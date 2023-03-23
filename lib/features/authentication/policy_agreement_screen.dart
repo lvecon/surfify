@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfify/features/authentication/register_profile.dart';
+import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
@@ -18,22 +19,39 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   var agreeAll = false;
   var agreeNecessary = false;
 
-  final ChangeNotifier changeNotifier = ChangeNotifier();
   void tapAgree1() {
     setState(() {
       agree1 = !agree1;
+      if (agree1 == false) {
+        agreeAll = false;
+      }
+      if (agree1 && agree2 && agree3) {
+        agreeAll = true;
+      }
     });
   }
 
   void tapAgree2() {
     setState(() {
       agree2 = !agree2;
+      if (agree2 == false) {
+        agreeAll = false;
+      }
+      if (agree1 && agree2 && agree3) {
+        agreeAll = true;
+      }
     });
   }
 
   void tapAgree3() {
     setState(() {
       agree3 = !agree3;
+      if (agree3 == false) {
+        agreeAll = false;
+      }
+      if (agree1 && agree2 && agree3) {
+        agreeAll = true;
+      }
     });
   }
 
@@ -54,9 +72,11 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   }
 
   void onNextTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const RegisterProfile(),
-    ));
+    if (agree1 && agree2) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const RegisterProfile(),
+      ));
+    }
   }
 
   @override
@@ -158,28 +178,7 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
               onTap: () {
                 onNextTap(context);
               },
-              child: FractionallySizedBox(
-                widthFactor: 1,
-                child: AnimatedContainer(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: Sizes.size16,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Sizes.size5),
-                      color: (agree1 && agree2)
-                          ? Theme.of(context).primaryColor
-                          : Colors.grey.shade300),
-                  duration: const Duration(milliseconds: 300),
-                  child: const Text(
-                    '다음',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
+              child: FormButton(able: (agree1 && agree2), text: '다음'),
             ),
           ],
         ),
