@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:surfify/features/initial_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/firebase_options.dart';
+import 'package:surfify/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,16 +10,21 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const SurfifyApp());
+  runApp(
+    const ProviderScope(
+      child: SurfifyApp(),
+    ),
+  );
 }
 
-class SurfifyApp extends StatelessWidget {
+class SurfifyApp extends ConsumerWidget {
   const SurfifyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
+      routerConfig: ref.watch(routerProvider),
       title: 'Surfify Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -32,7 +38,6 @@ class SurfifyApp extends StatelessWidget {
         // is not restarted.
         primaryColor: const Color(0xFF5F5DE3),
       ),
-      home: const InitialScreen(),
     );
   }
 }
