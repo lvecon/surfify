@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:surfify/features/authentication/view_models/social_auth_view_model.dart';
 import 'package:surfify/widgets/box_button.dart';
 
 import '../constants/gaps.dart';
 import '../constants/sizes.dart';
 import 'authentication/policy_agreement_screen.dart';
 
-class InitialScreen extends StatelessWidget {
+class InitialScreen extends ConsumerWidget {
   const InitialScreen({super.key});
+
+  static const routeName = "/";
 
   void onRegisterTap(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
@@ -15,7 +19,7 @@ class InitialScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -53,9 +57,13 @@ class InitialScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const BoxButton(
-                text: 'Google 로그인',
-                color: true,
+              GestureDetector(
+                onTap: () =>
+                    ref.read(socialAuthProvider.notifier).googleSignIn(context),
+                child: const BoxButton(
+                  text: 'Google 로그인',
+                  color: true,
+                ),
               ),
               Gaps.v12,
               GestureDetector(

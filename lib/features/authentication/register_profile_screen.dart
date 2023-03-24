@@ -1,20 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:surfify/features/tutorial/tutorial.dart';
+import 'package:go_router/go_router.dart';
+import 'package:surfify/features/tutorial/tutorial_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 
-class RegisterProfile extends StatefulWidget {
-  const RegisterProfile({super.key});
+class RegisterProfileScreen extends StatefulWidget {
+  const RegisterProfileScreen({super.key});
+  static const routeName = '/register_profile_screen';
 
   @override
-  State<RegisterProfile> createState() => _RegisterProfileState();
+  State<RegisterProfileScreen> createState() => _RegisterProfileState();
 }
 
-class _RegisterProfileState extends State<RegisterProfile> {
+class _RegisterProfileState extends State<RegisterProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool able = false;
 
@@ -24,12 +26,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => const Tutorial(),
-            ), (route) {
-          return false;
-        });
+        context.go(TutorialScreen.routeName);
       }
     }
   }
@@ -66,15 +63,16 @@ class _RegisterProfileState extends State<RegisterProfile> {
                           ),
                           Gaps.v32,
                           Center(
-                            child: Container(
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(64),
-                              ),
-                              child: Image.asset(
-                                'assets/images/App_Icon.png',
+                            child: CircleAvatar(
+                              radius: 64,
+                              child: SizedBox(
                                 height: Sizes.size128,
                                 width: Sizes.size128,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    'assets/images/App_Icon.png',
+                                  ),
+                                ),
                               ),
                             ),
                           ),

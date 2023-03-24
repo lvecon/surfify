@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:surfify/features/authentication/register_profile.dart';
+import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
@@ -7,6 +7,7 @@ import '../../constants/sizes.dart';
 
 class PolicyAgreementScreen extends StatefulWidget {
   const PolicyAgreementScreen({super.key});
+  static const routeName = '/policy_agreement_screen';
 
   @override
   State<PolicyAgreementScreen> createState() => _PolicyAgreementScreenState();
@@ -74,7 +75,7 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   void onNextTap(BuildContext context) {
     if (agree1 && agree2) {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const RegisterProfile(),
+        builder: (context) => const RegisterProfileScreen(),
       ));
     }
   }
