@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:surfify/features/tutorial/tutorial_screen.dart';
 
 import '../../../utils.dart';
 import '../repos/authentication_repo.dart';
@@ -22,7 +23,7 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
     } else {
-      context.go("/home");
+      context.go(TutorialScreen.routeName);
     }
   }
 }
