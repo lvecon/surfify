@@ -10,7 +10,7 @@ class AuthenticaitonRepository {
   User? get user => _firebaseAuth.currentUser;
 
   Future<void> googleSignIn() async {
-    await _googleSignIn.signIn();
+    await _firebaseAuth.signInWithProvider(GoogleAuthProvider());
   }
 }
 

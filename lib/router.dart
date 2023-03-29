@@ -4,11 +4,14 @@ import 'package:surfify/features/authentication/policy_agreement_screen.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/features/initial_screen.dart';
 import 'package:surfify/features/tutorial/tutorial_screen.dart';
+import 'package:surfify/features/video/video_screen.dart';
+
+import 'features/authentication/repos/authentication_repo.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
-    initialLocation: InitialScreen.routeName,
-    /*redirect: (context, state) {
+    initialLocation: VideoScreen.routeName,
+    redirect: (context, state) {
       final isLoggedIn = ref.read(authRepo).isLoggedIn;
       if (!isLoggedIn) {
         if (state.subloc != InitialScreen.routeName) {
@@ -16,7 +19,7 @@ final routerProvider = Provider((ref) {
         }
       }
       return null;
-    },*/
+    },
     routes: [
       GoRoute(
         path: "/",
@@ -34,6 +37,10 @@ final routerProvider = Provider((ref) {
         path: TutorialScreen.routeName,
         builder: (context, state) => const TutorialScreen(),
       ),
+      GoRoute(
+        path: VideoScreen.routeName,
+        builder: (context, state) => const VideoScreen(),
+      )
     ],
   );
 });
