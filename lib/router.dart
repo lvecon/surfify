@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:surfify/features/authentication/policy_agreement_screen.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/features/initial_screen.dart';
-import 'package:surfify/features/tutorial/tutorial_screen.dart';
+import 'package:surfify/features/video/video_recording_screen.dart';
 import 'package:surfify/features/video/video_screen.dart';
 
 import 'features/authentication/repos/authentication_repo.dart';
@@ -34,8 +34,8 @@ final routerProvider = Provider((ref) {
         builder: (context, state) => const RegisterProfileScreen(),
       ),
       GoRoute(
-        path: TutorialScreen.routeName,
-        builder: (context, state) => const TutorialScreen(),
+        path: VideoRecordingScreen.routeName,
+        builder: (context, state) => const VideoRecordingScreen(),
       ),
       GoRoute(
         path: VideoScreen.routeName,
