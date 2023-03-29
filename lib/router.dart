@@ -2,15 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surfify/features/authentication/policy_agreement_screen.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
-import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/features/initial_screen.dart';
 import 'package:surfify/features/tutorial/tutorial_screen.dart';
-import 'package:surfify/features/video/video_screen.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
-    initialLocation: VideoScreen.routeName,
-    redirect: (context, state) {
+    initialLocation: InitialScreen.routeName,
+    /*redirect: (context, state) {
       final isLoggedIn = ref.read(authRepo).isLoggedIn;
       if (!isLoggedIn) {
         if (state.subloc != InitialScreen.routeName) {
@@ -18,7 +16,7 @@ final routerProvider = Provider((ref) {
         }
       }
       return null;
-    },
+    },*/
     routes: [
       GoRoute(
         path: "/",

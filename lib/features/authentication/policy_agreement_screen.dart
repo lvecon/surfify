@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
@@ -74,9 +75,7 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
 
   void onNextTap(BuildContext context) {
     if (agree1 && agree2) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const RegisterProfileScreen(),
-      ));
+      context.push(RegisterProfileScreen.routeName);
     }
   }
 
@@ -209,14 +208,12 @@ class TextBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
       ),
-      child: Expanded(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontSize: Sizes.size16,
-            ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: Sizes.size16,
           ),
         ),
       ),
