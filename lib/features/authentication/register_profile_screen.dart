@@ -40,7 +40,6 @@ class _RegisterProfileState extends State<RegisterProfileScreen> {
             Sizes.size16,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: SingleChildScrollView(
@@ -233,7 +232,7 @@ class _RegisterProfileState extends State<RegisterProfileScreen> {
                               ),
                             ),
                           ),
-                          Gaps.v6,
+                          Gaps.v6
                         ],
                       ),
                     ),
