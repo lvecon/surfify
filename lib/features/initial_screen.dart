@@ -68,6 +68,7 @@ class InitialScreen extends ConsumerWidget {
               Gaps.v12,
               GestureDetector(
                   onTap: () {
+                    ref.read(socialAuthProvider.notifier).googleSignUp(context);
                     onRegisterTap(context);
                   },
                   child: const BoxButton(text: '회원가입', color: false)),

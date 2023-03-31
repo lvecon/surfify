@@ -44,6 +44,7 @@ class _VideoCommentsState extends State<VideoComments> {
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
+          elevation: 0.3,
           centerTitle: false,
           backgroundColor: Colors.grey.shade50,
           automaticallyImplyLeading: false,
@@ -54,13 +55,16 @@ class _VideoCommentsState extends State<VideoComments> {
             ),
             child: Text(
               "댓글 701개",
-              style: TextStyle(fontSize: Sizes.size20),
+              style: TextStyle(
+                fontSize: Sizes.size20,
+                color: Colors.black,
+              ),
             ),
           ),
           actions: [
             IconButton(
               onPressed: _onClosePressed,
-              icon: const FaIcon(FontAwesomeIcons.xmark),
+              icon: const FaIcon(FontAwesomeIcons.xmark, color: Colors.black),
             ),
           ],
         ),

@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
+import 'package:surfify/features/message/message_screen.dart';
+import 'package:surfify/features/profile/profile_screen.dart';
 import 'package:surfify/features/video/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -45,15 +47,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: Container(),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 3,
-            child: Container(),
+            child: const VideoTimelineScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: Container(),
+            child: const ProfileScreen(),
           )
         ],
       ),
@@ -89,12 +87,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
               Gaps.h24,
               NavTab(
-                text: "Msg.",
-                isSelected: _selectedIndex == 3,
-                icon: FontAwesomeIcons.message,
-                selectedIcon: FontAwesomeIcons.solidMessage,
-                onTap: () => _onTap(3),
-              ),
+                  text: "Msg.",
+                  isSelected: _selectedIndex == 3,
+                  icon: FontAwesomeIcons.message,
+                  selectedIcon: FontAwesomeIcons.solidMessage,
+                  onTap: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => const MessageScreen());
+                  }),
               NavTab(
                 text: "Profile",
                 isSelected: _selectedIndex == 4,
