@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
@@ -75,7 +74,11 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
 
   void onNextTap(BuildContext context) {
     if (agree1 && agree2) {
-      context.push(RegisterProfileScreen.routeName);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const RegisterProfileScreen(),
+        ),
+      );
     }
   }
 
@@ -88,101 +91,106 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(Sizes.size16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                const Text(
-                  '약관/정책 동의',
-                  style: TextStyle(
-                    fontSize: Sizes.size20,
-                    fontWeight: FontWeight.w600,
+        child: Padding(
+          padding: const EdgeInsets.all(Sizes.size16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  const Text(
+                    '약관/정책 동의',
+                    style: TextStyle(
+                      fontSize: Sizes.size20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                Gaps.v20,
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: tapAgreeAll,
-                      child: agreeAll
-                          ? Icon(Icons.check_circle_outline,
-                              color: Theme.of(context).primaryColor)
-                          : Icon(Icons.circle_outlined,
-                              color: Theme.of(context).primaryColor),
-                    ),
-                    Gaps.h4,
-                    const Text('전체동의',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        )),
-                  ],
-                ),
-                Gaps.v20,
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: tapAgree1,
-                      child: agree1
-                          ? Icon(Icons.check_circle_outline,
-                              color: Theme.of(context).primaryColor)
-                          : Icon(Icons.circle_outlined,
-                              color: Theme.of(context).primaryColor),
-                    ),
-                    Gaps.h4,
-                    const Text('[필수] 서비스 이용약관 동의', style: TextStyle()),
-                  ],
-                ),
-                const TextBox(
-                    text:
-                        "이용약관\n가. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n나. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n다. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n"),
-                Gaps.v20,
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: tapAgree2,
-                      child: agree2
-                          ? Icon(Icons.check_circle_outline,
-                              color: Theme.of(context).primaryColor)
-                          : Icon(Icons.circle_outlined,
-                              color: Theme.of(context).primaryColor),
-                    ),
-                    Gaps.h4,
-                    const Text('[필수] 개인정보 수집 및 이용에 관한 동의 ', style: TextStyle()),
-                  ],
-                ),
-                const TextBox(
-                    text:
-                        "개인정보 수집에는 이런 것들을 함.                                    \n\n\n\n\n\n\n\n"),
-                Gaps.v10,
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: tapAgree3,
-                      child: agree3
-                          ? Icon(Icons.check_circle_outline,
-                              color: Theme.of(context).primaryColor)
-                          : Icon(Icons.circle_outlined,
-                              color: Theme.of(context).primaryColor),
-                    ),
-                    Gaps.h4,
-                    const Text('(선택) 이벤트 등 프로모션 알림 메일 및 푸시 알림 수신',
-                        style: TextStyle()),
-                  ],
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                onNextTap(context);
-              },
-              child: FormButton(able: (agree1 && agree2), text: '다음'),
-            ),
-          ],
+                  Gaps.v20,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: tapAgreeAll,
+                        child: agreeAll
+                            ? Icon(Icons.check_circle_outline,
+                                color: Theme.of(context).primaryColor)
+                            : Icon(Icons.circle_outlined,
+                                color: Theme.of(context).primaryColor),
+                      ),
+                      Gaps.h4,
+                      const Text('전체동의',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                          )),
+                    ],
+                  ),
+                  Gaps.v20,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: tapAgree1,
+                        child: agree1
+                            ? Icon(Icons.check_circle_outline,
+                                color: Theme.of(context).primaryColor)
+                            : Icon(Icons.circle_outlined,
+                                color: Theme.of(context).primaryColor),
+                      ),
+                      Gaps.h4,
+                      const Text('[필수] 서비스 이용약관 동의', style: TextStyle()),
+                    ],
+                  ),
+                  const TextBox(
+                      text:
+                          "이용약관\n가. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n나. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n다. 동영상 책임은 사용자에게 있음 동영상 책임은 사용자에게 있음\n"),
+                  Gaps.v20,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: tapAgree2,
+                        child: agree2
+                            ? Icon(Icons.check_circle_outline,
+                                color: Theme.of(context).primaryColor)
+                            : Icon(Icons.circle_outlined,
+                                color: Theme.of(context).primaryColor),
+                      ),
+                      Gaps.h4,
+                      const Text('[필수] 개인정보 수집 및 이용에 관한 동의 ',
+                          style: TextStyle()),
+                    ],
+                  ),
+                  const TextBox(
+                      text:
+                          "개인정보 수집에는 이런 것들을 함.                                    \n\n\n\n\n\n\n\n"),
+                  Gaps.v10,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: tapAgree3,
+                        child: agree3
+                            ? Icon(Icons.check_circle_outline,
+                                color: Theme.of(context).primaryColor)
+                            : Icon(Icons.circle_outlined,
+                                color: Theme.of(context).primaryColor),
+                      ),
+                      Gaps.h4,
+                      const Text('(선택) 이벤트 등 프로모션 알림 메일 및 푸시 알림 수신',
+                          style: TextStyle()),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 0,
+        color: const Color(0x00fafafa),
+        child: GestureDetector(
+            onTap: () {
+              onNextTap(context);
+            },
+            child: FormButton(able: (agree1 && agree2), text: '다음')),
+      ),
     );
   }
 }

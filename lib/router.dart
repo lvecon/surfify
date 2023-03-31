@@ -10,7 +10,7 @@ import 'features/authentication/repos/authentication_repo.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
-    initialLocation: VideoRecordingScreen.routeName,
+    initialLocation: MainNavigationScreen.routeName,
     redirect: (context, state) {
       final isLoggedIn = ref.read(authRepo).isLoggedIn;
       if (!isLoggedIn) {
