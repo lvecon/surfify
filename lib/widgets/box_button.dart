@@ -17,6 +17,7 @@ class BoxButton extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
+        height: 50,
         padding: const EdgeInsets.all(Sizes.size14),
         decoration: BoxDecoration(
           color: able ? mainColor : Colors.white,
