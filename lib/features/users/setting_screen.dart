@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surfify/features/authentication/repos/authentication_repo.dart';
+import 'package:surfify/features/users/delete_account_screen.dart';
 import 'package:surfify/widgets/box_button.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
@@ -53,7 +55,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    void _onClosePressed() {
+    void onClosePressed() {
       Navigator.of(context).pop();
     }
 
@@ -79,7 +81,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen>
           ),
           actions: [
             IconButton(
-              onPressed: _onClosePressed,
+              onPressed: onClosePressed,
               icon: const FaIcon(
                 FontAwesomeIcons.xmark,
                 size: Sizes.size24,
@@ -107,16 +109,31 @@ class _SettingScreenState extends ConsumerState<SettingScreen>
                     ),
                   ),
                   Gaps.v6,
-                  BoxButton(
-                    text: "Term & Policy",
-                    able: false,
-                    mainColor: Theme.of(context).primaryColor,
+                  GestureDetector(
+                    onTap: () async {
+                      await launchUrlString(
+                          "https://notice.danbee.ai/terms/use_policy.html");
+                    },
+                    child: BoxButton(
+                      text: "Term & Policy",
+                      able: false,
+                      mainColor: Theme.of(context).primaryColor,
+                    ),
                   ),
                   Gaps.v6,
-                  const BoxButton(
-                    text: "Quit Service",
-                    able: false,
-                    mainColor: Colors.red,
+                  GestureDetector(
+                    onTap: () async {
+                      await showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const DeleteAccountScreen());
+                    },
+                    child: const BoxButton(
+                      text: "Quit Service",
+                      able: false,
+                      mainColor: Colors.red,
+                    ),
                   ),
                 ],
               ),
