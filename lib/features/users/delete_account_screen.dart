@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:surfify/features/initial_screen.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 import '../../widgets/box_button.dart';
+import '../authentication/repos/authentication_repo.dart';
 
-class DeleteAccountScreen extends StatefulWidget {
+class DeleteAccountScreen extends ConsumerStatefulWidget {
   const DeleteAccountScreen({super.key});
 
   @override
-  State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
+  ConsumerState<DeleteAccountScreen> createState() =>
+      _DeleteAccountScreenState();
 }
 
-class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
+class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String confirm = '';
   bool able = false;
   Map<String, String> formData = {};
+
+  @override
+  void initState() {
+    super.initState();
+    // "ref" can be used in all life-cycles of a StatefulWidget.
+    ref.read(authRepo);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +181,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                context.go(InitialScreen.routeName);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('회원탈퇴가 완료되었습니다')),
+                                );
+                                ref.read(authRepo).signOut();
+                                context.go("/");
                               },
                             ),
                           ],
@@ -186,7 +200,7 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                     }
                   },
             child: BoxButton(
-              text: "지금 탈퇴",
+              text: "탈퇴",
               able: able,
               mainColor: Colors.red,
             ),
