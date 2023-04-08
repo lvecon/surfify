@@ -7,6 +7,7 @@ import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
 import 'package:surfify/features/video/video_recording_screen.dart';
 
 import 'features/authentication/repos/authentication_repo.dart';
+import 'features/video/video_create_screen.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
@@ -40,7 +41,11 @@ final routerProvider = Provider((ref) {
       GoRoute(
         path: MainNavigationScreen.routeName,
         builder: (context, state) => const MainNavigationScreen(),
-      )
+      ),
+      GoRoute(
+        path: VideoCreateScreen.routeName,
+        builder: (context, state) => const VideoCreateScreen(),
+      ),
     ],
   );
 });
