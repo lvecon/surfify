@@ -51,6 +51,7 @@ dependencies:
   gallery_saver: 2.3.2
   image_picker: 0.8.6+1
   url_launcher: ^6.1.7
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:
