@@ -56,16 +56,17 @@ class _RegisterProfileState extends State<RegisterProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
+                    const Center(
                       child: CircleAvatar(
                         radius: 64,
                         child: SizedBox(
                           height: Sizes.size128,
                           width: Sizes.size128,
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/images/App_Icon.png',
-                            ),
+                          child: CircleAvatar(
+                            radius: 50,
+                            foregroundImage: NetworkImage(
+                                "http://file3.instiz.net/data/cached_img/upload/2019/06/22/15/04187419bdd68827a847fdbdd65edcda.jpg"),
+                            child: Text("마곡냥"),
                           ),
                         ),
                       ),

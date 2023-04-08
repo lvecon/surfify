@@ -60,9 +60,10 @@ class InitialScreen extends ConsumerWidget {
               GestureDetector(
                 onTap: () =>
                     ref.read(socialAuthProvider.notifier).googleSignIn(context),
-                child: const BoxButton(
+                child: BoxButton(
                   text: 'Google 로그인',
-                  color: true,
+                  able: true,
+                  mainColor: Theme.of(context).primaryColor,
                 ),
               ),
               Gaps.v12,
@@ -71,7 +72,11 @@ class InitialScreen extends ConsumerWidget {
                     ref.read(socialAuthProvider.notifier).googleSignUp(context);
                     onRegisterTap(context);
                   },
-                  child: const BoxButton(text: '회원가입', color: false)),
+                  child: BoxButton(
+                    text: '회원가입',
+                    able: false,
+                    mainColor: Theme.of(context).primaryColor,
+                  )),
             ],
           ),
         ],

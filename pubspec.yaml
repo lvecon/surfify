@@ -50,6 +50,7 @@ dependencies:
   permission_handler: ^10.2.0
   gallery_saver: 2.3.2
   image_picker: 0.8.6+1
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
