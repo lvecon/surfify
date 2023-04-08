@@ -23,64 +23,68 @@ class InitialScreen extends ConsumerWidget {
     var screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
             child: Padding(
-      padding: const EdgeInsets.all(Sizes.size36),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
+          padding: const EdgeInsets.all(Sizes.size36),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: screenHeight * 0.2),
-              Image.asset(
-                'assets/images/App_Icon.png',
-                height: Sizes.size128,
-                width: Sizes.size128,
+              Column(
+                children: [
+                  SizedBox(height: screenHeight * 0.2),
+                  Image.asset(
+                    'assets/images/App_Icon.png',
+                    height: Sizes.size128,
+                    width: Sizes.size128,
+                  ),
+                  Gaps.v10,
+                  const Text(
+                    'SURFI',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Text(
+                    '어디갈까?',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-              Gaps.v10,
-              const Text(
-                'SURFI',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Text(
-                '어디갈까?',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w600,
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => ref
+                        .read(socialAuthProvider.notifier)
+                        .googleSignIn(context),
+                    child: BoxButton(
+                      text: 'Google 로그인',
+                      able: true,
+                      mainColor: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  Gaps.v12,
+                  GestureDetector(
+                      onTap: () {
+                        ref
+                            .read(socialAuthProvider.notifier)
+                            .googleSignUp(context);
+                        onRegisterTap(context);
+                      },
+                      child: BoxButton(
+                        text: '회원가입',
+                        able: false,
+                        mainColor: Theme.of(context).primaryColor,
+                      )),
+                ],
               ),
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () =>
-                    ref.read(socialAuthProvider.notifier).googleSignIn(context),
-                child: BoxButton(
-                  text: 'Google 로그인',
-                  able: true,
-                  mainColor: Theme.of(context).primaryColor,
-                ),
-              ),
-              Gaps.v12,
-              GestureDetector(
-                  onTap: () {
-                    ref.read(socialAuthProvider.notifier).googleSignUp(context);
-                    onRegisterTap(context);
-                  },
-                  child: BoxButton(
-                    text: '회원가입',
-                    able: false,
-                    mainColor: Theme.of(context).primaryColor,
-                  )),
-            ],
-          ),
-        ],
-      ),
-    )));
+        )));
   }
 }
