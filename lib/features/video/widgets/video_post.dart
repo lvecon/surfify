@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/video/search_screen.dart';
 import 'package:surfify/features/video/widgets/search_bar.dart';
 import 'package:surfify/features/video/widgets/video_button.dart';
 import 'package:surfify/features/video/widgets/video_comments.dart';
@@ -277,10 +278,18 @@ class _VideoPostState extends State<VideoPost>
                     },
                     child: const VideoCompass()),
           ),
-          const Positioned(
+          Positioned(
             top: 50,
             left: 20,
-            child: SearchBar(),
+            child: GestureDetector(
+                onTap: () async {
+                  await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const SearchScreen());
+                },
+                child: const SearchBar()),
           ),
           const Positioned(
             top: 90,
