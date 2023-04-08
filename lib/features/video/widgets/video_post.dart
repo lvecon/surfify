@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/video/widgets/search_bar.dart';
 import 'package:surfify/features/video/widgets/video_button.dart';
 import 'package:surfify/features/video/widgets/video_comments.dart';
+import 'package:surfify/features/video/widgets/video_compass.dart';
+import 'package:surfify/features/video/widgets/video_location.dart';
+import 'package:surfify/features/video/widgets/video_radar.dart';
 
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+
+import '../opinion_screen.dart';
 
 class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
@@ -32,6 +38,8 @@ class _VideoPostState extends State<VideoPost>
   late final AnimationController _animationController;
 
   bool _isPaused = false;
+
+  var radarMode = true;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -222,9 +230,18 @@ class _VideoPostState extends State<VideoPost>
                   text: "1.2K",
                 ),
                 Gaps.v20,
-                const VideoButton(
-                  icon: FontAwesomeIcons.ellipsisVertical,
-                  text: "",
+                GestureDetector(
+                  onTap: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => const OptionScreen());
+                  },
+                  child: const VideoButton(
+                    icon: FontAwesomeIcons.ellipsisVertical,
+                    text: "",
+                  ),
                 )
               ],
             ),
@@ -241,6 +258,35 @@ class _VideoPostState extends State<VideoPost>
               ],
             ),
           ),
+          Positioned(
+            top: 50,
+            right: 20,
+            child: radarMode
+                ? GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        radarMode = !radarMode;
+                      });
+                    },
+                    child: const VideoRadar())
+                : GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        radarMode = !radarMode;
+                      });
+                    },
+                    child: const VideoCompass()),
+          ),
+          const Positioned(
+            top: 50,
+            left: 20,
+            child: SearchBar(),
+          ),
+          const Positioned(
+            top: 90,
+            left: 20,
+            child: VideoLocation(),
+          )
         ],
       ),
     );
