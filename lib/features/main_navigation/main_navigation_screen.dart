@@ -4,7 +4,7 @@ import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
 import 'package:surfify/features/message/message_screen.dart';
-import 'package:surfify/features/profile/profile_screen.dart';
+import 'package:surfify/features/users/user_profile_screen.dart';
 import 'package:surfify/features/video/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -49,10 +49,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             offstage: _selectedIndex != 1,
             child: const VideoTimelineScreen(),
           ),
-          Offstage(
-            offstage: _selectedIndex != 4,
-            child: const ProfileScreen(),
-          )
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -99,12 +95,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         builder: (context) => const MessageScreen());
                   }),
               NavTab(
-                text: "Profile",
-                isSelected: _selectedIndex == 4,
-                icon: FontAwesomeIcons.user,
-                selectedIcon: FontAwesomeIcons.solidUser,
-                onTap: () => _onTap(4),
-              ),
+                  text: "Profile",
+                  isSelected: _selectedIndex == 4,
+                  icon: FontAwesomeIcons.user,
+                  selectedIcon: FontAwesomeIcons.solidUser,
+                  onTap: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => const UserProfileScreen());
+                  }),
             ],
           ),
         ),
