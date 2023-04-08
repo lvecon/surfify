@@ -3,9 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
+import 'package:surfify/features/main_navigation/widgets/post_video_button.dart';
 import 'package:surfify/features/message/message_screen.dart';
 import 'package:surfify/features/users/user_profile_screen.dart';
 import 'package:surfify/features/video/video_timeline_screen.dart';
+
+import '../video/video_create_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -27,10 +30,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void _onPostVideoButtonTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(title: const Text('Record video')),
-        ),
-        fullscreenDialog: true,
+        builder: (context) => const VideoCreateScreen(),
       ),
     );
   }
@@ -75,11 +75,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               Gaps.h24,
               GestureDetector(
                 onTap: _onPostVideoButtonTap,
-                child: Image.asset(
-                  'assets/images/App_Icon_resize.png',
-                  height: Sizes.size44,
-                  width: Sizes.size44,
-                ),
+                child: const PostVideoButton(),
               ),
               Gaps.h24,
               NavTab(
