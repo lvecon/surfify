@@ -4,27 +4,26 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
-import 'package:surfify/features/video/widgets/video_select_location.dart';
+import 'package:surfify/features/video/video_create_screen.dart';
 
 import 'package:video_player/video_player.dart';
 
-class VideoPreviewScreen extends StatefulWidget {
+class VideoUploadedScreen extends StatefulWidget {
   final XFile video;
 
-  const VideoPreviewScreen({
+  const VideoUploadedScreen({
     super.key,
     required this.video,
   });
 
   @override
-  State<VideoPreviewScreen> createState() => _VideoPreviewScreenState();
+  State<VideoUploadedScreen> createState() => VideoUploadedScreenState();
 }
 
-class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
+class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   late final VideoPlayerController _videoPlayerController;
 
   bool _savedVideo = false;
@@ -42,7 +41,11 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   }
 
   void _recordAgain() {
-    Navigator.pop(context);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const VideoCreateScreen(),
+      ),
+    );
   }
 
   @override
@@ -71,19 +74,14 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     setState(() {});
   }
 
-  void _onCreateLocation(BuildContext context) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => VideoSelectLocation(
-        video: widget.video,
+  void _goMain() {
+    // context.go(MainNavigationScreen.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MainNavigationScreen(),
       ),
     );
-  }
-
-  void _goMain() {
-    context.go(MainNavigationScreen.routeName);
   }
 
   @override
@@ -112,7 +110,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                           width: 330,
                           height: Sizes.size64,
                           child: CupertinoButton(
-                            onPressed: () => _onCreateLocation(context),
+                            onPressed: () => _saveToGallery(),
                             color: Theme.of(context).primaryColor,
                             child: const Text(
                               "서핑포인트 생성",
