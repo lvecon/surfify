@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -13,6 +12,7 @@ import 'package:surfify/features/video/widgets/video_select_location.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPreviewScreen extends StatefulWidget {
+  static const routeName = '/video_preview_screen';
   final XFile video;
 
   const VideoPreviewScreen({
@@ -27,7 +27,7 @@ class VideoPreviewScreen extends StatefulWidget {
 class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   late final VideoPlayerController _videoPlayerController;
 
-  bool _savedVideo = false;
+  final bool _savedVideo = false;
 
   Future<void> _initVideo() async {
     _videoPlayerController = VideoPlayerController.file(
@@ -58,18 +58,18 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     super.dispose();
   }
 
-  Future<void> _saveToGallery() async {
-    if (_savedVideo) return;
+  // Future<void> _saveToGallery() async {
+  //   if (_savedVideo) return;
 
-    await GallerySaver.saveVideo(
-      widget.video.path,
-      albumName: "TikTok Clone!",
-    );
+  //   await GallerySaver.saveVideo(
+  //     widget.video.path,
+  //     albumName: "TikTok Clone!",
+  //   );
 
-    _savedVideo = true;
+  //   _savedVideo = true;
 
-    setState(() {});
-  }
+  //   setState(() {});
+  // }
 
   void _onCreateLocation(BuildContext context) async {
     await showModalBottomSheet(

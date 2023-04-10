@@ -12,10 +12,10 @@ class VideoCreateScreen extends StatefulWidget {
   static const routeName = '/video_create_screen';
 
   @override
-  State<VideoCreateScreen> createState() => _VideoRecordingScreenState();
+  State<VideoCreateScreen> createState() => _VideoCreateScreenState();
 }
 
-class _VideoRecordingScreenState extends State<VideoCreateScreen>
+class _VideoCreateScreenState extends State<VideoCreateScreen>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
 
@@ -67,6 +67,7 @@ class _VideoRecordingScreenState extends State<VideoCreateScreen>
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
     _cameraController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
