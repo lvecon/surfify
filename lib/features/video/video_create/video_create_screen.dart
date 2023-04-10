@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_preview_screen.dart';
+import 'package:surfify/features/video/video_create/video_preview_screen.dart';
 
 class VideoCreateScreen extends StatefulWidget {
   const VideoCreateScreen({super.key});
   static const routeName = '/video_create_screen';
 
   @override
-  State<VideoCreateScreen> createState() => _VideoRecordingScreenState();
+  State<VideoCreateScreen> createState() => _VideoCreateScreenState();
 }
 
-class _VideoRecordingScreenState extends State<VideoCreateScreen>
+class _VideoCreateScreenState extends State<VideoCreateScreen>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
 
@@ -67,6 +67,7 @@ class _VideoRecordingScreenState extends State<VideoCreateScreen>
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
     _cameraController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
