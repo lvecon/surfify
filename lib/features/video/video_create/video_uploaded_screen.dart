@@ -77,11 +77,6 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
     // context.go(MainNavigationScreen.routeName);
     Navigator.popUntil(
         context, ModalRoute.withName(MainNavigationScreen.routeName));
-    // Navigator.pop(context);
-    // Navigator.pop(context);
-    // Navigator.pop(context);
-    // Navigator.pop(context);
-    // Navigator.pop(context);
   }
 
   @override
