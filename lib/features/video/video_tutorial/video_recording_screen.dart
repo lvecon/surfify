@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_preview_screen.dart';
+import 'package:surfify/features/video/video_tutorial/video_preview_turorial.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
@@ -156,7 +156,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => VideoPreviewScreen(
+        builder: (context) => VideoPreviewTutorial(
           video: video,
         ),
       ),

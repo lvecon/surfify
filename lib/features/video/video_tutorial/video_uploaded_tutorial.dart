@@ -7,23 +7,22 @@ import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
-import 'package:surfify/features/video/video_create_screen.dart';
 
 import 'package:video_player/video_player.dart';
 
-class VideoUploadedScreen extends StatefulWidget {
+class VideoUploadedTutorial extends StatefulWidget {
   final XFile video;
 
-  const VideoUploadedScreen({
+  const VideoUploadedTutorial({
     super.key,
     required this.video,
   });
 
   @override
-  State<VideoUploadedScreen> createState() => VideoUploadedScreenState();
+  State<VideoUploadedTutorial> createState() => VideoUploadedTutorialState();
 }
 
-class VideoUploadedScreenState extends State<VideoUploadedScreen> {
+class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
   late final VideoPlayerController _videoPlayerController;
 
   bool _savedVideo = false;
@@ -41,11 +40,11 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   }
 
   void _recordAgain() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const VideoCreateScreen(),
-      ),
-    );
+    // Navigator.popUntil(context, ModalRoute.withName(VideoCreateScreen.routeName));
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override
@@ -62,7 +61,7 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   }
 
   Future<void> _saveToGallery() async {
-    if (_savedVideo) return;
+    // if (_savedVideo) return;
 
     await GallerySaver.saveVideo(
       widget.video.path,
@@ -76,6 +75,11 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
 
   void _goMain() {
     // context.go(MainNavigationScreen.routeName);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+
     Navigator.push(
       context,
       MaterialPageRoute(
