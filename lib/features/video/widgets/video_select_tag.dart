@@ -53,9 +53,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
     );
 
     setState(() {});
-    Navigator.of(context).pop();
-    Navigator.of(context).pop();
-
+    if (!mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => VideoUploadedScreen(video: widget.video),
