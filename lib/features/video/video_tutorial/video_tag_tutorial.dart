@@ -5,17 +5,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_uploaded_screen.dart';
+import 'package:surfify/features/video/video_tutorial/video_uploaded_tutorial.dart';
 
-class VideoSelectTag extends StatefulWidget {
+class VideoTagTutorial extends StatefulWidget {
   final XFile video;
-  const VideoSelectTag({super.key, required this.video});
+  const VideoTagTutorial({super.key, required this.video});
 
   @override
-  State<VideoSelectTag> createState() => VideoSelectTagState();
+  State<VideoTagTutorial> createState() => VideoTagTutorialState();
 }
 
-class VideoSelectTagState extends State<VideoSelectTag> {
+class VideoTagTutorialState extends State<VideoTagTutorial> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -56,7 +56,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
     if (!mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => VideoUploadedScreen(video: widget.video),
+        builder: (context) => VideoUploadedTutorial(video: widget.video),
       ),
     );
   }

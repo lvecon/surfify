@@ -3,31 +3,29 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
-import 'package:surfify/features/video/widgets/video_select_location.dart';
 
 import 'package:video_player/video_player.dart';
 
-class VideoPreviewScreen extends StatefulWidget {
-  static const routeName = '/video_preview_screen';
+class VideoUploadedTutorial extends StatefulWidget {
   final XFile video;
 
-  const VideoPreviewScreen({
+  const VideoUploadedTutorial({
     super.key,
     required this.video,
   });
 
   @override
-  State<VideoPreviewScreen> createState() => _VideoPreviewScreenState();
+  State<VideoUploadedTutorial> createState() => VideoUploadedTutorialState();
 }
 
-class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
+class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
   late final VideoPlayerController _videoPlayerController;
 
-  final bool _savedVideo = false;
+  bool _savedVideo = false;
 
   Future<void> _initVideo() async {
     _videoPlayerController = VideoPlayerController.file(
@@ -42,6 +40,10 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   }
 
   void _recordAgain() {
+    // Navigator.popUntil(context, ModalRoute.withName(VideoCreateScreen.routeName));
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
     Navigator.pop(context);
   }
 
@@ -58,32 +60,32 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     super.dispose();
   }
 
-  // Future<void> _saveToGallery() async {
-  //   if (_savedVideo) return;
+  Future<void> _saveToGallery() async {
+    // if (_savedVideo) return;
 
-  //   await GallerySaver.saveVideo(
-  //     widget.video.path,
-  //     albumName: "TikTok Clone!",
-  //   );
-
-  //   _savedVideo = true;
-
-  //   setState(() {});
-  // }
-
-  void _onCreateLocation(BuildContext context) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => VideoSelectLocation(
-        video: widget.video,
-      ),
+    await GallerySaver.saveVideo(
+      widget.video.path,
+      albumName: "TikTok Clone!",
     );
+
+    _savedVideo = true;
+
+    setState(() {});
   }
 
   void _goMain() {
-    context.go(MainNavigationScreen.routeName);
+    // context.go(MainNavigationScreen.routeName);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MainNavigationScreen(),
+      ),
+    );
   }
 
   @override
@@ -112,7 +114,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                           width: 330,
                           height: Sizes.size64,
                           child: CupertinoButton(
-                            onPressed: () => _onCreateLocation(context),
+                            onPressed: () => _saveToGallery(),
                             color: Theme.of(context).primaryColor,
                             child: const Text(
                               "서핑포인트 생성",
