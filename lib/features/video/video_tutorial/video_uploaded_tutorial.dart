@@ -4,9 +4,11 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
+import 'package:surfify/features/video/video_tutorial/video_recording_screen.dart';
 
 import 'package:video_player/video_player.dart';
 
@@ -40,11 +42,8 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
   }
 
   void _recordAgain() {
-    // Navigator.popUntil(context, ModalRoute.withName(VideoCreateScreen.routeName));
-    Navigator.pop(context);
-    Navigator.pop(context);
-    Navigator.pop(context);
-    Navigator.pop(context);
+    Navigator.popUntil(
+        context, ModalRoute.withName(VideoRecordingScreen.routeName));
   }
 
   @override
@@ -80,12 +79,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
     Navigator.pop(context);
     Navigator.pop(context);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const MainNavigationScreen(),
-      ),
-    );
+    context.go(MainNavigationScreen.routeName);
   }
 
   @override
