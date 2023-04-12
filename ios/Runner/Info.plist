@@ -68,5 +68,9 @@
  	<array>
  		<string>https</string>
  	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>To get location and direction</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To get location and direction</string>
 </dict>
 </plist>

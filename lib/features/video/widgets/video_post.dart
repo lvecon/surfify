@@ -74,7 +74,7 @@ class _VideoPostState extends State<VideoPost>
         });
         // Do stuff on phone shake
       },
-      minimumShakeCount: 1,
+      minimumShakeCount: 2,
       shakeSlopTimeMS: 500,
       shakeCountResetTime: 3000,
       shakeThresholdGravity: 2.7,
