@@ -12,12 +12,25 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   int _itemCount = 4;
 
   final PageController _pageController = PageController();
+  final PageController _pageController2 = PageController();
 
   final Duration _scrollDuration = const Duration(milliseconds: 250);
   final Curve _scrollCurve = Curves.linear;
 
   void _onPageChanged(int page) {
     _pageController.animateToPage(
+      page,
+      duration: _scrollDuration,
+      curve: _scrollCurve,
+    );
+    if (page == _itemCount - 1) {
+      _itemCount = _itemCount + 4;
+      setState(() {});
+    }
+  }
+
+  void _onPageChanged2(int page) {
+    _pageController2.animateToPage(
       page,
       duration: _scrollDuration,
       curve: _scrollCurve,
@@ -39,6 +52,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   @override
   void dispose() {
     _pageController.dispose();
+    _pageController2.dispose();
     super.dispose();
   }
 
@@ -60,9 +74,15 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
         scrollDirection: Axis.vertical,
         onPageChanged: _onPageChanged,
         itemCount: _itemCount,
-        itemBuilder: (context, index) => VideoPost(
-          onVideoFinished: _onVideoFinished,
-          index: index,
+        itemBuilder: (context, index) => PageView.builder(
+          controller: _pageController2,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: _onPageChanged2,
+          itemCount: _itemCount,
+          itemBuilder: (context, index) => VideoPost(
+            onVideoFinished: _onVideoFinished,
+            index: index,
+          ),
         ),
       ),
     );
