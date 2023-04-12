@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/search_screen.dart';
@@ -66,6 +67,18 @@ class _VideoPostState extends State<VideoPost>
   void initState() {
     super.initState();
     _initVideoPlayer();
+    ShakeDetector detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        setState(() {
+          randomMode = true;
+        });
+        // Do stuff on phone shake
+      },
+      minimumShakeCount: 1,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
 
     _animationController = AnimationController(
       vsync: this,
@@ -267,8 +280,7 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
           randomMode
-              ? Container()
-              : Positioned(
+              ? Positioned(
                   child: Column(
                     children: [
                       Container(
@@ -305,7 +317,8 @@ class _VideoPostState extends State<VideoPost>
                       ),
                     ],
                   ),
-                ),
+                )
+              : Container(),
           Positioned(
             top: 50,
             right: 20,
@@ -314,6 +327,7 @@ class _VideoPostState extends State<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
+                        randomMode = false;
                       });
                     },
                     child: const VideoRadar())
@@ -321,6 +335,7 @@ class _VideoPostState extends State<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
+                        randomMode = false;
                       });
                     },
                     child: const VideoCompass()),
