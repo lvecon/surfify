@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/search_screen.dart';
@@ -42,6 +43,8 @@ class _VideoPostState extends State<VideoPost>
 
   var radarMode = true;
 
+  bool randomMode = false;
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -64,6 +67,18 @@ class _VideoPostState extends State<VideoPost>
   void initState() {
     super.initState();
     _initVideoPlayer();
+    ShakeDetector detector = ShakeDetector.autoStart(
+      onPhoneShake: () {
+        setState(() {
+          randomMode = true;
+        });
+        // Do stuff on phone shake
+      },
+      minimumShakeCount: 2,
+      shakeSlopTimeMS: 500,
+      shakeCountResetTime: 3000,
+      shakeThresholdGravity: 2.7,
+    );
 
     _animationController = AnimationController(
       vsync: this,
@@ -121,6 +136,8 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return VisibilityDetector(
       key: Key("${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
@@ -262,6 +279,46 @@ class _VideoPostState extends State<VideoPost>
               ],
             ),
           ),
+          randomMode
+              ? Positioned(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width,
+                        height: 160,
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.5),
+                        ),
+                      ),
+                      Container(
+                        width: size.width,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.7),
+                        ),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'Lucky Mode',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizes.size18,
+                                ),
+                              ),
+                              Gaps.v8,
+                              Text('500m이내 무작위(50m 이동 시 새로 고침)',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Sizes.size18,
+                                  )),
+                            ]),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
           Positioned(
             top: 50,
             right: 20,
@@ -270,6 +327,7 @@ class _VideoPostState extends State<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
+                        randomMode = false;
                       });
                     },
                     child: const VideoRadar())
@@ -277,6 +335,7 @@ class _VideoPostState extends State<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
+                        randomMode = false;
                       });
                     },
                     child: const VideoCompass()),
@@ -298,7 +357,7 @@ class _VideoPostState extends State<VideoPost>
             top: 90,
             left: 20,
             child: VideoLocation(),
-          )
+          ),
         ],
       ),
     );
