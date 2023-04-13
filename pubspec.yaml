@@ -54,6 +54,8 @@ dependencies:
   geolocator: ^9.0.2
   shake: ^2.2.0
   flutter_compass: ^0.7.0
+  remedi_kopo: ^0.0.1
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
