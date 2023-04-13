@@ -27,6 +27,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
   List<String> addressList = [];
   List<String> nameList = [];
   List<int> distanceList = [];
+  int _selectedIndex = -1;
 
   Future<void> getCurrentLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
@@ -95,6 +96,8 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
       backgroundColor: Colors.transparent,
       builder: (context) => VideoSelectTag(
         video: widget.video,
+        address: addressList[_selectedIndex],
+        name: nameList[_selectedIndex],
       ),
     );
   }
@@ -191,48 +194,64 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                   padding: const EdgeInsets.only(
                     top: Sizes.size10,
                     bottom: Sizes.size96 + Sizes.size20,
-                    left: Sizes.size16,
+                    left: Sizes.size20,
                     right: Sizes.size16,
                   ),
-                  separatorBuilder: (context, index) => Gaps.v20,
+                  separatorBuilder: (context, index) => Gaps.v2,
                   itemCount: addressList.length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => _onCreateTag(context),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    onTapDown: (TapDownDetails details) => setState(() {
+                      _selectedIndex = index;
+                    }),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                          color: (_selectedIndex == index)
+                              ? Colors.grey.shade200
+                              : Colors.white24),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Sizes.size8,
+                          horizontal: Sizes.size6,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              nameList[index],
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: Sizes.size18,
-                                  color: Colors.black54),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  nameList[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: Sizes.size18,
+                                      color: Colors.black54),
+                                ),
+                                Gaps.v3,
+                                Text(
+                                  addressList[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: Sizes.size16,
+                                      color: Colors.black45),
+                                ),
+                              ],
                             ),
-                            Gaps.v3,
                             Text(
-                              addressList[index],
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: Sizes.size16,
-                                  color: Colors.black45),
-                            ),
+                              (distanceList[index] >= 1000)
+                                  ? "${(distanceList[index] / 1000).toStringAsFixed(1)}km"
+                                  : "${distanceList[index]}m",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: Sizes.size14,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            )
                           ],
                         ),
-                        Text(
-                          (distanceList[index] >= 1000)
-                              ? "${(distanceList[index] / 1000).toStringAsFixed(1)}km"
-                              : "${distanceList[index]}m",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: Sizes.size16,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                   ),
                 ),

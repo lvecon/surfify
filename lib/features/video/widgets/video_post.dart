@@ -353,7 +353,10 @@ class _VideoPostState extends State<VideoPost>
           const Positioned(
             top: 90,
             left: 20,
-            child: VideoLocation(),
+            child: VideoLocation(
+              name: "서울식물원",
+              address: "서울시 강서구 마곡동 161",
+            ),
           ),
         ],
       ),
