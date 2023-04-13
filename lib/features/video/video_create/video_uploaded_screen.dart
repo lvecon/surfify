@@ -3,21 +3,30 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
+import 'package:surfify/features/video/widgets/video_location.dart';
 
 import 'package:video_player/video_player.dart';
 
+import '../../main_navigation/widgets/nav_tab.dart';
+import '../../main_navigation/widgets/post_video_button.dart';
+
 class VideoUploadedScreen extends StatefulWidget {
   final XFile video;
-
+  final String address;
+  final String name;
+  final String tags;
   const VideoUploadedScreen({
     super.key,
     required this.video,
+    required this.address,
+    required this.name,
+    required this.tags,
   });
-
   @override
   State<VideoUploadedScreen> createState() => VideoUploadedScreenState();
 }
@@ -26,6 +35,7 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   late final VideoPlayerController _videoPlayerController;
 
   bool _savedVideo = false;
+  final int _selectedIndex = -1;
 
   Future<void> _initVideo() async {
     _videoPlayerController = VideoPlayerController.file(
@@ -97,7 +107,59 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
             ),
             !_savedVideo
                 ? Positioned(
-                    bottom: Sizes.size80,
+                    top: Sizes.size60,
+                    left: Sizes.size20,
+                    child: VideoLocation(
+                      address: widget.address,
+                      name: widget.name,
+                    ))
+                : Container(),
+            !_savedVideo
+                ? Positioned(
+                    bottom: 180,
+                    left: 10,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          radius: Sizes.size28,
+                          child: SizedBox(
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/user.png',
+                              ),
+                            ),
+                          ),
+                        ),
+                        Gaps.v12,
+                        const Text(
+                          "마곡드래곤(@dragmag)",
+                          style: TextStyle(
+                            fontSize: Sizes.size20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Gaps.v10,
+                        SizedBox(
+                          width: 300,
+                          child: Text(
+                            widget.tags,
+                            style: const TextStyle(
+                              fontSize: Sizes.size16,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(),
+            !_savedVideo
+                ? Positioned(
+                    bottom: Sizes.size20,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
@@ -106,7 +168,8 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
                           height: Sizes.size64,
                           child: CupertinoButton(
                             onPressed: () => _saveToGallery(),
-                            color: Theme.of(context).primaryColor,
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.8),
                             child: const Text(
                               "서핑포인트 생성",
                               style: TextStyle(
@@ -144,7 +207,7 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
                     ),
                   )
                 : Positioned(
-                    bottom: Sizes.size80,
+                    bottom: Sizes.size20,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
@@ -193,8 +256,52 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
                         ),
                       ],
                     ),
-                  )
+                  ),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(Sizes.size12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              NavTab(
+                text: "Here",
+                isSelected: _selectedIndex == 0,
+                icon: FontAwesomeIcons.locationDot,
+                selectedIcon: FontAwesomeIcons.locationDot,
+                onTap: () => {},
+              ),
+              NavTab(
+                text: "Now",
+                isSelected: _selectedIndex == 0,
+                icon: FontAwesomeIcons.earthAsia,
+                selectedIcon: FontAwesomeIcons.earthAsia,
+                onTap: () => {},
+              ),
+              Gaps.h24,
+              GestureDetector(
+                child: const PostVideoButton(),
+              ),
+              Gaps.h24,
+              NavTab(
+                text: "Msg.",
+                isSelected: _selectedIndex == 0,
+                icon: FontAwesomeIcons.message,
+                selectedIcon: FontAwesomeIcons.message,
+                onTap: () => {},
+              ),
+              NavTab(
+                text: "Profile",
+                isSelected: _selectedIndex == 4,
+                icon: FontAwesomeIcons.user,
+                selectedIcon: FontAwesomeIcons.message,
+                onTap: () => {},
+              ),
+            ],
+          ),
         ),
       ),
     );

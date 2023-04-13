@@ -6,9 +6,15 @@ import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
 class VideoLocation extends StatelessWidget {
-  const VideoLocation({super.key});
+  const VideoLocation({
+    super.key,
+    required this.name,
+    required this.address,
+  });
   final latitude = 37.4553;
   final longitude = 126.95;
+  final name;
+  final address;
 
   @override
   Widget build(BuildContext context) {
@@ -16,22 +22,24 @@ class VideoLocation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          children: const [
-            FaIcon(
+          children: [
+            const FaIcon(
               FontAwesomeIcons.locationDot,
               size: Sizes.size24,
               color: Colors.white,
             ),
             Gaps.h10,
             Text(
-              '서울식물원',
-              style: TextStyle(
-                fontSize: 24,
+              name,
+              style: const TextStyle(
+                fontSize: Sizes.size24,
+                fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
             )
           ],
         ),
+        Gaps.v4,
         Row(
           children: [
             Gaps.h28,
@@ -40,9 +48,9 @@ class VideoLocation extends StatelessWidget {
                 await launchUrlString(
                     "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
               },
-              child: const Text(
-                '서울시 강서구 마곡동 161',
-                style: TextStyle(
+              child: Text(
+                address,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),
