@@ -7,6 +7,8 @@ import '../../../constants/sizes.dart';
 
 class VideoLocation extends StatelessWidget {
   const VideoLocation({super.key});
+  final latitude = 37.4553;
+  final longitude = 126.95;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class VideoLocation extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 await launchUrlString(
-                    "https://www.google.com/maps/search/apple+inc/@45.7132016,-122.8035778,11z/data=!3m1!4b1");
+                    "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
               },
               child: const Text(
                 '서울시 강서구 마곡동 161',
