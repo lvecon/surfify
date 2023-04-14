@@ -2,9 +2,11 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/video_create/video_select_tag.dart';
+import 'package:surfify/widgets/search_map.dart';
 
 class VideoSelectLocation extends StatefulWidget {
   final XFile video;
@@ -20,13 +22,52 @@ class VideoSelectLocation extends StatefulWidget {
 class VideoSelectLocationState extends State<VideoSelectLocation> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
+  late double longtitude;
+  late double latitude;
+  List<String> addressList = [];
+  List<String> nameList = [];
+  List<int> distanceList = [];
+  int _selectedIndex = -1;
+
+  Future<void> getCurrentLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    // print(permission);
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      latitude = position.latitude;
+      longtitude = position.longitude;
+    } catch (e) {
+      print(e);
+    }
+    setState(() {});
+  }
 
   void _onSearchChanged(String value) {
     print("Searching form $value");
   }
 
-  void _onSearchSubmitted(String value) {
-    print("Submitted $value");
+  Future<void> _onSearchSubmitted(String value) async {
+    await getCurrentLocation();
+    addressList.clear();
+    nameList.clear();
+    distanceList.clear();
+    final places = await searchPlaces(value, longtitude, latitude);
+    final documents = places['documents'];
+
+    for (final document in documents) {
+      final address = document['address_name'];
+      final name = document['place_name'];
+      final distance = int.parse(document['distance']);
+
+      distanceList.add(distance);
+      addressList.add(address);
+      nameList.add(name);
+    }
+    setState(() {});
   }
 
   final ScrollController _scrollController = ScrollController();
@@ -55,8 +96,15 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
       backgroundColor: Colors.transparent,
       builder: (context) => VideoSelectTag(
         video: widget.video,
+        address: addressList[_selectedIndex],
+        name: nameList[_selectedIndex],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -146,37 +194,64 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                   padding: const EdgeInsets.only(
                     top: Sizes.size10,
                     bottom: Sizes.size96 + Sizes.size20,
-                    left: Sizes.size16,
+                    left: Sizes.size20,
                     right: Sizes.size16,
                   ),
-                  separatorBuilder: (context, index) => Gaps.v20,
-                  itemCount: 10,
+                  separatorBuilder: (context, index) => Gaps.v2,
+                  itemCount: addressList.length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => _onCreateTag(context),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'LG사이언스파크',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: Sizes.size18,
-                                  color: Colors.black54),
+                    onTapDown: (TapDownDetails details) => setState(() {
+                      _selectedIndex = index;
+                    }),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                          color: (_selectedIndex == index)
+                              ? Colors.grey.shade200
+                              : Colors.white24),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Sizes.size8,
+                          horizontal: Sizes.size6,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  nameList[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: Sizes.size18,
+                                      color: Colors.black54),
+                                ),
+                                Gaps.v3,
+                                Text(
+                                  addressList[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: Sizes.size16,
+                                      color: Colors.black45),
+                                ),
+                              ],
                             ),
-                            Gaps.v3,
                             Text(
-                              '강서구 마곡 중앙10로 10',
+                              (distanceList[index] >= 1000)
+                                  ? "${(distanceList[index] / 1000).toStringAsFixed(1)}km"
+                                  : "${distanceList[index]}m",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: Sizes.size16,
-                                  color: Colors.black45),
-                            ),
+                                fontWeight: FontWeight.w500,
+                                fontSize: Sizes.size14,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            )
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

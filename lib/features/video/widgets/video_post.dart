@@ -17,13 +17,10 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../opinion_screen.dart';
 
 class VideoPost extends StatefulWidget {
-  final Function onVideoFinished;
-
   final int index;
 
   const VideoPost({
     super.key,
-    required this.onVideoFinished,
     required this.index,
   });
 
@@ -45,21 +42,21 @@ class _VideoPostState extends State<VideoPost>
 
   bool randomMode = false;
 
-  void _onVideoChange() {
-    if (_videoPlayerController.value.isInitialized) {
-      if (_videoPlayerController.value.duration ==
-          _videoPlayerController.value.position) {
-        widget.onVideoFinished();
-      }
-    }
-  }
+  // void _onVideoChange() {
+  //   if (_videoPlayerController.value.isInitialized) {
+  //     if (_videoPlayerController.value.duration ==
+  //         _videoPlayerController.value.position) {
+  //       // widget.onVideoFinished();
+  //     }
+  //   }
+  // }
 
   void _initVideoPlayer() async {
     _videoPlayerController =
         VideoPlayerController.asset("assets/videos/video.mp4");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    _videoPlayerController.addListener(_onVideoChange);
+    // _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
 
@@ -356,7 +353,10 @@ class _VideoPostState extends State<VideoPost>
           const Positioned(
             top: 90,
             left: 20,
-            child: VideoLocation(),
+            child: VideoLocation(
+              name: "서울식물원",
+              address: "서울시 강서구 마곡동 161",
+            ),
           ),
         ],
       ),

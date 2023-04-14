@@ -1,16 +1,21 @@
-
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/video_create/video_uploaded_screen.dart';
 
 class VideoSelectTag extends StatefulWidget {
   final XFile video;
-  const VideoSelectTag({super.key, required this.video});
+  final String address;
+  final String name;
+  const VideoSelectTag({
+    super.key,
+    required this.video,
+    required this.address,
+    required this.name,
+  });
 
   @override
   State<VideoSelectTag> createState() => VideoSelectTagState();
@@ -20,15 +25,8 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
-  void _onSearchChanged(String value) {
-    print("Searching form $value");
-  }
-
-  void _onSearchSubmitted(String value) {
-    print("Submitted $value");
-  }
-
   final ScrollController _scrollController = ScrollController();
+  String inputValue = "";
 
   void _onClosePressed() {
     Navigator.of(context).pop();
@@ -48,16 +46,16 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   }
 
   Future<void> _saveToGallery() async {
-    await GallerySaver.saveVideo(
-      widget.video.path,
-      albumName: "TikTok Clone!",
-    );
-
     setState(() {});
     if (!mounted) return;
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => VideoUploadedScreen(video: widget.video),
+        builder: (context) => VideoUploadedScreen(
+          video: widget.video,
+          address: widget.address,
+          name: widget.name,
+          tags: inputValue,
+        ),
       ),
     );
   }
@@ -150,6 +148,9 @@ class VideoSelectTagState extends State<VideoSelectTag> {
                     borderSide: BorderSide.none,
                   ),
                 ),
+                onChanged: (value) => setState(() {
+                  inputValue = value;
+                }),
               ),
             ),
             Gaps.v10,
