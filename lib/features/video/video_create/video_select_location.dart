@@ -242,25 +242,30 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  locationDict['name'][index],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: Sizes.size18,
-                                      color: Colors.black54),
-                                ),
-                                Gaps.v3,
-                                Text(
-                                  locationDict['address'][index],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: Sizes.size16,
-                                      color: Colors.black45),
-                                ),
-                              ],
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: 260,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    locationDict['name'][index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: Sizes.size18,
+                                        color: Colors.black54),
+                                  ),
+                                  Gaps.v3,
+                                  Text(
+                                    locationDict['address'][index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Sizes.size16,
+                                        color: Colors.black45),
+                                  ),
+                                ],
+                              ),
                             ),
                             Text(
                               (locationDict['distance'][index] >= 1000)

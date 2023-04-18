@@ -92,8 +92,9 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   void _onEditVideo(BuildContext context) async {
     final editVideo = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const EditVideo(),
-      ),
+          builder: (context) => EditVideo(
+                video: widget.video,
+              )),
     );
 
     setState(() {
@@ -105,8 +106,8 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
 
   @override
   void initState() {
-    _initVideo();
     super.initState();
+    _initVideo();
   }
 
   @override
