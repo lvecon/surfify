@@ -33,12 +33,17 @@ class VideoLocation extends StatelessWidget {
               color: Colors.white,
             ),
             Gaps.h10,
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: Sizes.size24,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+            SizedBox(
+              width: 280,
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             )
           ],

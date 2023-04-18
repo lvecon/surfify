@@ -2,12 +2,17 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 
 class EditVideo extends StatefulWidget {
-  const EditVideo({super.key});
+  final XFile video;
+  const EditVideo({
+    super.key,
+    required this.video,
+  });
   static const routeName = '/video_create_screen';
 
   @override
@@ -45,6 +50,10 @@ class EditVideoState extends State<EditVideo>
   late CameraController _cameraController;
   double currentSecond = 0;
   int roundedSecond = 0;
+
+  void _onClosePressed() {
+    Navigator.pop(context, widget.video);
+  }
 
   @override
   void initState() {
@@ -188,6 +197,18 @@ class EditVideoState extends State<EditVideo>
                 alignment: Alignment.center,
                 children: [
                   CameraPreview(_cameraController),
+                  Positioned(
+                    top: Sizes.size12,
+                    right: Sizes.size6,
+                    child: IconButton(
+                      onPressed: _onClosePressed,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.xmark,
+                        color: Colors.white,
+                        size: Sizes.size32,
+                      ),
+                    ),
+                  ),
                   Positioned(
                     bottom: Sizes.size80 + Sizes.size6,
                     width: MediaQuery.of(context).size.width,

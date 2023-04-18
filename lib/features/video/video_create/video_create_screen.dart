@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -191,6 +192,10 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
     // }
   }
 
+  void _onClosePressed() {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     // final mediaSize = MediaQuery.of(context).size;
@@ -217,6 +222,18 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
                 alignment: Alignment.center,
                 children: [
                   CameraPreview(_cameraController),
+                  Positioned(
+                    top: Sizes.size12,
+                    right: Sizes.size6,
+                    child: IconButton(
+                      onPressed: _onClosePressed,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.xmark,
+                        color: Colors.white,
+                        size: Sizes.size32,
+                      ),
+                    ),
+                  ),
                   Positioned(
                     bottom: Sizes.size80 + Sizes.size6,
                     width: MediaQuery.of(context).size.width,
