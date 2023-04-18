@@ -10,11 +10,15 @@ class VideoLocation extends StatelessWidget {
     super.key,
     required this.name,
     required this.address,
+    required this.latitude,
+    required this.longitude,
+    required this.url,
   });
-  final latitude = 37.4553;
-  final longitude = 126.95;
+  final latitude;
+  final longitude;
   final name;
   final address;
+  final url;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,8 @@ class VideoLocation extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 await launchUrlString(
-                    "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
+                    // "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
+                    url);
               },
               child: Text(
                 address,
