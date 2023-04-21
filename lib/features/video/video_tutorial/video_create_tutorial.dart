@@ -7,15 +7,15 @@ import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/video_tutorial/video_preview_turorial.dart';
 
-class VideoRecordingScreen extends StatefulWidget {
-  const VideoRecordingScreen({super.key});
-  static const routeName = '/video_create_screen';
+class VideoCreateTutorial extends StatefulWidget {
+  const VideoCreateTutorial({super.key});
+  static const routeName = '/video_create_tutorial';
 
   @override
-  State<VideoRecordingScreen> createState() => _VideoRecordingScreenState();
+  State<VideoCreateTutorial> createState() => _VideoCreateTutorialState();
 }
 
-class _VideoRecordingScreenState extends State<VideoRecordingScreen>
+class _VideoCreateTutorialState extends State<VideoCreateTutorial>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
 
@@ -168,6 +168,12 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
         ),
       ),
     );
+
+    setState(() {});
+  }
+
+  void _onClosePressed() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -195,7 +201,23 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
+                  Positioned.fill(
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: 1,
+                        height: _cameraController.value.aspectRatio,
+                        child: CameraPreview(_cameraController),
+                      ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: Sizes.size20,
+                    left: Sizes.size12,
+                    child: CloseButton(
+                      color: Colors.white,
+                    ),
+                  ),
                   Positioned(
                     bottom: Sizes.size80 + Sizes.size6,
                     width: MediaQuery.of(context).size.width,
