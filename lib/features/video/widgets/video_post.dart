@@ -356,6 +356,9 @@ class _VideoPostState extends State<VideoPost>
             child: VideoLocation(
               name: "서울식물원",
               address: "서울시 강서구 마곡동 161",
+              latitude: 37.4553,
+              longitude: 126.95,
+              url: "https://map.kakao.com/",
             ),
           ),
         ],

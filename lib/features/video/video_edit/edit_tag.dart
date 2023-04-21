@@ -1,33 +1,21 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_create/video_uploaded_screen.dart';
 
-class VideoSelectTag extends StatefulWidget {
-  final XFile video;
-  final String address;
-  final String name;
-  final String lat;
-  final String lon;
-  final String url;
-  const VideoSelectTag({
+class EditTag extends StatefulWidget {
+  final String originalTag;
+  const EditTag({
     super.key,
-    required this.video,
-    required this.address,
-    required this.name,
-    required this.lat,
-    required this.lon,
-    required this.url,
+    required this.originalTag,
   });
 
   @override
-  State<VideoSelectTag> createState() => VideoSelectTagState();
+  State<EditTag> createState() => EditTagState();
 }
 
-class VideoSelectTagState extends State<VideoSelectTag> {
+class EditTagState extends State<EditTag> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -35,7 +23,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   String inputValue = "";
 
   void _onClosePressed() {
-    Navigator.of(context).pop();
+    Navigator.pop(context, widget.originalTag);
   }
 
   void _stopWriting() {
@@ -51,26 +39,8 @@ class VideoSelectTagState extends State<VideoSelectTag> {
     });
   }
 
-  Future<void> _saveToGallery() async {
-    setState(() {});
-    if (!mounted) return;
-    Navigator.of(context).pop();
-    Navigator.of(context).pop();
-    Navigator.of(context).pop();
-    Navigator.of(context).pop();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => VideoUploadedScreen(
-          video: widget.video,
-          address: widget.address,
-          name: widget.name,
-          tags: inputValue,
-          lat: widget.lat,
-          lon: widget.lon,
-          url: widget.url,
-        ),
-      ),
-    );
+  void _returnValue(BuildContext context) {
+    Navigator.pop(context, inputValue);
   }
 
   @override
@@ -176,7 +146,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
                 width: 330,
                 height: Sizes.size64,
                 child: CupertinoButton(
-                  onPressed: () => _saveToGallery(),
+                  onPressed: () => _returnValue(context),
                   color: Theme.of(context).primaryColor,
                   child: const Text(
                     "입력 완료",

@@ -10,11 +10,15 @@ class VideoLocation extends StatelessWidget {
     super.key,
     required this.name,
     required this.address,
+    required this.latitude,
+    required this.longitude,
+    required this.url,
   });
-  final latitude = 37.4553;
-  final longitude = 126.95;
+  final latitude;
+  final longitude;
   final name;
   final address;
+  final url;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +33,17 @@ class VideoLocation extends StatelessWidget {
               color: Colors.white,
             ),
             Gaps.h10,
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: Sizes.size24,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+            SizedBox(
+              width: 280,
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             )
           ],
@@ -46,7 +55,8 @@ class VideoLocation extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 await launchUrlString(
-                    "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
+                    // "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude");
+                    url);
               },
               child: Text(
                 address,
