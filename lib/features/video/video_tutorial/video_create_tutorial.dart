@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
@@ -22,6 +23,8 @@ class _VideoCreateTutorialState extends State<VideoCreateTutorial>
   bool _isSelfieMode = false;
   bool _isRecording = false;
   bool _isfirstRecording = true;
+
+  bool _ontappedYes = false;
 
   late double progressValue;
 
@@ -46,6 +49,11 @@ class _VideoCreateTutorialState extends State<VideoCreateTutorial>
   late CameraController _cameraController;
   double currentSecond = 0;
   int roundedSecond = 0;
+
+  void _onTapYes() {
+    _ontappedYes = true;
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -218,103 +226,153 @@ class _VideoCreateTutorialState extends State<VideoCreateTutorial>
                       color: Colors.white,
                     ),
                   ),
-                  Positioned(
-                    bottom: Sizes.size80 + Sizes.size6,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
+                  if (!_ontappedYes)
+                    Stack(
+                      alignment: Alignment.center,
                       children: [
-                        if (_isfirstRecording)
-                          const Text(
-                            "버튼을 눌러 지금 여기를",
-                            style: TextStyle(
-                              fontSize: Sizes.size24,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        Gaps.v4,
-                        if (_isfirstRecording)
-                          const Text(
-                            "3초동안 기록해요",
-                            style: TextStyle(
-                              fontSize: Sizes.size24,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          )
-                        else if (roundedSecond >= 1)
-                          Text(
-                            "$roundedSecond초",
-                            style: const TextStyle(
-                              fontSize: Sizes.size44,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        if (_isfirstRecording) Gaps.v16 else Gaps.v10,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Sizes.size32,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        Positioned(
+                          bottom: Sizes.size80,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: _startRecording,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    const SizedBox(
-                                      width: Sizes.size64 + Sizes.size14,
-                                      height: Sizes.size64 + Sizes.size14,
-                                      child: CircularProgressIndicator(
-                                          color: Colors.white,
-                                          strokeWidth: Sizes.size4,
-                                          value: 1),
-                                    ),
-                                    ScaleTransition(
-                                      scale: _buttonAnimation,
-                                      child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        width: !_isRecording
-                                            ? Sizes.size60
-                                            : Sizes.size48,
-                                        height: !_isRecording
-                                            ? Sizes.size60
-                                            : Sizes.size48,
-                                        decoration: BoxDecoration(
-                                          shape: !_isRecording
-                                              ? BoxShape.rectangle
-                                              : BoxShape.rectangle,
-                                          color: const Color(0xFFE9435A),
-                                          borderRadius: !_isRecording
-                                              ? BorderRadius.circular(
-                                                  Sizes.size64 / 2)
-                                              : BorderRadius.circular(12.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                              const Text(
+                                "우리는 지금...",
+                                style: TextStyle(
+                                  fontSize: Sizes.size24,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
                                 ),
                               ),
+                              Gaps.v4,
+                              const Text(
+                                "여기에 있어요!",
+                                style: TextStyle(
+                                  fontSize: Sizes.size24,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Gaps.v28,
+                              SizedBox(
+                                width: 330,
+                                height: Sizes.size64,
+                                child: CupertinoButton(
+                                  onPressed: _onTapYes,
+                                  color: Theme.of(context).primaryColor,
+                                  child: const Text(
+                                    "맞아!",
+                                    style: TextStyle(
+                                      fontSize: Sizes.size18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
-                        ),
+                        )
                       ],
+                    )
+                  else
+                    Positioned(
+                      bottom: Sizes.size80 + Sizes.size6,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        children: [
+                          if (_isfirstRecording)
+                            const Text(
+                              "버튼을 눌러 지금 여기를",
+                              style: TextStyle(
+                                fontSize: Sizes.size24,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          Gaps.v4,
+                          if (_isfirstRecording)
+                            const Text(
+                              "3초동안 기록해요",
+                              style: TextStyle(
+                                fontSize: Sizes.size24,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            )
+                          else if (roundedSecond >= 1)
+                            Text(
+                              "$roundedSecond초",
+                              style: const TextStyle(
+                                fontSize: Sizes.size44,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          if (_isfirstRecording) Gaps.v16 else Gaps.v10,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Sizes.size32,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: _startRecording,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      const SizedBox(
+                                        width: Sizes.size64 + Sizes.size14,
+                                        height: Sizes.size64 + Sizes.size14,
+                                        child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: Sizes.size4,
+                                            value: 1),
+                                      ),
+                                      ScaleTransition(
+                                        scale: _buttonAnimation,
+                                        child: AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          width: !_isRecording
+                                              ? Sizes.size60
+                                              : Sizes.size48,
+                                          height: !_isRecording
+                                              ? Sizes.size60
+                                              : Sizes.size48,
+                                          decoration: BoxDecoration(
+                                            shape: !_isRecording
+                                                ? BoxShape.rectangle
+                                                : BoxShape.rectangle,
+                                            color: const Color(0xFFE9435A),
+                                            borderRadius: !_isRecording
+                                                ? BorderRadius.circular(
+                                                    Sizes.size64 / 2)
+                                                : BorderRadius.circular(12.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Positioned(
-                      right: Sizes.size32,
-                      bottom: Sizes.size96,
-                      child: IconButton(
-                        iconSize: Sizes.size40,
-                        color: Colors.white,
-                        onPressed: _toggleSelfieMode,
-                        icon: const Icon(
-                          Icons.cameraswitch_rounded,
-                        ),
-                      ))
+                  if (_ontappedYes)
+                    Positioned(
+                        right: Sizes.size32,
+                        bottom: Sizes.size96,
+                        child: IconButton(
+                          iconSize: Sizes.size40,
+                          color: Colors.white,
+                          onPressed: _toggleSelfieMode,
+                          icon: const Icon(
+                            Icons.cameraswitch_rounded,
+                          ),
+                        ))
                 ],
               ),
       ),

@@ -7,7 +7,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
 import 'package:surfify/features/video/video_edit/edit_location.dart';
 import 'package:surfify/features/video/video_edit/edit_tag.dart';
 import 'package:surfify/features/video/video_edit/edit_video.dart';
@@ -15,6 +14,7 @@ import 'package:surfify/features/video/widgets/video_location.dart';
 
 import 'package:video_player/video_player.dart';
 
+import '../../main_navigation/main_navigation_screen.dart';
 import '../widgets/video_button.dart';
 
 class VideoUploadedTutorial extends StatefulWidget {
@@ -127,7 +127,13 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
     setState(() {});
   }
 
-  void _goMain() {
+  void _goTutorial() {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const TutorialScreen(),
+    //   ),
+    // );
     context.go(MainNavigationScreen.routeName);
     // Navigator.popUntil(
     //     context, ModalRoute.withName(MainNavigationScreen.routeName));
@@ -342,7 +348,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
                           width: 330,
                           height: Sizes.size64,
                           child: CupertinoButton(
-                            onPressed: _goMain,
+                            onPressed: _goTutorial,
                             color: Theme.of(context).primaryColor,
                             child: const Text(
                               "별말씀을!",
