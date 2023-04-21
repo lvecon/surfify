@@ -16,3 +16,11 @@ Future<Map<String, dynamic>> searchPlaces(
     throw Exception('Failed to search places');
   }
 }
+
+String createGoogleMap(double lat, double lon, int mag) {
+  return "https://google.co.kr/maps/@$lat,$lon,${mag}z";
+}
+
+String createKakaoMap(String name, double lat, double lon) {
+  return "https://map.kakao.com/link/map/$name,$lat,$lon";
+}

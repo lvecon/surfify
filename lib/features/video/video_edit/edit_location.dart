@@ -1,25 +1,22 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_create/video_select_tag.dart';
 import 'package:surfify/widgets/search_map.dart';
 
 import '../../../constants/gaps.dart';
 
-class VideoSelectLocation extends StatefulWidget {
-  final XFile video;
-  const VideoSelectLocation({
+class EditLocation extends StatefulWidget {
+  const EditLocation({
     super.key,
-    required this.video,
   });
 
   @override
-  State<VideoSelectLocation> createState() => VideoSelectLocationState();
+  State<EditLocation> createState() => EditLocationState();
 }
 
-class VideoSelectLocationState extends State<VideoSelectLocation> {
+class EditLocationState extends State<EditLocation> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
   late double longitude;
@@ -32,11 +29,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
     "longitude": [],
     "url": [],
   };
-  // List<String> addressList = [];
-  // List<String> nameList = [];
-  // List<int> distanceList = [];
-  // List<double> latitudeList = [];
-  // List<double> longitudeList = [];
+
   int _selectedIndex = -1;
 
   Future<void> getCurrentLocation() async {
@@ -84,7 +77,6 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
       locationDict['longitude'].add(lat);
       locationDict['latitude'].add(lon);
       locationDict['url'].add(url);
-      print(locationDict);
     }
     setState(() {});
   }
@@ -108,20 +100,14 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
     });
   }
 
-  void _onCreateTag(BuildContext context) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => VideoSelectTag(
-        video: widget.video,
-        address: locationDict['address'][_selectedIndex],
-        name: locationDict['name'][_selectedIndex],
-        lat: locationDict['latitude'][_selectedIndex],
-        lon: locationDict['longitude'][_selectedIndex],
-        url: locationDict['url'][_selectedIndex],
-      ),
-    );
+  void _returnValue(BuildContext context) {
+    Navigator.pop(context, {
+      'name': locationDict['name'][_selectedIndex],
+      'address': locationDict['address'][_selectedIndex],
+      'lat': locationDict['latitude'][_selectedIndex],
+      'lon': locationDict['longitude'][_selectedIndex],
+      'url': locationDict['url'][_selectedIndex]
+    });
   }
 
   @override
@@ -162,11 +148,10 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gaps.v10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "지금 여기는 어디인가요?",
                         style: TextStyle(
                           fontSize: Sizes.size20,
@@ -174,14 +159,13 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                           color: Colors.black87,
                         ),
                       ),
-                      // IconButton(
-                      //   onPressed: _onClosePressed,
-                      //   icon: const FaIcon(FontAwesomeIcons.xmark,
-                      //       color: Colors.black),
-                      // ),
+                      IconButton(
+                        onPressed: _onClosePressed,
+                        icon: const FaIcon(FontAwesomeIcons.xmark,
+                            color: Colors.black),
+                      ),
                     ],
                   ),
-                  Gaps.v10,
                   CupertinoSearchTextField(
                     style: const TextStyle(fontSize: Sizes.size16),
                     placeholder: "내가 있는 곳 찾기 ",
@@ -216,6 +200,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                 child: ListView.separated(
                   controller: _scrollController,
                   padding: const EdgeInsets.only(
+                    top: Sizes.size10,
                     bottom: Sizes.size96 + Sizes.size20,
                     left: Sizes.size20,
                     right: Sizes.size16,
@@ -223,7 +208,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                   separatorBuilder: (context, index) => Gaps.v2,
                   itemCount: locationDict['address'].length,
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => _onCreateTag(context),
+                    onTap: () => _returnValue(context),
                     onTapDown: (TapDownDetails details) => setState(() {
                       _selectedIndex = index;
                     }),

@@ -6,25 +6,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_create/video_preview_screen.dart';
 
-class VideoCreateScreen extends StatefulWidget {
-  const VideoCreateScreen({super.key});
+class EditVideo extends StatefulWidget {
+  final XFile video;
+  const EditVideo({
+    super.key,
+    required this.video,
+  });
   static const routeName = '/video_create_screen';
 
   @override
-  State<VideoCreateScreen> createState() => _VideoCreateScreenState();
+  State<EditVideo> createState() => EditVideoState();
 }
 
-class _VideoCreateScreenState extends State<VideoCreateScreen>
+class EditVideoState extends State<EditVideo>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
 
   bool _isSelfieMode = false;
   bool _isRecording = false;
   bool _isfirstRecording = true;
-  bool _isrecordagain = false;
-  late var _result;
 
   late double progressValue;
 
@@ -49,6 +50,10 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
   late CameraController _cameraController;
   double currentSecond = 0;
   int roundedSecond = 0;
+
+  void _onClosePressed() {
+    Navigator.pop(context, widget.video);
+  }
 
   @override
   void initState() {
@@ -163,37 +168,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
 
     if (!mounted) return;
 
-    // if (!_isrecordagain) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => VideoPreviewScreen(
-          video: video,
-        ),
-      ),
-    );
-    _isrecordagain = true;
-    setState(() {});
-    // } else {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => VideoUploadedScreen(
-    //         video: video,
-    //         address: _result['address'],
-    //         name: _result['name'],
-    //         lon: _result['lon'],
-    //         lat: _result['lat'],
-    //         tags: _result['tags'],
-    //         url: _result['url'],
-    //       ),
-    //     ),
-    //   );
-    // }
-  }
-
-  void _onClosePressed() {
-    Navigator.of(context).pop();
+    Navigator.pop(context, video);
   }
 
   @override
