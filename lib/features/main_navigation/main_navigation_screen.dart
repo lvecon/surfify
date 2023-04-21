@@ -21,6 +21,17 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
+  // Future checkFirstSeen() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool seen = (prefs.getBool('seen') ?? false);
+
+  //   if (!seen) {
+  //     await prefs.setBool('seen', false);
+  //     Navigator.of(context)
+  //         .push(MaterialPageRoute(builder: (context) => const SplashScreen()));
+  //   }
+  // }
+
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -33,6 +44,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         builder: (context) => const VideoCreateScreen(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // checkFirstSeen();
   }
 
   @override
