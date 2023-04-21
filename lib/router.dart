@@ -11,7 +11,7 @@ import 'features/authentication/repos/authentication_repo.dart';
 
 final routerProvider = Provider((ref) {
   return GoRouter(
-    initialLocation: MainNavigationScreen.routeName,
+    initialLocation: MainNavigationScreen.routeURL,
     redirect: (context, state) {
       final isLoggedIn = ref.read(authRepo).isLoggedIn;
       if (!isLoggedIn) {
@@ -39,7 +39,8 @@ final routerProvider = Provider((ref) {
         builder: (context, state) => const VideoRecordingScreen(),
       ),
       GoRoute(
-        path: MainNavigationScreen.routeName,
+        name: MainNavigationScreen.routeName,
+        path: MainNavigationScreen.routeURL,
         builder: (context, state) => const MainNavigationScreen(),
       ),
       GoRoute(

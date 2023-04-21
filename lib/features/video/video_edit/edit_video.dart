@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -196,17 +195,21 @@ class EditVideoState extends State<EditVideo>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size12,
-                    right: Sizes.size6,
-                    child: IconButton(
-                      onPressed: _onClosePressed,
-                      icon: const FaIcon(
-                        FontAwesomeIcons.xmark,
-                        color: Colors.white,
-                        size: Sizes.size32,
+                  Positioned.fill(
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: 1,
+                        height: _cameraController.value.aspectRatio,
+                        child: CameraPreview(_cameraController),
                       ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: Sizes.size20,
+                    left: Sizes.size12,
+                    child: CloseButton(
+                      color: Colors.white,
                     ),
                   ),
                   Positioned(
