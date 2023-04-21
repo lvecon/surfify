@@ -11,7 +11,8 @@ import 'package:surfify/features/video/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
-  static const routeName = '/main_navigation_screen';
+  static const routeURL = '/mainNavigation';
+  static const routeName = 'mainNavigation';
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();

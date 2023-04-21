@@ -46,16 +46,10 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     Navigator.pop(context);
   }
 
-  Future<void> _initializeData() async {
-    await _initVideo();
-    _onCreateLocation(context);
-  }
-
   @override
   void initState() {
     super.initState();
     _initVideo();
-    // _initializeData();
   }
 
   @override
@@ -63,19 +57,6 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     _videoPlayerController.dispose();
     super.dispose();
   }
-
-  // Future<void> _saveToGallery() async {
-  //   if (_savedVideo) return;
-
-  //   await GallerySaver.saveVideo(
-  //     widget.video.path,
-  //     albumName: "TikTok Clone!",
-  //   );
-
-  //   _savedVideo = true;
-
-  //   setState(() {});
-  // }
 
   void _onCreateLocation(BuildContext context) async {
     await showModalBottomSheet(
