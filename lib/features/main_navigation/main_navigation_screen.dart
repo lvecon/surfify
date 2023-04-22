@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
@@ -8,6 +9,8 @@ import 'package:surfify/features/message/message_screen.dart';
 import 'package:surfify/features/users/user_profile_screen.dart';
 import 'package:surfify/features/video/video_create/video_create_screen.dart';
 import 'package:surfify/features/video/video_timeline_screen.dart';
+
+import '../video/video_tutorial/tutorial_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -20,17 +23,23 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+  late bool _firstSeen;
 
-  // Future checkFirstSeen() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   bool seen = (prefs.getBool('seen') ?? false);
-
-  //   if (!seen) {
-  //     await prefs.setBool('seen', false);
-  //     Navigator.of(context)
-  //         .push(MaterialPageRoute(builder: (context) => const SplashScreen()));
-  //   }
-  // }
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _firstSeen = (prefs.getBool('firstSeen') ?? false);
+    await prefs.setBool('firstSeen', true);
+    if (!_firstSeen) {
+      await prefs.setBool('firstSeen', true);
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          opaque: false, // set to false
+          pageBuilder: (_, __, ___) => const TutorialScreen(),
+        ),
+      );
+    }
+    setState(() {});
+  }
 
   void _onTap(int index) {
     setState(() {
@@ -49,7 +58,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   void initState() {
     super.initState();
-    // checkFirstSeen();
+    checkFirstSeen();
   }
 
   @override
