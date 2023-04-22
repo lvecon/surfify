@@ -46,16 +46,10 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     Navigator.pop(context);
   }
 
-  Future<void> _initializeData() async {
-    await _initVideo();
-    _onCreateLocation(context);
-  }
-
   @override
   void initState() {
     super.initState();
     _initVideo();
-    // _initializeData();
   }
 
   @override
@@ -63,19 +57,6 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
     _videoPlayerController.dispose();
     super.dispose();
   }
-
-  // Future<void> _saveToGallery() async {
-  //   if (_savedVideo) return;
-
-  //   await GallerySaver.saveVideo(
-  //     widget.video.path,
-  //     albumName: "TikTok Clone!",
-  //   );
-
-  //   _savedVideo = true;
-
-  //   setState(() {});
-  // }
 
   void _onCreateLocation(BuildContext context) async {
     await showModalBottomSheet(
@@ -116,7 +97,6 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                       color: Colors.black,
                     ),
             ),
-
             Positioned(
               bottom: Sizes.size80,
               width: MediaQuery.of(context).size.width,
@@ -175,57 +155,6 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                 ],
               ),
             )
-            //     : Positioned(
-            //         bottom: Sizes.size80,
-            //         width: MediaQuery.of(context).size.width,
-            //         child: Column(
-            //           children: [
-            //             const Text(
-            //               "고마워요!",
-            //               style: TextStyle(
-            //                 fontSize: Sizes.size24,
-            //                 fontWeight: FontWeight.w600,
-            //                 color: Colors.white,
-            //               ),
-            //             ),
-            //             Gaps.v4,
-            //             const Text(
-            //               "이제 다른 사람도 이곳을",
-            //               style: TextStyle(
-            //                 fontSize: Sizes.size24,
-            //                 fontWeight: FontWeight.w600,
-            //                 color: Colors.white,
-            //               ),
-            //             ),
-            //             Gaps.v4,
-            //             const Text(
-            //               "서핑할 수 있어요.",
-            //               style: TextStyle(
-            //                 fontSize: Sizes.size24,
-            //                 fontWeight: FontWeight.w600,
-            //                 color: Colors.white,
-            //               ),
-            //             ),
-            //             Gaps.v28,
-            //             SizedBox(
-            //               width: 330,
-            //               height: Sizes.size64,
-            //               child: CupertinoButton(
-            //                 onPressed: _goMain,
-            //                 color: Theme.of(context).primaryColor,
-            //                 child: const Text(
-            //                   "별말씀을!",
-            //                   style: TextStyle(
-            //                     fontSize: Sizes.size20,
-            //                     fontWeight: FontWeight.w600,
-            //                     color: Colors.white,
-            //                   ),
-            //                 ),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       )
           ],
         ),
       ),

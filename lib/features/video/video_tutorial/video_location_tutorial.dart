@@ -1,10 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/video_tutorial/video_tag_tutorial.dart';
+
+import '../../../widgets/search_map.dart';
 
 class VideoLocationTutorial extends StatefulWidget {
   final XFile video;
@@ -20,13 +22,71 @@ class VideoLocationTutorial extends StatefulWidget {
 class VideoLocationTutorialState extends State<VideoLocationTutorial> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
+  late double longitude;
+  late double latitude;
+  Map locationDict = {
+    "address": [],
+    "name": [],
+    "distance": [],
+    "latitude": [],
+    "longitude": [],
+    "url": [],
+  };
+  // List<String> addressList = [];
+  // List<String> nameList = [];
+  // List<int> distanceList = [];
+  // List<double> latitudeList = [];
+  // List<double> longitudeList = [];
+  int _selectedIndex = -1;
+
+  Future<void> getCurrentLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    // print(permission);
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      latitude = position.latitude;
+      longitude = position.longitude;
+    } catch (e) {
+      print(e);
+    }
+    setState(() {});
+  }
 
   void _onSearchChanged(String value) {
     print("Searching form $value");
   }
 
-  void _onSearchSubmitted(String value) {
-    print("Submitted $value");
+  Future<void> _onSearchSubmitted(String value) async {
+    await getCurrentLocation();
+    //initialize
+    locationDict.forEach((key, value) {
+      locationDict[key] = [];
+    });
+
+    final places = await searchPlaces(value, longitude, latitude);
+    final documents = places['documents'];
+
+    for (final document in documents) {
+      final address = document['address_name'];
+      final name = document['place_name'];
+      final distance = int.parse(document['distance']);
+      final lat = document['y'];
+      final lon = document['x'];
+      final url = document['place_url'];
+
+      locationDict['distance'].add(distance);
+      locationDict['address'].add(address);
+      locationDict['name'].add(name);
+      locationDict['longitude'].add(lat);
+      locationDict['latitude'].add(lon);
+      locationDict['url'].add(url);
+      print(locationDict);
+    }
+    setState(() {});
   }
 
   final ScrollController _scrollController = ScrollController();
@@ -55,8 +115,18 @@ class VideoLocationTutorialState extends State<VideoLocationTutorial> {
       backgroundColor: Colors.transparent,
       builder: (context) => VideoTagTutorial(
         video: widget.video,
+        address: locationDict['address'][_selectedIndex],
+        name: locationDict['name'][_selectedIndex],
+        lat: locationDict['latitude'][_selectedIndex],
+        lon: locationDict['longitude'][_selectedIndex],
+        url: locationDict['url'][_selectedIndex],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -92,10 +162,11 @@ class VideoLocationTutorialState extends State<VideoLocationTutorial> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gaps.v10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         "지금 여기는 어디인가요?",
                         style: TextStyle(
                           fontSize: Sizes.size20,
@@ -103,13 +174,14 @@ class VideoLocationTutorialState extends State<VideoLocationTutorial> {
                           color: Colors.black87,
                         ),
                       ),
-                      IconButton(
-                        onPressed: _onClosePressed,
-                        icon: const FaIcon(FontAwesomeIcons.xmark,
-                            color: Colors.black),
-                      ),
+                      // IconButton(
+                      //   onPressed: _onClosePressed,
+                      //   icon: const FaIcon(FontAwesomeIcons.xmark,
+                      //       color: Colors.black),
+                      // ),
                     ],
                   ),
+                  Gaps.v10,
                   CupertinoSearchTextField(
                     style: const TextStyle(fontSize: Sizes.size16),
                     placeholder: "내가 있는 곳 찾기 ",
@@ -144,39 +216,70 @@ class VideoLocationTutorialState extends State<VideoLocationTutorial> {
                 child: ListView.separated(
                   controller: _scrollController,
                   padding: const EdgeInsets.only(
-                    top: Sizes.size10,
                     bottom: Sizes.size96 + Sizes.size20,
-                    left: Sizes.size16,
+                    left: Sizes.size20,
                     right: Sizes.size16,
                   ),
-                  separatorBuilder: (context, index) => Gaps.v20,
-                  itemCount: 10,
+                  separatorBuilder: (context, index) => Gaps.v2,
+                  itemCount: locationDict['address'].length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => _onCreateTag(context),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'LG사이언스파크',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: Sizes.size18,
-                                  color: Colors.black54),
+                    onTapDown: (TapDownDetails details) => setState(() {
+                      _selectedIndex = index;
+                    }),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                          color: (_selectedIndex == index)
+                              ? Colors.grey.shade200
+                              : Colors.white24),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Sizes.size8,
+                          horizontal: Sizes.size6,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: 260,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    locationDict['name'][index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: Sizes.size18,
+                                        color: Colors.black54),
+                                  ),
+                                  Gaps.v3,
+                                  Text(
+                                    locationDict['address'][index],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: Sizes.size16,
+                                        color: Colors.black45),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Gaps.v3,
                             Text(
-                              '강서구 마곡 중앙10로 10',
+                              (locationDict['distance'][index] >= 1000)
+                                  ? "${(locationDict['distance'][index] / 1000).toStringAsFixed(1)}km"
+                                  : "${locationDict['distance'][index]}m",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: Sizes.size16,
-                                  color: Colors.black45),
-                            ),
+                                fontWeight: FontWeight.w500,
+                                fontSize: Sizes.size14,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            )
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

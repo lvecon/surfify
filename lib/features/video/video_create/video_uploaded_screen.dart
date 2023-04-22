@@ -4,7 +4,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
@@ -68,7 +67,7 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
     );
 
     setState(() {
-      widget.tags = editTag;
+      widget.tags = editTag ?? widget.tags;
     });
   }
 
@@ -117,12 +116,10 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   }
 
   Future<void> _saveToGallery() async {
-    // if (_savedVideo) return;
-
-    await GallerySaver.saveVideo(
-      widget.video.path,
-      albumName: "TikTok Clone!",
-    );
+    // await GallerySaver.saveVideo(
+    //   widget.video.path,
+    //   albumName: "TikTok Clone!",
+    // );
 
     _savedVideo = true;
 
@@ -130,9 +127,10 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   }
 
   void _goMain() {
-    // context.go(MainNavigationScreen.routeName);
+    // context.goNamed(MainNavigationScreen.routeName);
     Navigator.popUntil(
         context, ModalRoute.withName(MainNavigationScreen.routeName));
+    // Navigator.pushReplacementNamed(context, MainNavigationScreen.routeName);
   }
 
   @override
