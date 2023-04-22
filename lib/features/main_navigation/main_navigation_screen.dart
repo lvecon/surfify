@@ -29,7 +29,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _firstSeen = (prefs.getBool('firstSeen') ?? false);
     await prefs.setBool('firstSeen', true);
-    if (!_firstSeen) {
+    if (_firstSeen) {
       await prefs.setBool('firstSeen', true);
       Navigator.of(context).push(
         PageRouteBuilder(
