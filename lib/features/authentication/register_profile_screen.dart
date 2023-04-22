@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:surfify/features/video/video_tutorial/video_recording_screen.dart';
+import 'package:surfify/features/video/video_tutorial/video_create_tutorial.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
@@ -26,7 +26,7 @@ class _RegisterProfileState extends State<RegisterProfileScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        context.go(VideoRecordingScreen.routeName);
+        context.go(VideoCreateTutorial.routeName);
       }
     }
   }

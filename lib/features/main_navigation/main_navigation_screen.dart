@@ -11,6 +11,7 @@ import 'package:surfify/features/video/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
+
   static const routeName = '/main_navigation_screen';
 
   @override
@@ -19,6 +20,17 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+
+  // Future checkFirstSeen() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool seen = (prefs.getBool('seen') ?? false);
+
+  //   if (!seen) {
+  //     await prefs.setBool('seen', false);
+  //     Navigator.of(context)
+  //         .push(MaterialPageRoute(builder: (context) => const SplashScreen()));
+  //   }
+  // }
 
   void _onTap(int index) {
     setState(() {
@@ -32,6 +44,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         builder: (context) => const VideoCreateScreen(),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // checkFirstSeen();
   }
 
   @override

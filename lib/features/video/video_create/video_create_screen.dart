@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -23,8 +22,6 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
   bool _isSelfieMode = false;
   bool _isRecording = false;
   bool _isfirstRecording = true;
-  bool _isrecordagain = false;
-  late var _result;
 
   late double progressValue;
 
@@ -163,7 +160,6 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
 
     if (!mounted) return;
 
-    // if (!_isrecordagain) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -172,24 +168,8 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
         ),
       ),
     );
-    _isrecordagain = true;
+
     setState(() {});
-    // } else {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => VideoUploadedScreen(
-    //         video: video,
-    //         address: _result['address'],
-    //         name: _result['name'],
-    //         lon: _result['lon'],
-    //         lat: _result['lat'],
-    //         tags: _result['tags'],
-    //         url: _result['url'],
-    //       ),
-    //     ),
-    //   );
-    // }
   }
 
   void _onClosePressed() {
@@ -221,17 +201,21 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size12,
-                    right: Sizes.size6,
-                    child: IconButton(
-                      onPressed: _onClosePressed,
-                      icon: const FaIcon(
-                        FontAwesomeIcons.xmark,
-                        color: Colors.white,
-                        size: Sizes.size32,
+                  Positioned.fill(
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: 1,
+                        height: _cameraController.value.aspectRatio,
+                        child: CameraPreview(_cameraController),
                       ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: Sizes.size20,
+                    left: Sizes.size12,
+                    child: CloseButton(
+                      color: Colors.white,
                     ),
                   ),
                   Positioned(

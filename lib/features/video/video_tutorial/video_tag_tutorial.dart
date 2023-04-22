@@ -2,32 +2,37 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/video_tutorial/video_uploaded_tutorial.dart';
 
 class VideoTagTutorial extends StatefulWidget {
   final XFile video;
-  const VideoTagTutorial({super.key, required this.video});
+  final String address;
+  final String name;
+  final String lat;
+  final String lon;
+  final String url;
+  const VideoTagTutorial({
+    super.key,
+    required this.video,
+    required this.address,
+    required this.name,
+    required this.lat,
+    required this.lon,
+    required this.url,
+  });
 
   @override
-  State<VideoTagTutorial> createState() => VideoTagTutorialState();
+  State<VideoTagTutorial> createState() => _VideoTagTutorialState();
 }
 
-class VideoTagTutorialState extends State<VideoTagTutorial> {
+class _VideoTagTutorialState extends State<VideoTagTutorial> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
-  void _onSearchChanged(String value) {
-    print("Searching form $value");
-  }
-
-  void _onSearchSubmitted(String value) {
-    print("Submitted $value");
-  }
-
   final ScrollController _scrollController = ScrollController();
+  String inputValue = "";
 
   void _onClosePressed() {
     Navigator.of(context).pop();
@@ -47,16 +52,23 @@ class VideoTagTutorialState extends State<VideoTagTutorial> {
   }
 
   Future<void> _saveToGallery() async {
-    await GallerySaver.saveVideo(
-      widget.video.path,
-      albumName: "TikTok Clone!",
-    );
-
     setState(() {});
     if (!mounted) return;
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
+
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => VideoUploadedTutorial(video: widget.video),
+        builder: (context) => VideoUploadedTutorial(
+          video: widget.video,
+          address: widget.address,
+          name: widget.name,
+          tags: inputValue,
+          lat: widget.lat,
+          lon: widget.lon,
+          url: widget.url,
+        ),
       ),
     );
   }
@@ -149,6 +161,9 @@ class VideoTagTutorialState extends State<VideoTagTutorial> {
                     borderSide: BorderSide.none,
                   ),
                 ),
+                onChanged: (value) => setState(() {
+                  inputValue = value;
+                }),
               ),
             ),
             Gaps.v10,
