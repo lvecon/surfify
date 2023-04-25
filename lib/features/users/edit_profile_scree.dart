@@ -31,6 +31,10 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
+        ref.read(usersProvider.notifier).updateProfile(
+              name: formData["name"],
+              intro: formData['intro'],
+            );
         Navigator.of(context).pop();
       }
     }
@@ -137,7 +141,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  data.profileAddress,
+                                  '@${data.profileAddress}',
                                   textAlign: TextAlign.left,
                                   style: const TextStyle(
                                     fontSize: Sizes.size20,
@@ -174,7 +178,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                               },
                               onSaved: (newValue) {
                                 if (newValue != null) {
-                                  formData['nickname'] = newValue;
+                                  formData['name'] = newValue;
                                 }
                               },
                               cursorColor: Theme.of(context).primaryColor,
@@ -221,7 +225,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                               },
                               onSaved: (newValue) {
                                 if (newValue != null) {
-                                  formData['selfIntroduction'] = newValue;
+                                  formData['intro'] = newValue;
                                 }
                               },
                               maxLines: 5,
