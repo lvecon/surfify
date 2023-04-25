@@ -170,8 +170,6 @@ class _MessageScreenState extends State<MessageScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     messageAlarm = true;
-                                    print('1번');
-                                    print(messageAlarm);
                                   });
                                 }),
                             const Expanded(
@@ -196,8 +194,6 @@ class _MessageScreenState extends State<MessageScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     messageAlarm = false;
-                                    print('2번');
-                                    print(messageAlarm);
                                   });
                                 }),
                             const Expanded(
@@ -218,7 +214,6 @@ class _MessageScreenState extends State<MessageScreen> {
                     onTap: () {
                       setState(() {
                         _notifications.clear();
-                        print(messageAlarm);
                       });
                     },
                     child: const FormButton(able: true, text: '메세지 모두 삭제')),
