@@ -496,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  kakaomap_webview:
+    dependency: "direct main"
+    description:
+      name: kakaomap_webview
+      sha256: "6874ff256449fd93ea40bb8b1c3e1a5fec32d0fc39177f88623fadd502ea475d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   lints:
     dependency: transitive
     description:

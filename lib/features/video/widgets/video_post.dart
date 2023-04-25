@@ -22,6 +22,10 @@ class VideoPost extends ConsumerStatefulWidget {
   final String src;
   final String nickname;
   final String content;
+  final double latitude;
+  final double longitude;
+  final String location;
+  final String adress;
 
   const VideoPost({
     super.key,
@@ -29,6 +33,10 @@ class VideoPost extends ConsumerStatefulWidget {
     required this.src,
     required this.nickname,
     required this.content,
+    required this.latitude,
+    required this.longitude,
+    required this.location,
+    required this.adress,
   });
 
   @override
@@ -333,7 +341,11 @@ class VideoPostState extends ConsumerState<VideoPost>
                         randomMode = false;
                       });
                     },
-                    child: const VideoRadar())
+                    child: VideoRadar(
+                      latitude: widget.latitude,
+                      longitude: widget.longitude,
+                    ),
+                  )
                 : GestureDetector(
                     onTap: () {
                       setState(() {
@@ -341,7 +353,10 @@ class VideoPostState extends ConsumerState<VideoPost>
                         randomMode = false;
                       });
                     },
-                    child: const VideoCompass()),
+                    child: VideoCompass(
+                      latitude: widget.latitude,
+                      longitude: widget.longitude,
+                    )),
           ),
           Positioned(
             top: 50,
@@ -356,14 +371,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                 },
                 child: const SearchBar()),
           ),
-          const Positioned(
+          Positioned(
             top: 90,
             left: 20,
             child: VideoLocation(
-              name: "서울식물원",
-              address: "서울시 강서구 마곡동 161",
-              latitude: 37.4553,
-              longitude: 126.95,
+              name: widget.location,
+              address: widget.adress,
+              latitude: widget.latitude,
+              longitude: widget.longitude,
               url: "https://map.kakao.com/",
             ),
           ),

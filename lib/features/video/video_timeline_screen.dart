@@ -75,34 +75,51 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     "assets/videos/pizza03.mp4"
   ];
 
-  List<Map<String, dynamic>> video_example = [
-    {
-      'src': "assets/videos/pizza02.mp4",
-      'nickname': "마곡드래곤(@dragmag)",
-      'content': '피자집',
-      'location': "비바 나폴리",
-      'longitude': 0,
-      'latitude': 0,
-      'comments': 0,
-    },
-    {
-      'src': "assets/videos/pizza01.mp4",
-      'location': "비바 나폴리",
-      'nickname': "마곡드래곤(@dragmag)",
-      'content': '피자집',
-      'longitude': 0,
-      'latitude': 0,
-      'comments': 0,
-    },
-    {
-      'src': "assets/videos/pizza03.mp4",
-      'location': "비바 나폴리",
-      'nickname': "마곡드래곤(@dragmag)",
-      'content': '피자집',
-      'longitude': 0,
-      'latitude': 0,
-      'comments': 0,
-    },
+  List<List<Map<String, dynamic>>> video_example = [
+    [
+      {
+        'src': "assets/videos/pizza02.mp4",
+        'nickname': "마곡드래곤(@dragmag)",
+        'content': '피자집',
+        'location': "비바 나폴리",
+        'longitude': 37.56037058748502,
+        'latitude': 126.82747856620537,
+        'comments': 0.0,
+        'address': '서울특별시 강서구 마곡중앙로 76'
+      },
+      {
+        'src': "assets/videos/pizza01.mp4",
+        'location': "비바 나폴리",
+        'nickname': "마곡드래곤(@dragmag)",
+        'content': '피자집 내부',
+        'longitude': 37.56037058748502,
+        'latitude': 126.82747856620537,
+        'comments': 0.0,
+        'address': '서울특별시 강서구 마곡중앙로 76'
+      },
+      {
+        'src': "assets/videos/pizza03.mp4",
+        'location': "비바 나폴리",
+        'nickname': "마곡드래곤(@dragmag)",
+        'content': '메뉴판',
+        'longitude': 37.56037058748502,
+        'latitude': 126.82747856620537,
+        'comments': 0.0,
+        'address': '서울특별시 강서구 마곡중앙로 76'
+      },
+    ],
+    [
+      {
+        'src': "assets/videos/snu_main01.mp4",
+        'nickname': "허남현(@namhyeon)",
+        'content': '서울대 잔디광장의 야경 #서울대 #야경 #총장잔디',
+        'location': "서울대 본관",
+        'longitude': 37.45959904963221,
+        'latitude': 126.95175650442046,
+        'comments': 0.0,
+        'address': '서울특별시 관악구 관악로 1'
+      },
+    ],
   ];
 
   @override
@@ -124,23 +141,39 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                 scrollDirection: Axis.vertical,
                 onPageChanged: _onPageChanged,
                 itemCount: _itemCount,
-                itemBuilder: (context, index) => PageView.builder(
-                  controller: _pageController2,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: _onPageChanged2,
-                  itemCount: _itemCount,
-                  itemBuilder: (context, index) => (index == 0)
-                      ? VideoPost(
+                itemBuilder: (context, index) => (index == 0)
+                    ? PageView.builder(
+                        controller: _pageController2,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: _onPageChanged2,
+                        itemCount: video_example[0].length,
+                        itemBuilder: (context, index) => VideoPost(
                           index: index,
-                          src: video_index[index],
-                          nickname: video_example[index]['nickname'],
-                          content: video_example[index]['content'])
-                      : VideoPost(
+                          src: video_example[0][index]['src'],
+                          nickname: video_example[0][index]['nickname'],
+                          content: video_example[0][index]['content'],
+                          latitude: video_example[0][index]['latitude'],
+                          longitude: video_example[0][index]['longitude'],
+                          location: video_example[0][index]['location'],
+                          adress: video_example[0][index]['address'],
+                        ),
+                      )
+                    : PageView.builder(
+                        controller: _pageController2,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: _onPageChanged2,
+                        itemCount: video_example[1].length,
+                        itemBuilder: (context, index) => VideoPost(
                           index: index,
-                          src: video_example[index]['src'],
-                          nickname: video_example[index]['nickname'],
-                          content: video_example[index]['content']),
-                ),
+                          src: video_example[1][index]['src'],
+                          nickname: video_example[1][index]['nickname'],
+                          content: video_example[1][index]['content'],
+                          latitude: video_example[1][index]['latitude'],
+                          longitude: video_example[1][index]['longitude'],
+                          location: video_example[1][index]['location'],
+                          adress: video_example[1][index]['address'],
+                        ),
+                      ),
               ),
             ));
   }

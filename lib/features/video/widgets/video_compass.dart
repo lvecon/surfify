@@ -9,7 +9,11 @@ import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
 class VideoCompass extends StatefulWidget {
-  const VideoCompass({super.key});
+  final double latitude;
+  final double longitude;
+
+  const VideoCompass(
+      {super.key, required this.latitude, required this.longitude});
 
   @override
   State<VideoCompass> createState() => _VideoCompassState();
@@ -19,10 +23,6 @@ class _VideoCompassState extends State<VideoCompass> {
   // 출발지
   final double lat1 = 35.71;
   final double lon1 = 139.73;
-
-  //도착지
-  final double lat2 = 37.57;
-  final double lon2 = 126.98;
 
   double _direction = 0.00;
 
@@ -49,8 +49,8 @@ class _VideoCompassState extends State<VideoCompass> {
     double bearing = Geolocator.bearingBetween(
       lat1,
       lon1,
-      lat2,
-      lon2,
+      widget.latitude,
+      widget.longitude,
     );
     return Column(children: [
       Transform.rotate(
