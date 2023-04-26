@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
@@ -13,6 +12,7 @@ import '../../constants/sizes.dart';
 import '../users/view_models/avatar_view_model.dart';
 import '../users/view_models/user_view_model.dart';
 import '../users/views/avatar.dart';
+import '../video/video_tutorial/video_create_tutorial.dart';
 
 class RegisterProfileScreen extends ConsumerStatefulWidget {
   const RegisterProfileScreen({super.key});
@@ -36,8 +36,8 @@ class _RegisterProfileState extends ConsumerState<RegisterProfileScreen> {
             name: formData["name"],
             intro: formData['intro'],
             profileAddress: formData['profileAddress']);
-        //context.go(VideoCreateTutorial.routeName);
-        context.go(MainNavigationScreen.routeName);
+        context.go(VideoCreateTutorial.routeName);
+        //context.go(MainNavigationScreen.routeName);
       }
     }
   }
