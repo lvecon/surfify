@@ -35,6 +35,12 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
       name: credential.user!.displayName ?? "undefined",
       profileAddress: credential.user!.email ?? "undefined",
       intro: "undefined",
+      serviceAgree: false,
+      serviceAgreeDate: DateTime.now().toString(),
+      privacyAgree: false,
+      privacyAgreeDate: DateTime.now().toString(),
+      marketingAgree: false,
+      marketingAgreeDate: DateTime.now().toString(),
     );
     _usersRepository.createProfile(profile);
     state = AsyncValue.data(profile);
@@ -46,13 +52,60 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
     await _usersRepository.updateUser(state.value!.uid, {"hasAvatar": true});
   }
 
+  Future<void> registerProfile({
+    required String? profileAddress,
+    required String? name,
+    required String? intro,
+  }) async {
+    state = AsyncValue.data(
+      state.value!.copyWith(
+        name: name,
+        intro: intro,
+        profileAddress: profileAddress,
+      ),
+    );
+    await _usersRepository.updateUser(
+      state.value!.uid,
+      {
+        "name": name,
+        "intro": intro,
+        "profileAddress": profileAddress,
+      },
+    );
+  }
+
   Future<void> updateProfile({
     required String? name,
     required String? intro,
   }) async {
-    state = AsyncValue.data(state.value!.copyWith(name: name, link: intro));
-    await _usersRepository
-        .updateUser(state.value!.uid, {"name": name, "intro": intro});
+    state = AsyncValue.data(state.value!.copyWith(
+      name: name,
+      intro: intro,
+    ));
+    await _usersRepository.updateUser(state.value!.uid, {
+      "name": name,
+      "intro": intro,
+    });
+  }
+
+  Future<void> updateAgreement({
+    required bool? serviceAgree,
+    required bool? privacyAgree,
+    required bool? marketingAgree,
+  }) async {
+    state = AsyncValue.data(state.value!.copyWith(
+      serviceAgree: serviceAgree,
+      privacyAgree: privacyAgree,
+      marketingAgree: marketingAgree,
+    ));
+    await _usersRepository.updateUser(state.value!.uid, {
+      "serviceAgree": serviceAgree,
+      "privacyAgree": privacyAgree,
+      "marketingAgree": marketingAgree,
+      "serviceAgreeDate": DateTime.now().toString(),
+      "privacyAgreeDate": DateTime.now().toString(),
+      "marketingAgreeDate": DateTime.now().toString(),
+    });
   }
 }
 
