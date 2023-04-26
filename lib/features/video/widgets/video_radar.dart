@@ -7,7 +7,11 @@ import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
 class VideoRadar extends StatelessWidget {
-  const VideoRadar({super.key});
+  final double latitude;
+  final double longitude;
+
+  const VideoRadar(
+      {super.key, required this.latitude, required this.longitude});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +19,14 @@ class VideoRadar extends StatelessWidget {
     const double lat1 = 35.71;
     const double lon1 = 139.73;
 
-    //도착지
-    const double lat2 = 37.57;
-    const double lon2 = 126.98;
-
     const double purpleBallR = 8.0;
     const double whiteBallR = 25.0;
 
     double bearing = Geolocator.bearingBetween(
       lat1,
       lon1,
-      lat2,
-      lon2,
+      latitude,
+      longitude,
     );
     double x = (whiteBallR - purpleBallR) * sin(bearing * pi / 180);
     double y = (whiteBallR - purpleBallR) * cos(bearing * pi / 180);

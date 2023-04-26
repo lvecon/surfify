@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
@@ -16,19 +17,33 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../opinion_screen.dart';
 
-class VideoPost extends StatefulWidget {
+class VideoPost extends ConsumerStatefulWidget {
   final int index;
+  final String src;
+  final String nickname;
+  final String content;
+  final double latitude;
+  final double longitude;
+  final String location;
+  final String adress;
 
   const VideoPost({
     super.key,
     required this.index,
+    required this.src,
+    required this.nickname,
+    required this.content,
+    required this.latitude,
+    required this.longitude,
+    required this.location,
+    required this.adress,
   });
 
   @override
-  State<VideoPost> createState() => _VideoPostState();
+  VideoPostState createState() => VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost>
+class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController;
 
@@ -52,8 +67,7 @@ class _VideoPostState extends State<VideoPost>
   // }
 
   void _initVideoPlayer() async {
-    _videoPlayerController =
-        VideoPlayerController.asset("assets/videos/video.mp4");
+    _videoPlayerController = VideoPlayerController.asset(widget.src);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     // _videoPlayerController.addListener(_onVideoChange);
@@ -193,18 +207,18 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
                 Gaps.v12,
-                const Text(
-                  "마곡드래곤(@dragmag)",
-                  style: TextStyle(
+                Text(
+                  widget.nickname,
+                  style: const TextStyle(
                     fontSize: Sizes.size20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Gaps.v10,
-                const Text(
-                  "LG사이언스파크에서 #창문 #화분 #빌딩",
-                  style: TextStyle(
+                Text(
+                  widget.content,
+                  style: const TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
                   ),
@@ -327,7 +341,11 @@ class _VideoPostState extends State<VideoPost>
                         randomMode = false;
                       });
                     },
-                    child: const VideoRadar())
+                    child: VideoRadar(
+                      latitude: widget.latitude,
+                      longitude: widget.longitude,
+                    ),
+                  )
                 : GestureDetector(
                     onTap: () {
                       setState(() {
@@ -335,7 +353,10 @@ class _VideoPostState extends State<VideoPost>
                         randomMode = false;
                       });
                     },
-                    child: const VideoCompass()),
+                    child: VideoCompass(
+                      latitude: widget.latitude,
+                      longitude: widget.longitude,
+                    )),
           ),
           Positioned(
             top: 50,
@@ -350,14 +371,14 @@ class _VideoPostState extends State<VideoPost>
                 },
                 child: const SearchBar()),
           ),
-          const Positioned(
+          Positioned(
             top: 90,
             left: 20,
             child: VideoLocation(
-              name: "서울식물원",
-              address: "서울시 강서구 마곡동 161",
-              latitude: 37.4553,
-              longitude: 126.95,
+              name: widget.location,
+              address: widget.adress,
+              latitude: widget.latitude,
+              longitude: widget.longitude,
               url: "https://map.kakao.com/",
             ),
           ),

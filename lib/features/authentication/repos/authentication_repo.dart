@@ -15,8 +15,8 @@ class AuthenticaitonRepository {
     await _firebaseAuth.signOut();
   }
 
-  Future<void> googleSignIn() async {
-    await _firebaseAuth.signInWithProvider(GoogleAuthProvider());
+  Future<UserCredential> googleSignIn() async {
+    return await _firebaseAuth.signInWithProvider(GoogleAuthProvider());
   }
 }
 
