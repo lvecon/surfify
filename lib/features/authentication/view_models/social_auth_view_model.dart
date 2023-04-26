@@ -18,9 +18,13 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
   }
 
   Future<void> googleSignUp(BuildContext context) async {
+    final users = ref.read(usersProvider.notifier);
+
     state = const AsyncValue.loading();
-    state =
-        await AsyncValue.guard(() async => await _repository.googleSignIn());
+    state = await AsyncValue.guard(() async {
+      final userCredential = await _repository.googleSignIn();
+      await users.createAccount(userCredential);
+    });
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
     } else {

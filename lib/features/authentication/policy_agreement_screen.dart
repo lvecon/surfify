@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import '../users/view_models/user_view_model.dart';
 
-class PolicyAgreementScreen extends StatefulWidget {
+class PolicyAgreementScreen extends ConsumerStatefulWidget {
   const PolicyAgreementScreen({super.key});
   static const routeName = '/policy_agreement_screen';
 
   @override
-  State<PolicyAgreementScreen> createState() => _PolicyAgreementScreenState();
+  createState() => _PolicyAgreementScreenState();
 }
 
-class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
+class _PolicyAgreementScreenState extends ConsumerState<PolicyAgreementScreen> {
   var agree1 = false;
   var agree2 = false;
   var agree3 = false;
@@ -73,6 +75,11 @@ class _PolicyAgreementScreenState extends State<PolicyAgreementScreen> {
   }
 
   void onNextTap(BuildContext context) {
+    ref.read(usersProvider.notifier).updateAgreement(
+          serviceAgree: agree1,
+          privacyAgree: agree2,
+          marketingAgree: agree3,
+        );
     if (agree1 && agree2) {
       Navigator.of(context).push(
         MaterialPageRoute(
