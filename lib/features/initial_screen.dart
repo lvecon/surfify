@@ -74,7 +74,6 @@ class InitialScreen extends ConsumerWidget {
                         ref
                             .read(socialAuthProvider.notifier)
                             .googleSignUp(context);
-                        onRegisterTap(context);
                       },
                       child: BoxButton(
                         text: '회원가입',
