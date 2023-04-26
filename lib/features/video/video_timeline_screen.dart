@@ -64,17 +64,6 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     );
   }
 
-  List<String> video_index = [
-    "assets/videos/pizza02.mp4",
-    "assets/videos/pizza01.mp4",
-    "assets/videos/pizza03.mp4"
-  ];
-  List<String> video_index2 = [
-    "assets/videos/pizza02.mp4",
-    "assets/videos/pizza01.mp4",
-    "assets/videos/pizza03.mp4"
-  ];
-
   List<List<Map<String, dynamic>>> video_example = [
     [
       {
