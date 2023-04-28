@@ -28,6 +28,9 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
 
   Future<void> createAccount(UserCredential credential) async {
     state = const AsyncValue.loading();
+    final profile2 =
+        await _usersRepository.findProfile(_authenticationRepository.user!.uid);
+
     final profile = UserProfileModel(
       hasAvatar: false,
       link: "undefined",

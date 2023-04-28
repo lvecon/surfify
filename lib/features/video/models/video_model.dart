@@ -49,10 +49,10 @@ class VideoModel {
         id = videoId,
         creator = json["creator"],
         location = json['location'],
-        longitude = json['longitude'],
-        latitude = json['latitdue'],
+        latitude = 0.0,
+        longitude = 0.0,
         kakaomapId = json['kakaomapId'],
-        hashtag = json['hashtag'],
+        hashtag = [],
         address = json['address'];
 
   Map<String, dynamic> toJson() {

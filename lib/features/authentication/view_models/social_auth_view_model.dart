@@ -37,8 +37,7 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final userCredential = await _repository.googleSignIn();
-      await users.createAccount(userCredential);
+      await _repository.googleSignIn();
     });
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
