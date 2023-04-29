@@ -25,8 +25,7 @@ export const onVideoCreated = functions.firestore
        destination: `thumbnails/${snapshot.id}.jpg`,
      });
      await file.makePublic();
-     await snapshot.ref.update({thumbnailUrl: file.publicUrl()});
-     await snapshot.ref.update({id: snapshot.id});
+     await snapshot.ref.update({thumbnailUrl: file.publicUrl(), id:snapshot.id});
 
      const db = admin.firestore();
 
