@@ -24,6 +24,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
     String address,
     double longitude,
     double latitude,
+    String description,
+    String url,
     BuildContext context,
   ) async {
     final user = ref.read(authRepo).user;
@@ -39,8 +41,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
           await _repository.saveVideo(
             VideoModel(
               id: "",
-              title: "From Flutter!",
-              description: "Hell yeah!",
+              title: "제목",
+              description: description,
               fileUrl: await task.ref.getDownloadURL(),
               thumbnailUrl: "",
               creatorUid: user.uid,
@@ -52,7 +54,7 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               address: address,
               longitude: longitude,
               latitude: latitude,
-              kakaomapId: '0',
+              kakaomapId: url,
               hashtag: [],
             ),
           );

@@ -126,6 +126,8 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
           widget.address,
           double.parse(widget.lon),
           double.parse(widget.lat),
+          widget.tags,
+          widget.url,
           context,
         );
 
@@ -183,25 +185,39 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: Sizes.size28,
-                          child: SizedBox(
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/images/user.png',
+                        ref.read(usersProvider).when(
+                              error: (error, stackTrace) => Center(
+                                child: Text(error.toString()),
+                              ),
+                              loading: () => const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
+                              data: (data) => CircleAvatar(
+                                radius: 28,
+                                foregroundImage: data.hasAvatar
+                                    ? NetworkImage(
+                                        "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media")
+                                    : null,
+                                child: Text(data.name),
                               ),
                             ),
-                          ),
-                        ),
                         Gaps.v12,
-                        const Text(
-                          "마곡드래곤(@dragmag)",
-                          style: TextStyle(
-                            fontSize: Sizes.size20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        ref.read(usersProvider).when(
+                              error: (error, stackTrace) => Center(
+                                child: Text(error.toString()),
+                              ),
+                              loading: () => const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
+                              data: (data) => Text(
+                                data.name,
+                                style: const TextStyle(
+                                  fontSize: Sizes.size20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                         Gaps.v10,
                         SizedBox(
                           width: 300,
@@ -269,14 +285,23 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                                     : _saveToGallery(),
                             color:
                                 Theme.of(context).primaryColor.withOpacity(0.8),
-                            child: const Text(
-                              "서핑포인트 생성",
-                              style: TextStyle(
-                                fontSize: Sizes.size20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: ref.watch(uploadVideoProvider).isLoading
+                                ? const Text(
+                                    "로딩 중 잠시만 기다려주세요",
+                                    style: TextStyle(
+                                      fontSize: Sizes.size20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const Text(
+                                    "서핑포인트 생성",
+                                    style: TextStyle(
+                                      fontSize: Sizes.size20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         ),
                         Gaps.v16,
