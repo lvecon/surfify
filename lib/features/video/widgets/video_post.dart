@@ -372,7 +372,7 @@ class VideoPostState extends ConsumerState<VideoPost>
               address: widget.videoData.address,
               latitude: widget.videoData.latitude,
               longitude: widget.videoData.longitude,
-              url: "https://map.kakao.com/",
+              url: widget.videoData.kakaomapId,
             ),
           ),
         ],

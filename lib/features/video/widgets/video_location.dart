@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakaomap_webview/kakaomap_webview.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
@@ -54,7 +54,9 @@ class VideoLocation extends StatelessWidget {
             Gaps.h28,
             GestureDetector(
               onTap: () async {
-                _openKakaoMapScreen(context, name, latitude, longitude);
+                //_openKakaoMapScreen(context, name, latitude, longitude);
+
+                await launchUrlString(url);
               },
               child: Text(
                 address,
@@ -70,12 +72,13 @@ class VideoLocation extends StatelessWidget {
     );
   }
 
-  Future<void> _openKakaoMapScreen(BuildContext context, String name,
-      double latitude, double longitude) async {
-    KakaoMapUtil util = KakaoMapUtil();
-    String url = await util.getMapScreenURL(longitude, latitude, name: name);
+//   Future<void> _openKakaoMapScreen(BuildContext context, String name,
+//       double latitude, double longitude) async {
+//   //  KakaoMapUtil util = KakaoMapUtil();
+//    // String url = await util.getMapScreenURL(longitude, latitude, name: name);
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => KakaoMapScreen(url: url)));
-  }
+//     Navigator.push(
+//         context, MaterialPageRoute(builder: (_) => KakaoMapScreen(url: url)));
+//   }
+// }
 }

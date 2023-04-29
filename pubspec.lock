@@ -278,6 +278,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
+  flutter_geo_hash:
+    dependency: "direct main"
+    description:
+      name: flutter_geo_hash
+      sha256: e6463e79d299138e87ec9305244e7e34e6554938a10cd7a0e5fbded4bbb63fd4
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   flutter_lints:
     dependency: "direct dev"
     description:
