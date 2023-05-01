@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_tutorial/video_preview_turorial.dart';
+import 'package:surfify/features/video/views/video_tutorial/video_preview_turorial.dart';
 
 class VideoCreateTutorial extends StatefulWidget {
   const VideoCreateTutorial({super.key});

@@ -7,14 +7,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_edit/edit_location.dart';
-import 'package:surfify/features/video/video_edit/edit_tag.dart';
-import 'package:surfify/features/video/video_edit/edit_video.dart';
-import 'package:surfify/features/video/widgets/video_location.dart';
+import 'package:surfify/features/video/views/video_edit/edit_location.dart';
+import 'package:surfify/features/video/views/video_edit/edit_tag.dart';
+import 'package:surfify/features/video/views/video_edit/edit_video.dart';
+import 'package:surfify/features/video/views/widgets/video_location.dart';
 
 import 'package:video_player/video_player.dart';
 
-import '../../main_navigation/main_navigation_screen.dart';
+import '../../../main_navigation/main_navigation_screen.dart';
 import '../widgets/video_button.dart';
 
 class VideoUploadedTutorial extends StatefulWidget {
@@ -229,6 +229,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
                           child: const VideoButton(
                             icon: FontAwesomeIcons.pen,
                             text: "Edit",
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -246,6 +247,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
                           child: const VideoButton(
                             icon: FontAwesomeIcons.penToSquare,
                             text: "Edit",
+                            color: Colors.white,
                           ),
                         ),
                       ],

@@ -5,8 +5,8 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../../../constants/gaps.dart';
-import '../../../constants/sizes.dart';
+import '../../../../constants/gaps.dart';
+import '../../../../constants/sizes.dart';
 
 class VideoCompass extends StatefulWidget {
   final double latitude;
@@ -24,11 +24,36 @@ class _VideoCompassState extends State<VideoCompass> {
   final double lat1 = 35.71;
   final double lon1 = 139.73;
 
+  late double longitude;
+  late double latitude;
+
   double _direction = 0.00;
+
+  Future<void> getCurrentLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    print(permission);
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      latitude = position.latitude;
+      longitude = position.longitude;
+    } catch (e) {
+      print(e);
+    }
+    setState(() {});
+    print('dd');
+  }
 
   @override
   void initState() {
     super.initState();
+    () async {
+      getCurrentLocation();
+    };
+
     FlutterCompass.events?.listen((event) async {
       setState(() {
         _direction = event.heading ?? 0.0;

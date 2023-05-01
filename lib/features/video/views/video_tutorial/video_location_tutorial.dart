@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_tutorial/video_tag_tutorial.dart';
+import 'package:surfify/features/video/views/video_tutorial/video_tag_tutorial.dart';
 
-import '../../../widgets/search_map.dart';
+import '../../../../widgets/search_map.dart';
 
 class VideoLocationTutorial extends StatefulWidget {
   final XFile video;

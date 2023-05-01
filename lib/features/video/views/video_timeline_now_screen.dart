@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/video/view_models/timeline_view_model.dart';
-import 'package:surfify/features/video/widgets/video_post.dart';
+import 'package:surfify/features/video/views/widgets/video_post.dart';
 
 class VideoTimelineNowScreen extends ConsumerStatefulWidget {
   const VideoTimelineNowScreen({super.key});

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_create/video_uploaded_screen.dart';
+import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
 
 class VideoSelectTag extends StatefulWidget {
   final XFile video;

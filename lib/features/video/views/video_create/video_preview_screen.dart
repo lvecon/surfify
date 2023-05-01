@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
-import 'package:surfify/features/video/video_create/video_select_location.dart';
+import 'package:surfify/features/video/views/video_create/video_select_location.dart';
 
 import 'package:video_player/video_player.dart';
 

@@ -4,8 +4,8 @@ import 'package:surfify/features/authentication/policy_agreement_screen.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/features/initial_screen.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
-import 'package:surfify/features/video/video_create/video_create_screen.dart';
-import 'package:surfify/features/video/video_tutorial/video_create_tutorial.dart';
+import 'package:surfify/features/video/views/video_create/video_create_screen.dart';
+import 'package:surfify/features/video/views/video_tutorial/video_create_tutorial.dart';
 
 import 'features/authentication/repos/authentication_repo.dart';
 
