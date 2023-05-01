@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:surfify/features/video/detail_opinion_screen.dart';
 import 'package:surfify/widgets/box_button.dart';
 
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
+import 'detail_opinion_screen.dart';
 
 class OptionScreen extends StatelessWidget {
   const OptionScreen({super.key});
