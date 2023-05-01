@@ -9,14 +9,14 @@ import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
-import 'package:surfify/features/video/video_edit/edit_location.dart';
-import 'package:surfify/features/video/video_edit/edit_tag.dart';
-import 'package:surfify/features/video/video_edit/edit_video.dart';
-import 'package:surfify/features/video/widgets/video_location.dart';
+import 'package:surfify/features/video/views/video_edit/edit_location.dart';
+import 'package:surfify/features/video/views/video_edit/edit_tag.dart';
+import 'package:surfify/features/video/views/video_edit/edit_video.dart';
+import 'package:surfify/features/video/views/widgets/video_location.dart';
 
 import 'package:video_player/video_player.dart';
 
-import '../view_models/upload_video_view_model.dart';
+import '../../view_models/upload_video_view_model.dart';
 import '../widgets/video_button.dart';
 
 class VideoUploadedScreen extends ConsumerStatefulWidget {
@@ -246,6 +246,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                           child: const VideoButton(
                             icon: FontAwesomeIcons.pen,
                             text: "Edit",
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -263,6 +264,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                           child: const VideoButton(
                             icon: FontAwesomeIcons.penToSquare,
                             text: "Edit",
+                            color: Colors.white,
                           ),
                         ),
                       ],

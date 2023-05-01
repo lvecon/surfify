@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/widgets/search_map.dart';
 
-import '../../../constants/gaps.dart';
+import '../../../../constants/gaps.dart';
 
 class EditLocation extends StatefulWidget {
   const EditLocation({

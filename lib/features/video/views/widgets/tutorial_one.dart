@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surfify/constants/gaps.dart';
 
-import '../../../constants/sizes.dart';
+import '../../../../constants/sizes.dart';
 
 class TutorialOne extends StatelessWidget {
   const TutorialOne({

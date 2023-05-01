@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/video_create/video_select_tag.dart';
+import 'package:surfify/features/video/views/video_create/video_select_tag.dart';
 import 'package:surfify/widgets/search_map.dart';
 
-import '../../../constants/gaps.dart';
+import '../../../../constants/gaps.dart';
 
 class VideoSelectLocation extends StatefulWidget {
   final XFile video;

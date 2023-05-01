@@ -4,19 +4,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/features/video/search_screen.dart';
-import 'package:surfify/features/video/widgets/search_bar.dart';
-import 'package:surfify/features/video/widgets/video_button.dart';
-import 'package:surfify/features/video/widgets/video_comments.dart';
-import 'package:surfify/features/video/widgets/video_compass.dart';
-import 'package:surfify/features/video/widgets/video_location.dart';
-import 'package:surfify/features/video/widgets/video_radar.dart';
+import 'package:surfify/features/video/views/widgets/search_bar.dart';
+import 'package:surfify/features/video/views/widgets/video_button.dart';
+import 'package:surfify/features/video/views/widgets/video_comments.dart';
+import 'package:surfify/features/video/views/widgets/video_compass.dart';
+import 'package:surfify/features/video/views/widgets/video_location.dart';
+import 'package:surfify/features/video/views/widgets/video_radar.dart';
 
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../models/video_model.dart';
+import '../../models/video_model.dart';
+import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
+import '../search_screen.dart';
 
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
@@ -47,6 +48,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   var radarMode = true;
 
   bool randomMode = false;
+  var like = 0;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -124,6 +126,12 @@ class VideoPostState extends ConsumerState<VideoPost>
     });
   }
 
+  void _onLikeTap() {
+    ref
+        .watch(videoPostProvider(widget.videoData.id).notifier)
+        .toggleLikeVideo();
+  }
+
   void _onCommentsTap(BuildContext context) async {
     if (_videoPlayerController.value.isPlaying) {
       _onTogglePause();
@@ -140,6 +148,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final videoId = widget.videoData.id;
 
     return VisibilityDetector(
       key: Key("${widget.index}"),
@@ -237,22 +246,47 @@ class VideoPostState extends ConsumerState<VideoPost>
             right: 20,
             child: Column(
               children: [
-                VideoButton(
-                  icon: FontAwesomeIcons.solidHeart,
-                  text: '${widget.videoData.likes}',
-                ),
+                ref.watch(videoPostProvider(videoId)).when(
+                      loading: () => GestureDetector(
+                        onTap: null,
+                        child: VideoButton(
+                          icon: Icons.favorite,
+                          text: "${widget.videoData.likes}",
+                          color: Colors.white,
+                        ),
+                      ),
+                      error: (error, stackTrace) => const SizedBox(),
+                      data: (data) {
+                        return GestureDetector(
+                            onTap: () {
+                              ref
+                                  .watch(videoPostProvider(widget.videoData.id)
+                                      .notifier)
+                                  .toggleLikeVideo();
+                            },
+                            child: VideoButton(
+                              icon: Icons.favorite,
+                              text: '$like',
+                              color: data
+                                  ? Colors.redAccent.shade400
+                                  : Colors.white,
+                            ));
+                      },
+                    ),
                 Gaps.v20,
                 GestureDetector(
                   onTap: () => _onCommentsTap(context),
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidCommentDots,
                     text: '${widget.videoData.comments}',
+                    color: Colors.white,
                   ),
                 ),
                 Gaps.v20,
                 const VideoButton(
                   icon: FontAwesomeIcons.shareNodes,
                   text: "",
+                  color: Colors.white,
                 ),
                 Gaps.v20,
                 GestureDetector(
@@ -266,6 +300,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   child: const VideoButton(
                     icon: FontAwesomeIcons.ellipsisVertical,
                     text: "",
+                    color: Colors.white,
                   ),
                 )
               ],
@@ -279,6 +314,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 VideoButton(
                   icon: FontAwesomeIcons.pen,
                   text: "Edit",
+                  color: Colors.white,
                 ),
               ],
             ),
