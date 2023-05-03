@@ -18,6 +18,7 @@ import '../../models/video_model.dart';
 import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
 import '../search_screen.dart';
+import 'like.dart';
 
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
@@ -246,7 +247,7 @@ class VideoPostState extends ConsumerState<VideoPost>
             right: 20,
             child: Column(
               children: [
-                ref.watch(videoPostProvider(videoId)).when(
+                ref.read(videoPostProvider(videoId)).when(
                       loading: () => GestureDetector(
                         onTap: null,
                         child: VideoButton(
@@ -257,20 +258,11 @@ class VideoPostState extends ConsumerState<VideoPost>
                       ),
                       error: (error, stackTrace) => const SizedBox(),
                       data: (data) {
-                        return GestureDetector(
-                            onTap: () {
-                              ref
-                                  .watch(videoPostProvider(widget.videoData.id)
-                                      .notifier)
-                                  .toggleLikeVideo();
-                            },
-                            child: VideoButton(
-                              icon: Icons.favorite,
-                              text: '$like',
-                              color: data
-                                  ? Colors.redAccent.shade400
-                                  : Colors.white,
-                            ));
+                        return Like(
+                          number: widget.videoData.likes,
+                          originallyLiked: data,
+                          videoId: widget.videoData.id,
+                        );
                       },
                     ),
                 Gaps.v20,
