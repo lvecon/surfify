@@ -4,6 +4,8 @@ class UserProfileModel {
   final String profileAddress;
   final String link;
   final String intro;
+  final int follower;
+  final int likes;
   final bool hasAvatar;
   final bool serviceAgree;
   final String serviceAgreeDate;
@@ -18,6 +20,8 @@ class UserProfileModel {
     required this.profileAddress,
     required this.link,
     required this.intro,
+    required this.follower,
+    required this.likes,
     required this.hasAvatar,
     required this.serviceAgree,
     required this.serviceAgreeDate,
@@ -32,6 +36,8 @@ class UserProfileModel {
         profileAddress = "",
         link = "",
         intro = "",
+        follower = 0,
+        likes = 0,
         hasAvatar = false,
         serviceAgree = false,
         privacyAgree = false,
@@ -46,6 +52,8 @@ class UserProfileModel {
         name = json["name"],
         intro = json["intro"],
         link = json["link"],
+        follower = json['follower'],
+        likes = json['likes'],
         hasAvatar = json['hasAvatar'],
         serviceAgree = json['serviceAgree'],
         privacyAgree = json['privacyAgree'],
@@ -61,6 +69,8 @@ class UserProfileModel {
       "name": name,
       "intro": intro,
       "link": link,
+      "follower": follower,
+      "likes": likes,
       "hasAvatar": hasAvatar,
       "serviceAgree": serviceAgree,
       "privacyAgree": privacyAgree,
@@ -77,6 +87,8 @@ class UserProfileModel {
     String? name,
     String? intro,
     String? link,
+    int? follower,
+    int? likes,
     bool? hasAvatar,
     bool? serviceAgree,
     String? serviceAgreeDate,
@@ -91,6 +103,8 @@ class UserProfileModel {
       name: name ?? this.name,
       intro: intro ?? this.intro,
       link: link ?? this.link,
+      follower: follower ?? this.follower,
+      likes: likes ?? this.likes,
       hasAvatar: hasAvatar ?? this.hasAvatar,
       serviceAgree: serviceAgree ?? this.serviceAgree,
       serviceAgreeDate: serviceAgreeDate ?? this.serviceAgreeDate,

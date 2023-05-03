@@ -202,8 +202,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                   radius: Sizes.size28,
                   child: SizedBox(
                     child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/user.png',
+                      child: Image.network(
+                        'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media',
                       ),
                     ),
                   ),
