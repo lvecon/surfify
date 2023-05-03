@@ -71,15 +71,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
-                                children: const [
+                                children: [
                                   Text(
-                                    '448',
-                                    style: TextStyle(
+                                    '${data.follower}',
+                                    style: const TextStyle(
                                       fontSize: Sizes.size24,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Followers',
                                     style: TextStyle(
                                       fontSize: Sizes.size16,
@@ -95,15 +95,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                 hasAvatar: data.hasAvatar,
                               ),
                               Column(
-                                children: const [
+                                children: [
                                   Text(
-                                    '13.9M',
-                                    style: TextStyle(
+                                    '${data.likes}',
+                                    style: const TextStyle(
                                       fontSize: Sizes.size24,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Likes',
                                     style: TextStyle(
                                       fontSize: Sizes.size16,
@@ -224,7 +224,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                   ];
                 },
                 body: GridView.builder(
-                  itemCount: 20,
+                  itemCount: 4,
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,

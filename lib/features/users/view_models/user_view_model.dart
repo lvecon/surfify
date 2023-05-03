@@ -44,6 +44,8 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
       privacyAgreeDate: DateTime.now().toString(),
       marketingAgree: false,
       marketingAgreeDate: DateTime.now().toString(),
+      follower: 0,
+      likes: 0,
     );
     _usersRepository.createProfile(profile);
     state = AsyncValue.data(profile);
