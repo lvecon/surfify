@@ -33,7 +33,8 @@ class UserRepository {
         .collection("users")
         .doc(uid)
         .collection('videos')
-        .get(); //createdAt
+        .orderBy('createdAt', descending: true)
+        .get();
     return query;
   }
 }

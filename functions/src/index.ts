@@ -32,6 +32,7 @@ export const onVideoCreated = functions.firestore
      await db.collection('users').doc(video.creatorUid).collection("videos").doc(snapshot.id).set({
         thumbnailUrl: file.publicUrl(),
         videoId: snapshot.id,
+        createdAt: video.createdAt,
      });
 });
 
