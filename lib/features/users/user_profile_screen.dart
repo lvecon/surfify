@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/features/users/setting_screen.dart';
+import 'package:surfify/features/users/view_models/profile_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/users/views/avatar.dart';
 
@@ -223,29 +224,37 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     ),
                   ];
                 },
-                body: GridView.builder(
-                  itemCount: 4,
-                  padding: EdgeInsets.zero,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: Sizes.size2,
-                    mainAxisSpacing: Sizes.size2,
-                    childAspectRatio: 9 / 14,
-                  ),
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 9 / 14,
-                        child: FadeInImage.assetNetwork(
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/user.png",
-                          image:
-                              "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+                body: ref.read(profileProvider).when(
+                      error: (error, stackTrace) => Center(
+                        child: Text(error.toString()),
+                      ),
+                      loading: () => const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                      data: (data) => GridView.builder(
+                        itemCount: data.length,
+                        padding: EdgeInsets.zero,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: Sizes.size2,
+                          mainAxisSpacing: Sizes.size2,
+                          childAspectRatio: 9 / 14,
+                        ),
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 9 / 14,
+                              child: FadeInImage.assetNetwork(
+                                fit: BoxFit.cover,
+                                placeholder: "assets/images/user.png",
+                                image: data[index].thumbnailUrl,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
               ),
             ),
           ),
