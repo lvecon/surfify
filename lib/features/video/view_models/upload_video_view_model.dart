@@ -33,6 +33,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
     final user = ref.read(authRepo).user;
     final userProfile =
         ref.read(usersProvider(ref.read(authRepo).user!.uid)).value;
+    print(geoHasher.encode(longitude, latitude, precision: 20));
+    print(url.split(".com/")[1]);
     if (userProfile != null) {
       state = const AsyncValue.loading();
       state = await AsyncValue.guard(() async {
@@ -58,7 +60,7 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               longitude: longitude,
               latitude: latitude,
               kakaomapId: url.split(".com/")[1],
-              geoHash: geoHasher.encode(longitude, latitude, precision: 20),
+              geoHash: geoHasher.encode(latitude, longitude, precision: 20),
               hashtag: [],
             ),
           );
