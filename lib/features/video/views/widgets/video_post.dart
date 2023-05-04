@@ -142,7 +142,9 @@ class VideoPostState extends ConsumerState<VideoPost>
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => const VideoComments(),
+      builder: (context) => VideoComments(
+        videoId: widget.videoData.id,
+      ),
     );
     _onTogglePause();
   }
