@@ -61,3 +61,29 @@ export const onLikedCreated = functions.firestore
          likes: admin.firestore.FieldValue.increment(-1),
        });
    });
+
+   export const onCommentCreated = functions.firestore
+   .document("videos/{videoId}/comments/{commentsId}")
+   .onCreate(async (snapshot, context) => {
+     const db = admin.firestore();
+     const videoId = context.params.videoId;
+     await db
+       .collection("videos")
+       .doc(videoId)
+       .update({
+         likes: admin.firestore.FieldValue.increment(1),
+       });
+   });
+
+   export const onCommentRemoved = functions.firestore
+   .document("videos/{videoId}/comments/{commentsId}")
+   .onDelete(async (snapshot, context) => {
+     const db = admin.firestore();
+     const videoId = context.params.videoId;
+     await db
+       .collection("videos")
+       .doc(videoId)
+       .update({
+         likes: admin.firestore.FieldValue.increment(-1),
+       });
+   });

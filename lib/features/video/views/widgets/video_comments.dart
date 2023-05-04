@@ -34,8 +34,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
   }
 
   Future<void> _postComment() async {
-    ref.watch(usersProvider(ref.read(authRepo).user!.uid)).value!.name;
-    ref.watch(commentsProvider(widget.videoId).notifier).uploadComment(
+    ref.read(commentsProvider(widget.videoId).notifier).uploadComment(
           videoId: widget.videoId,
           comment: _textController.text,
         );
