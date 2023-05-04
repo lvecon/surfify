@@ -20,7 +20,7 @@ class CommentsRepository {
         .collection("videos")
         .doc(videoId)
         .collection('comments')
-        .orderBy('createdAt', descending: true)
+        .orderBy('createdAt', descending: false)
         .get();
     return query;
   }

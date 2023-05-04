@@ -3,7 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/view_models/commets_view_model.dart';
+
+import '../../../authentication/repos/authentication_repo.dart';
 
 class VideoComments extends ConsumerStatefulWidget {
   final String videoId;
@@ -14,6 +17,8 @@ class VideoComments extends ConsumerStatefulWidget {
 }
 
 class _VideoCommentsState extends ConsumerState<VideoComments> {
+  final TextEditingController _textController = TextEditingController();
+
   bool _isWriting = false;
 
   final ScrollController _scrollController = ScrollController();
@@ -23,7 +28,19 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
   }
 
   void _stopWriting() {
+    setState(() {
+      _isWriting = false;
+    });
+  }
+
+  Future<void> _postComment() async {
+    ref.watch(usersProvider(ref.read(authRepo).user!.uid)).value!.name;
+    ref.watch(commentsProvider(widget.videoId).notifier).uploadComment(
+          videoId: widget.videoId,
+          comment: _textController.text,
+        );
     FocusScope.of(context).unfocus();
+    _textController.clear();
     setState(() {
       _isWriting = false;
     });
@@ -51,18 +68,26 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
           centerTitle: false,
           backgroundColor: Colors.grey.shade50,
           automaticallyImplyLeading: false,
-          title: const Padding(
-            padding: EdgeInsets.only(
+          title: Padding(
+            padding: const EdgeInsets.only(
               top: Sizes.size8,
               left: Sizes.size8,
             ),
-            child: Text(
-              "댓글 701개",
-              style: TextStyle(
-                fontSize: Sizes.size20,
-                color: Colors.black,
-              ),
-            ),
+            child: ref.watch(commentsProvider(widget.videoId)).when(
+                  error: (error, stackTrace) => Center(
+                    child: Text(error.toString()),
+                  ),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                  data: (data) => Text(
+                    "댓글 ${data.length}개",
+                    style: const TextStyle(
+                      fontSize: Sizes.size20,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
           ),
           actions: [
             IconButton(
@@ -77,67 +102,90 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
             children: [
               Scrollbar(
                   controller: _scrollController,
-                  child: ref.read(commentsProvider(widget.videoId)).when(
+                  child: ref.watch(commentsProvider(widget.videoId)).when(
                         error: (error, stackTrace) => Center(
                           child: Text(error.toString()),
                         ),
                         loading: () => const Center(
                           child: CircularProgressIndicator.adaptive(),
                         ),
-                        data: (data) => ListView.separated(
-                          controller: _scrollController,
-                          padding: const EdgeInsets.only(
-                            top: Sizes.size10,
-                            bottom: Sizes.size96 + Sizes.size20,
-                            left: Sizes.size16,
-                            right: Sizes.size16,
-                          ),
-                          separatorBuilder: (context, index) => Gaps.v20,
-                          itemCount: data.length,
-                          itemBuilder: (context, index) => Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                radius: 18,
-                                child: Text('${data[index].creatorId}'),
-                              ),
-                              Gaps.h10,
-                              Expanded(
-                                child: Column(
+                        data: (data) => (data.isEmpty)
+                            ? const Center(
+                                child: Text(
+                                  '1등으로 댓글을\n달 수 있는 기회입니다!\n\n\n\n\n',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: Sizes.size24,
+                                  ),
+                                ),
+                              )
+                            : ListView.separated(
+                                controller: _scrollController,
+                                padding: const EdgeInsets.only(
+                                  top: Sizes.size10,
+                                  bottom: Sizes.size96 + Sizes.size20,
+                                  left: Sizes.size16,
+                                  right: Sizes.size16,
+                                ),
+                                separatorBuilder: (context, index) => Gaps.v20,
+                                itemCount: data.length,
+                                itemBuilder: (context, index) => Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '훈',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: Sizes.size14,
-                                          color: Colors.grey.shade500),
+                                    CircleAvatar(
+                                      radius: Sizes.size18,
+                                      child: SizedBox(
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    Gaps.v3,
-                                    Text("${data[index].comment}")
+                                    Gaps.h10,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            ref
+                                                    .watch(usersProvider(
+                                                        data[index].creatorId))
+                                                    .value
+                                                    ?.name ??
+                                                '훈',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: Sizes.size14,
+                                                color: Colors.grey.shade500),
+                                          ),
+                                          Gaps.v3,
+                                          Text("${data[index].comment}")
+                                        ],
+                                      ),
+                                    ),
+                                    Gaps.h10,
+                                    Column(
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.heart,
+                                          size: Sizes.size20,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Gaps.v2,
+                                        Text(
+                                          '${data[index].likes}',
+                                          style: TextStyle(
+                                            color: Colors.grey.shade500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),
-                              Gaps.h10,
-                              Column(
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.heart,
-                                    size: Sizes.size20,
-                                    color: Colors.grey.shade500,
-                                  ),
-                                  Gaps.v2,
-                                  Text(
-                                    '52.2K',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
                       )),
               Positioned(
                 bottom: 0,
@@ -155,8 +203,8 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
                           radius: Sizes.size18,
                           child: SizedBox(
                             child: ClipOval(
-                              child: Image.asset(
-                                'assets/images/user.png',
+                              child: Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${ref.read(authRepo).user!.uid}?alt=media',
                               ),
                             ),
                           ),
@@ -166,6 +214,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
                           child: SizedBox(
                             height: Sizes.size44,
                             child: TextField(
+                              controller: _textController,
                               onTap: _onStartWriting,
                               expands: true,
                               minLines: null,
@@ -193,7 +242,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
                                       children: [
                                         if (_isWriting)
                                           GestureDetector(
-                                            onTap: _stopWriting,
+                                            onTap: _postComment,
                                             child: const FaIcon(
                                               FontAwesomeIcons.paperPlane,
                                               color: Colors.grey,

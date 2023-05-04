@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../authentication/repos/authentication_repo.dart';
 import '../models/comment_model.dart';
 import '../repo/comments_repo.dart';
 
@@ -13,7 +14,6 @@ class CommentsViewModel
   Future<List<CommentModel>> _fetchComments({
     String? videoId,
   }) async {
-    print('여기');
     final result = await _repository.fetchComments(videoId: videoId);
     final videos = result.docs.map(
       (doc) => CommentModel.fromJson(
@@ -22,6 +22,20 @@ class CommentsViewModel
       ),
     );
     return videos.toList();
+  }
+
+  Future<void> uploadComment({
+    String? videoId,
+    String? comment,
+  }) async {
+    final user = ref.read(authRepo).user;
+    await _repository.addComment(CommentModel(
+      creatorId: user!.uid,
+      comment: comment,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      likes: 0,
+      videoId: videoId,
+    ));
   }
 
   @override
