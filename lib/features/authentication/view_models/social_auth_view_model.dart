@@ -11,6 +11,7 @@ import '../repos/authentication_repo.dart';
 
 class SocialAuthViewModel extends AsyncNotifier<void> {
   late final AuthenticaitonRepository _repository;
+  late final uid = ref.read(authRepo).user!.uid;
 
   @override
   FutureOr<void> build() {
@@ -18,7 +19,7 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
   }
 
   Future<void> googleSignUp(BuildContext context) async {
-    final users = ref.read(usersProvider.notifier);
+    final users = ref.read(usersProvider(uid).notifier);
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -33,7 +34,7 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
   }
 
   Future<void> googleSignIn(BuildContext context) async {
-    final users = ref.read(usersProvider.notifier);
+    final users = ref.read(usersProvider(uid).notifier);
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {

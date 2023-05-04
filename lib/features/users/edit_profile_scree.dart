@@ -12,6 +12,7 @@ import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import '../authentication/repos/authentication_repo.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key});
@@ -31,7 +32,9 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        ref.read(usersProvider.notifier).updateProfile(
+        ref
+            .read(usersProvider(ref.read(authRepo).user!.uid).notifier)
+            .updateProfile(
               name: formData["name"],
               intro: formData['intro'],
             );
@@ -62,7 +65,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
     final size = MediaQuery.of(context).size;
     final isLoading = ref.watch(avatarProvider).isLoading;
 
-    return ref.watch(usersProvider).when(
+    return ref.watch(usersProvider(ref.read(authRepo).user!.uid)).when(
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
           ),

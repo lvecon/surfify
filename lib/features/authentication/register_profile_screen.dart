@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
@@ -25,6 +26,7 @@ class RegisterProfileScreen extends ConsumerStatefulWidget {
 class _RegisterProfileState extends ConsumerState<RegisterProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool able = false;
+  late final uid = ref.read(authRepo).user!.uid;
 
   Map<String, String> formData = {};
 
@@ -32,7 +34,7 @@ class _RegisterProfileState extends ConsumerState<RegisterProfileScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        ref.read(usersProvider.notifier).registerProfile(
+        ref.read(usersProvider(uid).notifier).registerProfile(
             name: formData["name"],
             intro: formData['intro'],
             profileAddress: formData['profileAddress']);
@@ -59,7 +61,7 @@ class _RegisterProfileState extends ConsumerState<RegisterProfileScreen> {
   Widget build(BuildContext context) {
     final isLoading = ref.watch(avatarProvider).isLoading;
 
-    return ref.watch(usersProvider).when(
+    return ref.watch(usersProvider(uid)).when(
         error: (error, stackTrace) => Center(
               child: Text(error.toString()),
             ),

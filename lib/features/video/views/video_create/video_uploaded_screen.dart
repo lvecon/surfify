@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/views/video_edit/edit_location.dart';
@@ -119,7 +120,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
   }
 
   Future<void> _saveToGallery() async {
-    ref.watch(usersProvider).value!.name;
+    ref.watch(usersProvider(ref.read(authRepo).user!.uid)).value!.name;
     ref.read(uploadVideoProvider.notifier).uploadVideo(
           File(widget.video.path),
           widget.name,
@@ -185,7 +186,9 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ref.read(usersProvider).when(
+                        ref
+                            .read(usersProvider(ref.read(authRepo).user!.uid))
+                            .when(
                               error: (error, stackTrace) => Center(
                                 child: Text(error.toString()),
                               ),
@@ -202,7 +205,9 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                               ),
                             ),
                         Gaps.v12,
-                        ref.read(usersProvider).when(
+                        ref
+                            .read(usersProvider(ref.read(authRepo).user!.uid))
+                            .when(
                               error: (error, stackTrace) => Center(
                                 child: Text(error.toString()),
                               ),

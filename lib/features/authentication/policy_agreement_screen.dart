@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/authentication/register_profile_screen.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/widgets/form_button.dart';
 
 import '../../constants/gaps.dart';
@@ -21,6 +22,7 @@ class _PolicyAgreementScreenState extends ConsumerState<PolicyAgreementScreen> {
   var agree3 = false;
   var agreeAll = false;
   var agreeNecessary = false;
+  late final uid = ref.read(authRepo).user!.uid;
 
   void tapAgree1() {
     setState(() {
@@ -75,7 +77,7 @@ class _PolicyAgreementScreenState extends ConsumerState<PolicyAgreementScreen> {
   }
 
   void onNextTap(BuildContext context) {
-    ref.read(usersProvider.notifier).updateAgreement(
+    ref.read(usersProvider(uid).notifier).updateAgreement(
           serviceAgree: agree1,
           privacyAgree: agree2,
           marketingAgree: agree3,
