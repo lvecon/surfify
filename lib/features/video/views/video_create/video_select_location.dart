@@ -145,6 +145,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
         borderRadius: BorderRadius.circular(Sizes.size14),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey.shade50,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(Sizes.size96 + Sizes.size16),

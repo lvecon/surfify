@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:surfify/features/authentication/register_profile_screen.dart';
 import 'package:surfify/features/authentication/repos/authentication_repo.dart';
+import 'package:surfify/features/authentication/views/register_profile_screen.dart';
 import 'package:surfify/widgets/form_button.dart';
 
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
-import '../users/view_models/user_view_model.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
+import '../../users/view_models/user_view_model.dart';
 
 class PolicyAgreementScreen extends ConsumerStatefulWidget {
   const PolicyAgreementScreen({super.key});
