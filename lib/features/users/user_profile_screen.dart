@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/features/users/setting_screen.dart';
 import 'package:surfify/features/users/view_models/profile_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
@@ -11,7 +12,9 @@ import '../../constants/sizes.dart';
 import 'edit_profile_scree.dart';
 
 class UserProfileScreen extends ConsumerStatefulWidget {
-  const UserProfileScreen({super.key});
+  final String uid;
+
+  const UserProfileScreen({super.key, required this.uid});
 
   @override
   createState() => _UserProfileScreenState();
@@ -27,12 +30,12 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    const myProfile = true;
+    var myProfile = (ref.read(authRepo).user!.uid == widget.uid);
     void _onClosePressed() {
       Navigator.of(context).pop();
     }
 
-    return ref.watch(usersProvider).when(
+    return ref.watch(usersProvider(widget.uid)).when(
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
           ),

@@ -29,7 +29,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
     BuildContext context,
   ) async {
     final user = ref.read(authRepo).user;
-    final userProfile = ref.read(usersProvider).value;
+    final userProfile =
+        ref.read(usersProvider(ref.read(authRepo).user!.uid)).value;
     if (userProfile != null) {
       state = const AsyncValue.loading();
       state = await AsyncValue.guard(() async {

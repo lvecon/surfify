@@ -7,18 +7,17 @@ import 'package:surfify/features/users/repos/user_repo.dart';
 
 import '../../authentication/repos/authentication_repo.dart';
 
-class UsersViewModel extends AsyncNotifier<UserProfileModel> {
+class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
   late final UserRepository _usersRepository;
   late final AuthenticaitonRepository _authenticationRepository;
 
   @override
-  FutureOr<UserProfileModel> build() async {
+  FutureOr<UserProfileModel> build(String arg) async {
     _usersRepository = ref.read(userRepo);
     _authenticationRepository = ref.read(authRepo);
 
     if (_authenticationRepository.isLoggedIn) {
-      final profile = await _usersRepository
-          .findProfile(_authenticationRepository.user!.uid);
+      final profile = await _usersRepository.findProfile(arg);
       if (profile != null) {
         return UserProfileModel.fromJson(profile);
       }
@@ -114,6 +113,7 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
   }
 }
 
-final usersProvider = AsyncNotifierProvider<UsersViewModel, UserProfileModel>(
+final usersProvider =
+    AsyncNotifierProvider.family<UsersViewModel, UserProfileModel, String>(
   () => UsersViewModel(),
 );

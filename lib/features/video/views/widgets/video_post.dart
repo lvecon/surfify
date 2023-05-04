@@ -14,6 +14,7 @@ import 'package:surfify/features/video/views/widgets/video_radar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../users/user_profile_screen.dart';
 import '../../models/video_model.dart';
 import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
@@ -199,23 +200,37 @@ class VideoPostState extends ConsumerState<VideoPost>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: Sizes.size28,
-                  child: SizedBox(
-                    child: ClipOval(
-                      child: Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media',
+                GestureDetector(
+                  onTap: () async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => UserProfileScreen(
+                            uid: widget.videoData.creatorUid));
+                  },
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: Sizes.size28,
+                        child: SizedBox(
+                          child: ClipOval(
+                            child: Image.network(
+                              'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media',
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                Gaps.v12,
-                Text(
-                  widget.videoData.creator,
-                  style: const TextStyle(
-                    fontSize: Sizes.size20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                      Gaps.v12,
+                      Text(
+                        widget.videoData.creator,
+                        style: const TextStyle(
+                          fontSize: Sizes.size20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Gaps.v10,
