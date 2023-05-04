@@ -8,12 +8,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/widgets/form_button.dart';
 
-import '../../constants/gaps.dart';
-import '../../constants/sizes.dart';
-import '../users/view_models/avatar_view_model.dart';
-import '../users/view_models/user_view_model.dart';
-import '../users/views/avatar.dart';
-import '../video/views/video_tutorial/video_create_tutorial.dart';
+import '../../../constants/gaps.dart';
+import '../../../constants/sizes.dart';
+import '../../users/view_models/avatar_view_model.dart';
+import '../../users/view_models/user_view_model.dart';
+import '../../users/views/avatar.dart';
+import '../../video/views/video_tutorial/video_create_tutorial.dart';
 
 class RegisterProfileScreen extends ConsumerStatefulWidget {
   const RegisterProfileScreen({super.key});

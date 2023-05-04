@@ -15,6 +15,7 @@ class VideoModel {
   final double latitude;
   final String kakaomapId;
   final List<String> hashtag;
+  final String geoHash;
 
   VideoModel({
     required this.id,
@@ -33,6 +34,7 @@ class VideoModel {
     required this.latitude,
     required this.kakaomapId,
     required this.hashtag,
+    required this.geoHash,
   });
 
   VideoModel.fromJson({
@@ -53,6 +55,7 @@ class VideoModel {
         longitude = 0.0,
         kakaomapId = json['kakaomapId'],
         hashtag = [],
+        geoHash = json['geoHash'],
         address = json['address'];
 
   Map<String, dynamic> toJson() {
@@ -72,6 +75,7 @@ class VideoModel {
       "logitude": longitude,
       "latitude": latitude,
       "kakaomapId": kakaomapId,
+      "geoHash": geoHash,
       "hashtag": hashtag,
     };
   }
