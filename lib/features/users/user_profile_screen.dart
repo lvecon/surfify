@@ -227,36 +227,40 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     ),
                   ];
                 },
-                body: ref.read(profileProvider).when(
+                body: ref.read(profileProvider(widget.uid)).when(
                       error: (error, stackTrace) => Center(
                         child: Text(error.toString()),
                       ),
                       loading: () => const Center(
                         child: CircularProgressIndicator.adaptive(),
                       ),
-                      data: (data) => GridView.builder(
-                        itemCount: data.length,
-                        padding: EdgeInsets.zero,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: Sizes.size2,
-                          mainAxisSpacing: Sizes.size2,
-                          childAspectRatio: 9 / 14,
-                        ),
-                        itemBuilder: (context, index) => Column(
-                          children: [
-                            AspectRatio(
-                              aspectRatio: 9 / 14,
-                              child: FadeInImage.assetNetwork(
-                                fit: BoxFit.cover,
-                                placeholder: "assets/images/user.png",
-                                image: data[index].thumbnailUrl,
+                      data: (data) => (data.isEmpty)
+                          ? const Center(
+                              child: Text('아직 영상이 없습니다!'),
+                            )
+                          : GridView.builder(
+                              itemCount: data.length,
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: Sizes.size2,
+                                mainAxisSpacing: Sizes.size2,
+                                childAspectRatio: 9 / 14,
+                              ),
+                              itemBuilder: (context, index) => Column(
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: 9 / 14,
+                                    child: FadeInImage.assetNetwork(
+                                      fit: BoxFit.cover,
+                                      placeholder: "assets/images/user.png",
+                                      image: data[index].thumbnailUrl,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
                     ),
               ),
             ),

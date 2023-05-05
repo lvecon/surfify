@@ -13,6 +13,15 @@ class CommentsRepository {
         .add(commentModel.toJson());
   }
 
+  Future<void> deleteComment(CommentModel commentModel) async {
+    await _db
+        .collection("videos")
+        .doc(commentModel.videoId)
+        .collection("comments")
+        .doc(commentModel.commentId)
+        .delete();
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchComments({
     String? videoId,
   }) async {

@@ -71,7 +71,11 @@ export const onLikedCreated = functions.firestore
        .collection("videos")
        .doc(videoId)
        .update({
-         likes: admin.firestore.FieldValue.increment(1),
+         comments: admin.firestore.FieldValue.increment(1),
+       });
+
+       await db.collection('videos').doc(videoId).collection("comments").doc(snapshot.id).update({
+          commentId: snapshot.id,
        });
    });
 
@@ -84,6 +88,6 @@ export const onLikedCreated = functions.firestore
        .collection("videos")
        .doc(videoId)
        .update({
-         likes: admin.firestore.FieldValue.increment(-1),
+         comments: admin.firestore.FieldValue.increment(-1),
        });
    });
