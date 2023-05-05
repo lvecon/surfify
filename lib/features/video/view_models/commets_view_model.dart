@@ -30,12 +30,22 @@ class CommentsViewModel
   }) async {
     final user = ref.read(authRepo).user;
     await _repository.addComment(CommentModel(
-      creatorId: user!.uid,
-      comment: comment,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      likes: 0,
-      videoId: videoId,
-    ));
+        creatorId: user!.uid,
+        comment: comment,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        likes: 0,
+        videoId: videoId,
+        commentId: ""));
+  }
+
+  Future<void> refresh(String arg) async {
+    final comments = await _fetchComments(videoId: arg);
+    _list = comments;
+    state = AsyncValue.data(comments);
+  }
+
+  Future<void> deleteComment(CommentModel comment) async {
+    await _repository.deleteComment(comment);
   }
 
   @override

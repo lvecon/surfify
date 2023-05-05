@@ -4,6 +4,7 @@ class CommentModel {
   final createdAt;
   final likes;
   final videoId;
+  final commentId;
 
   CommentModel({
     required this.creatorId,
@@ -11,6 +12,7 @@ class CommentModel {
     required this.createdAt,
     required this.likes,
     required this.videoId,
+    required this.commentId,
   });
 
   CommentModel.fromJson({
@@ -20,7 +22,8 @@ class CommentModel {
         comment = json["comment"],
         createdAt = json["createdAt"],
         likes = json["likes"],
-        videoId = json["videoId"];
+        videoId = json["videoId"],
+        commentId = json['commentId'];
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,6 +32,7 @@ class CommentModel {
       "createdAt": createdAt,
       "likes": likes,
       "videoId": videoId,
+      "commentId": commentId,
     };
   }
 }

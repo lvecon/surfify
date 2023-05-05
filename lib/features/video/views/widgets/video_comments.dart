@@ -7,6 +7,7 @@ import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/view_models/commets_view_model.dart';
 
 import '../../../authentication/repos/authentication_repo.dart';
+import '../../../users/user_profile_screen.dart';
 
 class VideoComments extends ConsumerStatefulWidget {
   final String videoId;
@@ -38,6 +39,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
           videoId: widget.videoId,
           comment: _textController.text,
         );
+    _onRefresh();
     FocusScope.of(context).unfocus();
     _textController.clear();
     setState(() {
@@ -45,10 +47,23 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
     });
   }
 
+  Future<void> _deleteComment(comemntModel) async {
+    ref
+        .read(commentsProvider(widget.videoId).notifier)
+        .deleteComment(comemntModel);
+    _onRefresh();
+  }
+
   void _onStartWriting() {
     setState(() {
       _isWriting = true;
     });
+  }
+
+  Future<void> _onRefresh() {
+    return ref
+        .watch(commentsProvider(widget.videoId).notifier)
+        .refresh(widget.videoId);
   }
 
   @override
@@ -99,93 +114,132 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
           onTap: _stopWriting,
           child: Stack(
             children: [
-              Scrollbar(
-                  controller: _scrollController,
-                  child: ref.watch(commentsProvider(widget.videoId)).when(
-                        error: (error, stackTrace) => Center(
-                          child: Text(error.toString()),
-                        ),
-                        loading: () => const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        ),
-                        data: (data) => (data.isEmpty)
-                            ? const Center(
-                                child: Text(
-                                  '1등으로 댓글을\n달 수 있는 기회입니다!\n\n\n\n\n',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: Sizes.size24,
+              RefreshIndicator(
+                  onRefresh: _onRefresh,
+                  child: Scrollbar(
+                    controller: _scrollController,
+                    child: ref.watch(commentsProvider(widget.videoId)).when(
+                          error: (error, stackTrace) => Center(
+                            child: Text(error.toString()),
+                          ),
+                          loading: () => const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          ),
+                          data: (data) => (data.isEmpty)
+                              ? const Center(
+                                  child: Text(
+                                    '1등으로 댓글을\n달 수 있는 기회입니다!\n\n\n\n\n',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: Sizes.size24,
+                                    ),
                                   ),
-                                ),
-                              )
-                            : ListView.separated(
-                                controller: _scrollController,
-                                padding: const EdgeInsets.only(
-                                  top: Sizes.size10,
-                                  bottom: Sizes.size96 + Sizes.size20,
-                                  left: Sizes.size16,
-                                  right: Sizes.size16,
-                                ),
-                                separatorBuilder: (context, index) => Gaps.v20,
-                                itemCount: data.length,
-                                itemBuilder: (context, index) => Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: Sizes.size18,
-                                      child: SizedBox(
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                                )
+                              : ListView.separated(
+                                  controller: _scrollController,
+                                  padding: const EdgeInsets.only(
+                                    top: Sizes.size10,
+                                    bottom: Sizes.size96 + Sizes.size20,
+                                    left: Sizes.size16,
+                                    right: Sizes.size16,
+                                  ),
+                                  separatorBuilder: (context, index) =>
+                                      Gaps.v20,
+                                  itemCount: data.length,
+                                  itemBuilder: (context, index) => Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          await showModalBottomSheet(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              builder: (context) =>
+                                                  UserProfileScreen(
+                                                      uid: data[index]
+                                                          .creatorId));
+                                        },
+                                        child: CircleAvatar(
+                                          radius: Sizes.size18,
+                                          child: SizedBox(
+                                            child: ClipOval(
+                                              child: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Gaps.h10,
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Gaps.h10,
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              ref
+                                                      .watch(usersProvider(
+                                                          data[index]
+                                                              .creatorId))
+                                                      .value
+                                                      ?.name ??
+                                                  '로딩중...',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: Sizes.size14,
+                                                  color: Colors.grey.shade500),
+                                            ),
+                                            Gaps.v3,
+                                            Text("${data[index].comment}"),
+                                            Gaps.v3,
+                                            (data[index].creatorId ==
+                                                    ref
+                                                        .read(authRepo)
+                                                        .user!
+                                                        .uid)
+                                                ? GestureDetector(
+                                                    onTap: () => _deleteComment(
+                                                        data[index]),
+                                                    child: Text(
+                                                      "삭제",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .primaryColor),
+                                                    ),
+                                                  )
+                                                : Container(),
+                                          ],
+                                        ),
+                                      ),
+                                      Gaps.h10,
+                                      Column(
                                         children: [
-                                          Text(
-                                            ref
-                                                    .watch(usersProvider(
-                                                        data[index].creatorId))
-                                                    .value
-                                                    ?.name ??
-                                                '훈',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: Sizes.size14,
-                                                color: Colors.grey.shade500),
-                                          ),
-                                          Gaps.v3,
-                                          Text("${data[index].comment}")
-                                        ],
-                                      ),
-                                    ),
-                                    Gaps.h10,
-                                    Column(
-                                      children: [
-                                        FaIcon(
-                                          FontAwesomeIcons.heart,
-                                          size: Sizes.size20,
-                                          color: Colors.grey.shade500,
-                                        ),
-                                        Gaps.v2,
-                                        Text(
-                                          '${data[index].likes}',
-                                          style: TextStyle(
+                                          FaIcon(
+                                            FontAwesomeIcons.heart,
+                                            size: Sizes.size20,
                                             color: Colors.grey.shade500,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Gaps.v2,
+                                          Text(
+                                            '${data[index].likes}',
+                                            style: TextStyle(
+                                              color: Colors.grey.shade500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                      )),
+                        ),
+                  )),
               Positioned(
                 bottom: 0,
                 width: size.width,
