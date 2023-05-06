@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/video/view_models/timeline_view_model.dart';
-import 'package:surfify/features/video/widgets/video_post.dart';
 
 class VideoTimelineScreen extends ConsumerStatefulWidget {
   const VideoTimelineScreen({super.key});
@@ -114,56 +113,40 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   @override
   Widget build(BuildContext context) {
     return ref.watch(timelineProvider).when(
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-        error: (error, stackTrace) => Center(
-              child: Text('Could not load videos: $error'),
-            ),
-        data: (videos) => RefreshIndicator(
-              onRefresh: _onRefresh,
-              displacement: 50,
-              edgeOffset: 20,
-              color: Theme.of(context).primaryColor,
-              child: PageView.builder(
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (error, stackTrace) => Center(
+            child: Text('Could not load videos: $error'),
+          ),
+          data: (videos) => RefreshIndicator(
+            onRefresh: _onRefresh,
+            displacement: 50,
+            edgeOffset: 20,
+            color: Theme.of(context).primaryColor,
+            child: PageView.builder(
                 controller: _pageController,
                 scrollDirection: Axis.vertical,
                 onPageChanged: _onPageChanged,
                 itemCount: _itemCount,
-                itemBuilder: (context, index) => (index == 0)
-                    ? PageView.builder(
-                        controller: _pageController2,
-                        scrollDirection: Axis.horizontal,
-                        onPageChanged: _onPageChanged2,
-                        itemCount: video_example[0].length,
-                        itemBuilder: (context, index) => VideoPost(
-                          index: index,
-                          src: video_example[0][index]['src'],
-                          nickname: video_example[0][index]['nickname'],
-                          content: video_example[0][index]['content'],
-                          latitude: video_example[0][index]['latitude'],
-                          longitude: video_example[0][index]['longitude'],
-                          location: video_example[0][index]['location'],
-                          adress: video_example[0][index]['address'],
-                        ),
-                      )
-                    : PageView.builder(
-                        controller: _pageController2,
-                        scrollDirection: Axis.horizontal,
-                        onPageChanged: _onPageChanged2,
-                        itemCount: video_example[1].length,
-                        itemBuilder: (context, index) => VideoPost(
-                          index: index,
-                          src: video_example[1][index]['src'],
-                          nickname: video_example[1][index]['nickname'],
-                          content: video_example[1][index]['content'],
-                          latitude: video_example[1][index]['latitude'],
-                          longitude: video_example[1][index]['longitude'],
-                          location: video_example[1][index]['location'],
-                          adress: video_example[1][index]['address'],
-                        ),
-                      ),
-              ),
-            ));
+                itemBuilder: (context, index) => PageView.builder(
+                      controller: _pageController2,
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: _onPageChanged2,
+                      itemCount: video_example[0].length,
+                      itemBuilder: (context, index) => const Text("temp"),
+                      // VideoPost(
+                      //   index: index,
+                      //   src: video_example[0][index]['src'],
+                      //   nickname: video_example[0][index]['nickname'],
+                      //   content: video_example[0][index]['content'],
+                      //   latitude: video_example[0][index]['latitude'],
+                      //   longitude: video_example[0][index]['longitude'],
+                      //   location: video_example[0][index]['location'],
+                      //   adress: video_example[0][index]['address'],
+                      // ),
+                    )),
+          ),
+        );
   }
 }

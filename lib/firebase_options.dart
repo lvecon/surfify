@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -69,6 +66,18 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1034620117926',
     projectId: 'surfify',
     storageBucket: 'surfify.appspot.com',
+    androidClientId: '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
+    iosClientId: '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
+    iosBundleId: 'com.example.surfify',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyAmQIoBX0yG0uOTWEDqX34RkF2WYz8dqzU',
+    appId: '1:1034620117926:ios:129d07f53ff57653fe6567',
+    messagingSenderId: '1034620117926',
+    projectId: 'surfify',
+    storageBucket: 'surfify.appspot.com',
+    androidClientId: '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
     iosClientId: '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
     iosBundleId: 'com.example.surfify',
   );
