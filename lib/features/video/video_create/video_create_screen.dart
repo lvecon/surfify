@@ -91,7 +91,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
 
     _cameraController = CameraController(
       cameras[_isSelfieMode ? 1 : 0],
-      ResolutionPreset.ultraHigh,
+      ResolutionPreset.medium,
       // enableAudio: false,
     );
 

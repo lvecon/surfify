@@ -15,28 +15,19 @@ import 'package:surfify/features/video/widgets/video_radar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../models/video_model.dart';
 import '../opinion_screen.dart';
 
 class VideoPost extends ConsumerStatefulWidget {
+  final Function onVideoFinished;
+  final VideoModel videoData;
   final int index;
-  final String src;
-  final String nickname;
-  final String content;
-  final double latitude;
-  final double longitude;
-  final String location;
-  final String adress;
 
   const VideoPost({
     super.key,
+    required this.videoData,
+    required this.onVideoFinished,
     required this.index,
-    required this.src,
-    required this.nickname,
-    required this.content,
-    required this.latitude,
-    required this.longitude,
-    required this.location,
-    required this.adress,
   });
 
   @override
@@ -57,20 +48,21 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   bool randomMode = false;
 
-  // void _onVideoChange() {
-  //   if (_videoPlayerController.value.isInitialized) {
-  //     if (_videoPlayerController.value.duration ==
-  //         _videoPlayerController.value.position) {
-  //       // widget.onVideoFinished();
-  //     }
-  //   }
-  // }
+  void _onVideoChange() {
+    if (_videoPlayerController.value.isInitialized) {
+      if (_videoPlayerController.value.duration ==
+          _videoPlayerController.value.position) {
+        widget.onVideoFinished();
+      }
+    }
+  }
 
   void _initVideoPlayer() async {
-    _videoPlayerController = VideoPlayerController.asset(widget.src);
+    _videoPlayerController =
+        VideoPlayerController.asset("assets/videos/video.mp4");
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    // _videoPlayerController.addListener(_onVideoChange);
+    _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
 
@@ -155,10 +147,11 @@ class VideoPostState extends ConsumerState<VideoPost>
       child: Stack(
         children: [
           Positioned.fill(
-            child: _videoPlayerController.value.isInitialized
+            child: !_videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
-                : Container(
-                    color: Colors.black,
+                : Image.network(
+                    widget.videoData.thumbnailUrl,
+                    fit: BoxFit.cover,
                   ),
           ),
           Positioned.fill(
@@ -208,7 +201,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v12,
                 Text(
-                  widget.nickname,
+                  widget.videoData.creator,
                   style: const TextStyle(
                     fontSize: Sizes.size20,
                     color: Colors.white,
@@ -217,7 +210,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v10,
                 Text(
-                  widget.content,
+                  widget.videoData.description,
                   style: const TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
@@ -244,22 +237,22 @@ class VideoPostState extends ConsumerState<VideoPost>
             right: 20,
             child: Column(
               children: [
-                const VideoButton(
+                VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: "192K",
+                  text: '${widget.videoData.likes}',
                 ),
                 Gaps.v20,
                 GestureDetector(
                   onTap: () => _onCommentsTap(context),
-                  child: const VideoButton(
+                  child: VideoButton(
                     icon: FontAwesomeIcons.solidCommentDots,
-                    text: "544",
+                    text: '${widget.videoData.comments}',
                   ),
                 ),
                 Gaps.v20,
                 const VideoButton(
                   icon: FontAwesomeIcons.shareNodes,
-                  text: "1.2K",
+                  text: "",
                 ),
                 Gaps.v20,
                 GestureDetector(
@@ -342,8 +335,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                       });
                     },
                     child: VideoRadar(
-                      latitude: widget.latitude,
-                      longitude: widget.longitude,
+                      latitude: widget.videoData.latitude,
+                      longitude: widget.videoData.longitude,
                     ),
                   )
                 : GestureDetector(
@@ -354,8 +347,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                       });
                     },
                     child: VideoCompass(
-                      latitude: widget.latitude,
-                      longitude: widget.longitude,
+                      latitude: widget.videoData.latitude,
+                      longitude: widget.videoData.longitude,
                     )),
           ),
           Positioned(
@@ -375,11 +368,11 @@ class VideoPostState extends ConsumerState<VideoPost>
             top: 90,
             left: 20,
             child: VideoLocation(
-              name: widget.location,
-              address: widget.adress,
-              latitude: widget.latitude,
-              longitude: widget.longitude,
-              url: "https://map.kakao.com/",
+              name: widget.videoData.location,
+              address: widget.videoData.address,
+              latitude: widget.videoData.latitude,
+              longitude: widget.videoData.longitude,
+              url: widget.videoData.kakaomapId,
             ),
           ),
         ],

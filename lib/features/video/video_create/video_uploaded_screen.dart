@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/main_navigation/main_navigation_screen.dart';
+import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/video_edit/edit_location.dart';
 import 'package:surfify/features/video/video_edit/edit_tag.dart';
 import 'package:surfify/features/video/video_edit/edit_video.dart';
@@ -14,9 +16,10 @@ import 'package:surfify/features/video/widgets/video_location.dart';
 
 import 'package:video_player/video_player.dart';
 
+import '../view_models/upload_video_view_model.dart';
 import '../widgets/video_button.dart';
 
-class VideoUploadedScreen extends StatefulWidget {
+class VideoUploadedScreen extends ConsumerStatefulWidget {
   late XFile video;
   late String address;
   late String name;
@@ -36,10 +39,10 @@ class VideoUploadedScreen extends StatefulWidget {
     required this.url,
   });
   @override
-  State<VideoUploadedScreen> createState() => VideoUploadedScreenState();
+  createState() => VideoUploadedScreenState();
 }
 
-class VideoUploadedScreenState extends State<VideoUploadedScreen> {
+class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
   late VideoPlayerController _videoPlayerController;
 
   bool _savedVideo = false;
@@ -116,10 +119,17 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
   }
 
   Future<void> _saveToGallery() async {
-    // await GallerySaver.saveVideo(
-    //   widget.video.path,
-    //   albumName: "TikTok Clone!",
-    // );
+    ref.watch(usersProvider).value!.name;
+    ref.read(uploadVideoProvider.notifier).uploadVideo(
+          File(widget.video.path),
+          widget.name,
+          widget.address,
+          double.parse(widget.lon),
+          double.parse(widget.lat),
+          widget.tags,
+          widget.url,
+          context,
+        );
 
     _savedVideo = true;
 
@@ -175,25 +185,39 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: Sizes.size28,
-                          child: SizedBox(
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/images/user.png',
+                        ref.read(usersProvider).when(
+                              error: (error, stackTrace) => Center(
+                                child: Text(error.toString()),
+                              ),
+                              loading: () => const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
+                              data: (data) => CircleAvatar(
+                                radius: 28,
+                                foregroundImage: data.hasAvatar
+                                    ? NetworkImage(
+                                        "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media")
+                                    : null,
+                                child: Text(data.name),
                               ),
                             ),
-                          ),
-                        ),
                         Gaps.v12,
-                        const Text(
-                          "마곡드래곤(@dragmag)",
-                          style: TextStyle(
-                            fontSize: Sizes.size20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        ref.read(usersProvider).when(
+                              error: (error, stackTrace) => Center(
+                                child: Text(error.toString()),
+                              ),
+                              loading: () => const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
+                              data: (data) => Text(
+                                data.name,
+                                style: const TextStyle(
+                                  fontSize: Sizes.size20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                         Gaps.v10,
                         SizedBox(
                           width: 300,
@@ -255,17 +279,29 @@ class VideoUploadedScreenState extends State<VideoUploadedScreen> {
                           width: 330,
                           height: Sizes.size64,
                           child: CupertinoButton(
-                            onPressed: () => _saveToGallery(),
+                            onPressed: () =>
+                                ref.watch(uploadVideoProvider).isLoading
+                                    ? () {}
+                                    : _saveToGallery(),
                             color:
                                 Theme.of(context).primaryColor.withOpacity(0.8),
-                            child: const Text(
-                              "서핑포인트 생성",
-                              style: TextStyle(
-                                fontSize: Sizes.size20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
+                            child: ref.watch(uploadVideoProvider).isLoading
+                                ? const Text(
+                                    "로딩 중 잠시만 기다려주세요",
+                                    style: TextStyle(
+                                      fontSize: Sizes.size20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const Text(
+                                    "서핑포인트 생성",
+                                    style: TextStyle(
+                                      fontSize: Sizes.size20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         ),
                         Gaps.v16,
