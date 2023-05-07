@@ -81,11 +81,13 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
     );
 
     setState(() {
-      widget.name = editlocation['name'];
-      widget.lat = editlocation['lat'];
-      widget.lon = editlocation['lon'];
-      widget.address = editlocation['address'];
-      widget.url = editlocation['url'];
+      if (editlocation != null) {
+        widget.name = editlocation['name'];
+        widget.lat = editlocation['lat'];
+        widget.lon = editlocation['lon'];
+        widget.address = editlocation['address'];
+        widget.url = editlocation['url'];
+      }
     });
   }
 
@@ -98,7 +100,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
     );
 
     setState(() {
-      widget.video = editVideo;
+      widget.video = editVideo ?? widget.video;
       _videoPlayerController.dispose();
       _initVideo();
     });

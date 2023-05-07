@@ -84,11 +84,13 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
     );
 
     setState(() {
-      widget.name = editlocation['name'];
-      widget.lat = editlocation['lat'];
-      widget.lon = editlocation['lon'];
-      widget.address = editlocation['address'];
-      widget.url = editlocation['url'];
+      if (editlocation != null) {
+        widget.name = editlocation['name'];
+        widget.lat = editlocation['lat'];
+        widget.lon = editlocation['lon'];
+        widget.address = editlocation['address'];
+        widget.url = editlocation['url'];
+      }
     });
   }
 
@@ -101,7 +103,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
     );
 
     setState(() {
-      widget.video = editVideo;
+      widget.video = editVideo ?? widget.video;
       _videoPlayerController.dispose();
       _initVideo();
     });
@@ -201,7 +203,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                                     ? NetworkImage(
                                         "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media")
                                     : null,
-                                child: Text(data.name),
+                                child: data.hasAvatar ? null : Text(data.name),
                               ),
                             ),
                         Gaps.v12,
