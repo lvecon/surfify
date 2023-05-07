@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dart_geohash/dart_geohash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,7 @@ import '../repo/videos_repo.dart';
 
 class UploadVideoViewModel extends AsyncNotifier<void> {
   late final VideosRepository _repository;
+  var geoHasher = GeoHasher();
 
   @override
   FutureOr<void> build() {
@@ -28,7 +30,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
     BuildContext context,
   ) async {
     final user = ref.read(authRepo).user;
-    final userProfile = ref.read(usersProvider).value;
+    final userProfile =
+        ref.read(usersProvider(ref.read(authRepo).user!.uid)).value;
     if (userProfile != null) {
       state = const AsyncValue.loading();
       state = await AsyncValue.guard(() async {
@@ -53,7 +56,8 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               address: address,
               longitude: longitude,
               latitude: latitude,
-              kakaomapId: url,
+              kakaomapId: url.split(".com/")[1],
+              geoHash: geoHasher.encode(longitude, latitude, precision: 20),
               hashtag: [],
             ),
           );

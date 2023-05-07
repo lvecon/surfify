@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/features/users/setting_screen.dart';
+import 'package:surfify/features/users/view_models/profile_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/users/views/avatar.dart';
 
@@ -10,7 +12,9 @@ import '../../constants/sizes.dart';
 import 'edit_profile_scree.dart';
 
 class UserProfileScreen extends ConsumerStatefulWidget {
-  const UserProfileScreen({super.key});
+  final String uid;
+
+  const UserProfileScreen({super.key, required this.uid});
 
   @override
   createState() => _UserProfileScreenState();
@@ -26,12 +30,12 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    const myProfile = true;
+    var myProfile = (ref.read(authRepo).user!.uid == widget.uid);
     void _onClosePressed() {
       Navigator.of(context).pop();
     }
 
-    return ref.watch(usersProvider).when(
+    return ref.watch(usersProvider(widget.uid)).when(
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
           ),
@@ -71,15 +75,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Column(
-                                children: const [
+                                children: [
                                   Text(
-                                    '448',
-                                    style: TextStyle(
+                                    '${data.follower}',
+                                    style: const TextStyle(
                                       fontSize: Sizes.size24,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Followers',
                                     style: TextStyle(
                                       fontSize: Sizes.size16,
@@ -95,15 +99,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                 hasAvatar: data.hasAvatar,
                               ),
                               Column(
-                                children: const [
+                                children: [
                                   Text(
-                                    '13.9M',
-                                    style: TextStyle(
+                                    '${data.likes}',
+                                    style: const TextStyle(
                                       fontSize: Sizes.size24,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Likes',
                                     style: TextStyle(
                                       fontSize: Sizes.size16,
@@ -223,29 +227,41 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     ),
                   ];
                 },
-                body: GridView.builder(
-                  itemCount: 20,
-                  padding: EdgeInsets.zero,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: Sizes.size2,
-                    mainAxisSpacing: Sizes.size2,
-                    childAspectRatio: 9 / 14,
-                  ),
-                  itemBuilder: (context, index) => Column(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 9 / 14,
-                        child: FadeInImage.assetNetwork(
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/user.png",
-                          image:
-                              "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-                        ),
+                body: ref.read(profileProvider(widget.uid)).when(
+                      error: (error, stackTrace) => Center(
+                        child: Text(error.toString()),
                       ),
-                    ],
-                  ),
-                ),
+                      loading: () => const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                      data: (data) => (data.isEmpty)
+                          ? const Center(
+                              child: Text('아직 영상이 없습니다!'),
+                            )
+                          : GridView.builder(
+                              itemCount: data.length,
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: Sizes.size2,
+                                mainAxisSpacing: Sizes.size2,
+                                childAspectRatio: 9 / 14,
+                              ),
+                              itemBuilder: (context, index) => Column(
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: 9 / 14,
+                                    child: FadeInImage.assetNetwork(
+                                      fit: BoxFit.cover,
+                                      placeholder: "assets/images/user.png",
+                                      image: data[index].thumbnailUrl,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                    ),
               ),
             ),
           ),

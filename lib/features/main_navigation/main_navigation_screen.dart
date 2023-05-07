@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surfify/constants/gaps.dart';
@@ -7,21 +8,22 @@ import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
 import 'package:surfify/features/main_navigation/widgets/post_video_button.dart';
 import 'package:surfify/features/message/message_screen.dart';
 import 'package:surfify/features/users/user_profile_screen.dart';
-import 'package:surfify/features/video/video_create/video_create_screen.dart';
+import 'package:surfify/features/video/views/video_create/video_create_screen.dart';
 
-import '../video/video_timeline_now_screen.dart';
-import '../video/video_tutorial/tutorial_screen.dart';
+import '../authentication/repos/authentication_repo.dart';
+import '../video/views/video_timeline_now_screen.dart';
+import '../video/views/video_tutorial/tutorial_screen.dart';
 
-class MainNavigationScreen extends StatefulWidget {
+class MainNavigationScreen extends ConsumerStatefulWidget {
   const MainNavigationScreen({super.key});
 
   static const routeName = '/main_navigation_screen';
 
   @override
-  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
+  createState() => _MainNavigationScreenState();
 }
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
+class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   int _selectedIndex = 0;
   late bool _firstSeen;
 
@@ -126,7 +128,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        builder: (context) => const UserProfileScreen());
+                        builder: (context) => UserProfileScreen(
+                            uid: ref.read(authRepo).user!.uid));
                   }),
             ],
           ),
