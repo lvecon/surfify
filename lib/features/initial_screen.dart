@@ -5,7 +5,7 @@ import 'package:surfify/widgets/box_button.dart';
 
 import '../constants/gaps.dart';
 import '../constants/sizes.dart';
-import 'authentication/policy_agreement_screen.dart';
+import 'authentication/views/policy_agreement_screen.dart';
 
 class InitialScreen extends ConsumerWidget {
   const InitialScreen({super.key});
