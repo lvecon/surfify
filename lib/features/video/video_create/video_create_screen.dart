@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -176,6 +178,27 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
     Navigator.of(context).pop();
   }
 
+  Future<void> _onPickVideoPressed() async {
+    final video = await ImagePicker().pickVideo(
+      source: ImageSource.gallery,
+    );
+    if (video == null) {
+      Navigator.of(context).pop();
+      return;
+    }
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VideoPreviewScreen(
+          video: video,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final mediaSize = MediaQuery.of(context).size;
@@ -314,7 +337,21 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
                         icon: const Icon(
                           Icons.cameraswitch_rounded,
                         ),
-                      ))
+                      )),
+                  Positioned(
+                    left: Sizes.size48,
+                    bottom: Sizes.size96,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: IconButton(
+                        onPressed: _onPickVideoPressed,
+                        icon: const FaIcon(
+                          FontAwesomeIcons.image,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
       ),

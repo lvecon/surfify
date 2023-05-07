@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../authentication/repos/authentication_repo.dart';
 import '../../users/view_models/user_view_model.dart';
@@ -58,8 +57,6 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               hashtag: [],
             ),
           );
-          context.pop();
-          context.pop();
         }
       });
     }
