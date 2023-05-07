@@ -56,7 +56,7 @@ class VideoLocation extends StatelessWidget {
               onTap: () async {
                 //_openKakaoMapScreen(context, name, latitude, longitude);
 
-                await launchUrlString(url);
+                await launchUrlString("http://place.map.kakao.com/$url");
               },
               child: Text(
                 address,

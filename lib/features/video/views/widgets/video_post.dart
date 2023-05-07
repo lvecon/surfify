@@ -63,7 +63,7 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   void _initVideoPlayer() async {
     _videoPlayerController =
-        VideoPlayerController.asset("assets/videos/video.mp4");
+        VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
@@ -160,7 +160,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       child: Stack(
         children: [
           Positioned.fill(
-            child: !_videoPlayerController.value.isInitialized
+            child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
                 : Image.network(
                     widget.videoData.thumbnailUrl,
