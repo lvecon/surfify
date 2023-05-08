@@ -35,29 +35,31 @@ export const onVideoCreated = functions.firestore
         createdAt: video.createdAt,
      });
 
-     await db.collection("location").doc(video.geoHash).set({geoHash: video.geoHash});
-     await db.collection("location").doc(video.geoHash).collection("videos").doc(snapshot.id).set({
-        "title": video.title,
-        "description": video.description,
-        "fileUrl": video.fileUrl,
-        "thumbnailUrl": file.publicUrl(),
-        "creatorUid": video.creatorUid,
-        "likes": video.likes,
-        "comments": video.comments,
-        "createdAt": video.createdAt,
-        "creator": video.creator,
-        "id": snapshot.id,
-        "address": video.address,
-        "location": video.location,
-        "longitude": video.longitude,
-        "latitude": video.latitude,
-        "kakaomapId": video.kakaomapId,
-        "geoHash": video.geoHash,
-        "hashtag": video.hashtag,
-      }, {merge: true});
-    
-    
-     
+     await db.collection("locations").doc(video.geoHash.slice(0,5)).collection("sub").doc(video.geoHash.slice(5,9)).set({
+      "geoHash": video.geoHash,
+      "latitude": video.latitude,
+      "longitude": video.longitude,
+     })
+
+     await db.collection("locations").doc(video.geoHash.slice(0,5)).collection("sub").doc(video.geoHash.slice(5,9)).collection('videos').add({
+      "title": video.title,
+      "description": video.description,
+      "fileUrl": video.fileUrl,
+      "thumbnailUrl": file.publicUrl(),
+      "creatorUid": video.creatorUid,
+      "likes": video.likes,
+      "comments": video.comments,
+      "createdAt": video.createdAt,
+      "creator": video.creator,
+      "id": snapshot.id,
+      "address": video.address,
+      "location": video.location,
+      "longitude": video.longitude,
+      "latitude": video.latitude,
+      "kakaomapId": video.kakaomapId,
+      "geoHash": video.geoHash,
+      "hashtag": video.hashtag,
+    });
 });
 
 export const onLikedCreated = functions.firestore
