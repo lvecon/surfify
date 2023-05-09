@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/video/view_models/here_view_model.dart';
-import 'package:surfify/features/video/view_models/timeline_view_model.dart';
 import 'package:surfify/features/video/views/widgets/video_post.dart';
 
 import '../view_models/place_view_model.dart';
@@ -15,6 +14,7 @@ class VideoTimelineScreen extends ConsumerStatefulWidget {
 
 class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   int _itemCount = 0;
+  int overViewMode = 0;
 
   final PageController _pageController = PageController();
   final PageController _pageController2 = PageController();
@@ -61,71 +61,228 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     super.dispose();
   }
 
-  Future<void> _onRefresh() {
-    return ref.watch(timelineProvider.notifier).refresh();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ref.watch(hereProvider).when(
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text(
-              'Could not load videos: $error',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-          data: (locations) => RefreshIndicator(
-            onRefresh: _onRefresh,
-            displacement: 50,
-            edgeOffset: 20,
-            color: Theme.of(context).primaryColor,
-            child: PageView.builder(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              onPageChanged: _onPageChanged,
-              itemCount: locations.length,
-              itemBuilder: (context, index) =>
-                  ref.watch(placeProvider(locations[index])).when(
-                        loading: () => const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
+    return GestureDetector(
+      onScaleStart: (details) {
+        setState(() {
+          overViewMode += 1;
+        });
+      },
+      child:
+          ref.watch(hereProvider('126.95236219241595,37.458938402839834')).when(
+              loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+              error: (error, stackTrace) => Center(
+                    child: Text(
+                      'Could not load videos: $error',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+              data: (overViewMode % 3 == 0)
+                  ? (locations) => RefreshIndicator(
+                        onRefresh: ref
+                            .watch(hereProvider(
+                                    '126.95236219241595,37.458938402839834')
+                                .notifier)
+                            .refresh,
+                        displacement: 50,
+                        edgeOffset: 20,
+                        color: Theme.of(context).primaryColor,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          scrollDirection: Axis.vertical,
+                          onPageChanged: _onPageChanged,
+                          itemCount: locations.length,
+                          itemBuilder: (context, index) => ref
+                              .watch(placeProvider(locations[index]))
+                              .when(
+                                loading: () => const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                error: (error, stackTrace) => Center(
+                                  child: Text(
+                                    'Could not load videos: $error',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                data: (videos) {
+                                  _itemCount = videos.length;
+                                  return RefreshIndicator(
+                                    onRefresh: ref
+                                        .watch(placeProvider(locations[index])
+                                            .notifier)
+                                        .refresh,
+                                    displacement: 50,
+                                    edgeOffset: 20,
+                                    color: Theme.of(context).primaryColor,
+                                    child: PageView.builder(
+                                      controller: _pageController2,
+                                      scrollDirection: Axis.horizontal,
+                                      onPageChanged: _onPageChanged2,
+                                      itemCount: videos.length,
+                                      itemBuilder: (context, index) {
+                                        final videoData = videos[index];
+                                        return VideoPost(
+                                          onVideoFinished: () {},
+                                          index: index,
+                                          videoData: videoData,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
                         ),
-                        error: (error, stackTrace) => Center(
-                          child: Text(
-                            'Could not load videos: $error',
-                            style: const TextStyle(color: Colors.white),
-                          ),
+                      )
+                  : (data) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const Text('안녕하세요'),
+                            for (var location in data)
+                              ref.watch(placeProvider(location)).when(
+                                  loading: () => const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                  error: (error, stackTrace) => Center(
+                                        child: Text(
+                                          'Could not load videos: $error',
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                  data: (pics) {
+                                    return SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: [
+                                          for (var pic in pics)
+                                            FadeInImage.assetNetwork(
+                                              fit: BoxFit.cover,
+                                              placeholder:
+                                                  "assets/images/user.png",
+                                              image: pic.thumbnailUrl,
+                                            ),
+                                        ],
+                                      ),
+                                    );
+
+                                    // return GridView.builder(
+                                    //   itemCount: data.length,
+                                    //   padding: EdgeInsets.zero,
+                                    //   gridDelegate:
+                                    //       const SliverGridDelegateWithFixedCrossAxisCount(
+                                    //     crossAxisCount: 3,
+                                    //     crossAxisSpacing: Sizes.size2,
+                                    //     mainAxisSpacing: Sizes.size2,
+                                    //     childAspectRatio: 9 / 14,
+                                    //   ),
+                                    //   itemBuilder: (context, index) => Column(
+                                    //     children: [
+                                    //       AspectRatio(
+                                    //         aspectRatio: 9 / 14,
+                                    //         child: FadeInImage.assetNetwork(
+                                    //           fit: BoxFit.cover,
+                                    //           placeholder: "assets/images/user.png",
+                                    //           image: pics[index].thumbnailUrl,
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // );
+                                  })
+                          ],
                         ),
-                        data: (videos) {
-                          _itemCount = 5;
-                          return RefreshIndicator(
-                            onRefresh: _onRefresh,
-                            displacement: 50,
-                            edgeOffset: 20,
-                            color: Theme.of(context).primaryColor,
-                            child: PageView.builder(
-                              controller: _pageController2,
-                              scrollDirection: Axis.horizontal,
-                              onPageChanged: _onPageChanged2,
-                              itemCount: videos.length,
-                              itemBuilder: (context, index) {
-                                final videoData = videos[index];
-                                return VideoPost(
-                                  onVideoFinished: () {},
-                                  index: index,
-                                  videoData: videoData,
+                      );
+
+                      return Column(
+                        children: [
+                          ref.watch(placeProvider(data[0])).when(
+                              loading: () => const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                              error: (error, stackTrace) => Center(
+                                    child: Text(
+                                      'Could not load videos: $error',
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                              data: (pics) {
+                                _itemCount = pics.length;
+                                return SizedBox(
+                                  width: 500,
+                                  child: ListView.builder(
+                                    itemCount: pics.length,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) => SizedBox(
+                                      width: 500,
+                                      child: AspectRatio(
+                                        aspectRatio: 9 / 14,
+                                        child: FadeInImage.assetNetwork(
+                                          fit: BoxFit.cover,
+                                          placeholder: "assets/images/user.png",
+                                          image: pics[index].thumbnailUrl,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-            ),
-          ),
-        );
+                              }),
+                        ],
+                      );
+
+                      return ListView.builder(
+                        itemCount: data.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) =>
+                            ref.watch(placeProvider(data[index])).when(
+                                loading: () => const Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                error: (error, stackTrace) => Center(
+                                      child: Text(
+                                        'Could not load videos: $error',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                data: (pics) {
+                                  _itemCount = pics.length;
+                                  return SizedBox(
+                                    width: 500,
+                                    child: ListView.builder(
+                                      itemCount: pics.length,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) => SizedBox(
+                                        width: 500,
+                                        child: AspectRatio(
+                                          aspectRatio: 9 / 14,
+                                          child: FadeInImage.assetNetwork(
+                                            fit: BoxFit.cover,
+                                            placeholder:
+                                                "assets/images/user.png",
+                                            image: data[index].thumbnailUrl,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                      );
+                    }),
+    );
   }
 }
