@@ -85,7 +85,6 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
       locationDict['latitude'].add(lat);
       locationDict['url'].add(url);
     }
-    print(locationDict);
     setState(() {});
   }
 

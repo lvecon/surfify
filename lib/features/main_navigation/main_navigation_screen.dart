@@ -12,6 +12,7 @@ import 'package:surfify/features/video/views/video_create/video_create_screen.da
 
 import '../authentication/repos/authentication_repo.dart';
 import '../video/views/video_timeline_now_screen.dart';
+import '../video/views/video_timeline_screen.dart';
 import '../video/views/video_tutorial/tutorial_screen.dart';
 
 class MainNavigationScreen extends ConsumerStatefulWidget {
@@ -71,7 +72,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const VideoTimelineNowScreen(), //수정해야함
+            child: const VideoTimelineScreen(), //수정해야함
           ),
           Offstage(
             offstage: _selectedIndex != 1,
