@@ -81,7 +81,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                 style: const TextStyle(color: Colors.white),
               ),
             ),
-            data: (overViewMode % 3 == 0)
+            data: (overViewMode % 4 == 0)
                 ? (locations) => RefreshIndicator(
                       onRefresh: ref
                           .watch(hereProvider(
