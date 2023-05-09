@@ -16,10 +16,29 @@ class HereViewModel extends AsyncNotifier<List<dynamic>> {
     final result = await _repository.fetchLocations(
       hash: hash,
     );
+
     final videos = result.docs.map(
-      (doc) => doc.data()['geoHash'],
+      (doc) => {
+        "geoHash": doc.data()['geoHash'],
+        "latitude": doc.data()['latitude'],
+        "longitude": doc.data()['latitude'],
+      },
     );
-    return videos.toList();
+    var list = videos.toList();
+    var location = geoHasher.decode(hash!);
+    list.sort((m1, m2) {
+      return ((m1['longitude'] -
+                  2 * location[0] +
+                  m1['latitude'] -
+                  2 * location[1] -
+                  m2['longitude'] -
+                  m2['latitude']) *
+              16)
+          .round(); //현재위치와의 거리 비교. 원래는 위도 경도 제곱으로 계산해야하는데 그냥 맨해튼 거리로 계산.
+    });
+    print(list);
+    var sol = list.map((element) => element['geoHash']).toList();
+    return sol;
   }
 
   @override
