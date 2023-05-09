@@ -47,7 +47,8 @@ class VideosRepository {
           .doc(hash.substring(0, 5))
           .collection('sub')
           .doc(hash.substring(5, 9))
-          .collection('videos');
+          .collection('videos')
+          .orderBy("createdAt", descending: true);
       if (lastItemCreatedAt == null) {
         return query.get();
       } else {
