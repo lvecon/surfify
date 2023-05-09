@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../repo/videos_repo.dart';
 
-class HereViewModel extends AsyncNotifier<List<dynamic>> {
+class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
   late final VideosRepository _repository;
   List<dynamic> _list = [];
   var geoHasher = GeoHasher();
@@ -42,10 +42,11 @@ class HereViewModel extends AsyncNotifier<List<dynamic>> {
   }
 
   @override
-  FutureOr<List<dynamic>> build() async {
+  FutureOr<List<dynamic>> build(String arg) async {
+    var location = arg.split(',');
     final hash = geoHasher.encode(
-      126.95236219241595,
-      37.458938402839834,
+      double.parse(location[0]),
+      double.parse(location[1]),
       precision: 9,
     );
     _repository = ref.read(videosRepo);
@@ -79,6 +80,7 @@ class HereViewModel extends AsyncNotifier<List<dynamic>> {
   }
 }
 
-final hereProvider = AsyncNotifierProvider<HereViewModel, List<dynamic>>(
+final hereProvider =
+    AsyncNotifierProvider.family<HereViewModel, List<dynamic>, String>(
   () => HereViewModel(),
 );
