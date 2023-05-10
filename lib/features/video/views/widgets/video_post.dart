@@ -317,7 +317,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        builder: (context) => const OptionScreen());
+                        builder: (context) =>
+                            OptionScreen(videoId: widget.videoData.id));
                   },
                   child: const VideoButton(
                     icon: FontAwesomeIcons.ellipsisVertical,

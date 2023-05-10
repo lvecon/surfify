@@ -38,8 +38,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       Navigator.of(context).pop();
     }
 
-    final alreadyFollow = ref.watch(followProvider(widget.uid));
-
     return ref.watch(usersProvider(widget.uid)).when(
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
