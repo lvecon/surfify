@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:surfify/features/authentication/repos/authentication_repo.dart';
+import 'package:surfify/features/video/models/report_model.dart';
+import 'package:surfify/features/video/repo/report_repo.dart';
 import 'package:surfify/widgets/box_button.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
-class DetailOpinionScreen extends StatefulWidget {
-  const DetailOpinionScreen({super.key});
+class DetailOpinionScreen extends ConsumerStatefulWidget {
+  final int type;
+  final String videoId;
+  const DetailOpinionScreen(
+      {super.key, required this.type, required this.videoId});
 
   @override
-  State<DetailOpinionScreen> createState() => _DetailOpinionScreenState();
+  ConsumerState<DetailOpinionScreen> createState() =>
+      _DetailOpinionScreenState();
 }
 
-class _DetailOpinionScreenState extends State<DetailOpinionScreen> {
+class _DetailOpinionScreenState extends ConsumerState<DetailOpinionScreen> {
+  final TextEditingController _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -64,7 +74,8 @@ class _DetailOpinionScreenState extends State<DetailOpinionScreen> {
                   ),
                 ),
                 Gaps.v12,
-                TextFormField(
+                TextField(
+                  controller: _textController,
                   textInputAction: TextInputAction.done,
                   maxLines: 10,
                   cursorColor: Theme.of(context).primaryColor,
@@ -90,6 +101,14 @@ class _DetailOpinionScreenState extends State<DetailOpinionScreen> {
           ),
           child: GestureDetector(
             onTap: () {
+              ref.read(reportRepo).addReport(
+                    ReportModel(
+                        creatorId: ref.read(authRepo).user!.uid,
+                        contents: _textController.text,
+                        createdAt: DateTime.now().millisecondsSinceEpoch,
+                        videoId: "1",
+                        type: widget.type),
+                  );
               context.pop();
               context.pop();
               ScaffoldMessenger.of(context).showSnackBar(
