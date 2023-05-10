@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hashtagable/hashtagable.dart';
 import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -236,13 +237,25 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                Text(
-                  widget.videoData.description,
-                  style: const TextStyle(
+                HashTagText(
+                  text: widget.videoData.description,
+                  basicStyle: const TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
                   ),
-                )
+                  decoratedStyle: TextStyle(
+                    fontSize: Sizes.size16,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  onTap: (string) async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => const SearchScreen());
+                  },
+                ),
               ],
             ),
           ),
