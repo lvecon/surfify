@@ -32,16 +32,20 @@ class UserRepository {
     final query = _db.collection("following").doc("${uid1}000$uid2");
     final following = await query.get();
     if (!following.exists) {
-      print('여기');
       await query.set(
         {
           "createdAt": DateTime.now().millisecondsSinceEpoch,
         },
       );
     } else {
-      print('거기');
       await query.delete();
     }
+  }
+
+  Future<bool> isFollowUser(String uid1, String uid2) async {
+    final query = _db.collection("following").doc("${uid1}000$uid2");
+    final follow = await query.get();
+    return follow.exists;
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> fetchThumbnail(String uid) async {
