@@ -144,3 +144,16 @@ export const onLikedCreated = functions.firestore
          comments: admin.firestore.FieldValue.increment(-1),
        });
    });
+
+   export const onMessageCreated = functions.firestore
+   .document("users/{userId}/message/{messageId}")
+   .onCreate(async (snapshot, context) => {
+     const db = admin.firestore();
+     const userId = context.params.userId;
+     await db
+       .collection("users")
+       .doc(userId)
+       .update({
+         messageId: snapshot.id,
+       });
+   });
