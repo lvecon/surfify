@@ -62,6 +62,33 @@ export const onVideoCreated = functions.firestore
     });
 });
 
+export const onFollowCreated = functions.firestore
+   .document("following/{followId}")
+   .onCreate(async (snapshot, context) => {
+     const db = admin.firestore();
+     const [_, userId] = snapshot.id.split("000");
+     await db
+       .collection("users")
+       .doc(userId)
+       .update({
+         follower: admin.firestore.FieldValue.increment(1),
+       });
+   });
+
+ export const onFollowRemoved = functions.firestore
+   .document("following/{followId}")
+   .onDelete(async (snapshot, context) => {
+     const db = admin.firestore();
+     const [_, userId] = snapshot.id.split("000");
+     await db
+       .collection("users")
+       .doc(userId)
+       .update({
+         follower: admin.firestore.FieldValue.increment(-1),
+       });
+   });
+
+
 export const onLikedCreated = functions.firestore
    .document("likes/{likeId}")
    .onCreate(async (snapshot, context) => {
