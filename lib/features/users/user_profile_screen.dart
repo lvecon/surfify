@@ -165,9 +165,9 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                         size: Sizes.size24,
                                       ),
                                     )
-                                  : FaIcon(
+                                  : const FaIcon(
                                       FontAwesomeIcons.gear,
-                                      color: Theme.of(context).primaryColor,
+                                      color: Colors.white,
                                       size: Sizes.size24,
                                     ),
                               Container(
@@ -203,14 +203,24 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                           textAlign: TextAlign.center,
                                         ),
                                       )
-                                    : Text(
-                                        'Follow',
-                                        style: TextStyle(
-                                          fontSize: Sizes.size16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).primaryColor,
+                                    : GestureDetector(
+                                        onTap: () => ref
+                                            .read(usersProvider(ref
+                                                    .read(authRepo)
+                                                    .user!
+                                                    .uid)
+                                                .notifier)
+                                            .followUser(uid2: widget.uid),
+                                        child: Text(
+                                          'Follow',
+                                          style: TextStyle(
+                                            fontSize: Sizes.size16,
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        textAlign: TextAlign.center,
                                       ),
                               ),
                               FaIcon(
