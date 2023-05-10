@@ -61,6 +61,7 @@ dependencies:
   cloud_functions: ^4.1.1
   flutter_geo_hash: ^0.0.4
   dart_geohash: ^2.0.2
+  hashtagable: ^2.1.0
 
 dev_dependencies:
   flutter_test:
