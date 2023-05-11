@@ -4,6 +4,7 @@ class MessageModel {
   final comment;
   final createdAt;
   final videoId;
+  final messageId;
 
   MessageModel({
     required this.creatorId,
@@ -11,15 +12,16 @@ class MessageModel {
     required this.createdAt,
     required this.receiverId,
     required this.videoId,
+    required this.messageId,
   });
 
   MessageModel.fromJson({
     required Map<String, dynamic> json,
-    required String videoId,
   })  : creatorId = json["creatorId"],
-        receiverId = json["receivedId"],
+        receiverId = json["receiverId"],
         comment = json["comment"],
         createdAt = json["createdAt"],
+        messageId = json['messageId'],
         videoId = json["videoId"];
 
   Map<String, dynamic> toJson() {
@@ -27,6 +29,7 @@ class MessageModel {
       "creatorId": creatorId,
       "comment": comment,
       "createdAt": createdAt,
+      "messageId": messageId,
       "receiverId": receiverId,
       "videoId": videoId,
     };
