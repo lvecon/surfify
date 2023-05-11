@@ -152,7 +152,7 @@ export const onLikedCreated = functions.firestore
      const userId = context.params.userId;
      await db
        .collection("users")
-       .doc(userId)
+       .doc(userId).collection('message').doc(snapshot.id)
        .update({
          messageId: snapshot.id,
        });
