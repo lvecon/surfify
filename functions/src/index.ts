@@ -29,6 +29,11 @@ export const onVideoCreated = functions.firestore
 
      const db = admin.firestore();
 
+     await db.collection('users').doc(video.creatorUid)
+      .update({
+        surfingPoints: admin.firestore.FieldValue.increment(1),
+      });
+
      await db.collection('users').doc(video.creatorUid).collection("videos").doc(snapshot.id).set({
         thumbnailUrl: file.publicUrl(),
         videoId: snapshot.id,

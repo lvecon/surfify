@@ -46,6 +46,7 @@ class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
       follower: 0,
       following: 0,
       likes: 0,
+      surfingPoints: 0,
     );
     _usersRepository.createProfile(profile);
     state = AsyncValue.data(profile);

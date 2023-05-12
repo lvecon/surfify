@@ -14,6 +14,7 @@ class UserProfileModel {
   final String privacyAgreeDate;
   final bool marketingAgree;
   final String marketingAgreeDate;
+  final int surfingPoints;
 
   UserProfileModel({
     required this.uid,
@@ -31,6 +32,7 @@ class UserProfileModel {
     required this.privacyAgreeDate,
     required this.marketingAgree,
     required this.marketingAgreeDate,
+    required this.surfingPoints,
   });
   UserProfileModel.empty()
       : uid = "",
@@ -41,6 +43,7 @@ class UserProfileModel {
         follower = 0,
         following = 0,
         likes = 0,
+        surfingPoints = 0,
         hasAvatar = false,
         serviceAgree = false,
         privacyAgree = false,
@@ -58,6 +61,7 @@ class UserProfileModel {
         follower = json['follower'],
         following = json['following'],
         likes = json['likes'],
+        surfingPoints = json['surfingPoints'],
         hasAvatar = json['hasAvatar'],
         serviceAgree = json['serviceAgree'],
         privacyAgree = json['privacyAgree'],
@@ -76,6 +80,7 @@ class UserProfileModel {
       "follower": follower,
       "following": following,
       "likes": likes,
+      "surfingPoints": surfingPoints,
       "hasAvatar": hasAvatar,
       "serviceAgree": serviceAgree,
       "privacyAgree": privacyAgree,
@@ -95,6 +100,7 @@ class UserProfileModel {
     int? follower,
     int? following,
     int? likes,
+    int? surfingPoints,
     bool? hasAvatar,
     bool? serviceAgree,
     String? serviceAgreeDate,
@@ -112,6 +118,7 @@ class UserProfileModel {
       follower: follower ?? this.follower,
       following: following ?? this.following,
       likes: likes ?? this.likes,
+      surfingPoints: surfingPoints ?? this.surfingPoints,
       hasAvatar: hasAvatar ?? this.hasAvatar,
       serviceAgree: serviceAgree ?? this.serviceAgree,
       serviceAgreeDate: serviceAgreeDate ?? this.serviceAgreeDate,
