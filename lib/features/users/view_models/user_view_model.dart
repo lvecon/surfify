@@ -44,6 +44,7 @@ class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
       marketingAgree: false,
       marketingAgreeDate: DateTime.now().toString(),
       follower: 0,
+      following: 0,
       likes: 0,
     );
     _usersRepository.createProfile(profile);

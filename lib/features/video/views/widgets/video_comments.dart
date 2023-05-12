@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/message/view_model/message_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/view_models/commets_view_model.dart';
 
@@ -11,7 +12,12 @@ import '../../../users/user_profile_screen.dart';
 
 class VideoComments extends ConsumerStatefulWidget {
   final String videoId;
-  const VideoComments({super.key, required this.videoId});
+  final String creatorId;
+  const VideoComments({
+    super.key,
+    required this.videoId,
+    required this.creatorId,
+  });
 
   @override
   createState() => _VideoCommentsState();
@@ -45,6 +51,11 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
     setState(() {
       _isWriting = false;
     });
+    ref.read(messageProvider.notifier).addMessage(
+          videoId: widget.videoId,
+          comment: "당신이 만든 기록에 댓글을 달았어요!",
+          receiverId: widget.creatorId,
+        );
   }
 
   Future<void> _deleteComment(comemntModel) async {
