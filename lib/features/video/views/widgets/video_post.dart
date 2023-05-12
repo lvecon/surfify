@@ -67,6 +67,7 @@ class VideoPostState extends ConsumerState<VideoPost>
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    await _videoPlayerController.seekTo(const Duration(milliseconds: 1));
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -120,13 +121,13 @@ class VideoPostState extends ConsumerState<VideoPost>
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
       _animationController.reverse();
+      _isPaused = true;
     } else {
       _videoPlayerController.play();
       _animationController.forward();
+      _isPaused = false;
     }
-    setState(() {
-      _isPaused = !_isPaused;
-    });
+    setState(() {});
   }
 
   void _onLikeTap() {
@@ -162,7 +163,12 @@ class VideoPostState extends ConsumerState<VideoPost>
         children: [
           Positioned.fill(
             child: _videoPlayerController.value.isInitialized
-                ? VideoPlayer(_videoPlayerController)
+                ? FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                        height: _videoPlayerController.value.size.height,
+                        width: _videoPlayerController.value.size.width,
+                        child: VideoPlayer(_videoPlayerController)))
                 : Image.network(
                     widget.videoData.thumbnailUrl,
                     fit: BoxFit.cover,
