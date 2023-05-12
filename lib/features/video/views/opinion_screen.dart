@@ -8,7 +8,8 @@ import '../../../constants/sizes.dart';
 import 'detail_opinion_screen.dart';
 
 class OptionScreen extends StatelessWidget {
-  const OptionScreen({super.key});
+  final String videoId;
+  const OptionScreen({super.key, required this.videoId});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,8 @@ class OptionScreen extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
-                    builder: (context) => const DetailOpinionScreen());
+                    builder: (context) =>
+                        DetailOpinionScreen(type: 1, videoId: videoId));
               },
               child: const BoxButton(
                   text: '이 콘텐츠는 부적절합니다', able: false, mainColor: Colors.red),
@@ -66,7 +68,8 @@ class OptionScreen extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
-                    builder: (context) => const DetailOpinionScreen());
+                    builder: (context) =>
+                        DetailOpinionScreen(type: 2, videoId: videoId));
               },
               child: const BoxButton(
                   text: '이 서퍼를 추천하지 않습니다', able: false, mainColor: Colors.red),
@@ -78,7 +81,8 @@ class OptionScreen extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
-                    builder: (context) => const DetailOpinionScreen());
+                    builder: (context) =>
+                        DetailOpinionScreen(type: 3, videoId: videoId));
               },
               child: const BoxButton(
                   text: '이 장소를 다시는 보지 않습니다',
@@ -92,7 +96,10 @@ class OptionScreen extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
-                    builder: (context) => const DetailOpinionScreen());
+                    builder: (context) => DetailOpinionScreen(
+                          type: 4,
+                          videoId: videoId,
+                        ));
               },
               child: BoxButton(
                   text: '서비스 개선 의견이 있습니다',

@@ -5,15 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/video_model.dart';
 import '../repo/videos_repo.dart';
 
-class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
+class PlaceViewModel extends FamilyAsyncNotifier<List<VideoModel>, String> {
   late final VideosRepository _repository;
   List<VideoModel> _list = [];
 
   Future<List<VideoModel>> _fetchVideos({
     int? lastItemCreatedAt,
+    String? hash,
   }) async {
-    final result = await _repository.fetchVideos(
+    final result = await _repository.fetchVideosHome(
       lastItemCreatedAt: lastItemCreatedAt,
+      hash: hash,
     );
     final videos = result.docs.map(
       (doc) => VideoModel.fromJson(
@@ -25,9 +27,9 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
   }
 
   @override
-  FutureOr<List<VideoModel>> build() async {
+  FutureOr<List<VideoModel>> build(String arg) async {
     _repository = ref.read(videosRepo);
-    _list = await _fetchVideos(lastItemCreatedAt: null);
+    _list = await _fetchVideos(lastItemCreatedAt: null, hash: arg);
     return _list;
   }
 
@@ -45,7 +47,7 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
   }
 }
 
-final timelineProvider =
-    AsyncNotifierProvider<TimelineViewModel, List<VideoModel>>(
-  () => TimelineViewModel(),
+final placeProvider =
+    AsyncNotifierProvider.family<PlaceViewModel, List<VideoModel>, String>(
+  () => PlaceViewModel(),
 );

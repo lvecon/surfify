@@ -34,7 +34,60 @@ export const onVideoCreated = functions.firestore
         videoId: snapshot.id,
         createdAt: video.createdAt,
      });
+
+     await db.collection("locations").doc(video.geoHash.slice(0,5)).collection("sub").doc(video.geoHash.slice(5,9)).set({
+      "geoHash": video.geoHash,
+      "latitude": video.latitude,
+      "longitude": video.longitude,
+     })
+
+     await db.collection("locations").doc(video.geoHash.slice(0,5)).collection("sub").doc(video.geoHash.slice(5,9)).collection('videos').add({
+      "title": video.title,
+      "description": video.description,
+      "fileUrl": video.fileUrl,
+      "thumbnailUrl": file.publicUrl(),
+      "creatorUid": video.creatorUid,
+      "likes": video.likes,
+      "comments": video.comments,
+      "createdAt": video.createdAt,
+      "creator": video.creator,
+      "id": snapshot.id,
+      "address": video.address,
+      "location": video.location,
+      "longitude": video.longitude,
+      "latitude": video.latitude,
+      "kakaomapId": video.kakaomapId,
+      "geoHash": video.geoHash,
+      "hashtag": video.hashtag,
+    });
 });
+
+export const onFollowCreated = functions.firestore
+   .document("following/{followId}")
+   .onCreate(async (snapshot, context) => {
+     const db = admin.firestore();
+     const [_, userId] = snapshot.id.split("000");
+     await db
+       .collection("users")
+       .doc(userId)
+       .update({
+         follower: admin.firestore.FieldValue.increment(1),
+       });
+   });
+
+ export const onFollowRemoved = functions.firestore
+   .document("following/{followId}")
+   .onDelete(async (snapshot, context) => {
+     const db = admin.firestore();
+     const [_, userId] = snapshot.id.split("000");
+     await db
+       .collection("users")
+       .doc(userId)
+       .update({
+         follower: admin.firestore.FieldValue.increment(-1),
+       });
+   });
+
 
 export const onLikedCreated = functions.firestore
    .document("likes/{likeId}")
@@ -89,5 +142,18 @@ export const onLikedCreated = functions.firestore
        .doc(videoId)
        .update({
          comments: admin.firestore.FieldValue.increment(-1),
+       });
+   });
+
+   export const onMessageCreated = functions.firestore
+   .document("users/{userId}/message/{messageId}")
+   .onCreate(async (snapshot, context) => {
+     const db = admin.firestore();
+     const userId = context.params.userId;
+     await db
+       .collection("users")
+       .doc(userId).collection('message').doc(snapshot.id)
+       .update({
+         messageId: snapshot.id,
        });
    });

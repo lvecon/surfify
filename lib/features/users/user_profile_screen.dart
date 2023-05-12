@@ -6,6 +6,7 @@ import 'package:surfify/features/users/setting_screen.dart';
 import 'package:surfify/features/users/view_models/profile_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/users/views/avatar.dart';
+import 'package:surfify/features/users/view_models/following_view_model.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
@@ -26,6 +27,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     _notifications.remove(notification);
     setState(() {});
   }
+
+  bool pushFollow = true;
 
   @override
   Widget build(BuildContext context) {
@@ -165,54 +168,106 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                         size: Sizes.size24,
                                       ),
                                     )
-                                  : FaIcon(
+                                  : const FaIcon(
                                       FontAwesomeIcons.gear,
-                                      color: Theme.of(context).primaryColor,
+                                      color: Colors.white,
                                       size: Sizes.size24,
                                     ),
                               Container(
-                                width: Sizes.size128 + Sizes.size64,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: Sizes.size12,
-                                ),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Theme.of(context).primaryColor,
+                                  width: Sizes.size128 + Sizes.size64,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: Sizes.size12,
                                   ),
-                                ),
-                                child: myProfile
-                                    ? GestureDetector(
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              builder: (context) =>
-                                                  const EditProfileScreen());
-                                        },
-                                        child: Text(
-                                          'Edit Profile',
-                                          style: TextStyle(
-                                            fontSize: Sizes.size16,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                  child: myProfile
+                                      ? GestureDetector(
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                                context: context,
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                builder: (context) =>
+                                                    const EditProfileScreen());
+                                          },
+                                          child: Text(
+                                            'Edit Profile',
+                                            style: TextStyle(
+                                              fontSize: Sizes.size16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Follow',
-                                        style: TextStyle(
-                                          fontSize: Sizes.size16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                              ),
+                                        )
+                                      : ref
+                                          .watch(followProvider(widget.uid))
+                                          .when(
+                                              error: (error, stackTrace) =>
+                                                  Center(
+                                                    child:
+                                                        Text(error.toString()),
+                                                  ),
+                                              loading: () => const Center(
+                                                    child:
+                                                        CircularProgressIndicator
+                                                            .adaptive(),
+                                                  ),
+                                              data: (data) {
+                                                return GestureDetector(
+                                                    onTap: () {
+                                                      ref
+                                                          .watch(usersProvider(ref
+                                                                  .read(
+                                                                      authRepo)
+                                                                  .user!
+                                                                  .uid)
+                                                              .notifier)
+                                                          .followUser(
+                                                              uid2: widget.uid);
+                                                      setState(() {
+                                                        pushFollow =
+                                                            !pushFollow;
+                                                      });
+                                                    },
+                                                    child: (data == pushFollow)
+                                                        ? Text(
+                                                            'Following',
+                                                            style: TextStyle(
+                                                              fontSize:
+                                                                  Sizes.size16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          )
+                                                        : Text(
+                                                            '팔로우하기',
+                                                            style: TextStyle(
+                                                              fontSize:
+                                                                  Sizes.size16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .primaryColor,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ));
+                                              })),
                               FaIcon(
                                 FontAwesomeIcons.shareNodes,
                                 color: Theme.of(context).primaryColor,

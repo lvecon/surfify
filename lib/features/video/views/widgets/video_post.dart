@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hashtagable/hashtagable.dart';
 import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
@@ -63,7 +64,7 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   void _initVideoPlayer() async {
     _videoPlayerController =
-        VideoPlayerController.asset("assets/videos/video.mp4");
+        VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
@@ -160,7 +161,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       child: Stack(
         children: [
           Positioned.fill(
-            child: !_videoPlayerController.value.isInitialized
+            child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
                 : Image.network(
                     widget.videoData.thumbnailUrl,
@@ -236,13 +237,25 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                Text(
-                  widget.videoData.description,
-                  style: const TextStyle(
+                HashTagText(
+                  text: widget.videoData.description,
+                  basicStyle: const TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
                   ),
-                )
+                  decoratedStyle: TextStyle(
+                    fontSize: Sizes.size16,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  onTap: (string) async {
+                    await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => const SearchScreen());
+                  },
+                ),
               ],
             ),
           ),
@@ -304,7 +317,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                         context: context,
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
-                        builder: (context) => const OptionScreen());
+                        builder: (context) =>
+                            OptionScreen(videoId: widget.videoData.id));
                   },
                   child: const VideoButton(
                     icon: FontAwesomeIcons.ellipsisVertical,
