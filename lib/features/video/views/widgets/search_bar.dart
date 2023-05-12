@@ -36,9 +36,9 @@ class SearchBar extends StatelessWidget {
                 ? const Text(
                     '주변 모든 장소 서핑',
                     style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
                   )
                 : SizedBox(
                     child: Wrap(children: [
@@ -66,6 +66,7 @@ class SearchBar extends StatelessWidget {
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white,
+                                      fontSize: 14,
                                     ),
                                   ),
                                   Gaps.h6,
