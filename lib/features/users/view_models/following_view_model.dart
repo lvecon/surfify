@@ -12,7 +12,7 @@ class FollowingViewModel extends FamilyAsyncNotifier<bool, String> {
   Future<void> followUser({
     required String uid2,
   }) async {
-    await _usersRepository.follwoUser(
+    await _usersRepository.followUser(
         _authenticationRepository.user!.uid, uid2);
   }
 
