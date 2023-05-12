@@ -148,6 +148,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       backgroundColor: Colors.transparent,
       builder: (context) => VideoComments(
         videoId: widget.videoData.id,
+        creatorId: widget.videoData.creatorUid,
       ),
     );
     _onTogglePause();
@@ -300,6 +301,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                           number: widget.videoData.likes,
                           originallyLiked: data,
                           videoId: widget.videoData.id,
+                          creatorId: widget.videoData.creatorUid,
                         );
                       },
                     ),
