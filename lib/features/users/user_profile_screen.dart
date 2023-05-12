@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/features/authentication/repos/authentication_repo.dart';
+import 'package:surfify/features/message/view_model/message_view_model.dart';
 import 'package:surfify/features/users/setting_screen.dart';
 import 'package:surfify/features/users/view_models/profile_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
@@ -22,12 +23,6 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
-  final List<String> _notifications = List.generate(5, (index) => "$index 개월전");
-  void _onDismissed(String notification) {
-    _notifications.remove(notification);
-    setState(() {});
-  }
-
   bool pushFollow = true;
 
   @override
@@ -235,6 +230,16 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                                         pushFollow =
                                                             !pushFollow;
                                                       });
+                                                      ref
+                                                          .read(messageProvider
+                                                              .notifier)
+                                                          .addMessage(
+                                                            videoId: null,
+                                                            comment:
+                                                                "당신을 Follow 합니다!",
+                                                            receiverId:
+                                                                widget.uid,
+                                                          );
                                                     },
                                                     child: (data == pushFollow)
                                                         ? Text(

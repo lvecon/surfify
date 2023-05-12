@@ -29,6 +29,12 @@ class UserRepository {
   }
 
   Future<void> follwoUser(String uid1, String uid2) async {
+    await _db
+        .collection("users")
+        .doc(uid1)
+        .collection("following")
+        .doc(uid2)
+        .set({"uid": uid2});
     final query = _db.collection("following").doc("${uid1}000$uid2");
     final following = await query.get();
     if (!following.exists) {

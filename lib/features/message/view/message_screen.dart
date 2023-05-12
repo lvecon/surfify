@@ -5,7 +5,9 @@ import 'package:surfify/features/message/view_model/message_view_model.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
+import '../../../normalize/time.dart';
 import '../../../widgets/form_button.dart';
+import '../../users/user_profile_screen.dart';
 import '../../users/view_models/user_view_model.dart';
 
 class MessageScreen extends ConsumerStatefulWidget {
@@ -111,12 +113,22 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                     separatorBuilder: (context, index) => Gaps.v20,
                     itemCount: data.length,
                     itemBuilder: (context, index) => ListTile(
-                      leading: CircleAvatar(
-                        radius: Sizes.size18,
-                        child: SizedBox(
-                          child: ClipOval(
-                            child: Image.network(
-                              'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                      leading: GestureDetector(
+                        onTap: () async {
+                          await showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => UserProfileScreen(
+                                  uid: data[index].creatorId));
+                        },
+                        child: CircleAvatar(
+                          radius: Sizes.size18,
+                          child: SizedBox(
+                            child: ClipOval(
+                              child: Image.network(
+                                'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                              ),
                             ),
                           ),
                         ),
@@ -134,7 +146,7 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                           ),
                           children: [
                             TextSpan(
-                                text: '${data[index].createdAt}',
+                                text: nomarlizeTime(data[index].createdAt),
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black.withOpacity(0.8),

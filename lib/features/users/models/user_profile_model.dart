@@ -5,6 +5,7 @@ class UserProfileModel {
   final String link;
   final String intro;
   final int follower;
+  final int following;
   final int likes;
   final bool hasAvatar;
   final bool serviceAgree;
@@ -21,6 +22,7 @@ class UserProfileModel {
     required this.link,
     required this.intro,
     required this.follower,
+    required this.following,
     required this.likes,
     required this.hasAvatar,
     required this.serviceAgree,
@@ -37,6 +39,7 @@ class UserProfileModel {
         link = "",
         intro = "",
         follower = 0,
+        following = 0,
         likes = 0,
         hasAvatar = false,
         serviceAgree = false,
@@ -53,6 +56,7 @@ class UserProfileModel {
         intro = json["intro"],
         link = json["link"],
         follower = json['follower'],
+        following = json['following'],
         likes = json['likes'],
         hasAvatar = json['hasAvatar'],
         serviceAgree = json['serviceAgree'],
@@ -70,6 +74,7 @@ class UserProfileModel {
       "intro": intro,
       "link": link,
       "follower": follower,
+      "following": following,
       "likes": likes,
       "hasAvatar": hasAvatar,
       "serviceAgree": serviceAgree,
@@ -88,6 +93,7 @@ class UserProfileModel {
     String? intro,
     String? link,
     int? follower,
+    int? following,
     int? likes,
     bool? hasAvatar,
     bool? serviceAgree,
@@ -104,6 +110,7 @@ class UserProfileModel {
       intro: intro ?? this.intro,
       link: link ?? this.link,
       follower: follower ?? this.follower,
+      following: following ?? this.following,
       likes: likes ?? this.likes,
       hasAvatar: hasAvatar ?? this.hasAvatar,
       serviceAgree: serviceAgree ?? this.serviceAgree,
