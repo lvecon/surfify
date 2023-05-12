@@ -261,7 +261,7 @@ class VideoPostState extends ConsumerState<VideoPost>
           ),
           Positioned(
             bottom: 185,
-            right: 14.5,
+            right: 8.5,
             child: Container(
               width: 48,
               height: 260,
