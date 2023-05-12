@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
+import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class SearchScreenState extends ConsumerState<SearchScreen> {
   final TextEditingController _textController = TextEditingController();
 
   final hotSurfer = ["@rabbit2(서울토끼)", "@kingzo(식객조사장)"];
   final hotSurfingPoint = ["#맛집", "#드립커피", "#만화책방", "#모텔", "#당구장", "#노래방"];
-  var searchCondition = [];
+  List<String> searchCondition = [];
+
+  // void _returnValue(BuildContext context) {
+  //   Navigator.pop(context, searchCondition);
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   searchCondition = ref.watch(searchConditionProvider).searchCondition;
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    searchCondition = ref.watch(searchConditionProvider).searchCondition;
     return Container(
       height: size.height * 0.7,
       clipBehavior: Clip.hardEdge,
@@ -47,7 +59,10 @@ class _SearchScreenState extends State<SearchScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                context.pop();
+                ref
+                    .read(searchConditionProvider.notifier)
+                    .setCondition(searchCondition);
+                Navigator.pop(context);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.xmark,

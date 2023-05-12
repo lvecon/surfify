@@ -17,6 +17,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../users/user_profile_screen.dart';
 import '../../models/video_model.dart';
+import '../../view_models/searchCondition_view_model.dart';
 import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
 import '../search_screen.dart';
@@ -67,9 +68,8 @@ class VideoPostState extends ConsumerState<VideoPost>
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    // if (_videoPlayerController.value.isInitialized) {
-    //   await _videoPlayerController.seekTo(const Duration(milliseconds: 1));
-    // }
+    await _videoPlayerController
+        .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -419,19 +419,6 @@ class VideoPostState extends ConsumerState<VideoPost>
                     )),
           ),
           Positioned(
-            top: 50,
-            left: 20,
-            child: GestureDetector(
-                onTap: () async {
-                  await showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const SearchScreen());
-                },
-                child: const SearchBar()),
-          ),
-          Positioned(
             top: 90,
             left: 20,
             child: VideoLocation(
@@ -441,6 +428,22 @@ class VideoPostState extends ConsumerState<VideoPost>
               longitude: widget.videoData.longitude,
               url: widget.videoData.kakaomapId,
             ),
+          ),
+          Positioned(
+            top: 40,
+            left: 20,
+            child: GestureDetector(
+                onTap: () async {
+                  await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const SearchScreen());
+                },
+                child: SearchBar(
+                  searchcondition:
+                      ref.watch(searchConditionProvider).searchCondition,
+                )),
           ),
         ],
       ),
