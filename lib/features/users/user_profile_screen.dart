@@ -159,7 +159,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${data.likes}',
+                                '${data.surfingPoints}',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: Sizes.size16,
