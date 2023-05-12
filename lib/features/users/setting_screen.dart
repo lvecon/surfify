@@ -140,7 +140,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen>
               SlideTransition(
                 position: _panelAnimation2,
                 child: BoxButton(
-                    text: "지도 연결 - 카카오맵",
+                    text: "지도 연결 - Google Map",
                     able: false,
                     mainColor: Theme.of(context).primaryColor),
               ),
@@ -170,7 +170,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen>
                         Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "지도 연결 - Google Map",
+                            "지도 연결 - 카카오맵",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,

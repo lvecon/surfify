@@ -27,11 +27,47 @@ class VideosRepository {
     final query = _db
         .collection("videos")
         .orderBy("createdAt", descending: true)
-        .limit(2);
+        .limit(3);
     if (lastItemCreatedAt == null) {
       return query.get();
     } else {
       return query.startAfter([lastItemCreatedAt]).get();
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideosHome({
+    String? hash,
+    int? lastItemCreatedAt,
+  }) {
+    if (hash == null) {
+      return _db.collection('locations').get();
+    } else {
+      final query = _db
+          .collection('locations')
+          .doc(hash.substring(0, 5))
+          .collection('sub')
+          .doc(hash.substring(5, 9))
+          .collection('videos')
+          .orderBy("createdAt", descending: true);
+      if (lastItemCreatedAt == null) {
+        return query.get();
+      } else {
+        return query.startAfter([lastItemCreatedAt]).get();
+      }
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchLocations({
+    String? hash,
+  }) {
+    if (hash == null) {
+      return _db.collection("location").get();
+    } else {
+      final query = _db
+          .collection('locations')
+          .doc(hash.substring(0, 5))
+          .collection('sub');
+      return query.get();
     }
   }
 

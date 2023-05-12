@@ -63,10 +63,6 @@ class VideoTimelineNowScreenState
           ),
           data: (videos) {
             _itemCount = videos.length;
-            print(videos[0].fileUrl);
-            print(videos[1].fileUrl);
-
-            print(videos.length);
             return RefreshIndicator(
               onRefresh: _onRefresh,
               displacement: 50,

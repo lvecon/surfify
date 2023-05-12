@@ -92,6 +92,20 @@ class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
     });
   }
 
+  Future<void> followUser({
+    required String uid2,
+  }) async {
+    await _usersRepository.follwoUser(
+        _authenticationRepository.user!.uid, uid2);
+  }
+
+  Future<bool> isFollowUser({
+    required String uid2,
+  }) async {
+    return await _usersRepository.isFollowUser(
+        _authenticationRepository.user!.uid, uid2);
+  }
+
   Future<void> updateAgreement({
     required bool? serviceAgree,
     required bool? privacyAgree,
