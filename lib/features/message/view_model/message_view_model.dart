@@ -46,6 +46,11 @@ class MessageViewModel extends AsyncNotifier<List<MessageModel>> {
         messageId: ""));
   }
 
+  Future<void> deleteAllMessages() async {
+    final user = ref.read(authRepo).user;
+    await _repository.deleteAllMessages(user!.uid);
+  }
+
   @override
   FutureOr<List<MessageModel>> build() async {
     _repository = ref.read(messageRepo);

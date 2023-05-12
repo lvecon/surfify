@@ -44,7 +44,9 @@ class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
       marketingAgree: false,
       marketingAgreeDate: DateTime.now().toString(),
       follower: 0,
+      following: 0,
       likes: 0,
+      surfingPoints: 0,
     );
     _usersRepository.createProfile(profile);
     state = AsyncValue.data(profile);
@@ -95,7 +97,7 @@ class UsersViewModel extends FamilyAsyncNotifier<UserProfileModel, String> {
   Future<void> followUser({
     required String uid2,
   }) async {
-    await _usersRepository.follwoUser(
+    await _usersRepository.followUser(
         _authenticationRepository.user!.uid, uid2);
   }
 
