@@ -57,6 +57,26 @@ class VideosRepository {
     }
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideosHashTags({
+    List<String>? hashtags,
+    int? lastItemCreatedAt,
+  }) {
+    if (hashtags == null) {
+      return _db.collection('hashtags').get();
+    } else {
+      final query = _db
+          .collection('hashtags')
+          .doc(hashtags[0])
+          .collection('videos')
+          .orderBy("createdAt", descending: true);
+      if (lastItemCreatedAt == null) {
+        return query.get();
+      } else {
+        return query.startAfter([lastItemCreatedAt]).get();
+      }
+    }
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchLocations({
     String? hash,
   }) {

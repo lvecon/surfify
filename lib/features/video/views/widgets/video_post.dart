@@ -254,7 +254,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   decoratedStyle: TextStyle(
                     fontSize: Sizes.size16,
                     color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                   ),
                   onTap: (string) async {
                     await showModalBottomSheet(
@@ -430,7 +430,9 @@ class VideoPostState extends ConsumerState<VideoPost>
             ),
           ),
           Positioned(
-            top: 40,
+            top: ref.watch(searchConditionProvider).searchCondition.isNotEmpty
+                ? 38
+                : 50,
             left: 20,
             child: GestureDetector(
                 onTap: () async {

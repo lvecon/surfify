@@ -58,7 +58,7 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.1.0
   kakaomap_webview: 0.3.0
-  cloud_functions: ^4.1.1
+  cloud_functions: ^4.3.0
   flutter_geo_hash: ^0.0.4
   dart_geohash: ^2.0.2
   hashtagable: ^2.1.0
