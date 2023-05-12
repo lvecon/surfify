@@ -5,6 +5,7 @@ class UserProfileModel {
   final String link;
   final String intro;
   final int follower;
+  final int following;
   final int likes;
   final bool hasAvatar;
   final bool serviceAgree;
@@ -13,6 +14,7 @@ class UserProfileModel {
   final String privacyAgreeDate;
   final bool marketingAgree;
   final String marketingAgreeDate;
+  final int surfingPoints;
 
   UserProfileModel({
     required this.uid,
@@ -21,6 +23,7 @@ class UserProfileModel {
     required this.link,
     required this.intro,
     required this.follower,
+    required this.following,
     required this.likes,
     required this.hasAvatar,
     required this.serviceAgree,
@@ -29,6 +32,7 @@ class UserProfileModel {
     required this.privacyAgreeDate,
     required this.marketingAgree,
     required this.marketingAgreeDate,
+    required this.surfingPoints,
   });
   UserProfileModel.empty()
       : uid = "",
@@ -37,7 +41,9 @@ class UserProfileModel {
         link = "",
         intro = "",
         follower = 0,
+        following = 0,
         likes = 0,
+        surfingPoints = 0,
         hasAvatar = false,
         serviceAgree = false,
         privacyAgree = false,
@@ -53,7 +59,9 @@ class UserProfileModel {
         intro = json["intro"],
         link = json["link"],
         follower = json['follower'],
+        following = json['following'],
         likes = json['likes'],
+        surfingPoints = json['surfingPoints'],
         hasAvatar = json['hasAvatar'],
         serviceAgree = json['serviceAgree'],
         privacyAgree = json['privacyAgree'],
@@ -70,7 +78,9 @@ class UserProfileModel {
       "intro": intro,
       "link": link,
       "follower": follower,
+      "following": following,
       "likes": likes,
+      "surfingPoints": surfingPoints,
       "hasAvatar": hasAvatar,
       "serviceAgree": serviceAgree,
       "privacyAgree": privacyAgree,
@@ -88,7 +98,9 @@ class UserProfileModel {
     String? intro,
     String? link,
     int? follower,
+    int? following,
     int? likes,
+    int? surfingPoints,
     bool? hasAvatar,
     bool? serviceAgree,
     String? serviceAgreeDate,
@@ -104,7 +116,9 @@ class UserProfileModel {
       intro: intro ?? this.intro,
       link: link ?? this.link,
       follower: follower ?? this.follower,
+      following: following ?? this.following,
       likes: likes ?? this.likes,
+      surfingPoints: surfingPoints ?? this.surfingPoints,
       hasAvatar: hasAvatar ?? this.hasAvatar,
       serviceAgree: serviceAgree ?? this.serviceAgree,
       serviceAgreeDate: serviceAgreeDate ?? this.serviceAgreeDate,

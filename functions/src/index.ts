@@ -34,6 +34,13 @@ export const onVideoCreated = functions.firestore
     await db
       .collection("users")
       .doc(video.creatorUid)
+      .update({
+        surfingPoints: admin.firestore.FieldValue.increment(1),
+      });
+
+    await db
+      .collection("users")
+      .doc(video.creatorUid)
       .collection("videos")
       .doc(snapshot.id)
       .set({
@@ -107,28 +114,40 @@ export const onVideoCreated = functions.firestore
   });
 
 export const onFollowCreated = functions.firestore
-  .document("following/{followId}")
+  .document("followings/{followId}")
   .onCreate(async (snapshot, context) => {
     const db = admin.firestore();
-    const [_, userId] = snapshot.id.split("000");
+    const [userIdA, userIdB] = snapshot.id.split("000");
     await db
       .collection("users")
-      .doc(userId)
+      .doc(userIdB)
       .update({
         follower: admin.firestore.FieldValue.increment(1),
+      });
+    await db
+      .collection("users")
+      .doc(userIdA)
+      .update({
+        following: admin.firestore.FieldValue.increment(1),
       });
   });
 
 export const onFollowRemoved = functions.firestore
-  .document("following/{followId}")
+  .document("followings/{followId}")
   .onDelete(async (snapshot, context) => {
     const db = admin.firestore();
-    const [_, userId] = snapshot.id.split("000");
+    const [userIdA, userIdB] = snapshot.id.split("000");
     await db
       .collection("users")
-      .doc(userId)
+      .doc(userIdB)
       .update({
         follower: admin.firestore.FieldValue.increment(-1),
+      });
+    await db
+      .collection("users")
+      .doc(userIdA)
+      .update({
+        following: admin.firestore.FieldValue.increment(-1),
       });
   });
 

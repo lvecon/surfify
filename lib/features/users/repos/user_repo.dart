@@ -28,8 +28,19 @@ class UserRepository {
     await _db.collection("users").doc(uid).update(data);
   }
 
-  Future<void> follwoUser(String uid1, String uid2) async {
-    final query = _db.collection("following").doc("${uid1}000$uid2");
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchFollowers(String uid) async {
+    final query = _db.collection("users").doc(uid).collection('followers');
+    return query.get();
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchFollowings(
+      String uid) async {
+    final query = _db.collection("users").doc(uid).collection('followings');
+    return query.get();
+  }
+
+  Future<void> followUser(String uid1, String uid2) async {
+    final query = _db.collection("followings").doc("${uid1}000$uid2");
     final following = await query.get();
     if (!following.exists) {
       await query.set(
@@ -37,13 +48,37 @@ class UserRepository {
           "createdAt": DateTime.now().millisecondsSinceEpoch,
         },
       );
+      await _db
+          .collection("users")
+          .doc(uid1)
+          .collection("followings")
+          .doc(uid2)
+          .set({"uid": uid2});
+      await _db
+          .collection("users")
+          .doc(uid2)
+          .collection("followers")
+          .doc(uid1)
+          .set({"uid": uid1});
     } else {
       await query.delete();
+      await _db
+          .collection("users")
+          .doc(uid1)
+          .collection("followings")
+          .doc(uid2)
+          .delete();
+      await _db
+          .collection("users")
+          .doc(uid2)
+          .collection("followers")
+          .doc(uid1)
+          .delete();
     }
   }
 
   Future<bool> isFollowUser(String uid1, String uid2) async {
-    final query = _db.collection("following").doc("${uid1}000$uid2");
+    final query = _db.collection("followings").doc("${uid1}000$uid2");
     final follow = await query.get();
     return follow.exists;
   }
