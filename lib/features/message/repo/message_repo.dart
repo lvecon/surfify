@@ -22,6 +22,10 @@ class MessageRepository {
         .delete();
   }
 
+  Future<void> deleteAllMessages(String uid) async {
+    await _db.collection("users").doc(uid).delete();
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchMessage({
     String? uid,
   }) async {

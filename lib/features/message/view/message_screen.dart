@@ -18,12 +18,7 @@ class MessageScreen extends ConsumerStatefulWidget {
 }
 
 class _MessageScreenState extends ConsumerState<MessageScreen> {
-  final List<String> _notifications = List.generate(5, (index) => "$index 개월전");
   bool messageAlarm = true;
-  void _onDismissed(String notification) {
-    _notifications.remove(notification);
-    setState(() {});
-  }
 
   Future<void> _deleteMessage(message) async {
     ref.read(messageProvider.notifier).deleteMessage(message);
@@ -92,7 +87,7 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
             loading: () => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-            data: (data) => (data.isEmpty)
+            data: (data) => (data.isEmpty || !messageAlarm)
                 ? const Center(
                     child: Text(
                       '깨끗한 책상처럼 \n메세지가 없어요!',
@@ -238,14 +233,7 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                 ),
                 GestureDetector(
                     onTap: () {
-                      _addMessage();
-                    },
-                    child: const FormButton(able: true, text: '메세지 하나 만들기')),
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _notifications.clear();
-                      });
+                      _onRefresh();
                     },
                     child: const FormButton(able: true, text: '메세지 모두 삭제')),
               ],
