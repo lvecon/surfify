@@ -54,7 +54,7 @@ class VideoModel {
         latitude = json['latitude'],
         longitude = json['longitude'],
         kakaomapId = json['kakaomapId'],
-        hashtag = [],
+        hashtag = (json['hashtag'] as List<dynamic>?)?.cast<String>() ?? [],
         geoHash = "",
         address = json['address'];
 

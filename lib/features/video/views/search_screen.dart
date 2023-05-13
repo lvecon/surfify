@@ -20,16 +20,20 @@ class SearchScreenState extends ConsumerState<SearchScreen> {
   final hotSurfingPoint = ["#맛집", "#드립커피", "#만화책방", "#모텔", "#당구장", "#노래방"];
   List<String> searchCondition = [];
 
-  // void _returnValue(BuildContext context) {
-  //   Navigator.pop(context, searchCondition);
-  // }
+  // 유저가 제일 앞으로 오도록 수정하고 return
+  void _returnValue(BuildContext context) {
+    List<String> modifiedCondition = List.from(searchCondition); // 배열 복사
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   searchCondition = ref.watch(searchConditionProvider).searchCondition;
-  //   setState(() {});
-  // }
+    for (String condition in searchCondition) {
+      if (condition.startsWith('@')) {
+        modifiedCondition.remove(condition);
+        modifiedCondition.insert(0, condition);
+        break;
+      }
+    }
+    ref.read(searchConditionProvider.notifier).setCondition(modifiedCondition);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +63,7 @@ class SearchScreenState extends ConsumerState<SearchScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                ref
-                    .read(searchConditionProvider.notifier)
-                    .setCondition(searchCondition);
-                Navigator.pop(context);
+                _returnValue(context);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.xmark,
