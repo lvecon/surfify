@@ -34,11 +34,11 @@ class VideoLocation extends StatelessWidget {
             ),
             Gaps.h10,
             SizedBox(
-              width: 280,
+              width: 250,
               child: Text(
                 name,
                 style: const TextStyle(
-                  fontSize: Sizes.size24,
+                  fontSize: Sizes.size20 + Sizes.size2,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
