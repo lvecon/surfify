@@ -130,11 +130,8 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                       ),
                       title: RichText(
                         text: TextSpan(
-                          text: ref
-                                  .watch(usersProvider(data[index].creatorId))
-                                  .value
-                                  ?.name ??
-                              '로딩중...',
+                          text:
+                              '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
