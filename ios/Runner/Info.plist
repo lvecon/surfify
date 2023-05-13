@@ -29,16 +29,24 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8</string>
+				<string>com.googleusercontent.apps.1034620117926-qeg0191j7fei3maqh3tmps1r0ia4905d</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>your usage description here</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>To get location and direction</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To get location and direction</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>your usage description here</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -64,13 +72,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>LSApplicationQueriesSchemes</key>
- 	<array>
- 		<string>https</string>
- 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>To get location and direction</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To get location and direction</string>
 </dict>
 </plist>
