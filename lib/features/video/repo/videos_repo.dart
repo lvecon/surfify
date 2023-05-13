@@ -43,7 +43,7 @@ class VideosRepository {
       return _db.collection('locations').get();
     } else {
       final query = _db
-          .collection('locations')
+          .collection('')
           .doc(hash.substring(0, 5))
           .collection('sub')
           .doc(hash.substring(5, 9))
