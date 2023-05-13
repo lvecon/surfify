@@ -241,35 +241,43 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                           .toList();
                     }
                     if (filteredVideos.isEmpty) {
-                      return Stack(
-                        children: [
-                          Positioned(
-                            top: 38,
-                            left: 20,
-                            child: GestureDetector(
-                              onTap: () async {
-                                await showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) => const SearchScreen());
-                              },
-                              child:
-                                  SearchBar(searchcondition: searchCondition),
-                            ),
-                          ),
-                          const Center(
-                            child: Text(
-                              '검색 결과가 없어요!',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                      return RefreshIndicator(
+                          onRefresh: ref
+                              .watch(hashTagProvider(searchCondition).notifier)
+                              .refresh,
+                          displacement: 50,
+                          edgeOffset: 20,
+                          color: Theme.of(context).primaryColor,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 38,
+                                left: 20,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) =>
+                                            const SearchScreen());
+                                  },
+                                  child: SearchBar(
+                                      searchcondition: searchCondition),
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
-                      );
+                              const Center(
+                                child: Text(
+                                  '검색 결과가 없어요!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ));
                     }
 
                     return RefreshIndicator(
