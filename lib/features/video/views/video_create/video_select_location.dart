@@ -32,11 +32,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
     "longitude": [],
     "url": [],
   };
-  // List<String> addressList = [];
-  // List<String> nameList = [];
-  // List<int> distanceList = [];
-  // List<double> latitudeList = [];
-  // List<double> longitudeList = [];
+
   int _selectedIndex = -1;
 
   Future<void> getCurrentLocation() async {
@@ -56,8 +52,15 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
     setState(() {});
   }
 
-  void _onSearchChanged(String value) {
-    print("Searching form $value");
+  // void _onSearchChanged(String value) {
+  //   print("Searching form $value");
+  // }
+
+  List<String?> extractHashtags(String text) {
+    final regex = RegExp(r"#(\w+)");
+    final matches = regex.allMatches(text);
+    final hashtags = matches.map((match) => match.group(1)).toList();
+    return hashtags;
   }
 
   Future<void> _onSearchSubmitted(String value) async {
@@ -90,10 +93,6 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
 
   final ScrollController _scrollController = ScrollController();
 
-  void _onClosePressed() {
-    Navigator.of(context).pop();
-  }
-
   void _stopWriting() {
     FocusScope.of(context).unfocus();
     setState(() {
@@ -101,11 +100,11 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
     });
   }
 
-  void _onStartWriting() {
-    setState(() {
-      _isWriting = true;
-    });
-  }
+  // void _onStartWriting() {
+  //   setState(() {
+  //     _isWriting = true;
+  //   });
+  // }
 
   void _onCreateTag(BuildContext context) async {
     await showModalBottomSheet(
@@ -174,11 +173,6 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                           color: Colors.black87,
                         ),
                       ),
-                      // IconButton(
-                      //   onPressed: _onClosePressed,
-                      //   icon: const FaIcon(FontAwesomeIcons.xmark,
-                      //       color: Colors.black),
-                      // ),
                     ],
                   ),
                   Gaps.v10,
@@ -199,7 +193,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
                       color: Colors.grey[200], // placeholder와 검색어 입력창의 배경 색상
                     ),
                     controller: _textEditingController,
-                    onChanged: _onSearchChanged,
+                    // onChanged: _onSearchChanged,
                     onSubmitted: _onSearchSubmitted,
                   ),
                 ],

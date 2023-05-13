@@ -17,6 +17,7 @@ class PlaceViewModel extends FamilyAsyncNotifier<List<VideoModel>, String> {
       lastItemCreatedAt: lastItemCreatedAt,
       hash: hash,
     );
+
     final videos = result.docs.map(
       (doc) => VideoModel.fromJson(
         json: doc.data(),

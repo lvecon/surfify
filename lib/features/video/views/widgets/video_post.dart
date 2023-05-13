@@ -17,6 +17,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../users/user_profile_screen.dart';
 import '../../models/video_model.dart';
+import '../../view_models/searchCondition_view_model.dart';
 import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
 import '../search_screen.dart';
@@ -67,6 +68,8 @@ class VideoPostState extends ConsumerState<VideoPost>
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    await _videoPlayerController
+        .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -120,13 +123,13 @@ class VideoPostState extends ConsumerState<VideoPost>
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
       _animationController.reverse();
+      _isPaused = true;
     } else {
       _videoPlayerController.play();
       _animationController.forward();
+      _isPaused = false;
     }
-    setState(() {
-      _isPaused = !_isPaused;
-    });
+    setState(() {});
   }
 
   void _onLikeTap() {
@@ -163,7 +166,12 @@ class VideoPostState extends ConsumerState<VideoPost>
         children: [
           Positioned.fill(
             child: _videoPlayerController.value.isInitialized
-                ? VideoPlayer(_videoPlayerController)
+                ? FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                        height: _videoPlayerController.value.size.height,
+                        width: _videoPlayerController.value.size.width,
+                        child: VideoPlayer(_videoPlayerController)))
                 : Image.network(
                     widget.videoData.thumbnailUrl,
                     fit: BoxFit.cover,
@@ -247,7 +255,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   decoratedStyle: TextStyle(
                     fontSize: Sizes.size16,
                     color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                   ),
                   onTap: (string) async {
                     await showModalBottomSheet(
@@ -262,7 +270,7 @@ class VideoPostState extends ConsumerState<VideoPost>
           ),
           Positioned(
             bottom: 185,
-            right: 14.5,
+            right: 8.5,
             child: Container(
               width: 48,
               height: 260,
@@ -413,19 +421,6 @@ class VideoPostState extends ConsumerState<VideoPost>
                     )),
           ),
           Positioned(
-            top: 50,
-            left: 20,
-            child: GestureDetector(
-                onTap: () async {
-                  await showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const SearchScreen());
-                },
-                child: const SearchBar()),
-          ),
-          Positioned(
             top: 90,
             left: 20,
             child: VideoLocation(
@@ -435,6 +430,24 @@ class VideoPostState extends ConsumerState<VideoPost>
               longitude: widget.videoData.longitude,
               url: widget.videoData.kakaomapId,
             ),
+          ),
+          Positioned(
+            top: ref.watch(searchConditionProvider).searchCondition.isNotEmpty
+                ? 38
+                : 50,
+            left: 20,
+            child: GestureDetector(
+                onTap: () async {
+                  await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const SearchScreen());
+                },
+                child: SearchBar(
+                  searchcondition:
+                      ref.watch(searchConditionProvider).searchCondition,
+                )),
           ),
         ],
       ),
