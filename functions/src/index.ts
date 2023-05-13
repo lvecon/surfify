@@ -44,9 +44,23 @@ export const onVideoCreated = functions.firestore
       .collection("videos")
       .doc(snapshot.id)
       .set({
+        title: video.title,
+        description: video.description,
+        fileUrl: video.fileUrl,
         thumbnailUrl: file.publicUrl(),
-        videoId: snapshot.id,
+        creatorUid: video.creatorUid,
+        likes: video.likes,
+        comments: video.comments,
         createdAt: video.createdAt,
+        creator: video.creator,
+        id: snapshot.id,
+        address: video.address,
+        location: video.location,
+        longitude: video.longitude,
+        latitude: video.latitude,
+        kakaomapId: video.kakaomapId,
+        geoHash: video.geoHash,
+        hashtag: video.hashtag,
       });
 
     await db

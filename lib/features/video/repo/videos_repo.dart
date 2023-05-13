@@ -43,7 +43,7 @@ class VideosRepository {
       return _db.collection('locations').get();
     } else {
       final query = _db
-          .collection('')
+          .collection('locations')
           .doc(hash.substring(0, 5))
           .collection('sub')
           .doc(hash.substring(5, 9))
@@ -57,22 +57,87 @@ class VideosRepository {
     }
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideosHashTags({
-    List<String>? hashtags,
+  //유저랑 해시태그
+  Future<QuerySnapshot<Map<String, dynamic>>>? fetchVideoswithBoth({
+    List<String>? searchConditions,
     int? lastItemCreatedAt,
   }) {
-    if (hashtags == null) {
-      return _db.collection('hashtags').get();
+    if (searchConditions == null) {
+      return _db.collection('hashtags').get().then((snapshot) => snapshot);
     } else {
-      final query = _db
+      Query<Map<String, dynamic>> query = _db
           .collection('hashtags')
-          .doc(hashtags[0])
-          .collection('videos')
-          .orderBy("createdAt", descending: true);
+          .doc(searchConditions[1])
+          .collection('videos');
+
       if (lastItemCreatedAt == null) {
-        return query.get();
+        return query.get().then((snapshot) => snapshot);
       } else {
-        return query.startAfter([lastItemCreatedAt]).get();
+        return query
+            .startAfter([lastItemCreatedAt])
+            .get()
+            .then((snapshot) => snapshot);
+      }
+    }
+  }
+
+  //해시태그만
+  Future<QuerySnapshot<Map<String, dynamic>>>? fetchVideosWithHashTags({
+    List<String>? searchConditions,
+    int? lastItemCreatedAt,
+  }) {
+    if (searchConditions == null) {
+      return _db.collection('hashtags').get().then((snapshot) => snapshot);
+    } else {
+      Query<Map<String, dynamic>> query = _db
+          .collection('hashtags')
+          .doc(searchConditions[0])
+          .collection('videos');
+
+      if (lastItemCreatedAt == null) {
+        return query.get().then((snapshot) => snapshot);
+      } else {
+        return query
+            .startAfter([lastItemCreatedAt])
+            .get()
+            .then((snapshot) => snapshot);
+      }
+    }
+  }
+
+  //유저만 검색
+  Future<QuerySnapshot<Map<String, dynamic>>>? fetchVideoswithUser({
+    List<String>? searchConditions,
+    int? lastItemCreatedAt,
+  }) async {
+    if (searchConditions == null) {
+      return _db.collection('hashtags').get().then((snapshot) => snapshot);
+    } else {
+      final QuerySnapshot<Map<String, dynamic>> snapshot = await _db
+          .collection('users')
+          .where('name', isEqualTo: searchConditions[0])
+          .get();
+      final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+          snapshot.docs;
+      late Query<Map<String, dynamic>> query;
+
+      if (documents.isNotEmpty) {
+        final DocumentSnapshot<Map<String, dynamic>> document = documents[0];
+        final String uid = (document.data()!['uid'] as String?) ?? '';
+        print(uid);
+
+        query = _db.collection('users').doc(uid).collection('videos');
+      } else {
+        query = _db.collection('users').doc('').collection('videos');
+      }
+
+      if (lastItemCreatedAt == null) {
+        return query.get().then((snapshot) => snapshot);
+      } else {
+        return query
+            .startAfter([lastItemCreatedAt])
+            .get()
+            .then((snapshot) => snapshot);
       }
     }
   }
