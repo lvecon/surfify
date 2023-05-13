@@ -41,6 +41,7 @@ class SearchBar extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   )
                 : SizedBox(
+                    width: 240,
                     child: Wrap(children: [
                       for (var keyword in searchcondition)
                         Padding(
