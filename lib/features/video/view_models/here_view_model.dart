@@ -10,6 +10,7 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
   List<dynamic> _list = [];
   var geoHasher = GeoHasher();
 
+  //return sorted GeoHash List
   Future<List<dynamic>> _fetchLocations({
     String? hash,
   }) async {
@@ -25,6 +26,7 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
       },
     );
     var list = videos.toList();
+
     var location = geoHasher.decode(hash!);
     list.sort((m1, m2) {
       return ((m1['longitude'] -
@@ -36,8 +38,9 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
               16)
           .round(); //현재위치와의 거리 비교. 원래는 위도 경도 제곱으로 계산해야하는데 그냥 맨해튼 거리로 계산.
     });
-    print(list);
+    // print(list);
     var sol = list.map((element) => element['geoHash']).toList();
+    // print(sol);
     return sol;
   }
 
@@ -51,7 +54,7 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
     );
     _repository = ref.read(videosRepo);
     _list = await _fetchLocations(hash: hash);
-    print(_list);
+    // print(_list);
     return _list;
   }
 

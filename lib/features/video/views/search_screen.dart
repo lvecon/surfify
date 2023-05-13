@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
+import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class SearchScreenState extends ConsumerState<SearchScreen> {
   final TextEditingController _textController = TextEditingController();
 
   final hotSurfer = ["@rabbit2(서울토끼)", "@kingzo(식객조사장)"];
   final hotSurfingPoint = ["#맛집", "#드립커피", "#만화책방", "#모텔", "#당구장", "#노래방"];
-  var searchCondition = [];
+  List<String> searchCondition = [];
+
+  // 유저가 제일 앞으로 오도록 수정하고 return
+  void _returnValue(BuildContext context) {
+    List<String> modifiedCondition = List.from(searchCondition); // 배열 복사
+
+    for (String condition in searchCondition) {
+      if (condition.startsWith('@')) {
+        modifiedCondition.remove(condition);
+        modifiedCondition.insert(0, condition);
+        break;
+      }
+    }
+    ref.read(searchConditionProvider.notifier).setCondition(modifiedCondition);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    searchCondition = ref.watch(searchConditionProvider).searchCondition;
     return Container(
       height: size.height * 0.7,
       clipBehavior: Clip.hardEdge,
@@ -47,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                context.pop();
+                _returnValue(context);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.xmark,

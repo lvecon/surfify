@@ -62,6 +62,20 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
     setState(() {});
   }
 
+  List<String> extractHashtags(String text) {
+    final List<String> hashtags = [];
+    final List<String> words = text.split(" ");
+
+    for (String word in words) {
+      if (word.startsWith("#")) {
+        final String hashtag = word.substring(1);
+        hashtags.add(hashtag);
+      }
+    }
+
+    return hashtags;
+  }
+
   void _onEditTag(BuildContext context) async {
     final editTag = await showModalBottomSheet(
       context: context,
@@ -69,6 +83,8 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
       backgroundColor: Colors.transparent,
       builder: (context) => EditTag(originalTag: widget.tags),
     );
+
+    print(extractHashtags(editTag));
 
     setState(() {
       widget.tags = editTag ?? widget.tags;
@@ -122,7 +138,6 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
   }
 
   Future<void> _saveToGallery() async {
-    ref.watch(usersProvider(ref.read(authRepo).user!.uid)).value!.name;
     ref.read(uploadVideoProvider.notifier).uploadVideo(
           File(widget.video.path),
           widget.name,
@@ -130,6 +145,7 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
           double.parse(widget.lon),
           double.parse(widget.lat),
           widget.tags,
+          extractHashtags(widget.tags),
           widget.url,
           context,
         );
@@ -140,15 +156,14 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
   }
 
   void _goMain() {
-    // context.goNamed(MainNavigationScreen.routeName);
     Navigator.popUntil(
         context, ModalRoute.withName(MainNavigationScreen.routeName));
-    // Navigator.pushReplacementNamed(context, MainNavigationScreen.routeName);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
