@@ -26,6 +26,7 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
     double longitude,
     double latitude,
     String description,
+    List<String> hashTags,
     String url,
     BuildContext context,
   ) async {
@@ -58,7 +59,7 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               latitude: latitude,
               kakaomapId: url.split(".com/")[1],
               geoHash: geoHasher.encode(longitude, latitude, precision: 20),
-              hashtag: [],
+              hashtag: hashTags,
             ),
           );
         }

@@ -72,7 +72,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const VideoTimelineScreen(), //수정해야함
+            child: VideoTimelineScreen(), //수정해야함
           ),
           Offstage(
             offstage: _selectedIndex != 1,
