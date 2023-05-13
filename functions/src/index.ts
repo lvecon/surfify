@@ -91,7 +91,8 @@ export const onVideoCreated = functions.firestore
         .collection("hashtags")
         .doc(video.hashtag[i])
         .collection("videos")
-        .add({
+        .doc(snapshot.id)
+        .set({
           title: video.title,
           description: video.description,
           fileUrl: video.fileUrl,
