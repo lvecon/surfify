@@ -1,23 +1,23 @@
 class ThumbnailModel {
   final String thumbnailUrl;
-  final String videoId;
+  final String id;
 
   ThumbnailModel({
     required this.thumbnailUrl,
-    required this.videoId,
+    required this.id,
   });
   ThumbnailModel.empty()
       : thumbnailUrl = "",
-        videoId = "";
+        id = "";
 
   ThumbnailModel.fromJson(Map<String, dynamic> json)
       : thumbnailUrl = json["thumbnailUrl"],
-        videoId = json["videoId"];
+        id = json["id"];
 
   Map<String, dynamic> toJson() {
     return {
       "thumbnailUrl": thumbnailUrl,
-      "videoId": videoId,
+      "id": id,
     };
   }
 }
