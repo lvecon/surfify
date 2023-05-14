@@ -223,7 +223,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                     )
                                   : const FaIcon(
                                       FontAwesomeIcons.gear,
-                                      color: Colors.white,
+                                      color: Color(0x00f5f5f5),
                                       size: Sizes.size24,
                                     ),
                               Container(
@@ -345,7 +345,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     ),
                   ];
                 },
-                body: ref.read(profileProvider(widget.uid)).when(
+                body: ref.watch(profileProvider(widget.uid)).when(
                       error: (error, stackTrace) => Center(
                         child: Text(error.toString()),
                       ),
