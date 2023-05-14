@@ -6,7 +6,9 @@ import 'package:surfify/features/video/view_models/here_view_model.dart';
 import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
 import 'package:surfify/features/video/views/search_screen.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';
+import 'package:surfify/features/video/views/widgets/video_compass_overview.dart';
 import 'package:surfify/features/video/views/widgets/video_post.dart';
+import 'package:surfify/normalize/distance.dart';
 
 import '../view_models/place_view_model.dart';
 
@@ -19,7 +21,10 @@ class VideoTimelineScreen extends ConsumerStatefulWidget {
 
 class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   int _itemCount = 0;
-  int overViewMode = 0;
+  bool overViewMode = false;
+
+  double _scaleFactor = 1;
+  double _baseScaleFactor = 1;
 
   final PageController _pageController = PageController();
   final PageController _pageController2 = PageController();
@@ -91,9 +96,24 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     final searchCondition = ref.watch(searchConditionProvider).searchCondition;
     return GestureDetector(
       onScaleStart: (details) {
-        setState(() {
-          overViewMode += 1;
-        });
+        _baseScaleFactor = _scaleFactor;
+      },
+      onScaleUpdate: (details) {
+        _scaleFactor = _baseScaleFactor * details.scale;
+        print(details.scale);
+      },
+      onScaleEnd: (details) {
+        if (_scaleFactor > 1.5) {
+          setState(() {
+            overViewMode = true;
+          });
+        } else if (_scaleFactor < 0.9) {
+          setState(() {
+            overViewMode = false;
+          });
+        } else {
+          _scaleFactor = 1;
+        }
       },
       child: Stack(children: [
         ref.watch(searchConditionProvider).searchCondition.isEmpty
@@ -109,7 +129,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
-                  data: (overViewMode % 4 == 0)
+                  data: (!overViewMode)
                       ? (locations) => RefreshIndicator(
                             onRefresh: ref
                                 .watch(hereProvider(
@@ -170,41 +190,79 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                             ),
                           )
                       : (data) {
-                          return SingleChildScrollView(
-                            child: Column(
+                          return Scaffold(
+                            body: Stack(
                               children: [
-                                const Text('안녕하세요'),
-                                for (var location in data)
-                                  ref.watch(placeProvider(location)).when(
-                                        loading: () => const Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        error: (error, stackTrace) => Center(
-                                          child: Text(
-                                            'Could not load videos: $error',
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                        data: (pics) {
-                                          return SingleChildScrollView(
-                                            scrollDirection: Axis.horizontal,
-                                            child: Row(
-                                              children: [
-                                                for (var pic in pics)
-                                                  FadeInImage.assetNetwork(
-                                                    fit: BoxFit.cover,
-                                                    placeholder:
-                                                        "assets/images/user.png",
-                                                    image: pic.thumbnailUrl,
+                                Column(
+                                  children: [
+                                    Expanded(
+                                      child: ListView.builder(
+                                          itemCount: data.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return ref
+                                                .watch(
+                                                    placeProvider(data[index]))
+                                                .when(
+                                                  loading: () => const Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
+                                                  error: (error, stackTrace) =>
+                                                      Center(
+                                                    child: Text(
+                                                      'Could not load videos: $error',
+                                                      style: const TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                  data: (pics) {
+                                                    return Column(
+                                                      children: [
+                                                        SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Row(
+                                                            children: [
+                                                              for (var pic
+                                                                  in pics)
+                                                                FadeInImage
+                                                                    .assetNetwork(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  placeholder:
+                                                                      "assets/images/App_Icon.png",
+                                                                  image: pic
+                                                                      .thumbnailUrl,
+                                                                ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Text(pics[0].location),
+                                                        Text(distance(
+                                                          pics[0].longitude,
+                                                          pics[0].latitude,
+                                                          126.95236219241595,
+                                                          37.458938402839834,
+                                                        )),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                          }),
+                                    ),
+                                  ],
+                                ),
+                                const Positioned(
+                                  top: 50,
+                                  right: 20,
+                                  child: VideoCompassOverView(
+                                    latitude: 37.458938402839834,
+                                    longitude: 126.95236219241595,
+                                  ),
+                                ),
                               ],
                             ),
                           );

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dart_geohash/dart_geohash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../repo/videos_repo.dart';
 
@@ -22,21 +23,26 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
       (doc) => {
         "geoHash": doc.data()['geoHash'],
         "latitude": doc.data()['latitude'],
-        "longitude": doc.data()['latitude'],
+        "longitude": doc.data()['longitude'],
       },
     );
     var list = videos.toList();
 
     var location = geoHasher.decode(hash!);
+    print(location);
     list.sort((m1, m2) {
-      return ((m1['longitude'] -
-                  2 * location[0] +
-                  m1['latitude'] -
-                  2 * location[1] -
-                  m2['longitude'] -
-                  m2['latitude']) *
-              16)
-          .round(); //현재위치와의 거리 비교. 원래는 위도 경도 제곱으로 계산해야하는데 그냥 맨해튼 거리로 계산.
+      return (Geolocator.distanceBetween(
+            m1['latitude'],
+            m1['longitude'],
+            location[1],
+            location[0],
+          ).round() -
+          Geolocator.distanceBetween(
+            m2['latitude'],
+            m2['longitude'],
+            location[1],
+            location[0],
+          ).round());
     });
     // print(list);
     var sol = list.map((element) => element['geoHash']).toList();
