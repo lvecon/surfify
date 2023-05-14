@@ -45,11 +45,11 @@ class VideoSelectTagState extends State<VideoSelectTag> {
     });
   }
 
-  void _onStartWriting() {
-    setState(() {
-      _isWriting = true;
-    });
-  }
+  // void _onStartWriting() {
+  //   setState(() {
+  //     _isWriting = true;
+  //   });
+  // }
 
   Future<void> _saveToGallery() async {
     setState(() {});
