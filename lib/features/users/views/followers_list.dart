@@ -144,7 +144,7 @@ class _FollowersListState extends ConsumerState<FollowersList> {
                             separatorBuilder: (context, index) => Gaps.v20,
                             itemCount: data.length,
                             itemBuilder: (context, index) {
-                              return ref.read(usersProvider(data[index])).when(
+                              return ref.watch(usersProvider(data[index])).when(
                                     loading: () => const Center(
                                       child: CircularProgressIndicator(),
                                     ),

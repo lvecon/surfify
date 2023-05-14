@@ -66,9 +66,11 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1034620117926',
     projectId: 'surfify',
     storageBucket: 'surfify.appspot.com',
-    androidClientId: '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
-    iosClientId: '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.surfify',
+    androidClientId:
+        '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
+    iosClientId:
+        '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
+    iosBundleId: 'ai.surfi.snu',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,8 +79,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1034620117926',
     projectId: 'surfify',
     storageBucket: 'surfify.appspot.com',
-    androidClientId: '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
-    iosClientId: '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
-    iosBundleId: 'com.example.surfify',
+    androidClientId:
+        '1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com',
+    iosClientId:
+        '1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com',
+    iosBundleId: 'ai.surfi.snu',
   );
 }
