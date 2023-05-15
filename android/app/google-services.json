@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1034620117926",
+    "project_id": "surfify",
+    "storage_bucket": "surfify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034620117926:android:7f2f94ed8d756474fe6567",
+        "android_client_info": {
+          "package_name": "ai.surfi.snu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034620117926-vl06kcku6f1us687gvfddrtmf6tkeajs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.surfi.snu",
+            "certificate_hash": "72ef900998e048cf3dfc2b6dc4f98760c79dc9d2"
+          }
+        },
+        {
+          "client_id": "1034620117926-u1unmk91ealbhr3imlcaegbgh8atanpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO3e2-LgCoY058yyv5B5PSy-rPIrzLLqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034620117926-hk4dls5qkkrr2h1d9qogo61ad2g2oa1s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.surfify"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034620117926:android:3a41d5e6ea93f193fe6567",
+        "android_client_info": {
+          "package_name": "com.example.surfify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034620117926-o22ebtimrt2uobkach66kfjft4o68cl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.surfify",
+            "certificate_hash": "72ef900998e048cf3dfc2b6dc4f98760c79dc9d2"
+          }
+        },
+        {
+          "client_id": "1034620117926-u1unmk91ealbhr3imlcaegbgh8atanpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO3e2-LgCoY058yyv5B5PSy-rPIrzLLqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034620117926-hk4dls5qkkrr2h1d9qogo61ad2g2oa1s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1034620117926-7vmn977ggr82q88jgt4n8a4mnsulred8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.surfify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

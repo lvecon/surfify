@@ -1,3 +1,5 @@
+import 'package:geolocator/geolocator.dart';
+
 String normalizeDistance(int distance) {
   if (distance < 10) {
     return 'Here';
@@ -10,6 +12,17 @@ String normalizeDistance(int distance) {
     return '$first.${second}km';
   } else {
     distance = (distance / 1000).round();
-    return '${distance}m';
+    return '${distance}km';
   }
+}
+
+String distance(double long1, double lat1, double long2, double lat2) {
+  double distance = Geolocator.distanceBetween(
+    lat1,
+    long1,
+    lat2,
+    long2,
+  );
+  int result = distance.round();
+  return normalizeDistance(result);
 }
