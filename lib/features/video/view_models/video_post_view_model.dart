@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:surfify/features/video/models/video_model.dart';
 
 import '../../authentication/repos/authentication_repo.dart';
 import '../repo/videos_repo.dart';
@@ -24,6 +25,10 @@ class VideoPostViewModel extends FamilyAsyncNotifier<bool, String> {
     await _repository.likeVideo(_videoId, user!.uid);
     _isLiked = !_isLiked;
     state = AsyncValue.data(_isLiked);
+  }
+
+  Future<void> deleteVideo(VideoModel videoModel) async {
+    await _repository.deleteVideo(videoModel);
   }
 }
 

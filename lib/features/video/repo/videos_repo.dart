@@ -21,6 +21,11 @@ class VideosRepository {
     await _db.collection("videos").add(data.toJson());
   }
 
+  Future<void> deleteVideo(VideoModel videoModel) async {
+    print(videoModel.id);
+    await _db.collection("videos").doc(videoModel.id).delete();
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchVideos({
     int? lastItemCreatedAt,
   }) {
@@ -124,7 +129,6 @@ class VideosRepository {
       if (documents.isNotEmpty) {
         final DocumentSnapshot<Map<String, dynamic>> document = documents[0];
         final String uid = (document.data()!['uid'] as String?) ?? '';
-        print(uid);
 
         query = _db.collection('users').doc(uid).collection('videos');
       } else {
