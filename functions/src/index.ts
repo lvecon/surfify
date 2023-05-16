@@ -80,7 +80,8 @@ export const onVideoCreated = functions.firestore
       .collection("sub")
       .doc(video.geoHash.slice(5, 9))
       .collection("videos")
-      .add({
+      .doc(snapshot.id)
+      .set({
         title: video.title,
         description: video.description,
         fileUrl: video.fileUrl,
@@ -126,6 +127,59 @@ export const onVideoCreated = functions.firestore
           hashtag: video.hashtag,
         });
     }
+  });
+
+export const onVideoRemoved = functions.firestore
+  .document("videos/{videoId}")
+  .onDelete(async (snapshot, context) => {
+    const db = admin.firestore();
+    // const storage = admin.storage();
+    const video = snapshot.data();
+    const videoid = snapshot.id;
+    const [geohash_head, geohash_tail, hashtags, creatorUid] = [
+      video.geoHash.slice(0, 5),
+      video.geoHash.slice(5, 9),
+      video.hashtag,
+      video.creatorUid,
+    ];
+
+    // locations에서 삭제
+    await db
+      .collection("locations")
+      .doc(geohash_head)
+      .collection("sub")
+      .doc(geohash_tail)
+      .collection("videos")
+      .doc(videoid)
+      .delete();
+
+    // hashtags에서 삭제
+
+    for (let i = 0; i < hashtags.length; i++) {
+      await db
+        .collection("hashtags")
+        .doc(hashtags[i])
+        .collection("videos")
+        .doc(videoid)
+        .delete();
+    }
+
+    //users 에서 삭제
+    await db
+      .collection("users")
+      .doc(creatorUid)
+      .collection("videos")
+      .doc(videoid)
+      .delete();
+
+    // //delete video file
+    // storage
+    //   .bucket()
+    //   .file("videos/" + creatorUid + "/" + createdAt)
+    //   .delete();
+
+    // //delete thumbnail file
+    // storage.bucket().file("thumbnails/" + videoid + ".jpg");
   });
 
 export const onFollowCreated = functions.firestore
