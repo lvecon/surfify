@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +16,7 @@ import 'package:surfify/features/video/views/widgets/video_radar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../authentication/repos/authentication_repo.dart';
 import '../../../users/user_profile_screen.dart';
 import '../../models/video_model.dart';
 import '../../view_models/searchCondition_view_model.dart';
@@ -76,6 +78,8 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   @override
   void initState() {
+    // print("uid${ref.read(authRepo).user!.uid}");
+    // print("creatorUid${widget.videoData.creatorUid}");
     super.initState();
     _initVideoPlayer();
     ShakeDetector detector = ShakeDetector.autoStart(
@@ -118,6 +122,13 @@ class VideoPostState extends ConsumerState<VideoPost>
     }
   }
 
+  void _onEditTap() {
+    print(widget.videoData.geoHash);
+    print(widget.videoData.id);
+    print(widget.videoData.description);
+    Navigator.of(context).pop();
+  }
+
   void _onTogglePause() {
     if (!mounted) return;
     if (_videoPlayerController.value.isPlaying) {
@@ -130,6 +141,14 @@ class VideoPostState extends ConsumerState<VideoPost>
       _isPaused = false;
     }
     setState(() {});
+  }
+
+  void _onDeleteVideo() {
+    print(widget.videoData.id);
+    ref
+        .watch(videoPostProvider(widget.videoData.id).notifier)
+        .deleteVideo(widget.videoData);
+    Navigator.of(context).pop();
   }
 
   void _onLikeTap() {
@@ -339,19 +358,42 @@ class VideoPostState extends ConsumerState<VideoPost>
               ],
             ),
           ),
-          Positioned(
-            bottom: 30,
-            right: 20,
-            child: Column(
-              children: const [
-                VideoButton(
-                  icon: FontAwesomeIcons.pen,
-                  text: "Edit",
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          ),
+          ref.read(authRepo).user!.uid == widget.videoData.creatorUid
+              ? Positioned(
+                  bottom: 30,
+                  right: 20,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showCupertinoDialog(
+                            context: context,
+                            builder: (context) => CupertinoAlertDialog(
+                              title: const Text("기록을 삭제할까요?"),
+                              actions: [
+                                CupertinoDialogAction(
+                                  onPressed: _onEditTap,
+                                  child: const Text("취소"),
+                                ),
+                                CupertinoDialogAction(
+                                  onPressed: _onDeleteVideo,
+                                  isDestructiveAction: true,
+                                  child: const Text("삭제"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        child: const VideoButton(
+                          icon: FontAwesomeIcons.pen,
+                          text: "Edit",
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
           randomMode
               ? Positioned(
                   child: Column(

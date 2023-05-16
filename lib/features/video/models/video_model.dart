@@ -48,14 +48,14 @@ class VideoModel {
         likes = json["likes"],
         comments = json["comments"],
         createdAt = json["createdAt"],
-        id = videoId,
+        id = json['id'],
         creator = json["creator"],
         location = json['location'],
         latitude = json['latitude'],
         longitude = json['longitude'],
         kakaomapId = json['kakaomapId'],
         hashtag = (json['hashtag'] as List<dynamic>?)?.cast<String>() ?? [],
-        geoHash = "",
+        geoHash = json['geoHash'],
         address = json['address'];
 
   Map<String, dynamic> toJson() {
