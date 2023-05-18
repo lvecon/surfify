@@ -162,77 +162,6 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                     .watch(directionProvider(
                         '126.95236219241595,37.458938402839834,$heading'))
                     .when(
-                        loading: () => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                        error: (error, stackTrace) => Center(
-                              child: Text(
-                                'Could not load videos: $error',
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                        data: (locations) => RefreshIndicator(
-                            onRefresh: ref
-                                .watch(hereProvider(
-                                        '126.95236219241595,37.458938402839834')
-                                    .notifier)
-                                .refresh,
-                            displacement: 50,
-                            edgeOffset: 20,
-                            color: Theme.of(context).primaryColor,
-                            child: PageView.builder(
-                                controller: _pageController,
-                                scrollDirection: Axis.vertical,
-                                onPageChanged: _onPageChanged,
-                                itemCount: locations.length,
-                                itemBuilder: (context, index) => ref
-                                    .watch(placeProvider(locations[index]))
-                                    .when(
-                                        loading: () => const Center(
-                                              child: CircularProgressIndicator(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                        error: (error, stackTrace) => Center(
-                                              child: Text(
-                                                'Could not load videos: $error',
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                        data: (videos) {
-                                          _itemCount = videos.length;
-                                          return RefreshIndicator(
-                                            onRefresh: ref
-                                                .watch(placeProvider(
-                                                        locations[index])
-                                                    .notifier)
-                                                .refresh,
-                                            displacement: 50,
-                                            edgeOffset: 20,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            child: PageView.builder(
-                                              controller: _pageController2,
-                                              scrollDirection: Axis.horizontal,
-                                              onPageChanged: _onPageChanged2,
-                                              itemCount: videos.length,
-                                              itemBuilder: (context, index) {
-                                                final videoData = videos[index];
-                                                return VideoPost(
-                                                  onVideoFinished: () {},
-                                                  index: index,
-                                                  videoData: videoData,
-                                                  radar: false,
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        }))))
-                : ref
-                    .watch(
-                        hereProvider('126.95236219241595,37.458938402839834'))
-                    .when(
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -242,72 +171,157 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
-                      data: (!overViewMode)
-                          ? (locations) => RefreshIndicator(
-                                onRefresh: ref
-                                    .watch(hereProvider(
-                                            '126.95236219241595,37.458938402839834')
-                                        .notifier)
-                                    .refresh,
-                                displacement: 50,
-                                edgeOffset: 20,
-                                color: Theme.of(context).primaryColor,
-                                child: PageView.builder(
-                                  controller: _pageController,
-                                  scrollDirection: Axis.vertical,
-                                  onPageChanged: _onPageChanged,
-                                  itemCount: locations.length,
-                                  itemBuilder: (context, index) => ref
-                                      .watch(placeProvider(locations[index]))
-                                      .when(
-                                        loading: () => const Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        error: (error, stackTrace) => Center(
-                                          child: Text(
-                                            'Could not load videos: $error',
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                        data: (videos) {
-                                          _itemCount = videos.length;
-                                          return RefreshIndicator(
-                                            onRefresh: ref
-                                                .watch(placeProvider(
-                                                        locations[index])
-                                                    .notifier)
-                                                .refresh,
-                                            displacement: 50,
-                                            edgeOffset: 20,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            child: PageView.builder(
-                                              controller: _pageController2,
-                                              scrollDirection: Axis.horizontal,
-                                              onPageChanged: _onPageChanged2,
-                                              itemCount: videos.length,
-                                              itemBuilder: (context, index) {
-                                                final videoData = videos[index];
-                                                return VideoPost(
-                                                  onVideoFinished: () {},
-                                                  index: index,
-                                                  videoData: videoData,
-                                                  radar: true,
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      ),
+                      data: (locations) => RefreshIndicator(
+                        onRefresh: ref
+                            .watch(hereProvider(
+                                    '126.95236219241595,37.458938402839834')
+                                .notifier)
+                            .refresh,
+                        displacement: 50,
+                        edgeOffset: 20,
+                        color: Theme.of(context).primaryColor,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          scrollDirection: Axis.vertical,
+                          onPageChanged: _onPageChanged,
+                          itemCount: locations.length,
+                          itemBuilder: (context, index) => ref
+                              .watch(placeProvider(locations[index]))
+                              .when(
+                                loading: () => const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              )
-                          : (data) {
-                              return Overview(ref: ref, data: data);
-                            },
+                                error: (error, stackTrace) => Center(
+                                  child: Text(
+                                    'Could not load videos: $error',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                data: (videos) {
+                                  _itemCount = videos.length;
+                                  return RefreshIndicator(
+                                    onRefresh: ref
+                                        .watch(placeProvider(locations[index])
+                                            .notifier)
+                                        .refresh,
+                                    displacement: 50,
+                                    edgeOffset: 20,
+                                    color: Theme.of(context).primaryColor,
+                                    child: PageView.builder(
+                                      controller: _pageController2,
+                                      scrollDirection: Axis.horizontal,
+                                      onPageChanged: _onPageChanged2,
+                                      itemCount: videos.length,
+                                      itemBuilder: (context, index) {
+                                        final videoData = videos[index];
+                                        return VideoPost(
+                                          onVideoFinished: () {},
+                                          index: index,
+                                          videoData: videoData,
+                                          radar: false,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
+                        ),
+                      ),
                     )
+                : overViewMode
+                    ? ref
+                        .watch(directionProvider(
+                            '126.95236219241595,37.458938402839834,$heading'))
+                        .when(
+                          loading: () => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          error: (error, stackTrace) => Center(
+                            child: Text(
+                              'Could not load videos: $error',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          data: (data) {
+                            return Overview(ref: ref, data: data);
+                          },
+                        )
+                    : ref
+                        .watch(hereProvider(
+                            '126.95236219241595,37.458938402839834'))
+                        .when(
+                          loading: () => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          error: (error, stackTrace) => Center(
+                            child: Text(
+                              'Could not load videos: $error',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          data: (locations) => RefreshIndicator(
+                            onRefresh: ref
+                                .watch(hereProvider(
+                                        '126.95236219241595,37.458938402839834')
+                                    .notifier)
+                                .refresh,
+                            displacement: 50,
+                            edgeOffset: 20,
+                            color: Theme.of(context).primaryColor,
+                            child: PageView.builder(
+                              controller: _pageController,
+                              scrollDirection: Axis.vertical,
+                              onPageChanged: _onPageChanged,
+                              itemCount: locations.length,
+                              itemBuilder: (context, index) => ref
+                                  .watch(placeProvider(locations[index]))
+                                  .when(
+                                    loading: () => const Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    error: (error, stackTrace) => Center(
+                                      child: Text(
+                                        'Could not load videos: $error',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    data: (videos) {
+                                      _itemCount = videos.length;
+                                      return RefreshIndicator(
+                                        onRefresh: ref
+                                            .watch(
+                                                placeProvider(locations[index])
+                                                    .notifier)
+                                            .refresh,
+                                        displacement: 50,
+                                        edgeOffset: 20,
+                                        color: Theme.of(context).primaryColor,
+                                        child: PageView.builder(
+                                          controller: _pageController2,
+                                          scrollDirection: Axis.horizontal,
+                                          onPageChanged: _onPageChanged2,
+                                          itemCount: videos.length,
+                                          itemBuilder: (context, index) {
+                                            final videoData = videos[index];
+                                            return VideoPost(
+                                              onVideoFinished: () {},
+                                              index: index,
+                                              videoData: videoData,
+                                              radar: true,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                            ),
+                          ),
+                        )
             : ref.watch(hashTagProvider(searchCondition)).when(
                   loading: () => const Center(
                     child: CircularProgressIndicator(),
