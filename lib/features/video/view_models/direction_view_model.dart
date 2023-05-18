@@ -58,13 +58,14 @@ class DirectionViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
   @override
   FutureOr<List<dynamic>> build(String arg) async {
     var location = arg.split(',');
+    var mode = location[2];
     final hash = geoHasher.encode(
       double.parse(location[0]),
       double.parse(location[1]),
       precision: 9,
     );
     _repository = ref.read(videosRepo);
-    _list = await _fetchLocations(hash: hash, mode: 1);
+    _list = await _fetchLocations(hash: hash, mode: int.parse(mode));
     // print(_list);
     return _list;
   }
@@ -82,13 +83,13 @@ class DirectionViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
     _list = [..._list, ...nextPage];
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh(int mode) async {
     final hash = geoHasher.encode(
       126.95236219241595,
       37.458938402839834,
       precision: 9,
     );
-    final videos = await _fetchLocations(hash: hash, mode: 4);
+    final videos = await _fetchLocations(hash: hash, mode: mode);
     _list = videos;
     state = AsyncValue.data(videos);
   }

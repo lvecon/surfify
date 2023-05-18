@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/video/models/video_model.dart';
 import 'package:surfify/features/video/view_models/hashtag_view_model.dart';
@@ -85,8 +88,44 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     return result;
   }
 
+  double _direction = 0.00;
+  int heading = 1;
+
+  StreamSubscription<CompassEvent>? stream;
+
+  @override
+  void initState() {
+    super.initState();
+    stream = FlutterCompass.events?.listen((event) async {
+      setState(() {
+        _direction = event.heading ?? 0.0;
+        var prev = _direction;
+        if (_direction >= 315 || _direction <= 45) {
+          heading = 1;
+        }
+        if (_direction > 45 && _direction <= 135) {
+          heading = 2;
+        }
+        if (_direction > 135 && _direction <= 225) {
+          heading = 3;
+        }
+        if (_direction > 225 && _direction <= 315) {
+          heading = 4;
+        }
+        if (prev != heading) {
+          ref
+              .watch(directionProvider(
+                      '126.95236219241595,37.458938402839834,$heading')
+                  .notifier)
+              .refresh(heading);
+        }
+      });
+    });
+  }
+
   @override
   void dispose() {
+    stream?.cancel();
     _pageController.dispose();
     _pageController2.dispose();
     super.dispose();
@@ -121,7 +160,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
             ? ref.watch(compassProvider)
                 ? ref
                     .watch(directionProvider(
-                        '126.95236219241595,37.458938402839834'))
+                        '126.95236219241595,37.458938402839834,$heading'))
                     .when(
                         loading: () => const Center(
                               child: CircularProgressIndicator(),
@@ -184,6 +223,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                                   onVideoFinished: () {},
                                                   index: index,
                                                   videoData: videoData,
+                                                  radar: false,
                                                 );
                                               },
                                             ),
@@ -255,6 +295,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                                   onVideoFinished: () {},
                                                   index: index,
                                                   videoData: videoData,
+                                                  radar: true,
                                                 );
                                               },
                                             ),
@@ -355,6 +396,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                             onVideoFinished: () {},
                             index: index,
                             videoData: videoData,
+                            radar: true,
                           );
                         },
                       ),
