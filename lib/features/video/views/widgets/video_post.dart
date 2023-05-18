@@ -6,6 +6,7 @@ import 'package:hashtagable/hashtagable.dart';
 import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/video/view_models/compass_view_model.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';
 import 'package:surfify/features/video/views/widgets/video_button.dart';
 import 'package:surfify/features/video/views/widgets/video_comments.dart';
@@ -444,6 +445,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                         radarMode = !radarMode;
                         randomMode = false;
                       });
+                      ref.read(compassProvider.notifier).setCondition();
                     },
                     child: VideoRadar(
                       latitude: widget.videoData.latitude,
@@ -456,6 +458,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                         radarMode = !radarMode;
                         randomMode = false;
                       });
+                      ref.read(compassProvider.notifier).setCondition();
                     },
                     child: VideoCompass(
                       latitude: widget.videoData.latitude,
