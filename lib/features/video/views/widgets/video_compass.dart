@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -26,10 +27,12 @@ class _VideoCompassState extends State<VideoCompass> {
 
   double _direction = 0.00;
 
+  StreamSubscription<CompassEvent>? stream;
+
   @override
   void initState() {
     super.initState();
-    FlutterCompass.events?.listen((event) async {
+    stream = FlutterCompass.events?.listen((event) async {
       setState(() {
         _direction = event.heading ?? 0.0;
       });
@@ -38,6 +41,7 @@ class _VideoCompassState extends State<VideoCompass> {
 
   @override
   void dispose() {
+    stream?.cancel();
     super.dispose();
   }
 

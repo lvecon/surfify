@@ -20,7 +20,7 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
   Future<void> googleSignUp(BuildContext context) async {
     late final uid = ref.read(authRepo).user!.uid;
 
-    final users = ref.read(usersProvider(uid).notifier);
+    late final users = ref.read(usersProvider(uid).notifier);
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
