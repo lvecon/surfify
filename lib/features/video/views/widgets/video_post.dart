@@ -74,7 +74,7 @@ class VideoPostState extends ConsumerState<VideoPost>
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
-    await _videoPlayerController.setLooping(true);
+    if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
     // await _videoPlayerController
     //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
