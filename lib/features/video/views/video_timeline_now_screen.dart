@@ -79,6 +79,7 @@ class VideoTimelineNowScreenState
                     onVideoFinished: _onVideoFinished,
                     index: index,
                     videoData: videoData,
+                    radar: true,
                   );
                 },
               ),
