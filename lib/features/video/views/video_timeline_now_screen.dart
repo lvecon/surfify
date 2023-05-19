@@ -80,6 +80,7 @@ class VideoTimelineNowScreenState
                     index: index,
                     videoData: videoData,
                     radar: true,
+                    now: true,
                   );
                 },
               ),
