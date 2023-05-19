@@ -7,6 +7,7 @@ import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/view_models/compass_view_model.dart';
+import 'package:surfify/features/video/view_models/lucky_view_model.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';
 import 'package:surfify/features/video/views/widgets/video_button.dart';
 import 'package:surfify/features/video/views/widgets/video_comments.dart';
@@ -32,6 +33,7 @@ class VideoPost extends ConsumerStatefulWidget {
   final int index;
   final bool radar;
   final bool now;
+  final bool luckyMode;
 
   const VideoPost({
     super.key,
@@ -40,6 +42,7 @@ class VideoPost extends ConsumerStatefulWidget {
     required this.index,
     required this.radar,
     required this.now,
+    required this.luckyMode,
   });
 
   @override
@@ -56,7 +59,6 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   bool _isPaused = false;
 
-  bool randomMode = false;
   var like = 0;
 
   void _onVideoChange() {
@@ -73,8 +75,8 @@ class VideoPostState extends ConsumerState<VideoPost>
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
-    await _videoPlayerController
-        .seekTo(const Duration(milliseconds: 1)); // minor bug..
+    // await _videoPlayerController
+    //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -88,7 +90,8 @@ class VideoPostState extends ConsumerState<VideoPost>
     ShakeDetector detector = ShakeDetector.autoStart(
       onPhoneShake: () {
         setState(() {
-          randomMode = true;
+          ref.watch(luckyProvider.notifier).setLucky();
+          ref.read(compassProvider.notifier).setUncompass();
         });
         // Do stuff on phone shake
       },
@@ -126,9 +129,9 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   void _onEditTap() {
-    print(widget.videoData.geoHash);
-    print(widget.videoData.id);
-    print(widget.videoData.description);
+    // print(widget.videoData.geoHash);
+    // print(widget.videoData.id);
+    // print(widget.videoData.description);
     Navigator.of(context).pop();
   }
 
@@ -282,6 +285,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                   onTap: (string) async {
                     if (!widget.now) {
+                      ref.watch(luckyProvider.notifier).setUnLucky();
                       await showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
@@ -400,7 +404,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 )
               : Container(),
-          randomMode
+          widget.luckyMode
               ? Positioned(
                   child: Column(
                     children: [
@@ -448,7 +452,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
-                        randomMode = false;
+
+                        ref.read(luckyProvider.notifier).setUnLucky();
                       });
                       ref.read(compassProvider.notifier).setCondition();
                     },
@@ -461,7 +466,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
-                        randomMode = false;
+
+                        ref.watch(luckyProvider.notifier).setUnLucky();
                       });
                       ref.read(compassProvider.notifier).setCondition();
                     },
@@ -492,6 +498,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   left: 20,
                   child: GestureDetector(
                       onTap: () async {
+                        ref.watch(luckyProvider.notifier).setUnLucky();
                         await showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
