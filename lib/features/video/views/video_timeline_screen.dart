@@ -66,13 +66,14 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     }
   }
 
-  // void _onVideoFinished() {
-  //   return;
-  //   _pageController.nextPage(
-  //     duration: _scrollDuration,
-  //     curve: _scrollCurve,
-  //   );
-  // }
+  void _onVideoFinished() {
+    _pageController_vertical.nextPage(
+      duration: _scrollDuration,
+      curve: _scrollCurve,
+    );
+    print("mex");
+  }
+
   bool checkUserandHashTags(
       List<String> list, String username, List<String> elements) {
     return elements.sublist(1).every((element) => list.contains(element)) &&
@@ -227,13 +228,12 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                   ),
                                 ),
                                 data: (videos) {
-                                  print("이게머야");
                                   final random = Random();
                                   final videoData =
                                       videos[random.nextInt(videos.length)];
 
                                   return VideoPost(
-                                    onVideoFinished: () {},
+                                    onVideoFinished: _onVideoFinished,
                                     index: index,
                                     videoData: videoData,
                                     radar: true,
