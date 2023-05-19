@@ -31,6 +31,7 @@ class VideoPost extends ConsumerStatefulWidget {
   final VideoModel videoData;
   final int index;
   final bool radar;
+  final bool now;
 
   const VideoPost({
     super.key,
@@ -38,6 +39,7 @@ class VideoPost extends ConsumerStatefulWidget {
     required this.onVideoFinished,
     required this.index,
     required this.radar,
+    required this.now,
   });
 
   @override
@@ -279,11 +281,13 @@ class VideoPostState extends ConsumerState<VideoPost>
                     fontWeight: FontWeight.w600,
                   ),
                   onTap: (string) async {
-                    await showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) => const SearchScreen());
+                    if (!widget.now) {
+                      await showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const SearchScreen());
+                    }
                   },
                 ),
               ],
@@ -467,7 +471,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     )),
           ),
           Positioned(
-            top: 90,
+            top: !widget.now ? 90 : 65,
             left: 20,
             child: VideoLocation(
               name: widget.videoData.location,
@@ -477,24 +481,29 @@ class VideoPostState extends ConsumerState<VideoPost>
               url: widget.videoData.kakaomapId,
             ),
           ),
-          Positioned(
-            top: ref.watch(searchConditionProvider).searchCondition.isNotEmpty
-                ? 38
-                : 50,
-            left: 20,
-            child: GestureDetector(
-                onTap: () async {
-                  await showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const SearchScreen());
-                },
-                child: SearchBar(
-                  searchcondition:
-                      ref.watch(searchConditionProvider).searchCondition,
-                )),
-          ),
+          !widget.now
+              ? Positioned(
+                  top: ref
+                          .watch(searchConditionProvider)
+                          .searchCondition
+                          .isNotEmpty
+                      ? 38
+                      : 50,
+                  left: 20,
+                  child: GestureDetector(
+                      onTap: () async {
+                        await showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => const SearchScreen());
+                      },
+                      child: SearchBar(
+                        searchcondition:
+                            ref.watch(searchConditionProvider).searchCondition,
+                      )),
+                )
+              : Container(),
         ],
       ),
     );
