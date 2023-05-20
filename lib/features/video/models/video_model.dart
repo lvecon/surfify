@@ -3,6 +3,7 @@ class VideoModel {
   final String description;
   final String fileUrl;
   final String thumbnailUrl;
+  final String gifUrl;
   final String creatorUid;
   final String creator;
   final String id;
@@ -22,6 +23,7 @@ class VideoModel {
     required this.title,
     required this.description,
     required this.fileUrl,
+    required this.gifUrl,
     required this.thumbnailUrl,
     required this.creatorUid,
     required this.likes,
@@ -44,6 +46,7 @@ class VideoModel {
         description = json["description"],
         fileUrl = json["fileUrl"],
         thumbnailUrl = json["thumbnailUrl"],
+        gifUrl = "", //json['gifUrl'],
         creatorUid = json["creatorUid"],
         likes = json["likes"],
         comments = json["comments"],
@@ -63,6 +66,7 @@ class VideoModel {
       "title": title,
       "description": description,
       "fileUrl": fileUrl,
+      "gifUrl": gifUrl,
       "thumbnailUrl": thumbnailUrl,
       "creatorUid": creatorUid,
       "likes": likes,
