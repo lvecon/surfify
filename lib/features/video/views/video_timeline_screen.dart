@@ -118,9 +118,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   StreamSubscription<CompassEvent>? stream;
 
   void _handleCompassEvent(CompassEvent event) {
-    setState(() {
+    if (ref.watch(compassProvider) || overViewMode) {
       _direction = event.heading ?? 0.0;
-      var prev = _direction;
+      var prev = heading;
       if (_direction >= 315 || _direction <= 45) {
         heading = 1;
       }
@@ -134,13 +134,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         heading = 4;
       }
       if (prev != heading) {
-        ref
-            .watch(directionProvider(
-                    '126.95236219241595,37.458938402839834,$heading')
-                .notifier)
-            .refresh(heading);
+        setState(() {
+          ref
+              .watch(directionProvider(
+                      '126.95236219241595,37.458938402839834,$heading')
+                  .notifier)
+              .refresh(heading);
+        });
       }
-    });
+    }
   }
 
   @override
