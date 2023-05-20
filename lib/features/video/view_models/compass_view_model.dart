@@ -10,6 +10,14 @@ class CompassViewModel extends StateNotifier<bool> {
   void setCondition() {
     state = !state;
   }
+
+  void setCompass() {
+    state = true;
+  }
+
+  void setUncompass() {
+    state = false;
+  }
 }
 
 final compassProvider = StateNotifierProvider<CompassViewModel, bool>((ref) {
