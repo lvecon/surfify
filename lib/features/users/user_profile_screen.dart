@@ -13,6 +13,7 @@ import 'package:surfify/features/users/views/following_list.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import '../video/views/widgets/video_post.dart';
 import 'edit_profile_scree.dart';
 
 class UserProfileScreen extends ConsumerStatefulWidget {
@@ -368,12 +369,36 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                               ),
                               itemBuilder: (context, index) => Column(
                                 children: [
-                                  AspectRatio(
-                                    aspectRatio: 9 / 14,
-                                    child: FadeInImage.assetNetwork(
-                                      fit: BoxFit.cover,
-                                      placeholder: "assets/images/user.png",
-                                      image: data[index].thumbnailUrl,
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          builder: (context) => Container(
+                                              height: size.height * 0.9,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Sizes.size14),
+                                              ),
+                                              child: VideoPost(
+                                                videoData: data[index],
+                                                onVideoFinished: () {},
+                                                index: 0,
+                                                radar: false,
+                                                now: false,
+                                                luckyMode: false,
+                                              )));
+                                    },
+                                    child: AspectRatio(
+                                      aspectRatio: 9 / 14,
+                                      child: FadeInImage.assetNetwork(
+                                        fit: BoxFit.cover,
+                                        placeholder: "assets/images/user.png",
+                                        image: data[index].thumbnailUrl,
+                                      ),
                                     ),
                                   ),
                                 ],
