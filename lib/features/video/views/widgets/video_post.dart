@@ -7,6 +7,7 @@ import 'package:shake/shake.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/view_models/compass_view_model.dart';
+import 'package:surfify/features/video/view_models/lucky_view_model.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';
 import 'package:surfify/features/video/views/widgets/video_button.dart';
 import 'package:surfify/features/video/views/widgets/video_comments.dart';
@@ -31,6 +32,8 @@ class VideoPost extends ConsumerStatefulWidget {
   final VideoModel videoData;
   final int index;
   final bool radar;
+  final bool now;
+  final bool luckyMode;
 
   const VideoPost({
     super.key,
@@ -38,6 +41,8 @@ class VideoPost extends ConsumerStatefulWidget {
     required this.onVideoFinished,
     required this.index,
     required this.radar,
+    required this.now,
+    required this.luckyMode,
   });
 
   @override
@@ -54,7 +59,6 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   bool _isPaused = false;
 
-  bool randomMode = false;
   var like = 0;
 
   void _onVideoChange() {
@@ -70,9 +74,9 @@ class VideoPostState extends ConsumerState<VideoPost>
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
     await _videoPlayerController.initialize();
-    await _videoPlayerController.setLooping(true);
-    await _videoPlayerController
-        .seekTo(const Duration(milliseconds: 1)); // minor bug..
+    if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
+    // await _videoPlayerController
+    //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -86,7 +90,8 @@ class VideoPostState extends ConsumerState<VideoPost>
     ShakeDetector detector = ShakeDetector.autoStart(
       onPhoneShake: () {
         setState(() {
-          randomMode = true;
+          ref.watch(luckyProvider.notifier).setLucky();
+          ref.read(compassProvider.notifier).setUncompass();
         });
         // Do stuff on phone shake
       },
@@ -124,9 +129,9 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   void _onEditTap() {
-    print(widget.videoData.geoHash);
-    print(widget.videoData.id);
-    print(widget.videoData.description);
+    // print(widget.videoData.geoHash);
+    // print(widget.videoData.id);
+    // print(widget.videoData.description);
     Navigator.of(context).pop();
   }
 
@@ -279,11 +284,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                     fontWeight: FontWeight.w600,
                   ),
                   onTap: (string) async {
-                    await showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) => const SearchScreen());
+                    if (!widget.now) {
+                      ref.watch(luckyProvider.notifier).setUnLucky();
+                      await showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const SearchScreen());
+                    }
                   },
                 ),
               ],
@@ -396,7 +404,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 )
               : Container(),
-          randomMode
+          widget.luckyMode
               ? Positioned(
                   child: Column(
                     children: [
@@ -444,7 +452,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
-                        randomMode = false;
+
+                        ref.read(luckyProvider.notifier).setUnLucky();
                       });
                       ref.read(compassProvider.notifier).setCondition();
                     },
@@ -457,7 +466,8 @@ class VideoPostState extends ConsumerState<VideoPost>
                     onTap: () {
                       setState(() {
                         radarMode = !radarMode;
-                        randomMode = false;
+
+                        ref.watch(luckyProvider.notifier).setUnLucky();
                       });
                       ref.read(compassProvider.notifier).setCondition();
                     },
@@ -467,7 +477,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     )),
           ),
           Positioned(
-            top: 90,
+            top: !widget.now ? 90 : 65,
             left: 20,
             child: VideoLocation(
               name: widget.videoData.location,
@@ -477,24 +487,30 @@ class VideoPostState extends ConsumerState<VideoPost>
               url: widget.videoData.kakaomapId,
             ),
           ),
-          Positioned(
-            top: ref.watch(searchConditionProvider).searchCondition.isNotEmpty
-                ? 38
-                : 50,
-            left: 20,
-            child: GestureDetector(
-                onTap: () async {
-                  await showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const SearchScreen());
-                },
-                child: SearchBar(
-                  searchcondition:
-                      ref.watch(searchConditionProvider).searchCondition,
-                )),
-          ),
+          !widget.now
+              ? Positioned(
+                  top: ref
+                          .watch(searchConditionProvider)
+                          .searchCondition
+                          .isNotEmpty
+                      ? 38
+                      : 50,
+                  left: 20,
+                  child: GestureDetector(
+                      onTap: () async {
+                        ref.watch(luckyProvider.notifier).setUnLucky();
+                        await showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) => const SearchScreen());
+                      },
+                      child: SearchBar(
+                        searchcondition:
+                            ref.watch(searchConditionProvider).searchCondition,
+                      )),
+                )
+              : Container(),
         ],
       ),
     );
