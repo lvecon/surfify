@@ -46,7 +46,7 @@ class VideoModel {
         description = json["description"],
         fileUrl = json["fileUrl"],
         thumbnailUrl = json["thumbnailUrl"],
-        gifUrl = json['gifUrl'],
+        gifUrl = "", //json['gifUrl'],
         creatorUid = json["creatorUid"],
         likes = json["likes"],
         comments = json["comments"],
