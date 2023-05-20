@@ -118,9 +118,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   StreamSubscription<CompassEvent>? stream;
 
   void _handleCompassEvent(CompassEvent event) {
-    if (ref.watch(compassProvider)) {
+    if (ref.watch(compassProvider) || overViewMode) {
       _direction = event.heading ?? 0.0;
-      var prev = _direction;
+      var prev = heading;
       if (_direction >= 315 || _direction <= 45) {
         heading = 1;
       }

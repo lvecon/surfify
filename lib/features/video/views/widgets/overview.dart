@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surfify/features/video/views/widgets/video_compass_overview.dart';
+import 'package:surfify/features/video/views/widgets/video_post.dart';
 
 import '../../../../constants/sizes.dart';
 import '../../../../normalize/distance.dart';
@@ -18,6 +19,8 @@ class Overview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: (data.isEmpty)
           ? const Center(
@@ -59,11 +62,48 @@ class Overview extends StatelessWidget {
                                           child: Row(
                                             children: [
                                               for (var pic in pics)
-                                                FadeInImage.assetNetwork(
-                                                  fit: BoxFit.cover,
-                                                  placeholder:
-                                                      "assets/images/App_Icon.png",
-                                                  image: pic.thumbnailUrl,
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    await showModalBottomSheet(
+                                                        context: context,
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        builder: (context) =>
+                                                            Container(
+                                                                height:
+                                                                    size.height *
+                                                                        0.9,
+                                                                clipBehavior: Clip
+                                                                    .hardEdge,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              Sizes.size14),
+                                                                ),
+                                                                child:
+                                                                    VideoPost(
+                                                                  videoData:
+                                                                      pic,
+                                                                  onVideoFinished:
+                                                                      () {},
+                                                                  index: 0,
+                                                                  radar: false,
+                                                                  now: false,
+                                                                  luckyMode:
+                                                                      false,
+                                                                )));
+                                                  },
+                                                  child:
+                                                      FadeInImage.assetNetwork(
+                                                    fit: BoxFit.cover,
+                                                    placeholder:
+                                                        "assets/images/App_Icon.png",
+                                                    image: pic.thumbnailUrl,
+                                                  ),
                                                 ),
                                             ],
                                           ),
