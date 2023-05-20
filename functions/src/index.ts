@@ -23,9 +23,27 @@ export const onVideoCreated = functions.firestore
     const [file, _] = await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
       destination: `thumbnails/${snapshot.id}.jpg`,
     });
+
+    const spawn1 = require("child-process-promise").spawn;
+    await spawn1("ffmpeg", [
+      "-i",
+      video.fileUrl,
+      "-r",
+      "3",
+      "-vf",
+      "scale=150:-1",
+      "-loop",
+      "0",
+      `/tmp/${snapshot.id}.gif`,
+    ]);
+    const [file1, ] = await storage.bucket().upload(`/tmp/${snapshot.id}.gif`, {
+      destination: `gif/${snapshot.id}.gif`,
+    });
     await file.makePublic();
+    await file1.makePublic();
     await snapshot.ref.update({
       thumbnailUrl: file.publicUrl(),
+      gifUrl: file1.publicUrl(),
       id: snapshot.id,
     });
 
