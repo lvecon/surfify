@@ -119,29 +119,29 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
 
   void _handleCompassEvent(CompassEvent event) {
     if (ref.watch(compassProvider)) {
-      setState(() {
-        _direction = event.heading ?? 0.0;
-        var prev = _direction;
-        if (_direction >= 315 || _direction <= 45) {
-          heading = 1;
-        }
-        if (_direction > 45 && _direction <= 135) {
-          heading = 2;
-        }
-        if (_direction > 135 && _direction <= 225) {
-          heading = 3;
-        }
-        if (_direction > 225 && _direction <= 315) {
-          heading = 4;
-        }
-        if (prev != heading) {
+      _direction = event.heading ?? 0.0;
+      var prev = _direction;
+      if (_direction >= 315 || _direction <= 45) {
+        heading = 1;
+      }
+      if (_direction > 45 && _direction <= 135) {
+        heading = 2;
+      }
+      if (_direction > 135 && _direction <= 225) {
+        heading = 3;
+      }
+      if (_direction > 225 && _direction <= 315) {
+        heading = 4;
+      }
+      if (prev != heading) {
+        setState(() {
           ref
               .watch(directionProvider(
                       '126.95236219241595,37.458938402839834,$heading')
                   .notifier)
               .refresh(heading);
-        }
-      });
+        });
+      }
     }
   }
 
