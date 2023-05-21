@@ -60,6 +60,9 @@ def extract_keyword(model, processor, pil_images, labels):
     return top5
 
 if __name__ == "__main__":
+    # get path for benchmark videos
+    benchmark_path = sys.argv[1]
+
     model = CLIPModel.from_pretrained("openai/clip-vit-base-patch16")
     processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch16")
 
@@ -70,7 +73,7 @@ if __name__ == "__main__":
     true_positive_count = 0
     wrong_files = []
 
-    files = glob.glob('/Users/minsuyoon/Desktop/School/23-1/창의적통합설계2/real_life_violence/Real Life Violence Dataset/NonViolence/*')
+    files = glob.glob(f'{benchmark_path}/*')
     files = [file for file in files if 'mp4' in file]
     with open('non_output.txt', 'w') as wf:
         for i, video_file in enumerate(files):

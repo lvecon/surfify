@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
+import "dart:convert";
 
 class VideoSelectTag extends StatefulWidget {
   final XFile video;
@@ -13,6 +14,7 @@ class VideoSelectTag extends StatefulWidget {
   final String lat;
   final String lon;
   final String url;
+  final String resStr;
   const VideoSelectTag({
     super.key,
     required this.video,
@@ -21,6 +23,7 @@ class VideoSelectTag extends StatefulWidget {
     required this.lat,
     required this.lon,
     required this.url,
+    required this.resStr,
   });
 
   @override
@@ -82,6 +85,16 @@ class VideoSelectTagState extends State<VideoSelectTag> {
 
   @override
   Widget build(BuildContext context) {
+    String resultsText = "";
+    if (widget.resStr != "Empty") {
+        List<dynamic> resJson = jsonDecode(widget.resStr);
+        for (List<dynamic> result in resJson){
+          String label = result[0];
+          String confidence = result[1];
+          resultsText += "Label: $label, Confidence: $confidence\n";
+        }
+    }
+
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * 0.75,
@@ -129,6 +142,14 @@ class VideoSelectTagState extends State<VideoSelectTag> {
                     ),
                     const Text(
                       "해쉬태그#를 써서 사람들이 쉽게 발견하게 해봐요",
+                      style: TextStyle(
+                        fontSize: Sizes.size16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    Text(
+                      resultsText,
                       style: TextStyle(
                         fontSize: Sizes.size16,
                         fontWeight: FontWeight.bold,

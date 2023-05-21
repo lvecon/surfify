@@ -14,10 +14,12 @@ import 'package:video_player/video_player.dart';
 class VideoPreviewScreen extends StatefulWidget {
   static const routeName = '/video_preview_screen';
   final XFile video;
+  final String resStr;
 
   const VideoPreviewScreen({
     super.key,
     required this.video,
+    required this.resStr,
   });
 
   @override
@@ -65,6 +67,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
       backgroundColor: Colors.transparent,
       builder: (context) => VideoSelectLocation(
         video: widget.video,
+        resStr: widget.resStr,
       ),
     );
   }
