@@ -90,4 +90,4 @@ def predict_image():
     return jsonify(keywords)
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5010, debug=True, host="0.0.0.0")
