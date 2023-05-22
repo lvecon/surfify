@@ -67,12 +67,12 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: VideoTimelineScreen(), //수정해야함
+            child: const VideoTimelineScreen(), //수정해야함
           ),
           Offstage(
             offstage: _selectedIndex != 1,

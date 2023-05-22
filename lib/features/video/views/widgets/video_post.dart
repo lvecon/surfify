@@ -191,6 +191,11 @@ class VideoPostState extends ConsumerState<VideoPost>
       child: Stack(
         children: [
           Positioned.fill(
+              child: Image.network(
+            widget.videoData.thumbnailUrl,
+            fit: BoxFit.cover,
+          )),
+          Positioned.fill(
             child: _videoPlayerController.value.isInitialized
                 ? FittedBox(
                     fit: BoxFit.cover,
@@ -198,10 +203,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                         height: _videoPlayerController.value.size.height,
                         width: _videoPlayerController.value.size.width,
                         child: VideoPlayer(_videoPlayerController)))
-                : Image.network(
-                    widget.videoData.thumbnailUrl,
-                    fit: BoxFit.cover,
-                  ),
+                : Container(),
           ),
           Positioned.fill(
             child: GestureDetector(
