@@ -27,6 +27,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   bool able = true;
 
   Map<String, String> formData = {};
+  final ValueNotifier<String> nameValue = ValueNotifier('');
 
   void _onSubmitTap() {
     if (_formKey.currentState != null) {
