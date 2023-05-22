@@ -100,7 +100,7 @@ class Overview extends StatelessWidget {
                                       enableInfiniteScroll:
                                           false, // 무한 스크롤 비활성화
                                       viewportFraction: 0.42,
-                                      // autoPlay: true,
+                                      autoPlay: true,
                                     ),
                                     items: [
                                       for (var pic in pics)
