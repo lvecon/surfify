@@ -165,21 +165,17 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       onScaleStart: (details) {
         _baseScaleFactor = _scaleFactor;
       },
-      onScaleUpdate: (details) {
+     onScaleUpdate: (details) {
         _scaleFactor = _baseScaleFactor * details.scale;
-        print(details.scale);
-      },
-      onScaleEnd: (details) {
-        if (_scaleFactor > 0.2) {
+        if (details.scale < 0.7) {
           setState(() {
             overViewMode = true;
           });
-        } else if (_scaleFactor < 0.2) {
+        } else if (details.scale > 1.3) {
           setState(() {
             overViewMode = false;
           });
-        } else {
-          _scaleFactor = 1;
+          print(details.scale);
         }
       },
       child: Stack(children: [
