@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hashtagable/hashtagable.dart';
 import 'package:shake/shake.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/view_models/compass_view_model.dart';
@@ -314,7 +315,7 @@ class VideoPostState extends ConsumerState<VideoPost>
           ),
           Positioned(
             bottom: 180,
-            right: 20,
+            right: 9,
             child: Column(
               children: [
                 ref.read(videoPostProvider(videoId)).when(
@@ -346,10 +347,22 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 ),
                 Gaps.v20,
-                const VideoButton(
-                  icon: FontAwesomeIcons.shareNodes,
-                  text: "",
-                  color: Colors.white,
+                ElevatedButton(
+                  onPressed: () async {
+                    await Share.share("https://surfi.ai/");
+                  },
+                  style: ElevatedButton.styleFrom(
+                    splashFactory: NoSplash.splashFactory,
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    padding: const EdgeInsets.all(0), // 버튼의 내부 여백을 조정합니다
+                    minimumSize: const Size(1, 1), // 버튼의 최소 크기를 지정합니다
+                  ),
+                  child: const VideoButton(
+                    icon: FontAwesomeIcons.shareNodes,
+                    text: "",
+                    color: Colors.white,
+                  ),
                 ),
                 Gaps.v20,
                 GestureDetector(
