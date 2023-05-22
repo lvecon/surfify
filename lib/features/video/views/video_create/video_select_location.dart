@@ -10,9 +10,11 @@ import '../../../../constants/gaps.dart';
 
 class VideoSelectLocation extends StatefulWidget {
   final XFile video;
+  final String resStr;
   const VideoSelectLocation({
     super.key,
     required this.video,
+    required this.resStr,
   });
 
   @override
@@ -118,6 +120,7 @@ class VideoSelectLocationState extends State<VideoSelectLocation> {
         lat: locationDict['latitude'][_selectedIndex],
         lon: locationDict['longitude'][_selectedIndex],
         url: locationDict['url'][_selectedIndex],
+        resStr: widget.resStr,
       ),
     );
   }

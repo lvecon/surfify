@@ -1,0 +1,1902 @@
+NV_219.mp4
+[('music', '0.283'), ('dance', '0.255')]
+NV_225.mp4
+[('dance', '0.200')]
+NV_543.mp4
+[('filthy', '0.205'), ('filthy', '0.210'), ('filthy', '0.211'), ('filthy', '0.232')]
+NV_557.mp4
+[('filthy', '0.224'), ('filthy', '0.305'), ('filthy', '0.339'), ('filthy', '0.201')]
+NV_231.mp4
+[('wedding', '0.213')]
+NV_580.mp4
+[]
+NV_594.mp4
+[('amor', '0.204'), ('amor', '0.289')]
+NV_769.mp4
+[('foodporn', '0.267'), ('foodporn', '0.587'), ('foodporn', '0.477'), ('foodporn', '0.486'), ('foodporn', '0.341')]
+NV_999.mp4
+[('japanese people', '0.233')]
+NV_741.mp4
+[]
+NV_755.mp4
+[]
+NV_966.mp4
+[('fitness', '0.234'), ('workout', '0.232'), ('workout', '0.232'), ('workout', '0.202'), ('workout', '0.259'), ('workout', '0.242'), ('workout', '0.216')]
+NV_64.mp4
+[]
+NV_70.mp4
+[('boy', '0.248'), ('red', '0.304'), ('boy', '0.219'), ('red', '0.342')]
+NV_972.mp4
+[('usa', '0.241'), ('fitness', '0.254'), ('usa', '0.214'), ('fitness', '0.380')]
+NV_782.mp4
+[('restaurant', '0.307'), ('restaurant', '0.455'), ('sanitary', '0.228')]
+NV_58.mp4
+[('red', '0.356'), ('red', '0.282'), ('red', '0.356')]
+NV_796.mp4
+[('restaurant', '0.423'), ('restaurant', '0.262'), ('restaurant', '0.288')]
+NV_609.mp4
+[('music', '0.360'), ('music', '0.399'), ('music', '0.353'), ('photographer', '0.208'), ('music', '0.373'), ('music', '0.241')]
+NV_635.mp4
+[]
+NV_153.mp4
+[('red', '0.224'), ('red', '0.359'), ('red', '0.504'), ('This photo contains violence.', '0.307')]
+NV_147.mp4
+[('smile', '0.252')]
+NV_621.mp4
+[]
+NV_812.mp4
+[('restaurant', '0.342'), ('foodie', '0.257')]
+NV_806.mp4
+[('restaurant', '0.964'), ('foodporn', '0.291'), ('restaurant', '0.463'), ('restaurant', '0.287')]
+NV_190.mp4
+[]
+NV_184.mp4
+[]
+NV_379.mp4
+[('photographer', '0.443'), ('photographer', '0.533'), ('photographer', '0.872'), ('photographer', '0.778'), ('photographer', '0.660'), ('photographer', '0.645')]
+NV_351.mp4
+[('usa', '0.219'), ('usa', '0.250'), ('usa', '0.264'), ('usa', '0.230'), ('usa', '0.225'), ('usa', '0.233')]
+NV_437.mp4
+[]
+NV_423.mp4
+[]
+NV_345.mp4
+[('red', '0.282'), ('usa', '0.740'), ('usa', '0.783'), ('red', '0.206')]
+NV_392.mp4
+[('flowers', '0.322'), ('flowers', '0.298'), ('flowers', '0.218'), ('flowers', '0.328'), ('flowers', '0.279')]
+NV_386.mp4
+[('flowers', '0.294'), ('photographer', '0.511'), ('photographer', '0.461'), ('flowers', '0.373'), ('flowers', '0.430'), ('spring', '0.220'), ('spring', '0.231')]
+NV_387.mp4
+[('flowers', '0.239'), ('flowers', '0.392'), ('flowers', '0.372'), ('flowers', '0.392'), ('flowers', '0.421'), ('flowers', '0.389'), ('spring', '0.220')]
+NV_393.mp4
+[('flowers', '0.300'), ('flowers', '0.307'), ('flowers', '0.276'), ('flowers', '0.230'), ('flowers', '0.214'), ('flowers', '0.209')]
+NV_422.mp4
+[]
+NV_344.mp4
+[('fun', '0.202'), ('usa', '0.525'), ('fun', '0.212'), ('fun', '0.274'), ('fun', '0.316')]
+NV_350.mp4
+[('red', '0.291'), ('red', '0.232'), ('red', '0.430')]
+NV_436.mp4
+[]
+NV_378.mp4
+[('photographer', '0.901'), ('photographer', '0.603'), ('photographer', '0.847'), ('photographer', '0.691'), ('photographer', '0.545'), ('photographer', '0.793')]
+NV_185.mp4
+[]
+NV_191.mp4
+[]
+NV_807.mp4
+[]
+NV_813.mp4
+[('restaurant', '0.251'), ('restaurant', '0.382'), ('restaurant', '0.219'), ('restaurant', '0.284'), ('restaurant', '0.268')]
+NV_146.mp4
+[('style', '0.220'), ('style', '0.306'), ('style', '0.233'), ('style', '0.235')]
+NV_620.mp4
+[]
+NV_634.mp4
+[('violence', '0.208'), ('violence', '0.245')]
+NV_152.mp4
+[]
+NV_608.mp4
+[('wedding', '0.258')]
+NV_797.mp4
+[('restaurant', '0.306'), ('restaurant', '0.400'), ('restaurant', '0.374'), ('restaurant', '0.377'), ('restaurant', '0.436')]
+NV_783.mp4
+[('foodporn', '0.407')]
+NV_59.mp4
+[]
+NV_71.mp4
+[]
+NV_973.mp4
+[('fitness', '0.210')]
+NV_967.mp4
+[('workout', '0.242'), ('workout', '0.340'), ('workout', '0.257'), ('fitness', '0.252'), ('workout', '0.329'), ('fitness', '0.229'), ('gym', '0.296'), ('gym', '0.247'), ('workout', '0.236'), ('fitness', '0.247')]
+NV_65.mp4
+[]
+NV_754.mp4
+[]
+NV_740.mp4
+[]
+NV_998.mp4
+[]
+NV_768.mp4
+[('chinese food', '0.292'), ('chinese food', '0.287'), ('thai', '0.281'), ('chinese food', '0.292'), ('restaurant', '0.761'), ('foodporn', '0.352')]
+NV_595.mp4
+[('london', '0.273'), ('london', '0.355'), ('london', '0.409')]
+NV_581.mp4
+[('boy', '0.261')]
+NV_556.mp4
+[('filthy', '0.255'), ('filthy', '0.318'), ('filthy', '0.297'), ('filthy', '0.255')]
+NV_230.mp4
+[]
+NV_224.mp4
+[('dance', '0.227')]
+NV_542.mp4
+[('filthy', '0.231'), ('filthy', '0.214'), ('filthy', '0.254')]
+NV_218.mp4
+[('style', '0.217')]
+NV_568.mp4
+[('filthy', '0.280'), ('filthy', '0.265'), ('filthy', '0.256'), ('filthy', '0.263'), ('filthy', '0.324')]
+NV_232.mp4
+[('dance', '0.203')]
+NV_554.mp4
+[('filthy', '0.229'), ('filthy', '0.212'), ('filthy', '0.217')]
+NV_540.mp4
+[('car', '0.283'), ('restaurant', '0.350'), ('restaurant', '0.350')]
+NV_226.mp4
+[('This photo contains violence.', '0.211'), ('This photo contains violence.', '0.203'), ('This photo contains violence.', '0.252'), ('This photo contains violence.', '0.271')]
+NV_597.mp4
+[]
+NV_583.mp4
+[('boxing', '0.213'), ('boxing', '0.266')]
+NV_756.mp4
+[]
+NV_98.mp4
+[]
+NV_742.mp4
+[]
+NV_971.mp4
+[('workout', '0.204')]
+NV_73.mp4
+[('dance', '0.216')]
+NV_67.mp4
+[('red', '0.227')]
+NV_965.mp4
+[('workout', '0.271'), ('fitness', '0.292'), ('gym', '0.326'), ('workout', '0.294'), ('gym', '0.309'), ('gym', '0.293'), ('gym', '0.237'), ('workout', '0.207'), ('workout', '0.244'), ('gym', '0.246'), ('workout', '0.283'), ('workout', '0.251')]
+NV_795.mp4
+[('mexican', '0.276')]
+NV_781.mp4
+[]
+NV_959.mp4
+[('workout', '0.301'), ('workout', '0.299'), ('workout', '0.299'), ('workout', '0.463'), ('workout', '0.263'), ('workout', '0.296'), ('training', '0.214'), ('training', '0.214')]
+NV_178.mp4
+[('christmas', '0.307'), ('meme', '0.202'), ('christmas', '0.271'), ('smile', '0.224')]
+NV_622.mp4
+[]
+NV_144.mp4
+[]
+NV_150.mp4
+[]
+NV_636.mp4
+[('violence', '0.210')]
+NV_805.mp4
+[('foodie', '0.266'), ('foodie', '0.201'), ('foodie', '0.256'), ('italian food', '0.299'), ('italian food', '0.435')]
+NV_811.mp4
+[('restaurant', '0.371'), ('restaurant', '0.472'), ('restaurant', '0.449'), ('foodie', '0.225')]
+NV_839.mp4
+[('foodie', '0.270'), ('mexican', '0.259')]
+NV_187.mp4
+[('cafe', '0.594'), ('restaurant', '0.203')]
+NV_193.mp4
+[]
+NV_408.mp4
+[('dog', '0.282'), ('NSFW', '0.288')]
+NV_346.mp4
+[('fun', '0.239'), ('fun', '0.213')]
+NV_420.mp4
+[]
+NV_434.mp4
+[]
+NV_352.mp4
+[('red', '0.331'), ('red', '0.258'), ('red', '0.296'), ('red', '0.312'), ('red', '0.218'), ('red', '0.204')]
+NV_385.mp4
+[('photographer', '0.212')]
+NV_391.mp4
+[('art', '0.238')]
+NV_390.mp4
+[]
+NV_384.mp4
+[('spring', '0.203')]
+NV_435.mp4
+[]
+NV_353.mp4
+[]
+NV_347.mp4
+[('red', '0.492'), ('red', '0.396'), ('red', '0.217'), ('red', '0.519'), ('red', '0.489'), ('red', '0.521')]
+NV_421.mp4
+[]
+NV_409.mp4
+[('violence', '0.222'), ('violence', '0.218')]
+NV_192.mp4
+[]
+NV_838.mp4
+[('foodie', '0.387'), ('foodie', '0.223'), ('foodie', '0.223'), ('foodie', '0.318'), ('foodporn', '0.211')]
+NV_186.mp4
+[]
+NV_810.mp4
+[('trip', '0.201'), ('travel', '0.212')]
+NV_804.mp4
+[('foodie', '0.221'), ('chinese food', '0.288'), ('foodie', '0.233'), ('foodie', '0.219'), ('foodie', '0.237'), ('dinner', '0.214'), ('dinner', '0.212')]
+NV_151.mp4
+[]
+NV_637.mp4
+[]
+NV_623.mp4
+[]
+NV_145.mp4
+[]
+NV_179.mp4
+[('dress', '0.243'), ('model', '0.204')]
+NV_958.mp4
+[('workout', '0.433'), ('training', '0.417'), ('workout', '0.443'), ('workout', '0.496'), ('workout', '0.613'), ('training', '0.481'), ('training', '0.205'), ('fitness', '0.204'), ('training', '0.330'), ('training', '0.273')]
+NV_780.mp4
+[('foodporn', '0.262'), ('sanitary', '0.215')]
+NV_794.mp4
+[]
+NV_66.mp4
+[]
+NV_964.mp4
+[('gym', '0.244'), ('training', '0.216'), ('workout', '0.269'), ('gym', '0.382'), ('workout', '0.297'), ('gym', '0.369'), ('workout', '0.244'), ('fitness', '0.216'), ('gym', '0.231'), ('workout', '0.246'), ('fitness', '0.205'), ('workout', '0.261'), ('training', '0.204')]
+NV_970.mp4
+[('fitness', '0.308'), ('gym', '0.326'), ('fitness', '0.391'), ('workout', '0.252'), ('fitness', '0.315'), ('workout', '0.214'), ('fitness', '0.203')]
+NV_72.mp4
+[]
+NV_99.mp4
+[('red', '0.319'), ('red', '0.220'), ('red', '0.284'), ('red', '0.234'), ('red', '0.286')]
+NV_743.mp4
+[]
+NV_757.mp4
+[]
+NV_582.mp4
+[]
+NV_596.mp4
+[('music', '0.260'), ('christmas', '0.205')]
+NV_541.mp4
+[]
+NV_227.mp4
+[]
+NV_233.mp4
+[('dance', '0.215'), ('dance', '0.439'), ('dance', '0.219'), ('dance', '0.252'), ('dance', '0.261')]
+NV_555.mp4
+[('fight', '0.213')]
+NV_569.mp4
+[('filthy', '0.261'), ('filthy', '0.234'), ('filthy', '0.268'), ('filthy', '0.203'), ('filthy', '0.360')]
+NV_551.mp4
+[('filthy', '0.284'), ('filthy', '0.228'), ('filthy', '0.225')]
+NV_237.mp4
+[]
+NV_223.mp4
+[]
+NV_545.mp4
+[('filthy', '0.240'), ('filthy', '0.259')]
+NV_579.mp4
+[]
+NV_592.mp4
+[('car', '0.238'), ('car', '0.585'), ('indonesia', '0.310'), ('car', '0.441'), ('car', '0.264')]
+NV_586.mp4
+[]
+NV_89.mp4
+[]
+NV_753.mp4
+[]
+NV_747.mp4
+[]
+NV_790.mp4
+[('restaurant', '0.398'), ('italian food', '0.442'), ('italian food', '0.332'), ('sanitary', '0.234'), ('restaurant', '0.455'), ('restaurant', '0.398'), ('restaurant', '0.201')]
+NV_948.mp4
+[('workout', '0.273'), ('gym', '0.243'), ('bodybuilding', '0.212'), ('fitness', '0.256'), ('gym', '0.216'), ('fitness', '0.227'), ('workout', '0.238'), ('fitness', '0.206'), ('bodybuilding', '0.209')]
+NV_784.mp4
+[('foodporn', '0.448'), ('foodporn', '0.374'), ('foodporn', '0.361'), ('foodporn', '0.314'), ('foodporn', '0.464'), ('foodporn', '0.411')]
+NV_76.mp4
+[]
+NV_974.mp4
+[]
+NV_960.mp4
+[('workout', '0.319'), ('fitness', '0.296'), ('gym', '0.594'), ('workout', '0.373'), ('workout', '0.279'), ('workout', '0.285'), ('fitness', '0.219'), ('fitness', '0.207'), ('fitness', '0.209'), ('gym', '0.226'), ('gym', '0.207'), ('gym', '0.204'), ('fitness', '0.219')]
+NV_62.mp4
+[('dance', '0.224')]
+NV_141.mp4
+[]
+NV_627.mp4
+[]
+NV_633.mp4
+[]
+NV_155.mp4
+[]
+NV_169.mp4
+[]
+NV_182.mp4
+[]
+NV_828.mp4
+[('italian food', '0.242'), ('foodie', '0.259'), ('foodie', '0.231')]
+NV_196.mp4
+[('flowers', '0.421'), ('flowers', '0.274')]
+NV_800.mp4
+[('chinese food', '0.215'), ('coffee', '0.215'), ('restaurant', '0.240'), ('foodporn', '0.316'), ('restaurant', '0.203'), ('foodporn', '0.215')]
+NV_814.mp4
+[('dinner', '0.316'), ('dinner', '0.316'), ('foodie', '0.223'), ('restaurant', '0.215'), ('dinner', '0.305'), ('restaurant', '0.247')]
+NV_425.mp4
+[]
+NV_343.mp4
+[]
+NV_357.mp4
+[('mood', '0.250'), ('mood', '0.260')]
+NV_431.mp4
+[]
+NV_419.mp4
+[]
+NV_380.mp4
+[('photographer', '0.782'), ('photographer', '0.851'), ('photographer', '0.674'), ('photographer', '0.824'), ('photographer', '0.774'), ('photographer', '0.858')]
+NV_394.mp4
+[('dance', '0.209'), ('dance', '0.235')]
+NV_395.mp4
+[('flowers', '0.221'), ('flowers', '0.217')]
+NV_381.mp4
+[('photographer', '0.427'), ('photographer', '0.837')]
+NV_418.mp4
+[('photographer', '0.275')]
+NV_356.mp4
+[('fight', '0.257'), ('fight', '0.239')]
+NV_430.mp4
+[]
+NV_424.mp4
+[]
+NV_342.mp4
+[('red', '0.202'), ('red', '0.251'), ('red', '0.206')]
+NV_815.mp4
+[('restaurant', '0.281'), ('italian food', '0.253'), ('restaurant', '0.352'), ('restaurant', '0.424'), ('restaurant', '0.211')]
+NV_801.mp4
+[('restaurant', '0.503'), ('foodie', '0.317'), ('restaurant', '0.412'), ('restaurant', '0.283'), ('restaurant', '0.227'), ('shopping', '0.236'), ('dinner', '0.228'), ('foodie', '0.233'), ('foodie', '0.217')]
+NV_829.mp4
+[('foodie', '0.204'), ('foodie', '0.356'), ('foodie', '0.218'), ('italian food', '0.294'), ('restaurant', '0.213')]
+NV_197.mp4
+[('flowers', '0.345')]
+NV_183.mp4
+[]
+NV_168.mp4
+[('style', '0.222'), ('dress', '0.223')]
+NV_632.mp4
+[]
+NV_154.mp4
+[]
+NV_140.mp4
+[]
+NV_626.mp4
+[]
+NV_961.mp4
+[('workout', '0.319'), ('workout', '0.291'), ('fitness', '0.276'), ('fitness', '0.246'), ('workout', '0.342'), ('workout', '0.318'), ('fitness', '0.304'), ('fitness', '0.215'), ('workout', '0.273'), ('workout', '0.232'), ('fitness', '0.283'), ('fitness', '0.249')]
+NV_63.mp4
+[]
+NV_77.mp4
+[]
+NV_975.mp4
+[('workout', '0.315'), ('workout', '0.360'), ('workout', '0.441'), ('workout', '0.365'), ('workout', '0.315'), ('workout', '0.427'), ('fitness', '0.208'), ('fitness', '0.249'), ('fitness', '0.248'), ('fitness', '0.208'), ('fitness', '0.240')]
+NV_785.mp4
+[('foodie', '0.249'), ('foodporn', '0.714'), ('foodie', '0.258'), ('foodie', '0.223'), ('foodie', '0.249')]
+NV_949.mp4
+[('workout', '0.368'), ('workout', '0.287'), ('workout', '0.298'), ('workout', '0.341'), ('workout', '0.361'), ('workout', '0.300'), ('gym', '0.261'), ('gym', '0.208'), ('fitness', '0.248'), ('gym', '0.257'), ('fitness', '0.212'), ('fitness', '0.223'), ('gym', '0.230'), ('gym', '0.200')]
+NV_791.mp4
+[('restaurant', '0.342'), ('italian food', '0.518'), ('italian food', '0.441'), ('italian food', '0.323'), ('italian food', '0.492'), ('restaurant', '0.407'), ('restaurant', '0.273')]
+NV_746.mp4
+[]
+NV_88.mp4
+[]
+NV_752.mp4
+[]
+NV_587.mp4
+[]
+NV_593.mp4
+[('color', '0.216'), ('color', '0.224'), ('amor', '0.210'), ('amor', '0.219'), ('color', '0.219')]
+NV_578.mp4
+[]
+NV_222.mp4
+[]
+NV_544.mp4
+[('filthy', '0.262'), ('filthy', '0.333'), ('filthy', '0.285'), ('filthy', '0.214')]
+NV_550.mp4
+[('NSFW', '0.278')]
+NV_236.mp4
+[('dance', '0.217'), ('dance', '0.419'), ('dance', '0.419')]
+NV_546.mp4
+[]
+NV_220.mp4
+[('dance', '0.211'), ('dance', '0.596'), ('dance', '0.355'), ('dance', '0.321'), ('dance', '0.494'), ('dance', '0.429')]
+NV_234.mp4
+[('dance', '0.403'), ('dance', '0.377'), ('dance', '0.312')]
+NV_552.mp4
+[('filthy', '0.202'), ('filthy', '0.235')]
+NV_208.mp4
+[]
+NV_1000.mp4
+[]
+NV_585.mp4
+[]
+NV_591.mp4
+[('indonesia', '0.709')]
+NV_744.mp4
+[('car', '0.214'), ('car', '0.255'), ('car', '0.255')]
+NV_988.mp4
+[('workout', '0.377'), ('fitness', '0.404'), ('workout', '0.374'), ('workout', '0.285'), ('workout', '0.377'), ('workout', '0.448'), ('fitness', '0.356'), ('workout', '0.329'), ('fitness', '0.367')]
+NV_750.mp4
+[]
+NV_778.mp4
+[('restaurant', '0.505'), ('restaurant', '0.428'), ('restaurant', '0.805'), ('restaurant', '0.551'), ('restaurant', '0.529'), ('restaurant', '0.556'), ('cafe', '0.227')]
+NV_787.mp4
+[('restaurant', '0.565'), ('foodie', '0.309'), ('restaurant', '0.219')]
+NV_793.mp4
+[('restaurant', '0.211'), ('foodporn', '0.605'), ('foodie', '0.216')]
+NV_49.mp4
+[]
+NV_61.mp4
+[]
+NV_963.mp4
+[('workout', '0.308'), ('workout', '0.264'), ('training', '0.296'), ('workout', '0.310'), ('gym', '0.317'), ('gym', '0.310'), ('gym', '0.216'), ('gym', '0.241'), ('workout', '0.294'), ('gym', '0.246'), ('workout', '0.213'), ('workout', '0.207'), ('training', '0.228')]
+NV_977.mp4
+[('gym', '0.324'), ('gym', '0.223'), ('workout', '0.240'), ('gym', '0.309'), ('gym', '0.272'), ('gym', '0.434'), ('gym', '0.229'), ('workout', '0.237')]
+NV_75.mp4
+[]
+NV_156.mp4
+[]
+NV_630.mp4
+[]
+NV_624.mp4
+[]
+NV_142.mp4
+[]
+NV_618.mp4
+[]
+NV_195.mp4
+[]
+NV_181.mp4
+[]
+NV_817.mp4
+[('chinese food', '0.244'), ('dinner', '0.345'), ('foodie', '0.243'), ('chinese food', '0.244'), ('foodie', '0.308'), ('dinner', '0.233'), ('foodporn', '0.220')]
+NV_803.mp4
+[('foodporn', '0.277'), ('foodie', '0.282'), ('chinese food', '0.251'), ('foodie', '0.307'), ('dinner', '0.200'), ('dinner', '0.256')]
+NV_432.mp4
+[]
+NV_354.mp4
+[('blogger', '0.369'), ('blogger', '0.310'), ('blogger', '0.413'), ('blogger', '0.322'), ('blogger', '0.310'), ('blogger', '0.410')]
+NV_340.mp4
+[('usa', '0.862'), ('usa', '0.680'), ('usa', '0.227'), ('usa', '0.858'), ('usa', '0.740'), ('usa', '0.425')]
+NV_426.mp4
+[]
+NV_368.mp4
+[('art', '0.225')]
+NV_397.mp4
+[]
+NV_383.mp4
+[('photographer', '0.287'), ('photographer', '0.287')]
+NV_382.mp4
+[('photographer', '0.334')]
+NV_396.mp4
+[('photographer', '0.238')]
+NV_369.mp4
+[]
+NV_341.mp4
+[('red', '0.217'), ('red', '0.237'), ('red', '0.319'), ('red', '0.297'), ('red', '0.296'), ('usa', '0.207')]
+NV_427.mp4
+[('photographer', '0.218'), ('selfie', '0.266'), ('photographer', '0.257'), ('selfie', '0.260'), ('photographer', '0.304'), ('photographer', '0.276'), ('photographer', '0.208')]
+NV_433.mp4
+[]
+NV_355.mp4
+[]
+NV_802.mp4
+[('chinese food', '0.329'), ('chinese food', '0.312'), ('foodporn', '0.229'), ('chinese food', '0.286'), ('foodporn', '0.399'), ('italian food', '0.242')]
+NV_816.mp4
+[('dinner', '0.377'), ('restaurant', '0.341'), ('dinner', '0.457'), ('dinner', '0.356'), ('restaurant', '0.202'), ('dinner', '0.318'), ('foodie', '0.205'), ('dinner', '0.255'), ('restaurant', '0.326'), ('restaurant', '0.219')]
+NV_180.mp4
+[]
+NV_194.mp4
+[('fashionblogger', '0.245'), ('fashionblogger', '0.239'), ('fashionblogger', '0.234'), ('fashionblogger', '0.244'), ('fashionblogger', '0.203')]
+NV_619.mp4
+[('amor', '0.322'), ('This photo contains violence.', '0.208')]
+NV_625.mp4
+[]
+NV_143.mp4
+[]
+NV_157.mp4
+[('cats', '0.219')]
+NV_631.mp4
+[]
+NV_976.mp4
+[('workout', '0.291'), ('workout', '0.285'), ('workout', '0.293'), ('workout', '0.268'), ('workout', '0.308'), ('workout', '0.401'), ('fitness', '0.266'), ('fitness', '0.236'), ('fitness', '0.247'), ('fitness', '0.267'), ('gym', '0.231')]
+NV_74.mp4
+[('red', '0.389'), ('red', '0.261'), ('red', '0.336'), ('red', '0.237')]
+NV_60.mp4
+[('boy', '0.204'), ('red', '0.464')]
+NV_962.mp4
+[('workout', '0.383'), ('workout', '0.420'), ('boxing', '0.329'), ('workout', '0.247'), ('workout', '0.472'), ('training', '0.224')]
+NV_792.mp4
+[('restaurant', '0.257'), ('restaurant', '0.560'), ('restaurant', '0.389'), ('restaurant', '0.305'), ('restaurant', '0.331'), ('restaurant', '0.311')]
+NV_48.mp4
+[]
+NV_786.mp4
+[('foodporn', '0.673'), ('foodporn', '0.565'), ('foodie', '0.281'), ('foodie', '0.210'), ('foodporn', '0.544'), ('foodie', '0.288')]
+NV_779.mp4
+[('italian food', '0.355'), ('italian food', '0.329'), ('restaurant', '0.417'), ('restaurant', '0.276'), ('restaurant', '0.447'), ('italian food', '0.529'), ('restaurant', '0.301'), ('italian food', '0.287'), ('chinese food', '0.209')]
+NV_751.mp4
+[]
+NV_989.mp4
+[]
+NV_745.mp4
+[('friends', '0.224'), ('friends', '0.279'), ('friends', '0.308'), ('friends', '0.257'), ('friends', '0.345'), ('friends', '0.293')]
+NV_590.mp4
+[('paris', '0.247'), ('paris', '0.456'), ('car', '0.374'), ('japanese people', '0.342'), ('japan', '0.355'), ('car', '0.245'), ('japan', '0.273'), ('japanese people', '0.286')]
+NV_584.mp4
+[('violence', '0.270'), ('violence', '0.203')]
+NV_209.mp4
+[('dance', '0.240')]
+NV_235.mp4
+[('dance', '0.343'), ('dance', '0.265'), ('dance', '0.471'), ('dance', '0.461'), ('dance', '0.505')]
+NV_553.mp4
+[('filthy', '0.239')]
+NV_547.mp4
+[('filthy', '0.273'), ('filthy', '0.225'), ('filthy', '0.223'), ('filthy', '0.209')]
+NV_221.mp4
+[('dance', '0.259')]
+NV_508.mp4
+[]
+NV_520.mp4
+[('car', '0.235')]
+NV_246.mp4
+[]
+NV_252.mp4
+[]
+NV_534.mp4
+[('dinner', '0.273'), ('dinner', '0.235'), ('dinner', '0.212'), ('dinner', '0.272'), ('dinner', '0.298'), ('dinner', '0.335')]
+NV_285.mp4
+[]
+NV_291.mp4
+[]
+NV_722.mp4
+[('nails', '0.385')]
+NV_736.mp4
+[('music', '0.565'), ('music', '0.524'), ('music', '0.520'), ('music', '0.576'), ('music', '0.613'), ('music', '0.577')]
+NV_911.mp4
+[('workout', '0.246'), ('workout', '0.349'), ('workout', '0.561'), ('workout', '0.351'), ('workout', '0.383'), ('workout', '0.536'), ('fitness', '0.232'), ('fitness', '0.283')]
+NV_13.mp4
+[]
+NV_939.mp4
+[('bodybuilding', '0.230'), ('bodybuilding', '0.201'), ('workout', '0.204'), ('bodybuilding', '0.209'), ('bodybuilding', '0.273'), ('workout', '0.233')]
+NV_7.mp4
+[('korean people', '0.431'), ('korean people', '0.311'), ('korean people', '0.274')]
+NV_118.mp4
+[]
+NV_130.mp4
+[]
+NV_656.mp4
+[]
+NV_642.mp4
+[]
+NV_124.mp4
+[]
+NV_695.mp4
+[('music', '0.200'), ('music', '0.637')]
+NV_859.mp4
+[]
+NV_681.mp4
+[('music', '0.317'), ('music', '0.368'), ('music', '0.212')]
+NV_468.mp4
+[('workout', '0.438'), ('workout', '0.460'), ('dance', '0.262'), ('workout', '0.234')]
+NV_454.mp4
+[('dance', '0.250'), ('dance', '0.218'), ('dance', '0.201'), ('dance', '0.269')]
+NV_332.mp4
+[]
+NV_326.mp4
+[]
+NV_440.mp4
+[]
+NV_497.mp4
+[('fun', '0.253'), ('beach', '0.207'), ('beach', '0.235')]
+NV_483.mp4
+[('dance', '0.413'), ('dance', '0.282'), ('car', '0.241')]
+NV_482.mp4
+[('gym', '0.362'), ('gym', '0.443'), ('gym', '0.500'), ('gym', '0.407'), ('gym', '0.311'), ('gym', '0.460')]
+NV_496.mp4
+[('fun', '0.219'), ('fun', '0.205'), ('beach', '0.211')]
+NV_327.mp4
+[('training', '0.237'), ('training', '0.224'), ('training', '0.509')]
+NV_441.mp4
+[]
+NV_455.mp4
+[('gym', '0.213'), ('gym', '0.307'), ('gym', '0.215'), ('boxing', '0.263'), ('training', '0.212'), ('workout', '0.252'), ('gym', '0.254')]
+NV_333.mp4
+[('red', '0.438'), ('This photo contains violence.', '0.201'), ('red', '0.214'), ('red', '0.526')]
+NV_469.mp4
+[('training', '0.337'), ('gym', '0.307'), ('gym', '0.258'), ('workout', '0.242'), ('training', '0.335'), ('workout', '0.222')]
+NV_680.mp4
+[('music', '0.469'), ('music', '0.439'), ('music', '0.470'), ('music', '0.345'), ('music', '0.415'), ('music', '0.460')]
+NV_858.mp4
+[]
+NV_694.mp4
+[('christmas', '0.237'), ('music', '0.395'), ('music', '0.384'), ('music', '0.432')]
+NV_643.mp4
+[('car', '0.664')]
+NV_125.mp4
+[('style', '0.266'), ('style', '0.234')]
+NV_131.mp4
+[]
+NV_657.mp4
+[]
+NV_119.mp4
+[]
+NV_6.mp4
+[('korean people', '0.355'), ('korean people', '0.394'), ('korean people', '0.502'), ('korean people', '0.237'), ('korean people', '0.237')]
+NV_938.mp4
+[('bodybuilding', '0.222'), ('workout', '0.271'), ('bodybuilding', '0.246'), ('bodybuilding', '0.307'), ('bodybuilding', '0.268'), ('bodybuilding', '0.237')]
+NV_12.mp4
+[('korean people', '0.333')]
+NV_737.mp4
+[('music', '0.591'), ('music', '0.588'), ('music', '0.538'), ('music', '0.514'), ('music', '0.596'), ('music', '0.601')]
+NV_723.mp4
+[('music', '0.299'), ('music', '0.231'), ('music', '0.219'), ('car', '0.220')]
+NV_290.mp4
+[]
+NV_284.mp4
+[('chinese people', '0.284'), ('chinese people', '0.259'), ('chinese people', '0.290'), ('chinese people', '0.362')]
+NV_253.mp4
+[('flowers', '0.208')]
+NV_535.mp4
+[('dinner', '0.259'), ('dinner', '0.205'), ('dinner', '0.206'), ('dinner', '0.225'), ('dinner', '0.244')]
+NV_521.mp4
+[('model', '0.275')]
+NV_247.mp4
+[]
+NV_509.mp4
+[('car', '0.373'), ('car', '0.419'), ('car', '0.237'), ('car', '0.252')]
+NV_279.mp4
+[('chinese people', '0.225'), ('photo', '0.202'), ('chinese people', '0.226')]
+NV_537.mp4
+[('car', '0.223')]
+NV_251.mp4
+[('dance', '0.294'), ('mood', '0.257'), ('dance', '0.323')]
+NV_245.mp4
+[]
+NV_523.mp4
+[]
+NV_292.mp4
+[('indonesia', '0.272')]
+NV_286.mp4
+[]
+NV_709.mp4
+[('music', '0.440'), ('music', '0.319'), ('music', '0.582'), ('music', '0.237'), ('music', '0.355'), ('music', '0.462')]
+NV_735.mp4
+[('music', '0.537'), ('music', '0.574'), ('music', '0.536'), ('music', '0.620'), ('music', '0.530'), ('music', '0.548')]
+NV_721.mp4
+[('music', '0.325'), ('fashion', '0.201'), ('music', '0.471'), ('music', '0.422')]
+NV_10.mp4
+[]
+NV_912.mp4
+[('workout', '0.405'), ('workout', '0.405'), ('workout', '0.524'), ('workout', '0.401'), ('workout', '0.456'), ('workout', '0.520'), ('fitness', '0.269'), ('fitness', '0.206'), ('fitness', '0.231'), ('fitness', '0.239')]
+NV_38.mp4
+[('usa', '0.404'), ('usa', '0.480'), ('bodybuilding', '0.262'), ('bodybuilding', '0.321'), ('usa', '0.479'), ('bodybuilding', '0.410'), ('usa', '0.238'), ('usa', '0.273')]
+NV_669.mp4
+[('music', '0.221'), ('music', '0.224'), ('music', '0.543'), ('music', '0.444'), ('music', '0.294'), ('music', '0.481')]
+NV_4.mp4
+[('korean people', '0.382'), ('korean people', '0.233'), ('korean people', '0.259')]
+NV_127.mp4
+[]
+NV_641.mp4
+[]
+NV_655.mp4
+[]
+NV_133.mp4
+[('red', '0.204')]
+NV_682.mp4
+[('music', '0.203'), ('meme', '0.203')]
+NV_696.mp4
+[('christmas', '0.214'), ('christmas', '0.211'), ('christmas', '0.222')]
+NV_319.mp4
+[('fun', '0.318'), ('NSFW', '0.217'), ('NSFW', '0.217')]
+NV_443.mp4
+[]
+NV_325.mp4
+[]
+NV_331.mp4
+[('fight', '0.250'), ('NSFW', '0.343'), ('fight', '0.331')]
+NV_457.mp4
+[]
+NV_480.mp4
+[('gym', '0.478'), ('gym', '0.333'), ('gym', '0.227'), ('gym', '0.336'), ('gym', '0.605'), ('gym', '0.426')]
+NV_494.mp4
+[('boxing', '0.204'), ('boxing', '0.204')]
+NV_495.mp4
+[('boxing', '0.387'), ('gym', '0.227'), ('beach', '0.321'), ('fun', '0.292'), ('boxing', '0.380'), ('boxing', '0.512')]
+NV_481.mp4
+[('gym', '0.249'), ('training', '0.295'), ('gym', '0.298'), ('gym', '0.491'), ('training', '0.240')]
+NV_330.mp4
+[('fight', '0.371'), ('fight', '0.291'), ('fight', '0.383'), ('fight', '0.398'), ('fight', '0.342'), ('fight', '0.238'), ('This photo contains violence.', '0.247'), ('This photo contains violence.', '0.224'), ('This photo contains violence.', '0.218'), ('This photo contains violence.', '0.285'), ('This photo contains violence.', '0.210')]
+NV_456.mp4
+[]
+NV_442.mp4
+[]
+NV_324.mp4
+[]
+NV_318.mp4
+[('fun', '0.217')]
+NV_697.mp4
+[('music', '0.277')]
+NV_683.mp4
+[('music', '0.281'), ('music', '0.242'), ('christmas', '0.362'), ('christmas', '0.273')]
+NV_654.mp4
+[('car', '0.623')]
+NV_132.mp4
+[('style', '0.270'), ('style', '0.291'), ('style', '0.221')]
+NV_126.mp4
+[('red', '0.377'), ('red', '0.413')]
+NV_640.mp4
+[]
+NV_668.mp4
+[('music', '0.487'), ('music', '0.438'), ('music', '0.513'), ('music', '0.639'), ('music', '0.440'), ('music', '0.298')]
+NV_5.mp4
+[('korean people', '0.245'), ('korean people', '0.382')]
+NV_39.mp4
+[('usa', '0.232'), ('usa', '0.268')]
+NV_11.mp4
+[]
+NV_913.mp4
+[('workout', '0.488'), ('workout', '0.407'), ('workout', '0.445'), ('workout', '0.452'), ('workout', '0.523'), ('workout', '0.453'), ('fitness', '0.287'), ('fitness', '0.304'), ('fitness', '0.325'), ('fitness', '0.341'), ('fitness', '0.268'), ('fitness', '0.242'), ('gym', '0.204')]
+NV_720.mp4
+[]
+NV_734.mp4
+[('music', '0.532'), ('music', '0.565'), ('music', '0.541'), ('music', '0.528'), ('music', '0.570'), ('music', '0.525')]
+NV_708.mp4
+[('music', '0.451'), ('music', '0.358'), ('music', '0.238'), ('music', '0.367'), ('music', '0.333'), ('music', '0.364')]
+NV_287.mp4
+[]
+NV_293.mp4
+[]
+NV_244.mp4
+[]
+NV_522.mp4
+[('model', '0.310')]
+NV_536.mp4
+[('dinner', '0.371'), ('car', '0.244'), ('foodporn', '0.242')]
+NV_250.mp4
+[]
+NV_278.mp4
+[('chinese people', '0.201')]
+NV_254.mp4
+[('flowers', '0.224'), ('flowers', '0.230')]
+NV_532.mp4
+[('dinner', '0.201'), ('dinner', '0.235')]
+NV_526.mp4
+[]
+NV_240.mp4
+[('style', '0.205')]
+NV_268.mp4
+[]
+NV_297.mp4
+[('usa', '0.265')]
+NV_283.mp4
+[('chinese people', '0.206'), ('pink', '0.207'), ('chinese people', '0.224')]
+NV_730.mp4
+[('music', '0.588'), ('music', '0.585'), ('music', '0.485'), ('music', '0.586'), ('music', '0.561'), ('music', '0.513')]
+NV_724.mp4
+[('music', '0.576'), ('music', '0.589'), ('music', '0.655'), ('music', '0.540'), ('music', '0.616'), ('music', '0.589')]
+NV_718.mp4
+[('music', '0.498'), ('music', '0.224'), ('moda', '0.245'), ('music', '0.432')]
+NV_29.mp4
+[]
+NV_917.mp4
+[('workout', '0.421'), ('workout', '0.419'), ('workout', '0.440'), ('workout', '0.499'), ('workout', '0.366'), ('workout', '0.416'), ('fitness', '0.233'), ('fitness', '0.257'), ('fitness', '0.248'), ('fitness', '0.224'), ('fitness', '0.237'), ('fitness', '0.268')]
+NV_15.mp4
+[]
+NV_644.mp4
+[('meme', '0.238'), ('meme', '0.245'), ('meme', '0.218'), ('boy', '0.213')]
+NV_122.mp4
+[]
+NV_136.mp4
+[]
+NV_650.mp4
+[]
+NV_678.mp4
+[('music', '0.343'), ('music', '0.348'), ('music', '0.336'), ('music', '0.260'), ('music', '0.308'), ('music', '0.331')]
+NV_1.mp4
+[('training', '0.279'), ('dance', '0.349'), ('dance', '0.494'), ('amor', '0.204'), ('dance', '0.365')]
+NV_687.mp4
+[('violence', '0.316'), ('violence', '0.243')]
+NV_693.mp4
+[('music', '0.483'), ('music', '0.288'), ('music', '0.235'), ('music', '0.429'), ('music', '0.274'), ('music', '0.421')]
+NV_320.mp4
+[]
+NV_446.mp4
+[]
+NV_452.mp4
+[]
+NV_334.mp4
+[]
+NV_308.mp4
+[('usa', '0.208'), ('usa', '0.201')]
+NV_485.mp4
+[('fun', '0.709'), ('fun', '0.358'), ('fun', '0.612'), ('fun', '0.742'), ('fun', '0.653'), ('fun', '0.668')]
+NV_491.mp4
+[('training', '0.301'), ('gym', '0.295'), ('training', '0.309'), ('training', '0.309'), ('training', '0.370'), ('training', '0.346'), ('gym', '0.282'), ('training', '0.244'), ('workout', '0.209')]
+NV_490.mp4
+[('training', '0.243'), ('gym', '0.347'), ('gym', '0.329'), ('training', '0.251'), ('training', '0.384'), ('gym', '0.221'), ('training', '0.218'), ('gym', '0.227')]
+NV_484.mp4
+[('fun', '0.661'), ('fun', '0.763'), ('fun', '0.798'), ('fun', '0.749')]
+NV_309.mp4
+[]
+NV_453.mp4
+[]
+NV_335.mp4
+[]
+NV_321.mp4
+[]
+NV_447.mp4
+[]
+NV_862.mp4
+[]
+NV_692.mp4
+[('music', '0.338'), ('music', '0.296'), ('music', '0.338'), ('music', '0.405'), ('christmas', '0.320'), ('christmas', '0.387'), ('music', '0.203')]
+NV_686.mp4
+[('bestoftheday', '0.258'), ('bestoftheday', '0.245')]
+NV_679.mp4
+[('meme', '0.231'), ('music', '0.462'), ('meme', '0.232')]
+NV_137.mp4
+[]
+NV_651.mp4
+[('wedding', '0.222')]
+NV_645.mp4
+[]
+NV_123.mp4
+[('red', '0.253')]
+NV_916.mp4
+[('fitness', '0.334'), ('fitness', '0.262'), ('fitness', '0.271'), ('gym', '0.261'), ('fitness', '0.257'), ('workout', '0.341'), ('workout', '0.224'), ('workout', '0.209'), ('workout', '0.220'), ('gym', '0.230'), ('fitness', '0.335'), ('bodybuilding', '0.204')]
+NV_14.mp4
+[('korean people', '0.983'), ('korean people', '0.985'), ('korean people', '0.990'), ('korean people', '0.980'), ('korean people', '0.984'), ('korean people', '0.987')]
+NV_28.mp4
+[('usa', '0.765'), ('usa', '0.831')]
+NV_719.mp4
+[('music', '0.483')]
+NV_725.mp4
+[('music', '0.587'), ('music', '0.837'), ('music', '0.630'), ('music', '0.650'), ('music', '0.625'), ('music', '0.634')]
+NV_731.mp4
+[('music', '0.591'), ('music', '0.611'), ('music', '0.582'), ('music', '0.510'), ('music', '0.586'), ('music', '0.441')]
+NV_282.mp4
+[('chinese people', '0.285'), ('chinese people', '0.214'), ('chinese people', '0.242'), ('chinese people', '0.212'), ('chinese people', '0.231')]
+NV_296.mp4
+[]
+NV_269.mp4
+[('green', '0.274'), ('This photo contains violence.', '0.319')]
+NV_527.mp4
+[]
+NV_241.mp4
+[]
+NV_255.mp4
+[]
+NV_533.mp4
+[('dinner', '0.255')]
+NV_243.mp4
+[('dress', '0.361'), ('dress', '0.206'), ('dance', '0.247')]
+NV_525.mp4
+[]
+NV_531.mp4
+[]
+NV_257.mp4
+[]
+NV_519.mp4
+[('sea', '0.205'), ('nyc', '0.546'), ('nyc', '0.816')]
+NV_280.mp4
+[]
+NV_294.mp4
+[]
+NV_727.mp4
+[('music', '0.731'), ('music', '0.615'), ('music', '0.610'), ('music', '0.756'), ('music', '0.599'), ('music', '0.771')]
+NV_733.mp4
+[('music', '0.469'), ('music', '0.478'), ('music', '0.541'), ('music', '0.403'), ('music', '0.516'), ('music', '0.534')]
+NV_928.mp4
+[('workout', '0.397'), ('workout', '0.283'), ('fitness', '0.304'), ('workout', '0.393'), ('workout', '0.395'), ('fitness', '0.301'), ('workout', '0.232'), ('training', '0.234'), ('fitness', '0.216')]
+NV_16.mp4
+[]
+NV_914.mp4
+[('fitness', '0.453'), ('workout', '0.467'), ('fitness', '0.504'), ('fitness', '0.335'), ('fitness', '0.474'), ('fitness', '0.397'), ('workout', '0.318'), ('fitness', '0.264'), ('workout', '0.260'), ('workout', '0.332'), ('workout', '0.296'), ('workout', '0.366')]
+NV_653.mp4
+[]
+NV_135.mp4
+[]
+NV_121.mp4
+[]
+NV_647.mp4
+[]
+NV_109.mp4
+[]
+NV_2.mp4
+[]
+NV_848.mp4
+[]
+NV_690.mp4
+[('christmas', '0.259'), ('christmas', '0.204')]
+NV_684.mp4
+[('music', '0.300'), ('christmas', '0.234'), ('christmas', '0.239'), ('christmas', '0.254'), ('christmas', '0.239'), ('music', '0.354')]
+NV_860.mp4
+[]
+NV_337.mp4
+[]
+NV_451.mp4
+[]
+NV_445.mp4
+[('art', '0.203')]
+NV_323.mp4
+[]
+NV_479.mp4
+[('gym', '0.362'), ('gym', '0.467'), ('gym', '0.384'), ('gym', '0.506'), ('gym', '0.416'), ('gym', '0.542')]
+NV_492.mp4
+[('fun', '0.390'), ('fun', '0.302'), ('fun', '0.365'), ('fun', '0.357'), ('fun', '0.271'), ('fun', '0.305')]
+NV_486.mp4
+[('fun', '0.686'), ('fun', '0.766'), ('fun', '0.571'), ('fun', '0.583'), ('fun', '0.653'), ('fun', '0.657')]
+NV_487.mp4
+[('training', '0.349'), ('training', '0.275'), ('training', '0.289'), ('training', '0.217'), ('training', '0.411'), ('gym', '0.242'), ('training', '0.201')]
+NV_493.mp4
+[('boxing', '0.363')]
+NV_478.mp4
+[('boxing', '0.410'), ('boxing', '0.391'), ('dance', '0.231'), ('fun', '0.258'), ('boxing', '0.338'), ('fun', '0.258')]
+NV_444.mp4
+[]
+NV_322.mp4
+[]
+NV_336.mp4
+[('bodybuilding', '0.347')]
+NV_450.mp4
+[]
+NV_861.mp4
+[('mexican', '0.349'), ('mexican', '0.327')]
+NV_685.mp4
+[('christmas', '0.203')]
+NV_691.mp4
+[('christmas', '0.462'), ('music', '0.223'), ('christmas', '0.212')]
+NV_849.mp4
+[]
+NV_3.mp4
+[('mexican', '0.351'), ('mexican', '0.331'), ('green', '0.236'), ('mexican', '0.351'), ('green', '0.295'), ('green', '0.227'), ('mexican', '0.214'), ('green', '0.227'), ('mexican', '0.265')]
+NV_108.mp4
+[('red', '0.266')]
+NV_120.mp4
+[('japan', '0.252')]
+NV_646.mp4
+[]
+NV_652.mp4
+[]
+NV_134.mp4
+[]
+NV_17.mp4
+[('usa', '0.251'), ('usa', '0.294')]
+NV_915.mp4
+[('workout', '0.440'), ('workout', '0.246'), ('workout', '0.546'), ('workout', '0.329'), ('workout', '0.373'), ('workout', '0.359'), ('fitness', '0.209'), ('training', '0.225'), ('fitness', '0.235'), ('gym', '0.220'), ('fitness', '0.202'), ('fitness', '0.305'), ('fitness', '0.219')]
+NV_929.mp4
+[('workout', '0.228'), ('fitness', '0.308'), ('workout', '0.228'), ('workout', '0.292'), ('fitness', '0.259'), ('fitness', '0.203'), ('fitness', '0.203'), ('fitness', '0.221'), ('workout', '0.212'), ('training', '0.210')]
+NV_732.mp4
+[('music', '0.523'), ('music', '0.532'), ('music', '0.558'), ('music', '0.588'), ('music', '0.569'), ('music', '0.568')]
+NV_726.mp4
+[('music', '0.669'), ('music', '0.619'), ('music', '0.658'), ('music', '0.622'), ('music', '0.606'), ('music', '0.643')]
+NV_295.mp4
+[('usa', '0.298'), ('usa', '0.298'), ('training', '0.288'), ('usa', '0.280')]
+NV_281.mp4
+[('green', '0.214')]
+NV_518.mp4
+[]
+NV_530.mp4
+[('gym', '0.308'), ('nyc', '0.685'), ('gym', '0.278'), ('training', '0.302'), ('nyc', '0.612'), ('workout', '0.218'), ('gym', '0.205')]
+NV_256.mp4
+[('dance', '0.214'), ('dance', '0.328')]
+NV_242.mp4
+[('dance', '0.221')]
+NV_524.mp4
+[]
+NV_529.mp4
+[]
+NV_501.mp4
+[]
+NV_267.mp4
+[]
+NV_273.mp4
+[]
+NV_515.mp4
+[]
+NV_298.mp4
+[]
+NV_703.mp4
+[('christmas', '0.375')]
+NV_717.mp4
+[('music', '0.643'), ('music', '0.348'), ('music', '0.558'), ('music', '0.482')]
+NV_26.mp4
+[('motivation', '0.218'), ('This photo contains violence.', '0.251')]
+NV_924.mp4
+[('workout', '0.477'), ('workout', '0.353'), ('workout', '0.348'), ('workout', '0.389'), ('workout', '0.445'), ('workout', '0.487'), ('fitness', '0.246'), ('fitness', '0.235'), ('fitness', '0.270'), ('fitness', '0.293'), ('fitness', '0.285')]
+NV_930.mp4
+[('workout', '0.317'), ('workout', '0.376'), ('workout', '0.426'), ('workout', '0.318'), ('training', '0.296'), ('workout', '0.321'), ('training', '0.244'), ('training', '0.228'), ('training', '0.222'), ('training', '0.251'), ('workout', '0.250'), ('training', '0.232')]
+NV_32.mp4
+[('motivation', '0.204')]
+NV_918.mp4
+[('workout', '0.317'), ('workout', '0.434'), ('workout', '0.407'), ('workout', '0.394'), ('workout', '0.358'), ('workout', '0.374'), ('fitness', '0.213'), ('fitness', '0.236'), ('fitness', '0.228'), ('fitness', '0.251'), ('fitness', '0.235'), ('fitness', '0.287')]
+NV_139.mp4
+[]
+NV_111.mp4
+[]
+NV_677.mp4
+[('music', '0.446'), ('music', '0.455'), ('music', '0.568'), ('music', '0.612'), ('music', '0.247'), ('music', '0.584')]
+NV_663.mp4
+[('car', '0.596'), ('car', '0.556'), ('car', '0.623'), ('car', '0.559')]
+NV_105.mp4
+[]
+NV_850.mp4
+[]
+NV_688.mp4
+[('bestoftheday', '0.243'), ('bestoftheday', '0.209')]
+NV_844.mp4
+[]
+NV_449.mp4
+[]
+NV_475.mp4
+[('fun', '0.357'), ('dance', '0.229'), ('fun', '0.342'), ('dance', '0.222')]
+NV_313.mp4
+[('fun', '0.237')]
+NV_307.mp4
+[('bodybuilding', '0.228'), ('bodybuilding', '0.300'), ('bodybuilding', '0.250'), ('bodybuilding', '0.328')]
+NV_461.mp4
+[('gym', '0.333'), ('gym', '0.413'), ('gym', '0.552'), ('gym', '0.400'), ('gym', '0.342'), ('gym', '0.371')]
+NV_306.mp4
+[('chinese people', '0.283'), ('chinese people', '0.223'), ('bodybuilding', '0.218')]
+NV_460.mp4
+[('dinner', '0.228'), ('dinner', '0.232')]
+NV_474.mp4
+[('boxing', '0.353'), ('dance', '0.276'), ('dance', '0.533'), ('dance', '0.578'), ('dance', '0.293'), ('dance', '0.271'), ('boxing', '0.204')]
+NV_312.mp4
+[('green', '0.268')]
+NV_448.mp4
+[]
+NV_845.mp4
+[('korean people', '0.211'), ('landscape', '0.458')]
+NV_689.mp4
+[('christmas', '0.242')]
+NV_851.mp4
+[]
+NV_662.mp4
+[('car', '0.654'), ('car', '0.623')]
+NV_104.mp4
+[]
+NV_110.mp4
+[]
+NV_676.mp4
+[('music', '0.284'), ('music', '0.232'), ('music', '0.234'), ('music', '0.381'), ('music', '0.308')]
+NV_138.mp4
+[]
+NV_919.mp4
+[('workout', '0.423'), ('workout', '0.355'), ('workout', '0.371'), ('workout', '0.325'), ('workout', '0.340'), ('workout', '0.250'), ('gym', '0.200'), ('gym', '0.220'), ('fitness', '0.208')]
+NV_931.mp4
+[('fitness', '0.348'), ('workout', '0.313'), ('workout', '0.335'), ('workout', '0.252'), ('workout', '0.245'), ('workout', '0.415'), ('workout', '0.245'), ('fitness', '0.298'), ('fitness', '0.212'), ('fitness', '0.242'), ('fitness', '0.220')]
+NV_33.mp4
+[]
+NV_27.mp4
+[]
+NV_925.mp4
+[('fitness', '0.397'), ('workout', '0.374'), ('workout', '0.399'), ('workout', '0.380'), ('workout', '0.365'), ('workout', '0.408'), ('workout', '0.331'), ('fitness', '0.329'), ('fitness', '0.313'), ('fitness', '0.242'), ('fitness', '0.284'), ('fitness', '0.303')]
+NV_716.mp4
+[('music', '0.326'), ('music', '0.230')]
+NV_702.mp4
+[('christmas', '0.352'), ('music', '0.439'), ('christmas', '0.503'), ('music', '0.264')]
+NV_299.mp4
+[]
+NV_272.mp4
+[]
+NV_514.mp4
+[('sanitary', '0.295'), ('dinner', '0.207')]
+NV_500.mp4
+[('blogger', '0.305'), ('blogger', '0.305'), ('dance', '0.268'), ('blogger', '0.298'), ('blogger', '0.301'), ('gym', '0.231')]
+NV_266.mp4
+[('interior design', '0.207'), ('interior design', '0.213'), ('interior design', '0.223'), ('interior design', '0.258')]
+NV_528.mp4
+[]
+NV_258.mp4
+[('dance', '0.381')]
+NV_516.mp4
+[]
+NV_270.mp4
+[]
+NV_264.mp4
+[]
+NV_502.mp4
+[('restaurant', '0.288')]
+NV_728.mp4
+[('music', '0.697'), ('music', '0.761'), ('music', '0.684'), ('music', '0.717'), ('music', '0.779'), ('music', '0.638')]
+NV_714.mp4
+[('music', '0.228')]
+NV_700.mp4
+[('christmas', '0.213'), ('christmas', '0.204'), ('music', '0.535')]
+NV_31.mp4
+[('motivation', '0.201'), ('motivation', '0.277'), ('motivation', '0.226'), ('motivation', '0.201')]
+NV_933.mp4
+[('fitness', '0.349'), ('workout', '0.369'), ('workout', '0.382'), ('fitness', '0.380'), ('workout', '0.329'), ('fitness', '0.217'), ('fitness', '0.274'), ('workout', '0.309')]
+NV_927.mp4
+[('fitness', '0.444'), ('workout', '0.422'), ('workout', '0.404'), ('fitness', '0.422'), ('fitness', '0.400'), ('fitness', '0.285'), ('workout', '0.229'), ('workout', '0.233')]
+NV_25.mp4
+[('This photo contains violence.', '0.217'), ('This photo contains violence.', '0.208'), ('This photo contains violence.', '0.253')]
+NV_19.mp4
+[('motivation', '0.337')]
+NV_648.mp4
+[('car', '0.305'), ('car', '0.343'), ('car', '0.404'), ('car', '0.479'), ('car', '0.385'), ('car', '0.450')]
+NV_106.mp4
+[('dance', '0.217'), ('dance', '0.449'), ('dance', '0.301')]
+NV_660.mp4
+[]
+NV_674.mp4
+[]
+NV_112.mp4
+[]
+NV_847.mp4
+[]
+NV_853.mp4
+[('This photo contains violence.', '0.252')]
+NV_338.mp4
+[('usa', '0.530'), ('usa', '0.589'), ('usa', '0.435'), ('usa', '0.609'), ('usa', '0.590'), ('usa', '0.530'), ('red', '0.209')]
+NV_462.mp4
+[('training', '0.325'), ('gym', '0.429')]
+NV_304.mp4
+[('usa', '0.304'), ('fitness', '0.282'), ('usa', '0.378'), ('usa', '0.307'), ('usa', '0.223'), ('training', '0.216')]
+NV_310.mp4
+[('fun', '0.221'), ('fun', '0.204')]
+NV_476.mp4
+[('dance', '0.282'), ('boxing', '0.400'), ('gym', '0.218'), ('dance', '0.244'), ('boxing', '0.539'), ('boxing', '0.228')]
+NV_489.mp4
+[('gym', '0.357'), ('training', '0.246')]
+NV_488.mp4
+[('fun', '0.284'), ('fun', '0.305'), ('fun', '0.296'), ('training', '0.242'), ('gym', '0.373'), ('training', '0.223'), ('training', '0.202'), ('fun', '0.221')]
+NV_311.mp4
+[('chinese people', '0.431')]
+NV_477.mp4
+[('fun', '0.266'), ('gym', '0.412'), ('training', '0.357'), ('training', '0.251'), ('gym', '0.310'), ('training', '0.253'), ('training', '0.253'), ('gym', '0.250'), ('training', '0.228')]
+NV_463.mp4
+[('fun', '0.268'), ('beach', '0.341'), ('training', '0.355'), ('gym', '0.652')]
+NV_305.mp4
+[('bodybuilding', '0.203')]
+NV_339.mp4
+[]
+NV_852.mp4
+[('This photo contains violence.', '0.210')]
+NV_846.mp4
+[]
+NV_675.mp4
+[('meme', '0.244'), ('music', '0.396'), ('music', '0.532')]
+NV_113.mp4
+[('interior design', '0.225'), ('smile', '0.245')]
+NV_107.mp4
+[]
+NV_661.mp4
+[('car', '0.515'), ('car', '0.445'), ('car', '0.638'), ('car', '0.450')]
+NV_649.mp4
+[]
+NV_18.mp4
+[('motivation', '0.271')]
+NV_926.mp4
+[('training', '0.309'), ('training', '0.329'), ('workout', '0.471'), ('workout', '0.335'), ('workout', '0.379'), ('workout', '0.351'), ('workout', '0.250'), ('workout', '0.264'), ('gym', '0.257')]
+NV_24.mp4
+[]
+NV_30.mp4
+[('training', '0.587'), ('training', '0.544')]
+NV_932.mp4
+[('fitness', '0.237'), ('fitness', '0.285'), ('fitness', '0.335'), ('fitness', '0.283')]
+NV_701.mp4
+[('music', '0.232'), ('music', '0.245'), ('christmas', '0.228')]
+NV_715.mp4
+[('music', '0.528'), ('music', '0.247'), ('music', '0.446'), ('music', '0.224'), ('music', '0.350')]
+NV_729.mp4
+[('music', '0.587'), ('music', '0.597'), ('music', '0.572'), ('music', '0.655'), ('music', '0.611'), ('music', '0.683')]
+NV_265.mp4
+[]
+NV_503.mp4
+[('restaurant', '0.406'), ('restaurant', '0.400'), ('restaurant', '0.272')]
+NV_517.mp4
+[]
+NV_271.mp4
+[]
+NV_259.mp4
+[]
+NV_275.mp4
+[('korean people', '0.268'), ('korean people', '0.292'), ('korean people', '0.309')]
+NV_513.mp4
+[]
+NV_507.mp4
+[('japan', '0.239'), ('japan', '0.205')]
+NV_261.mp4
+[]
+NV_249.mp4
+[]
+NV_711.mp4
+[('music', '0.292'), ('music', '0.357'), ('music', '0.357'), ('music', '0.251')]
+NV_705.mp4
+[('music', '0.221'), ('music', '0.224'), ('music', '0.307'), ('music', '0.226')]
+NV_739.mp4
+[]
+NV_936.mp4
+[('workout', '0.352'), ('training', '0.217'), ('training', '0.254'), ('workout', '0.366'), ('training', '0.300'), ('training', '0.244'), ('workout', '0.205'), ('fitness', '0.252'), ('workout', '0.229'), ('fitness', '0.216')]
+NV_34.mp4
+[]
+NV_20.mp4
+[]
+NV_922.mp4
+[('workout', '0.455'), ('workout', '0.430'), ('workout', '0.415'), ('workout', '0.402'), ('workout', '0.364'), ('fitness', '0.367'), ('fitness', '0.313'), ('fitness', '0.304'), ('fitness', '0.281'), ('fitness', '0.331'), ('fitness', '0.250'), ('workout', '0.363')]
+NV_665.mp4
+[('music', '0.297'), ('music', '0.211'), ('music', '0.268'), ('music', '0.229')]
+NV_8.mp4
+[('korean people', '0.640'), ('korean people', '0.939'), ('korean people', '0.759'), ('usa', '0.203'), ('usa', '0.282')]
+NV_103.mp4
+[('restaurant', '0.422')]
+NV_117.mp4
+[('red', '0.200')]
+NV_671.mp4
+[('music', '0.413'), ('music', '0.346'), ('music', '0.408'), ('music', '0.480'), ('music', '0.413'), ('music', '0.354')]
+NV_659.mp4
+[]
+NV_842.mp4
+[('foodie', '0.284'), ('foodie', '0.244'), ('foodie', '0.242'), ('foodie', '0.275'), ('foodie', '0.240')]
+NV_856.mp4
+[]
+NV_301.mp4
+[('usa', '0.211'), ('usa', '0.205'), ('usa', '0.233'), ('training', '0.374')]
+NV_467.mp4
+[('dance', '0.365'), ('workout', '0.414'), ('dance', '0.359'), ('dance', '0.283'), ('workout', '0.346'), ('workout', '0.226')]
+NV_473.mp4
+[('boxing', '0.357'), ('fun', '0.218'), ('fun', '0.209'), ('sea', '0.255'), ('training', '0.276')]
+NV_315.mp4
+[('fun', '0.201')]
+NV_329.mp4
+[]
+NV_498.mp4
+[('workout', '0.273'), ('dance', '0.251'), ('gym', '0.226')]
+NV_499.mp4
+[('gym', '0.280')]
+NV_328.mp4
+[]
+NV_472.mp4
+[('fun', '0.201'), ('fun', '0.269'), ('fun', '0.220'), ('fun', '0.219'), ('fun', '0.250')]
+NV_314.mp4
+[('fun', '0.218')]
+NV_300.mp4
+[('usa', '0.427'), ('usa', '0.480'), ('usa', '0.544'), ('usa', '0.627')]
+NV_466.mp4
+[]
+NV_857.mp4
+[('smile', '0.218'), ('smile', '0.246'), ('smile', '0.230')]
+NV_843.mp4
+[]
+NV_658.mp4
+[]
+NV_116.mp4
+[]
+NV_670.mp4
+[('music', '0.376'), ('music', '0.294'), ('music', '0.270'), ('music', '0.258'), ('music', '0.247')]
+NV_664.mp4
+[('car', '0.701'), ('car', '0.621'), ('car', '0.527'), ('car', '0.476'), ('car', '0.590'), ('car', '0.602')]
+NV_102.mp4
+[]
+NV_9.mp4
+[('korean people', '0.276'), ('korean people', '0.376'), ('korean people', '0.376')]
+NV_21.mp4
+[('training', '0.581'), ('training', '0.589'), ('training', '0.589'), ('training', '0.531'), ('training', '0.446'), ('training', '0.490'), ('workout', '0.321')]
+NV_923.mp4
+[('fitness', '0.270'), ('workout', '0.250'), ('workout', '0.333'), ('gym', '0.391'), ('workout', '0.276'), ('workout', '0.381'), ('workout', '0.216'), ('fitness', '0.225'), ('gym', '0.239'), ('workout', '0.222'), ('fitness', '0.228'), ('gym', '0.296'), ('fitness', '0.214')]
+NV_937.mp4
+[('workout', '0.212'), ('workout', '0.309'), ('workout', '0.318'), ('music', '0.389'), ('workout', '0.285'), ('workout', '0.285')]
+NV_35.mp4
+[('usa', '0.602'), ('usa', '0.379'), ('usa', '0.310'), ('usa', '0.414'), ('usa', '0.518'), ('usa', '0.366')]
+NV_738.mp4
+[]
+NV_704.mp4
+[('music', '0.226'), ('music', '0.216'), ('christmas', '0.377'), ('christmas', '0.385'), ('christmas', '0.361'), ('christmas', '0.258'), ('christmas', '0.205')]
+NV_710.mp4
+[('music', '0.424'), ('music', '0.466'), ('music', '0.315'), ('music', '0.572'), ('music', '0.291'), ('music', '0.337')]
+NV_248.mp4
+[('dance', '0.235')]
+NV_506.mp4
+[('japan', '0.217')]
+NV_260.mp4
+[('dance', '0.236'), ('dance', '0.253')]
+NV_274.mp4
+[('chinese people', '0.402'), ('chinese people', '0.291'), ('chinese people', '0.435'), ('chinese people', '0.279'), ('chinese people', '0.288')]
+NV_512.mp4
+[('sanitary', '0.353'), ('sanitary', '0.313')]
+NV_262.mp4
+[('flowers', '0.203'), ('flowers', '0.283'), ('flowers', '0.247'), ('flowers', '0.293')]
+NV_504.mp4
+[('restaurant', '0.336'), ('restaurant', '0.402'), ('restaurant', '0.314'), ('restaurant', '0.343'), ('restaurant', '0.406'), ('restaurant', '0.337')]
+NV_510.mp4
+[]
+NV_276.mp4
+[('chinese people', '0.251'), ('chinese people', '0.251'), ('korean people', '0.203'), ('fight', '0.274'), ('fight', '0.332')]
+NV_538.mp4
+[('training', '0.387'), ('gym', '0.295'), ('gym', '0.353')]
+NV_289.mp4
+[('indonesia', '0.231')]
+NV_706.mp4
+[('music', '0.283'), ('music', '0.338'), ('music', '0.259'), ('music', '0.254'), ('music', '0.335'), ('music', '0.323')]
+NV_712.mp4
+[('music', '0.352')]
+NV_921.mp4
+[('bodybuilding', '0.362'), ('fitness', '0.242'), ('bodybuilding', '0.226'), ('bodybuilding', '0.283'), ('bodybuilding', '0.388'), ('bodybuilding', '0.263'), ('fitness', '0.205'), ('bodybuilding', '0.210'), ('fitness', '0.213'), ('fitness', '0.210'), ('fitness', '0.226')]
+NV_23.mp4
+[]
+NV_37.mp4
+[]
+NV_935.mp4
+[('gym', '0.306'), ('gym', '0.429'), ('gym', '0.408'), ('gym', '0.299'), ('gym', '0.263'), ('gym', '0.297'), ('workout', '0.204'), ('workout', '0.227'), ('workout', '0.237'), ('workout', '0.209'), ('workout', '0.210')]
+NV_672.mp4
+[('music', '0.414'), ('music', '0.439')]
+NV_114.mp4
+[('dance', '0.246'), ('dance', '0.313'), ('mood', '0.216'), ('dance', '0.438')]
+NV_100.mp4
+[]
+NV_666.mp4
+[('music', '0.314'), ('music', '0.543'), ('music', '0.605'), ('music', '0.352'), ('music', '0.569'), ('music', '0.543')]
+NV_128.mp4
+[]
+NV_855.mp4
+[]
+NV_841.mp4
+[('makeup', '0.218'), ('foodie', '0.397'), ('foodporn', '0.213')]
+NV_699.mp4
+[('christmas', '0.257'), ('music', '0.254'), ('christmas', '0.277'), ('christmas', '0.284'), ('christmas', '0.288')]
+NV_316.mp4
+[('fun', '0.210'), ('NSFW', '0.434')]
+NV_470.mp4
+[('training', '0.204'), ('training', '0.252'), ('gym', '0.312')]
+NV_464.mp4
+[('dance', '0.567'), ('dance', '0.345'), ('dance', '0.335'), ('dance', '0.456'), ('training', '0.405'), ('dance', '0.334'), ('training', '0.202'), ('dance', '0.204'), ('training', '0.303')]
+NV_302.mp4
+[('This photo contains violence.', '0.366')]
+NV_458.mp4
+[('sanitary', '0.228'), ('music', '0.235'), ('sanitary', '0.262')]
+NV_459.mp4
+[('dinner', '0.252'), ('dinner', '0.206')]
+NV_465.mp4
+[('gym', '0.223'), ('gym', '0.218'), ('dance', '0.325'), ('dance', '0.319'), ('gym', '0.279')]
+NV_303.mp4
+[('usa', '0.201'), ('usa', '0.472'), ('usa', '0.415'), ('usa', '0.343')]
+NV_317.mp4
+[('fun', '0.237'), ('NSFW', '0.400')]
+NV_471.mp4
+[('fun', '0.218'), ('fun', '0.218'), ('car', '0.220')]
+NV_698.mp4
+[('christmas', '0.381'), ('music', '0.473'), ('music', '0.219'), ('music', '0.232')]
+NV_840.mp4
+[('foodie', '0.203'), ('italian food', '0.354'), ('foodie', '0.211'), ('foodie', '0.252'), ('italian food', '0.303'), ('foodie', '0.239')]
+NV_854.mp4
+[]
+NV_129.mp4
+[]
+NV_101.mp4
+[]
+NV_667.mp4
+[('meme', '0.202')]
+NV_673.mp4
+[('music', '0.371'), ('meme', '0.253'), ('music', '0.313'), ('music', '0.345')]
+NV_115.mp4
+[]
+NV_36.mp4
+[('usa', '0.563'), ('usa', '0.491'), ('usa', '0.463')]
+NV_934.mp4
+[('fitness', '0.285'), ('fitness', '0.278'), ('fitness', '0.284'), ('fitness', '0.333'), ('fitness', '0.255'), ('fitness', '0.296')]
+NV_920.mp4
+[('bodybuilding', '0.295'), ('bodybuilding', '0.297'), ('bodybuilding', '0.318'), ('bodybuilding', '0.343'), ('workout', '0.332'), ('bodybuilding', '0.297'), ('fitness', '0.221'), ('fitness', '0.219')]
+NV_22.mp4
+[]
+NV_713.mp4
+[]
+NV_707.mp4
+[('music', '0.434'), ('music', '0.232')]
+NV_288.mp4
+[]
+NV_539.mp4
+[('gym', '0.459'), ('gym', '0.312'), ('fun', '0.210'), ('gym', '0.469'), ('fun', '0.737'), ('gym', '0.337')]
+NV_511.mp4
+[]
+NV_277.mp4
+[('korean people', '0.267'), ('korean people', '0.314')]
+NV_263.mp4
+[('flowers', '0.207')]
+NV_505.mp4
+[('beach', '0.277'), ('beach', '0.304'), ('beach', '0.320'), ('workout', '0.216'), ('workout', '0.275'), ('beach', '0.288')]
+NV_238.mp4
+[]
+NV_204.mp4
+[]
+NV_562.mp4
+[]
+NV_576.mp4
+[('filthy', '0.209'), ('cats', '0.761')]
+NV_210.mp4
+[]
+NV_589.mp4
+[]
+NV_984.mp4
+[('workout', '0.405'), ('workout', '0.656'), ('workout', '0.549'), ('workout', '0.434'), ('workout', '0.493'), ('workout', '0.584'), ('fitness', '0.208'), ('fitness', '0.250'), ('fitness', '0.224')]
+NV_86.mp4
+[]
+NV_92.mp4
+[('sky', '0.217')]
+NV_990.mp4
+[]
+NV_748.mp4
+[]
+NV_760.mp4
+[]
+NV_774.mp4
+[('dinner', '0.374'), ('foodie', '0.261'), ('dinner', '0.203'), ('mexican', '0.380'), ('mexican', '0.347'), ('foodie', '0.268'), ('restaurant', '0.213'), ('dinner', '0.226'), ('dinner', '0.257')]
+NV_947.mp4
+[('gym', '0.485'), ('gym', '0.289'), ('workout', '0.305'), ('gym', '0.477'), ('gym', '0.495'), ('gym', '0.320'), ('workout', '0.244'), ('workout', '0.239'), ('gym', '0.237'), ('workout', '0.241'), ('workout', '0.238'), ('workout', '0.279'), ('fitness', '0.228')]
+NV_45.mp4
+[]
+NV_51.mp4
+[('model', '0.202')]
+NV_953.mp4
+[('training', '0.279'), ('training', '0.282'), ('gym', '0.243'), ('workout', '0.348'), ('training', '0.282'), ('boxing', '0.377'), ('boxing', '0.248'), ('workout', '0.223'), ('gym', '0.256')]
+NV_79.mp4
+[]
+NV_628.mp4
+[]
+NV_614.mp4
+[('music', '0.212'), ('music', '0.281'), ('music', '0.231'), ('music', '0.276')]
+NV_172.mp4
+[]
+NV_166.mp4
+[('meme', '0.225')]
+NV_600.mp4
+[]
+NV_833.mp4
+[('italian food', '0.356'), ('italian food', '0.282'), ('italian food', '0.346'), ('foodie', '0.202'), ('italian food', '0.303'), ('foodie', '0.243'), ('restaurant', '0.206')]
+NV_199.mp4
+[]
+NV_827.mp4
+[]
+NV_358.mp4
+[]
+NV_370.mp4
+[('photographer', '0.333'), ('photographer', '0.209'), ('photographer', '0.471'), ('photographer', '0.405')]
+NV_416.mp4
+[]
+NV_402.mp4
+[]
+NV_364.mp4
+[('photographer', '0.778'), ('photographer', '0.608'), ('photographer', '0.772'), ('photographer', '0.759'), ('photographer', '0.790'), ('photographer', '0.801')]
+NV_403.mp4
+[]
+NV_365.mp4
+[('nature', '0.208')]
+NV_371.mp4
+[('photographer', '0.442'), ('photographer', '0.379'), ('photographer', '0.464')]
+NV_417.mp4
+[('selfie', '0.313')]
+NV_359.mp4
+[('fashionblogger', '0.399'), ('fashionblogger', '0.391'), ('fashionblogger', '0.227')]
+NV_198.mp4
+[('flowers', '0.393'), ('japan', '0.213'), ('flowers', '0.435'), ('flowers', '0.244')]
+NV_826.mp4
+[('restaurant', '0.213'), ('artist', '0.428')]
+NV_832.mp4
+[('foodie', '0.330'), ('foodie', '0.224'), ('foodie', '0.273'), ('foodie', '0.310'), ('foodie', '0.299'), ('foodie', '0.220')]
+NV_167.mp4
+[]
+NV_601.mp4
+[]
+NV_615.mp4
+[('music', '0.275')]
+NV_173.mp4
+[]
+NV_629.mp4
+[]
+NV_78.mp4
+[]
+NV_50.mp4
+[]
+NV_952.mp4
+[('bodybuilding', '0.236'), ('bodybuilding', '0.294'), ('bodybuilding', '0.294'), ('gym', '0.224'), ('bodybuilding', '0.220'), ('bodybuilding', '0.239'), ('gym', '0.212')]
+NV_946.mp4
+[('workout', '0.245'), ('workout', '0.235'), ('workout', '0.272'), ('workout', '0.277'), ('workout', '0.341'), ('training', '0.207')]
+NV_44.mp4
+[('red', '0.277'), ('red', '0.221'), ('pink', '0.250')]
+NV_775.mp4
+[('foodporn', '0.251'), ('foodporn', '0.244'), ('foodporn', '0.371'), ('foodporn', '0.284'), ('foodporn', '0.505'), ('foodporn', '0.570')]
+NV_761.mp4
+[('indonesia', '0.217'), ('indonesia', '0.405'), ('indonesia', '0.535'), ('sea', '0.370'), ('indonesia', '0.280')]
+NV_93.mp4
+[('red', '0.284')]
+NV_749.mp4
+[('music', '0.658'), ('music', '0.654'), ('music', '0.595'), ('music', '0.209')]
+NV_991.mp4
+[('portrait', '0.213'), ('portrait', '0.231'), ('portrait', '0.247')]
+NV_985.mp4
+[('workout', '0.465'), ('workout', '0.474'), ('workout', '0.486'), ('workout', '0.538'), ('workout', '0.440'), ('workout', '0.465'), ('fitness', '0.324'), ('gym', '0.237'), ('fitness', '0.291'), ('fitness', '0.324')]
+NV_87.mp4
+[]
+NV_588.mp4
+[]
+NV_577.mp4
+[('sanitary', '0.389')]
+NV_211.mp4
+[('NSFW', '0.367'), ('NSFW', '0.231'), ('NSFW', '0.225'), ('NSFW', '0.277'), ('NSFW', '0.303')]
+NV_205.mp4
+[]
+NV_563.mp4
+[('filthy', '0.218'), ('filthy', '0.258')]
+NV_239.mp4
+[('dance', '0.385'), ('dance', '0.296')]
+NV_549.mp4
+[('filthy', '0.230')]
+NV_213.mp4
+[('music', '0.209')]
+NV_575.mp4
+[('filthy', '0.225'), ('filthy', '0.242'), ('filthy', '0.320'), ('filthy', '0.316'), ('filthy', '0.223'), ('filthy', '0.257')]
+NV_561.mp4
+[]
+NV_207.mp4
+[('red', '0.361'), ('red', '0.231'), ('red', '0.372')]
+NV_993.mp4
+[('training', '0.206'), ('training', '0.217'), ('training', '0.251'), ('training', '0.221')]
+NV_91.mp4
+[('usa', '0.224')]
+NV_85.mp4
+[('chinese people', '0.596'), ('chinese people', '0.321'), ('chinese people', '0.328'), ('chinese people', '0.369'), ('japanese people', '0.334')]
+NV_987.mp4
+[('workout', '0.298'), ('workout', '0.339'), ('fitness', '0.321'), ('fitness', '0.294'), ('workout', '0.321')]
+NV_777.mp4
+[('restaurant', '0.380'), ('restaurant', '0.594'), ('restaurant', '0.380'), ('restaurant', '0.217'), ('restaurant', '0.293')]
+NV_763.mp4
+[('food', '0.317'), ('food', '0.317'), ('food', '0.224'), ('food', '0.317'), ('food', '0.317'), ('food', '0.224'), ('foodporn', '0.216')]
+NV_788.mp4
+[('restaurant', '0.285'), ('restaurant', '0.241'), ('restaurant', '0.652'), ('restaurant', '0.408'), ('restaurant', '0.469'), ('foodporn', '0.217')]
+NV_950.mp4
+[('fitness', '0.392'), ('workout', '0.375'), ('workout', '0.439'), ('workout', '0.396'), ('workout', '0.476'), ('workout', '0.401'), ('workout', '0.289'), ('fitness', '0.281'), ('fitness', '0.250'), ('fitness', '0.264'), ('fitness', '0.272'), ('fitness', '0.327')]
+NV_52.mp4
+[]
+NV_46.mp4
+[('japan', '0.285')]
+NV_944.mp4
+[('workout', '0.347'), ('workout', '0.281'), ('workout', '0.217'), ('workout', '0.307'), ('workout', '0.306'), ('training', '0.247'), ('fitness', '0.239')]
+NV_978.mp4
+[('fitness', '0.277'), ('workout', '0.301'), ('workout', '0.378'), ('workout', '0.289'), ('workout', '0.354'), ('workout', '0.289'), ('workout', '0.263'), ('fitness', '0.240'), ('fitness', '0.228'), ('fitness', '0.217'), ('fitness', '0.239'), ('fitness', '0.258')]
+NV_159.mp4
+[]
+NV_603.mp4
+[('music', '0.200')]
+NV_165.mp4
+[('cats', '0.268')]
+NV_171.mp4
+[]
+NV_617.mp4
+[]
+NV_824.mp4
+[('indonesia', '0.761'), ('indonesia', '0.780'), ('indonesia', '0.726'), ('indonesia', '0.727'), ('indonesia', '0.224')]
+NV_830.mp4
+[]
+NV_818.mp4
+[('foodie', '0.241'), ('foodie', '0.275'), ('foodie', '0.227'), ('dinner', '0.280'), ('dinner', '0.243'), ('foodie', '0.336'), ('dinner', '0.222'), ('foodie', '0.258'), ('restaurant', '0.240')]
+NV_429.mp4
+[]
+NV_367.mp4
+[('art', '0.233')]
+NV_401.mp4
+[]
+NV_415.mp4
+[]
+NV_373.mp4
+[]
+NV_398.mp4
+[('dance', '0.228')]
+NV_399.mp4
+[]
+NV_414.mp4
+[('violence', '0.247'), ('fight', '0.239')]
+NV_372.mp4
+[('photographer', '0.252')]
+NV_366.mp4
+[]
+NV_400.mp4
+[]
+NV_428.mp4
+[]
+NV_819.mp4
+[('restaurant', '0.357'), ('restaurant', '0.556'), ('italian food', '0.271'), ('restaurant', '0.371'), ('restaurant', '0.354')]
+NV_831.mp4
+[('italian food', '0.244'), ('foodie', '0.277'), ('foodporn', '0.205'), ('foodie', '0.301'), ('foodporn', '0.205'), ('foodie', '0.403')]
+NV_825.mp4
+[]
+NV_170.mp4
+[]
+NV_616.mp4
+[('music', '0.265'), ('music', '0.315'), ('music', '0.258'), ('music', '0.209')]
+NV_164.mp4
+[]
+NV_158.mp4
+[('cats', '0.306'), ('cats', '0.344'), ('cats', '0.236')]
+NV_979.mp4
+[('workout', '0.405'), ('workout', '0.402'), ('workout', '0.454'), ('workout', '0.363'), ('gym', '0.494'), ('gym', '0.346'), ('gym', '0.376'), ('gym', '0.361'), ('gym', '0.289'), ('gym', '0.351'), ('workout', '0.265'), ('workout', '0.257')]
+NV_47.mp4
+[]
+NV_945.mp4
+[('workout', '0.246'), ('workout', '0.426'), ('workout', '0.251'), ('workout', '0.390'), ('training', '0.231'), ('workout', '0.314'), ('fitness', '0.220')]
+NV_951.mp4
+[('gym', '0.502'), ('gym', '0.308'), ('gym', '0.475'), ('gym', '0.770'), ('gym', '0.770'), ('gym', '0.482'), ('workout', '0.225'), ('workout', '0.210')]
+NV_789.mp4
+[('italian food', '0.354'), ('italian food', '0.318'), ('italian food', '0.645'), ('italian food', '0.352'), ('italian food', '0.478'), ('italian food', '0.459'), ('restaurant', '0.203'), ('italian', '0.207')]
+NV_53.mp4
+[]
+NV_762.mp4
+[]
+NV_776.mp4
+[('chinese food', '0.221'), ('chinese food', '0.224'), ('chinese food', '0.221'), ('oysters', '0.616')]
+NV_84.mp4
+[]
+NV_986.mp4
+[('workout', '0.301'), ('workout', '0.238'), ('workout', '0.229'), ('workout', '0.270'), ('fitness', '0.256'), ('fitness', '0.223')]
+NV_992.mp4
+[('model', '0.677'), ('music', '0.234'), ('music', '0.235'), ('music', '0.455')]
+NV_90.mp4
+[]
+NV_560.mp4
+[('filthy', '0.219'), ('filthy', '0.223')]
+NV_206.mp4
+[]
+NV_212.mp4
+[]
+NV_574.mp4
+[('filthy', '0.275'), ('filthy', '0.209'), ('filthy', '0.336'), ('filthy', '0.256'), ('filthy', '0.248'), ('filthy', '0.310')]
+NV_548.mp4
+[('filthy', '0.251'), ('filthy', '0.218'), ('filthy', '0.218'), ('fun', '0.213')]
+NV_570.mp4
+[('filthy', '0.278')]
+NV_216.mp4
+[]
+NV_202.mp4
+[]
+NV_564.mp4
+[('filthy', '0.228'), ('filthy', '0.259')]
+NV_558.mp4
+[('filthy', '0.230'), ('filthy', '0.323'), ('filthy', '0.255'), ('filthy', '0.277'), ('filthy', '0.209')]
+NV_772.mp4
+[('foodporn', '0.632'), ('foodporn', '0.721'), ('foodporn', '0.404'), ('foodporn', '0.721'), ('chinese food', '0.500')]
+NV_766.mp4
+[('oysters', '0.433'), ('oysters', '0.452'), ('foodporn', '0.432'), ('oysters', '0.434'), ('oysters', '0.535'), ('foodporn', '0.209'), ('oysters', '0.264'), ('foodporn', '0.210'), ('foodporn', '0.217')]
+NV_94.mp4
+[]
+NV_996.mp4
+[]
+NV_982.mp4
+[('workout', '0.215'), ('workout', '0.200'), ('gym', '0.249')]
+NV_80.mp4
+[]
+NV_969.mp4
+[('gym', '0.435'), ('fitness', '0.315'), ('gym', '0.273'), ('gym', '0.385'), ('gym', '0.355'), ('gym', '0.385'), ('workout', '0.201')]
+NV_57.mp4
+[]
+NV_955.mp4
+[('workout', '0.396'), ('workout', '0.501'), ('workout', '0.384'), ('workout', '0.415'), ('workout', '0.315'), ('workout', '0.337'), ('fitness', '0.213'), ('fitness', '0.244'), ('training', '0.212')]
+NV_799.mp4
+[('restaurant', '0.363'), ('restaurant', '0.418'), ('restaurant', '0.400'), ('restaurant', '0.415')]
+NV_941.mp4
+[('gym', '0.564'), ('gym', '0.503'), ('gym', '0.537'), ('gym', '0.664'), ('gym', '0.441'), ('gym', '0.498'), ('workout', '0.265'), ('workout', '0.204'), ('workout', '0.208'), ('workout', '0.233'), ('workout', '0.218')]
+NV_43.mp4
+[]
+NV_160.mp4
+[('cats', '0.253'), ('cats', '0.222'), ('cat', '0.292'), ('cats', '0.289')]
+NV_606.mp4
+[]
+NV_612.mp4
+[('amor', '0.245')]
+NV_174.mp4
+[('red', '0.348')]
+NV_148.mp4
+[('interior design', '0.284'), ('interior design', '0.575'), ('interior design', '0.218')]
+NV_809.mp4
+[('winter', '0.234'), ('winter', '0.295')]
+NV_821.mp4
+[('chinese food', '0.255'), ('foodporn', '0.202'), ('foodporn', '0.218'), ('chinese food', '0.266')]
+NV_835.mp4
+[('foodie', '0.215'), ('foodie', '0.282'), ('foodie', '0.277'), ('foodie', '0.244')]
+NV_404.mp4
+[('violence', '0.322')]
+NV_362.mp4
+[('amor', '0.335'), ('amor', '0.484'), ('amor', '0.221')]
+NV_376.mp4
+[('photographer', '0.899')]
+NV_410.mp4
+[]
+NV_438.mp4
+[]
+NV_389.mp4
+[]
+NV_388.mp4
+[('flowers', '0.359'), ('flowers', '0.375'), ('flowers', '0.368'), ('flowers', '0.386'), ('flowers', '0.353')]
+NV_439.mp4
+[]
+NV_377.mp4
+[('photographer', '0.281'), ('photographer', '0.286'), ('photographer', '0.389')]
+NV_411.mp4
+[]
+NV_405.mp4
+[('dog', '0.847')]
+NV_363.mp4
+[('photo', '0.236'), ('photo', '0.219'), ('photo', '0.262'), ('photo', '0.272'), ('photo', '0.236')]
+NV_834.mp4
+[('foodie', '0.263'), ('foodie', '0.217'), ('italian food', '0.460'), ('foodie', '0.285'), ('italian food', '0.311'), ('italian food', '0.204'), ('foodie', '0.235')]
+NV_820.mp4
+[('dinner', '0.289'), ('thai', '0.209'), ('dinner', '0.293'), ('thai', '0.256'), ('dinner', '0.339'), ('dinner', '0.381')]
+NV_808.mp4
+[]
+NV_149.mp4
+[]
+NV_613.mp4
+[]
+NV_175.mp4
+[]
+NV_161.mp4
+[('art', '0.221'), ('smile', '0.220')]
+NV_607.mp4
+[('music', '0.259'), ('amor', '0.202'), ('amor', '0.219'), ('music', '0.281')]
+NV_940.mp4
+[('workout', '0.202'), ('workout', '0.214'), ('workout', '0.202')]
+NV_798.mp4
+[('foodporn', '0.368'), ('coffee', '0.235'), ('coffee', '0.433'), ('foodporn', '0.447'), ('foodporn', '0.450'), ('foodporn', '0.348')]
+NV_42.mp4
+[('usa', '0.498'), ('usa', '0.498'), ('bodybuilding', '0.216'), ('bodybuilding', '0.232'), ('usa', '0.358'), ('bodybuilding', '0.267'), ('usa', '0.207')]
+NV_56.mp4
+[('red', '0.208')]
+NV_954.mp4
+[('workout', '0.247'), ('workout', '0.245'), ('workout', '0.223'), ('workout', '0.281'), ('workout', '0.247'), ('workout', '0.303'), ('training', '0.212'), ('gym', '0.235'), ('fitness', '0.235')]
+NV_968.mp4
+[('gym', '0.391'), ('gym', '0.354'), ('gym', '0.478'), ('workout', '0.253'), ('workout', '0.209'), ('gym', '0.351'), ('workout', '0.205'), ('workout', '0.313'), ('workout', '0.223'), ('training', '0.208'), ('training', '0.204'), ('workout', '0.321')]
+NV_983.mp4
+[('workout', '0.473'), ('workout', '0.425'), ('workout', '0.501'), ('workout', '0.465'), ('workout', '0.501'), ('workout', '0.535'), ('fitness', '0.233'), ('fitness', '0.324'), ('fitness', '0.219'), ('fitness', '0.291'), ('fitness', '0.219')]
+NV_81.mp4
+[('boy', '0.298'), ('boy', '0.300'), ('boy', '0.307')]
+NV_95.mp4
+[]
+NV_997.mp4
+[]
+NV_767.mp4
+[('restaurant', '0.312'), ('restaurant', '0.558'), ('restaurant', '0.341'), ('foodie', '0.299'), ('restaurant', '0.303'), ('thai', '0.212')]
+NV_773.mp4
+[('italian food', '0.285'), ('dinner', '0.233'), ('dinner', '0.312'), ('foodie', '0.252'), ('restaurant', '0.201')]
+NV_559.mp4
+[('filthy', '0.243')]
+NV_203.mp4
+[('fashion', '0.255'), ('dance', '0.310')]
+NV_565.mp4
+[('filthy', '0.271'), ('filthy', '0.235'), ('filthy', '0.229'), ('filthy', '0.208')]
+NV_571.mp4
+[('filthy', '0.221'), ('filthy', '0.211')]
+NV_217.mp4
+[('model', '0.207')]
+NV_567.mp4
+[]
+NV_201.mp4
+[]
+NV_215.mp4
+[('style', '0.215'), ('style', '0.247')]
+NV_573.mp4
+[('filthy', '0.326'), ('filthy', '0.274'), ('filthy', '0.318'), ('filthy', '0.266'), ('filthy', '0.320'), ('filthy', '0.321')]
+NV_229.mp4
+[]
+NV_598.mp4
+[('music', '0.282'), ('music', '0.307'), ('music', '0.218'), ('music', '0.242'), ('music', '0.267')]
+NV_765.mp4
+[('chinese food', '0.241'), ('chinese food', '0.320'), ('chinese food', '0.214'), ('chinese food', '0.248'), ('chinese food', '0.305'), ('foodporn', '0.206'), ('restaurant', '0.226')]
+NV_771.mp4
+[('foodie', '0.223'), ('foodie', '0.235'), ('foodie', '0.220'), ('foodie', '0.297'), ('foodie', '0.323'), ('foodie', '0.292')]
+NV_83.mp4
+[('nudity', '0.345')]
+NV_981.mp4
+[('workout', '0.523'), ('workout', '0.478'), ('workout', '0.528'), ('workout', '0.423'), ('workout', '0.471'), ('workout', '0.523'), ('fitness', '0.242'), ('fitness', '0.209'), ('fitness', '0.224'), ('fitness', '0.252'), ('fitness', '0.249'), ('fitness', '0.242')]
+NV_759.mp4
+[('meme', '0.251')]
+NV_995.mp4
+[]
+NV_97.mp4
+[]
+NV_68.mp4
+[('fight', '0.226')]
+NV_40.mp4
+[]
+NV_942.mp4
+[('gym', '0.315'), ('gym', '0.315'), ('gym', '0.497'), ('gym', '0.488'), ('gym', '0.251'), ('workout', '0.315'), ('workout', '0.280'), ('workout', '0.280'), ('workout', '0.214'), ('workout', '0.256'), ('gym', '0.275'), ('training', '0.206'), ('training', '0.206')]
+NV_956.mp4
+[('fitness', '0.278'), ('gym', '0.238'), ('gym', '0.201'), ('workout', '0.510'), ('gym', '0.246'), ('workout', '0.279'), ('workout', '0.255'), ('fitness', '0.206'), ('training', '0.241'), ('fitness', '0.253')]
+NV_54.mp4
+[]
+NV_177.mp4
+[]
+NV_611.mp4
+[('music', '0.289'), ('meme', '0.215'), ('music', '0.264'), ('music', '0.290')]
+NV_605.mp4
+[]
+NV_163.mp4
+[('car', '0.608'), ('car', '0.246'), ('car', '0.323'), ('car', '0.531'), ('car', '0.341'), ('car', '0.310')]
+NV_639.mp4
+[]
+NV_188.mp4
+[]
+NV_836.mp4
+[('foodporn', '0.352'), ('foodie', '0.273'), ('foodporn', '0.415'), ('foodie', '0.263'), ('foodie', '0.202'), ('foodie', '0.201'), ('foodporn', '0.257')]
+NV_822.mp4
+[]
+NV_413.mp4
+[('dog', '0.327'), ('dog', '0.294')]
+NV_375.mp4
+[('photographer', '0.717')]
+NV_361.mp4
+[]
+NV_407.mp4
+[('car', '0.230'), ('NSFW', '0.362'), ('car', '0.207')]
+NV_349.mp4
+[]
+NV_348.mp4
+[]
+NV_360.mp4
+[('shoes', '0.249')]
+NV_406.mp4
+[('art', '0.208'), ('photographer', '0.469'), ('photographer', '0.219'), ('photographer', '0.353')]
+NV_412.mp4
+[]
+NV_374.mp4
+[]
+NV_823.mp4
+[('indonesia', '0.471'), ('indonesia', '0.266'), ('sea', '0.388'), ('indonesia', '0.201'), ('sea', '0.376'), ('indonesia', '0.474')]
+NV_189.mp4
+[]
+NV_837.mp4
+[('foodie', '0.278'), ('mexican', '0.260'), ('mexican', '0.588')]
+NV_638.mp4
+[]
+NV_604.mp4
+[('music', '0.210'), ('london', '0.306'), ('music', '0.215')]
+NV_162.mp4
+[('art', '0.226'), ('friends', '0.240'), ('friends', '0.312')]
+NV_176.mp4
+[]
+NV_610.mp4
+[('music', '0.213')]
+NV_957.mp4
+[('workout', '0.425'), ('workout', '0.406'), ('training', '0.568'), ('workout', '0.415'), ('workout', '0.296'), ('workout', '0.348'), ('training', '0.200'), ('workout', '0.241'), ('training', '0.366'), ('training', '0.287')]
+NV_55.mp4
+[]
+NV_41.mp4
+[('boy', '0.240'), ('boy', '0.241'), ('boy', '0.227'), ('boy', '0.428')]
+NV_943.mp4
+[('workout', '0.338'), ('workout', '0.376'), ('workout', '0.336'), ('gym', '0.378'), ('workout', '0.237'), ('workout', '0.314'), ('gym', '0.282'), ('gym', '0.229'), ('gym', '0.277'), ('workout', '0.316'), ('gym', '0.225'), ('gym', '0.206'), ('fitness', '0.200'), ('training', '0.213')]
+NV_69.mp4
+[('red', '0.206')]
+NV_994.mp4
+[('training', '0.210'), ('training', '0.228'), ('training', '0.217'), ('training', '0.204'), ('training', '0.245')]
+NV_96.mp4
+[]
+NV_82.mp4
+[]
+NV_758.mp4
+[]
+NV_980.mp4
+[('workout', '0.342'), ('workout', '0.303'), ('workout', '0.249'), ('workout', '0.314'), ('workout', '0.360'), ('workout', '0.313'), ('fitness', '0.308'), ('fitness', '0.240'), ('fitness', '0.249'), ('fitness', '0.268'), ('fitness', '0.220')]
+NV_770.mp4
+[('chinese food', '0.315'), ('chinese food', '0.228'), ('restaurant', '0.239'), ('foodporn', '0.413'), ('chinese food', '0.495'), ('restaurant', '0.294')]
+NV_764.mp4
+[]
+NV_599.mp4
+[]
+NV_228.mp4
+[('dance', '0.216'), ('dance', '0.394')]
+NV_214.mp4
+[]
+NV_572.mp4
+[('NSFW', '0.241'), ('filthy', '0.279'), ('NSFW', '0.303'), ('filthy', '0.204')]
+NV_566.mp4
+[]
+NV_200.mp4
+[]

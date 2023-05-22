@@ -7,7 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/constants/configs.dart';
 import 'package:surfify/features/video/views/video_create/video_preview_screen.dart';
+import 'package:http/http.dart' as http;
 
 class VideoCreateScreen extends StatefulWidget {
   const VideoCreateScreen({super.key});
@@ -160,6 +162,30 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
     _isRecording = false;
     final video = await _cameraController.stopVideoRecording();
 
+    List<int> videoBytes = await video.readAsBytes();
+    var mFile = http.MultipartFile.fromBytes(
+      'video',
+      videoBytes,
+      filename: 'video.mp4',
+    );
+    var request = http.MultipartRequest('POST',Uri.parse(Configs.INFERENCE_SERVER_IP+'/predict_video'));
+    request.files.add(mFile);
+
+    String resStr;
+    try {
+        var res = await request.send();
+        if (res.statusCode == 200){
+          resStr = await res.stream.bytesToString();
+        }
+        else{
+          resStr = "Empty";
+          print("Failed with $res.statusCode");
+        }
+    } catch (e){
+        resStr = "Empty";
+        print(e);
+    }
+
     if (!mounted) return;
 
     Navigator.push(
@@ -167,6 +193,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       MaterialPageRoute(
         builder: (context) => VideoPreviewScreen(
           video: video,
+          resStr: resStr,
         ),
       ),
     );
@@ -187,6 +214,30 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       return;
     }
 
+    List<int> videoBytes = await video.readAsBytes();
+    var mFile = http.MultipartFile.fromBytes(
+      'video',
+      videoBytes,
+      filename: 'video.mp4',
+    );
+    var request = http.MultipartRequest('POST',Uri.parse(Configs.INFERENCE_SERVER_IP+'/predict_video'));
+    request.files.add(mFile);
+
+    String resStr;
+    try {
+        var res = await request.send();
+        if (res.statusCode == 200){
+          resStr = await res.stream.bytesToString();
+        }
+        else{
+          resStr = "Empty";
+          print("Failed with $res.statusCode");
+        }
+    } catch (e){
+        resStr = "Empty";
+        print(e);
+    }
+
     if (!mounted) return;
 
     Navigator.push(
@@ -194,6 +245,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       MaterialPageRoute(
         builder: (context) => VideoPreviewScreen(
           video: video,
+          resStr: resStr,
         ),
       ),
     );
