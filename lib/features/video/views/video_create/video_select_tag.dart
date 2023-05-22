@@ -87,12 +87,13 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   Widget build(BuildContext context) {
     String resultsText = "";
     if (widget.resStr != "Empty") {
-        List<dynamic> resJson = jsonDecode(widget.resStr);
-        for (List<dynamic> result in resJson){
-          String label = result[0];
-          String confidence = result[1];
-          resultsText += "Label: $label, Confidence: $confidence\n";
-        }
+      List<dynamic> resJson = jsonDecode(widget.resStr);
+      for (List<dynamic> result in resJson) {
+        String label = result[0];
+        String confidence = result[1];
+        resultsText += "Label: $label, Confidence: $confidence\n";
+      }
+      print(resultsText);
     }
 
     final size = MediaQuery.of(context).size;
@@ -150,7 +151,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
                     ),
                     Text(
                       resultsText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: Sizes.size16,
                         fontWeight: FontWeight.bold,
                         color: Colors.black45,
