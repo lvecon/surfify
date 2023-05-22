@@ -96,6 +96,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
     _cameraController = CameraController(
       cameras[_isSelfieMode ? 1 : 0],
       ResolutionPreset.medium,
+
       // enableAudio: false,
     );
 
@@ -168,22 +169,22 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       videoBytes,
       filename: 'video.mp4',
     );
-    var request = http.MultipartRequest('POST',Uri.parse(Configs.INFERENCE_SERVER_IP+'/predict_video'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Configs.INFERENCE_SERVER_IP}/predict_video'));
     request.files.add(mFile);
 
     String resStr;
     try {
-        var res = await request.send();
-        if (res.statusCode == 200){
-          resStr = await res.stream.bytesToString();
-        }
-        else{
-          resStr = "Empty";
-          print("Failed with $res.statusCode");
-        }
-    } catch (e){
+      var res = await request.send();
+      if (res.statusCode == 200) {
+        resStr = await res.stream.bytesToString();
+      } else {
         resStr = "Empty";
-        print(e);
+        print("Failed with $res.statusCode");
+      }
+    } catch (e) {
+      resStr = "Empty";
+      print(e);
     }
 
     if (!mounted) return;
@@ -220,22 +221,22 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       videoBytes,
       filename: 'video.mp4',
     );
-    var request = http.MultipartRequest('POST',Uri.parse(Configs.INFERENCE_SERVER_IP+'/predict_video'));
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Configs.INFERENCE_SERVER_IP}/predict_video'));
     request.files.add(mFile);
 
     String resStr;
     try {
-        var res = await request.send();
-        if (res.statusCode == 200){
-          resStr = await res.stream.bytesToString();
-        }
-        else{
-          resStr = "Empty";
-          print("Failed with $res.statusCode");
-        }
-    } catch (e){
+      var res = await request.send();
+      if (res.statusCode == 200) {
+        resStr = await res.stream.bytesToString();
+      } else {
         resStr = "Empty";
-        print(e);
+        print("Failed with $res.statusCode");
+      }
+    } catch (e) {
+      resStr = "Empty";
+      print(e);
     }
 
     if (!mounted) return;

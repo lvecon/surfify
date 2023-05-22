@@ -71,7 +71,6 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       duration: _scrollDuration,
       curve: _scrollCurve,
     );
-    print("mex");
   }
 
   bool checkUserandHashTags(
@@ -118,9 +117,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   StreamSubscription<CompassEvent>? stream;
 
   void _handleCompassEvent(CompassEvent event) {
-    if (ref.watch(compassProvider) || overViewMode) {
+    setState(() {
       _direction = event.heading ?? 0.0;
-      var prev = heading;
+      var prev = _direction;
       if (_direction >= 315 || _direction <= 45) {
         heading = 1;
       }
@@ -134,15 +133,13 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         heading = 4;
       }
       if (prev != heading) {
-        setState(() {
-          ref
-              .watch(directionProvider(
-                      '126.95236219241595,37.458938402839834,$heading')
-                  .notifier)
-              .refresh(heading);
-        });
+        ref
+            .watch(directionProvider(
+                    '126.95236219241595,37.458938402839834,$heading')
+                .notifier)
+            .refresh(heading);
       }
-    }
+    });
   }
 
   @override
@@ -173,11 +170,11 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         print(details.scale);
       },
       onScaleEnd: (details) {
-        if (_scaleFactor > 1.5) {
+        if (_scaleFactor > 0.2) {
           setState(() {
             overViewMode = true;
           });
-        } else if (_scaleFactor < 0.9) {
+        } else if (_scaleFactor < 0.2) {
           setState(() {
             overViewMode = false;
           });

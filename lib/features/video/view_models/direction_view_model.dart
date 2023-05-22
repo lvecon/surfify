@@ -107,7 +107,7 @@ bool checkBearing(double lat, double lon, double lat2, double lon2, int mode) {
     lat2,
     lon2,
   );
-  print(bearing);
+  // print(bearing);
   if (mode == 1 && bearing >= -45 && bearing <= 45) {
     //north
     return true;
