@@ -246,8 +246,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                     '이 방향으로는 서핑포인트가 없어요',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       fontSize: Sizes.size24,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 )
