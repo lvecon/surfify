@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -25,24 +26,36 @@ class SocialAuthViewModel extends AsyncNotifier<void> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final userCredential = await _repository.googleSignIn();
-      await users.createAccount(userCredential);
+      if (ref.read(usersProvider(uid)).value == null) {
+        await users.createAccount(userCredential);
+      }
     });
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
+    } else if (ref.read(usersProvider(uid)).value!.serviceAgree == true) {
+      context.go(MainNavigationScreen.routeName);
     } else {
       context.go(PolicyAgreementScreen.routeName);
     }
   }
 
   Future<void> googleSignIn(BuildContext context) async {
+    late final uid = ref.read(authRepo).user!.uid;
+    late final users = ref.read(usersProvider(uid).notifier);
+
+    late final UserCredential userCredential;
+
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      await _repository.googleSignIn();
+      userCredential = await _repository.googleSignIn();
     });
     if (state.hasError) {
       showFirebaseErrorSnack(context, state.error);
-    } else {
+    } else if (ref.read(usersProvider(uid)).value != null) {
       context.go(MainNavigationScreen.routeName);
+    } else {
+      await users.createAccount(userCredential);
+      context.go(PolicyAgreementScreen.routeName);
     }
   }
 }

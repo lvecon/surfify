@@ -35,6 +35,8 @@ class VideoPost extends ConsumerStatefulWidget {
   final bool radar;
   final bool now;
   final bool luckyMode;
+  final double currentLatitude;
+  final double currentLongitude;
 
   const VideoPost({
     super.key,
@@ -44,6 +46,8 @@ class VideoPost extends ConsumerStatefulWidget {
     required this.radar,
     required this.now,
     required this.luckyMode,
+    required this.currentLatitude,
+    required this.currentLongitude,
   });
 
   @override
@@ -476,6 +480,9 @@ class VideoPostState extends ConsumerState<VideoPost>
                     child: VideoRadar(
                       latitude: widget.videoData.latitude,
                       longitude: widget.videoData.longitude,
+                      currentLatitude: widget.currentLatitude,
+                      currentLongitude: widget.currentLongitude,
+                      createdAt: widget.videoData.createdAt,
                     ),
                   )
                 : GestureDetector(
@@ -490,6 +497,9 @@ class VideoPostState extends ConsumerState<VideoPost>
                     child: VideoCompass(
                       latitude: widget.videoData.latitude,
                       longitude: widget.videoData.longitude,
+                      currentLatitude: widget.currentLatitude,
+                      currentLongitude: widget.currentLongitude,
+                      createdAt: widget.videoData.createdAt,
                     )),
           ),
           Positioned(
