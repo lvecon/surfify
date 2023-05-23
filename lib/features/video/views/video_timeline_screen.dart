@@ -169,19 +169,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       },
       onScaleUpdate: (details) {
         _scaleFactor = _baseScaleFactor * details.scale;
-        print(details.scale);
-      },
-      onScaleEnd: (details) {
-        if (_scaleFactor > 0.2) {
+        if (details.scale < 0.7) {
           setState(() {
             overViewMode = true;
           });
-        } else if (_scaleFactor < 0.2) {
+        } else if (details.scale > 1.3) {
           setState(() {
             overViewMode = false;
           });
-        } else {
-          _scaleFactor = 1;
+          print(details.scale);
         }
       },
       child: Stack(children: [
@@ -266,8 +262,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                     '이 방향으로는 서핑포인트가 없어요',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       fontSize: Sizes.size24,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 )

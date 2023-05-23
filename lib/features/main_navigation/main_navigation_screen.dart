@@ -70,6 +70,19 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).primaryColor,
+                const Color.fromARGB(255, 149, 148, 225),
+                // const Color.fromARGB(255, 168, 222, 229),
+                // const Color.fromARGB(255, 180, 224, 216),
+              ],
+            )),
+          ),
           Offstage(
             offstage: _selectedIndex != 0,
             child: const VideoTimelineScreen(), //수정해야함
