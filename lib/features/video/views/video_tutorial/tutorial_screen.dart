@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:surfify/features/video/views/widgets/tutorial_three.dart';
 import 'package:surfify/features/video/views/widgets/tutorial_two.dart';
 
 import '../../../../constants/sizes.dart';
 import '../widgets/tutorial_one.dart';
+import '../widgets/tutorial_three.dart';
 
 enum Direction { right, left }
 
