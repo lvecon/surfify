@@ -8,13 +8,19 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../../../constants/gaps.dart';
 import '../../../../constants/sizes.dart';
+import '../../../../normalize/distance.dart';
+import '../../../../normalize/time.dart';
 
 class VideoCompass extends StatefulWidget {
   final double latitude;
   final double longitude;
+  final int createdAt;
 
   const VideoCompass(
-      {super.key, required this.latitude, required this.longitude});
+      {super.key,
+      required this.latitude,
+      required this.longitude,
+      required this.createdAt});
 
   @override
   State<VideoCompass> createState() => _VideoCompassState();
@@ -93,17 +99,17 @@ class _VideoCompassState extends State<VideoCompass> {
         ),
       ),
       Gaps.v3,
-      const Text(
-        '300m',
-        style: TextStyle(
+      Text(
+        distance(lon1, lat1, widget.longitude, widget.latitude),
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w600,
           fontSize: Sizes.size16,
         ),
       ),
-      const Text(
-        '방금',
-        style: TextStyle(
+      Text(
+        nomarlizeTime(widget.createdAt),
+        style: const TextStyle(
           color: Colors.white,
         ),
       ),

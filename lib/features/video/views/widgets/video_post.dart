@@ -465,6 +465,7 @@ class VideoPostState extends ConsumerState<VideoPost>
             child: radarMode
                 ? GestureDetector(
                     onTap: () {
+                      ref.read(authRepo).signOut(); ////////////////// 나중에 빼기
                       setState(() {
                         radarMode = !radarMode;
 
@@ -475,6 +476,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     child: VideoRadar(
                       latitude: widget.videoData.latitude,
                       longitude: widget.videoData.longitude,
+                      createdAt: widget.videoData.createdAt,
                     ),
                   )
                 : GestureDetector(
@@ -489,6 +491,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     child: VideoCompass(
                       latitude: widget.videoData.latitude,
                       longitude: widget.videoData.longitude,
+                      createdAt: widget.videoData.createdAt,
                     )),
           ),
           Positioned(

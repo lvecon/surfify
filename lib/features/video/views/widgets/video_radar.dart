@@ -4,16 +4,22 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:surfify/normalize/distance.dart';
 
 import '../../../../constants/gaps.dart';
 import '../../../../constants/sizes.dart';
+import '../../../../normalize/time.dart';
 
 class VideoRadar extends StatefulWidget {
   final double latitude;
   final double longitude;
+  final int createdAt;
 
   const VideoRadar(
-      {super.key, required this.latitude, required this.longitude});
+      {super.key,
+      required this.latitude,
+      required this.longitude,
+      required this.createdAt});
 
   @override
   State<VideoRadar> createState() => _VideoRadarState();
@@ -42,8 +48,8 @@ class _VideoRadarState extends State<VideoRadar> {
   @override
   Widget build(BuildContext context) {
     // 출발지
-    const double lat1 = 35.71;
-    const double lon1 = 139.73;
+    const double lat1 = 37.458938402839834;
+    const double lon1 = 126.95236219241595;
 
     const double purpleBallR = 8.0;
     const double whiteBallR = 25.0;
@@ -100,17 +106,17 @@ class _VideoRadarState extends State<VideoRadar> {
           ),
         ),
         Gaps.v3,
-        const Text(
-          '300m',
-          style: TextStyle(
+        Text(
+          distance(lon1, lat1, widget.longitude, widget.latitude),
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
             fontSize: Sizes.size16,
           ),
         ),
-        const Text(
-          '방금',
-          style: TextStyle(
+        Text(
+          nomarlizeTime(widget.createdAt),
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
