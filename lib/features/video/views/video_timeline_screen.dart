@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:surfify/features/video/models/video_model.dart';
 import 'package:surfify/features/video/view_models/hashtag_view_model.dart';
 import 'package:surfify/features/video/view_models/here_view_model.dart';
@@ -21,7 +20,10 @@ import '../view_models/direction_view_model.dart';
 import '../view_models/place_view_model.dart';
 
 class VideoTimelineScreen extends ConsumerStatefulWidget {
-  const VideoTimelineScreen({super.key});
+  final double latitude;
+  final double longitude;
+  const VideoTimelineScreen(
+      {super.key, required this.latitude, required this.longitude});
 
   @override
   createState() => VideoTimelineScreenState();
@@ -33,8 +35,6 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
 
   double _scaleFactor = 1;
   double _baseScaleFactor = 1;
-  late double longitude;
-  late double latitude;
 
   final PageController _pageController_vertical = PageController();
   final PageController _pageController_horizontal = PageController();
@@ -94,32 +94,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     return result;
   }
 
-  Future<void> getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    // print(permission);
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      latitude = position.latitude;
-      longitude = position.longitude;
-    } catch (e) {
-      print(e);
-    }
-    setState(() {});
-  }
-
   double _direction = 0.00;
   int heading = 1;
 
   StreamSubscription<CompassEvent>? stream;
 
   void _handleCompassEvent(CompassEvent event) {
-    setState(() {
+    if (ref.watch(compassProvider) || overViewMode) {
       _direction = event.heading ?? 0.0;
-      var prev = _direction;
+      var prev = heading;
       if (_direction >= 315 || _direction <= 45) {
         heading = 1;
       }
@@ -133,19 +116,20 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         heading = 4;
       }
       if (prev != heading) {
-        ref
-            .watch(directionProvider(
-                    '126.95236219241595,37.458938402839834,$heading')
-                .notifier)
-            .refresh(heading);
+        setState(() {
+          ref
+              .watch(directionProvider(
+                      '${widget.longitude},${widget.latitude},$heading')
+                  .notifier)
+              .refresh(heading, '${widget.longitude},${widget.latitude}');
+        });
       }
-    });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    // getCurrentLocation();
     stream = FlutterCompass.events?.listen(_handleCompassEvent);
   }
 
@@ -160,7 +144,6 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   @override
   Widget build(BuildContext context) {
     final searchCondition = ref.watch(searchConditionProvider).searchCondition;
-
     return GestureDetector(
       onScaleStart: (details) {
         _baseScaleFactor = _scaleFactor;
@@ -182,8 +165,8 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         ref.watch(searchConditionProvider).searchCondition.isEmpty
             ? ref.watch(luckyProvider)
                 ? ref
-                    .watch(
-                        randomProvider('126.95236219241595,37.458938402839834'))
+                    .watch(randomProvider(
+                        '${widget.longitude},${widget.latitude}'))
                     .when(
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
@@ -195,11 +178,12 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                         ),
                       ),
                       data: (locations) => RefreshIndicator(
-                        onRefresh: ref
+                        onRefresh: () => ref
                             .watch(randomProvider(
-                                    '126.95236219241595,37.458938402839834')
+                                    '${widget.longitude},${widget.latitude}')
                                 .notifier)
-                            .refresh,
+                            .refresh(
+                                '${widget.longitude},${widget.latitude}'), //수정
                         displacement: 50,
                         edgeOffset: 20,
                         color: Theme.of(context).primaryColor,
@@ -234,6 +218,8 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                     radar: true,
                                     now: false,
                                     luckyMode: true,
+                                    currentLatitude: widget.latitude,
+                                    currentLongitude: widget.longitude,
                                   );
                                 },
                               ),
@@ -243,7 +229,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                 : ref.watch(compassProvider)
                     ? ref
                         .watch(directionProvider(
-                            '126.95236219241595,37.458938402839834,$heading'))
+                            '${widget.longitude},${widget.latitude},$heading'))
                         .when(
                           loading: () => const Center(
                             child: CircularProgressIndicator(),
@@ -266,11 +252,12 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                   ),
                                 )
                               : RefreshIndicator(
-                                  onRefresh: ref
+                                  onRefresh: () => ref
                                       .watch(hereProvider(
-                                              '126.95236219241595,37.458938402839834')
+                                              '${widget.longitude},${widget.latitude}')
                                           .notifier)
-                                      .refresh,
+                                      .refresh(
+                                          '${widget.longitude},${widget.latitude}'),
                                   displacement: 50,
                                   edgeOffset: 20,
                                   color: Theme.of(context).primaryColor,
@@ -323,6 +310,10 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                                     radar: false,
                                                     now: false,
                                                     luckyMode: false,
+                                                    currentLatitude:
+                                                        widget.latitude,
+                                                    currentLongitude:
+                                                        widget.longitude,
                                                   );
                                                 },
                                               ),
@@ -335,7 +326,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                     : overViewMode
                         ? ref
                             .watch(directionProvider(
-                                '126.95236219241595,37.458938402839834,$heading'))
+                                '${widget.longitude},${widget.latitude},$heading'))
                             .when(
                               loading: () => const Center(
                                 child: CircularProgressIndicator(),
@@ -347,12 +338,17 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                 ),
                               ),
                               data: (data) {
-                                return Overview(ref: ref, data: data);
+                                return Overview(
+                                  ref: ref,
+                                  data: data,
+                                  latitude: widget.latitude,
+                                  longitude: widget.longitude,
+                                );
                               },
                             )
                         : ref
                             .watch(hereProvider(
-                                '126.95236219241595,37.458938402839834'))
+                                '${widget.longitude},${widget.latitude}'))
                             .when(
                               loading: () => const Center(
                                 child: CircularProgressIndicator(),
@@ -364,11 +360,12 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                 ),
                               ),
                               data: (locations) => RefreshIndicator(
-                                onRefresh: ref
+                                onRefresh: () => ref
                                     .watch(hereProvider(
-                                            '126.95236219241595,37.458938402839834')
+                                            '${widget.longitude},${widget.latitude}')
                                         .notifier)
-                                    .refresh,
+                                    .refresh(
+                                        '${widget.longitude},${widget.latitude}'),
                                 displacement: 50,
                                 edgeOffset: 20,
                                 color: Theme.of(context).primaryColor,
@@ -419,6 +416,10 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                                   radar: true,
                                                   now: false,
                                                   luckyMode: false,
+                                                  currentLatitude:
+                                                      widget.latitude,
+                                                  currentLongitude:
+                                                      widget.longitude,
                                                 );
                                               },
                                             ),
@@ -519,6 +520,8 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                             radar: true,
                             now: false,
                             luckyMode: false,
+                            currentLatitude: widget.latitude,
+                            currentLongitude: widget.longitude,
                           );
                         },
                       ),

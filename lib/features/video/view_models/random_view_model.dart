@@ -60,10 +60,11 @@ class RandomViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
   //   _list = [..._list, ...nextPage];
   // }
 
-  Future<void> refresh() async {
+  Future<void> refresh(String arg) async {
+    var location = arg.split(',');
     final hash = geoHasher.encode(
-      126.95236219241595,
-      37.458938402839834,
+      double.parse(location[0]),
+      double.parse(location[1]),
       precision: 9,
     );
     final videos = await _fetchLocations(hash: hash);

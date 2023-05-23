@@ -4,7 +4,13 @@ import 'package:surfify/features/video/view_models/timeline_view_model.dart';
 import 'package:surfify/features/video/views/widgets/video_post.dart';
 
 class VideoTimelineNowScreen extends ConsumerStatefulWidget {
-  const VideoTimelineNowScreen({super.key});
+  final double? latitude;
+  final double? longitude;
+  const VideoTimelineNowScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   VideoTimelineNowScreenState createState() => VideoTimelineNowScreenState();
@@ -51,42 +57,53 @@ class VideoTimelineNowScreenState
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(timelineProvider).when(
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text(
-              'Could not load videos: $error',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-          data: (videos) {
-            _itemCount = videos.length;
-            return RefreshIndicator(
-              onRefresh: _onRefresh,
-              displacement: 50,
-              edgeOffset: 20,
-              color: Theme.of(context).primaryColor,
-              child: PageView.builder(
-                controller: _pageController,
-                scrollDirection: Axis.vertical,
-                onPageChanged: _onPageChanged,
-                itemCount: videos.length,
-                itemBuilder: (context, index) {
-                  final videoData = videos[index];
-                  return VideoPost(
-                    onVideoFinished: _onVideoFinished,
-                    index: index,
-                    videoData: videoData,
-                    radar: true,
-                    now: false,
-                    luckyMode: false,
-                  );
-                },
-              ),
-            );
-          },
+    return FutureBuilder(
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      if (widget.latitude == null) {
+        return const CircularProgressIndicator(
+          color: Colors.red,
         );
+      } else {
+        return ref.watch(timelineProvider).when(
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              error: (error, stackTrace) => Center(
+                child: Text(
+                  'Could not load videos: $error',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              data: (videos) {
+                _itemCount = videos.length;
+                return RefreshIndicator(
+                  onRefresh: _onRefresh,
+                  displacement: 50,
+                  edgeOffset: 20,
+                  color: Theme.of(context).primaryColor,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    scrollDirection: Axis.vertical,
+                    onPageChanged: _onPageChanged,
+                    itemCount: videos.length,
+                    itemBuilder: (context, index) {
+                      final videoData = videos[index];
+                      return VideoPost(
+                        onVideoFinished: _onVideoFinished,
+                        index: index,
+                        videoData: videoData,
+                        radar: true,
+                        now: false,
+                        luckyMode: false,
+                        currentLatitude: widget.latitude!,
+                        currentLongitude: widget.longitude!,
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+      }
+    });
   }
 }

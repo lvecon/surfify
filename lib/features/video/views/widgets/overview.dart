@@ -14,14 +14,19 @@ class Overview extends StatelessWidget {
     super.key,
     required this.ref,
     required this.data,
+    required this.latitude,
+    required this.longitude,
   });
 
   final WidgetRef ref;
   final List<dynamic> data;
+  final double latitude;
+  final double longitude;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    print('$latitude, $longitude');
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor.withOpacity(1),
@@ -83,8 +88,8 @@ class Overview extends StatelessWidget {
                                     distance(
                                       pics[0].longitude,
                                       pics[0].latitude,
-                                      126.95236219241595,
-                                      37.458938402839834,
+                                      longitude,
+                                      latitude,
                                     ),
                                     style: const TextStyle(
                                       color: Colors.white,
@@ -126,6 +131,8 @@ class Overview extends StatelessWidget {
                                                   radar: false,
                                                   now: false,
                                                   luckyMode: false,
+                                                  currentLatitude: latitude,
+                                                  currentLongitude: longitude,
                                                 ),
                                               ),
                                             );
@@ -164,12 +171,12 @@ class Overview extends StatelessWidget {
               ),
             ],
           ),
-          const Positioned(
+          Positioned(
             top: 50,
             right: 20,
             child: VideoCompassOverView(
-              latitude: 37.458938402839834,
-              longitude: 126.95236219241595,
+              latitude: latitude,
+              longitude: longitude,
             ),
           ),
         ],
