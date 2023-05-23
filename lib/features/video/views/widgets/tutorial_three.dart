@@ -5,9 +5,7 @@ import '../../../../constants/gaps.dart';
 import '../../../../constants/sizes.dart';
 
 class TutorialThree extends StatelessWidget {
-  const TutorialThree({
-    super.key,
-  });
+  const TutorialThree({super.key});
 
   @override
   Widget build(BuildContext context) {

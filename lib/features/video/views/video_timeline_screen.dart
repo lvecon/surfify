@@ -117,9 +117,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   StreamSubscription<CompassEvent>? stream;
 
   void _handleCompassEvent(CompassEvent event) {
-    setState(() {
+    if (ref.watch(compassProvider) || overViewMode) {
       _direction = event.heading ?? 0.0;
-      var prev = _direction;
+      var prev = heading;
       if (_direction >= 315 || _direction <= 45) {
         heading = 1;
       }
@@ -133,13 +133,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
         heading = 4;
       }
       if (prev != heading) {
-        ref
-            .watch(directionProvider(
-                    '126.95236219241595,37.458938402839834,$heading')
-                .notifier)
-            .refresh(heading);
+        setState(() {
+          ref
+              .watch(directionProvider(
+                      '126.95236219241595,37.458938402839834,$heading')
+                  .notifier)
+              .refresh(heading);
+        });
       }
-    });
+    }
   }
 
   @override
@@ -167,19 +169,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       },
       onScaleUpdate: (details) {
         _scaleFactor = _baseScaleFactor * details.scale;
-        print(details.scale);
-      },
-      onScaleEnd: (details) {
-        if (_scaleFactor > 0.2) {
+        if (details.scale < 0.7) {
           setState(() {
             overViewMode = true;
           });
-        } else if (_scaleFactor < 0.2) {
+        } else if (details.scale > 1.3) {
           setState(() {
             overViewMode = false;
           });
-        } else {
-          _scaleFactor = 1;
+          print(details.scale);
         }
       },
       child: Stack(children: [
@@ -264,8 +262,9 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                     '이 방향으로는 서핑포인트가 없어요',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       fontSize: Sizes.size24,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 )

@@ -119,11 +119,6 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
   }
 
   Future<void> _saveToGallery() async {
-    // await GallerySaver.saveVideo(
-    //   widget.video.path,
-    //   albumName: "TikTok Clone!",
-    // );
-
     _savedVideo = true;
 
     setState(() {});
@@ -145,6 +140,7 @@ class VideoUploadedTutorialState extends State<VideoUploadedTutorial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
