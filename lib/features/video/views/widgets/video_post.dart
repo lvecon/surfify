@@ -79,6 +79,7 @@ class VideoPostState extends ConsumerState<VideoPost>
     // await _videoPlayerController
     //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
+    _videoPlayerController.play();
     setState(() {});
   }
 
