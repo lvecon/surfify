@@ -77,6 +77,7 @@ class VideoPreviewTutorialState extends State<VideoPreviewTutorial> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SizedBox(
         width: size.width,
