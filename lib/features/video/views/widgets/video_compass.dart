@@ -8,13 +8,23 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../../../constants/gaps.dart';
 import '../../../../constants/sizes.dart';
+import '../../../../normalize/distance.dart';
+import '../../../../normalize/time.dart';
 
 class VideoCompass extends StatefulWidget {
   final double latitude;
   final double longitude;
+  final double currentLatitude;
+  final double currentLongitude;
+  final int createdAt;
 
   const VideoCompass(
-      {super.key, required this.latitude, required this.longitude});
+      {super.key,
+      required this.latitude,
+      required this.longitude,
+      required this.currentLatitude,
+      required this.currentLongitude,
+      required this.createdAt});
 
   @override
   State<VideoCompass> createState() => _VideoCompassState();
@@ -22,8 +32,6 @@ class VideoCompass extends StatefulWidget {
 
 class _VideoCompassState extends State<VideoCompass> {
   // 출발지
-  final double lat1 = 35.71;
-  final double lon1 = 139.73;
 
   double _direction = 0.00;
 
@@ -51,8 +59,8 @@ class _VideoCompassState extends State<VideoCompass> {
     const double whiteBallR = 25.0;
 
     double bearing = Geolocator.bearingBetween(
-      lat1,
-      lon1,
+      widget.currentLatitude,
+      widget.currentLongitude,
       widget.latitude,
       widget.longitude,
     );
@@ -93,17 +101,18 @@ class _VideoCompassState extends State<VideoCompass> {
         ),
       ),
       Gaps.v3,
-      const Text(
-        '300m',
-        style: TextStyle(
+      Text(
+        distance(widget.currentLongitude, widget.currentLatitude,
+            widget.longitude, widget.latitude),
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w600,
           fontSize: Sizes.size16,
         ),
       ),
-      const Text(
-        '방금',
-        style: TextStyle(
+      Text(
+        nomarlizeTime(widget.createdAt),
+        style: const TextStyle(
           color: Colors.white,
         ),
       ),
