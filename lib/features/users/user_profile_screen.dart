@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:surfify/features/authentication/repos/authentication_repo.dart';
 import 'package:surfify/features/message/view_model/message_view_model.dart';
 import 'package:surfify/features/users/setting_screen.dart';
@@ -27,6 +28,33 @@ class UserProfileScreen extends ConsumerStatefulWidget {
 
 class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   bool pushFollow = true;
+  double? latitude;
+  double? longitude;
+
+  Future<void> getCurrentLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    // print(permission);
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      setState(() {
+        latitude = position.latitude;
+        longitude = position.longitude;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -390,6 +418,8 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                                 radar: false,
                                                 now: false,
                                                 luckyMode: false,
+                                                currentLatitude: latitude!,
+                                                currentLongitude: longitude!,
                                               )));
                                     },
                                     child: AspectRatio(

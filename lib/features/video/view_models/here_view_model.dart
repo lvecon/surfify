@@ -64,12 +64,7 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
     return _list;
   }
 
-  Future<void> fetchNextPage() async {
-    final hash = geoHasher.encode(
-      126.95236219241595,
-      37.458938402839834,
-      precision: 9,
-    );
+  Future<void> fetchNextPage(String hash) async {
     final neighborNorth = geoHasher.neighbors(hash)['NORTH'];
 
     final nextPage = await _fetchLocations(hash: neighborNorth);
@@ -77,12 +72,14 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
     _list = [..._list, ...nextPage];
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh(String arg) async {
+    var location = arg.split(',');
     final hash = geoHasher.encode(
-      126.95236219241595,
-      37.458938402839834,
+      double.parse(location[0]),
+      double.parse(location[1]),
       precision: 9,
     );
+
     final videos = await _fetchLocations(hash: hash);
     _list = videos;
     state = AsyncValue.data(videos);

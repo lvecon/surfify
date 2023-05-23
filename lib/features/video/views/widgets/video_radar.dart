@@ -13,12 +13,16 @@ import '../../../../normalize/time.dart';
 class VideoRadar extends StatefulWidget {
   final double latitude;
   final double longitude;
+  final double currentLatitude;
+  final double currentLongitude;
   final int createdAt;
 
   const VideoRadar(
       {super.key,
       required this.latitude,
       required this.longitude,
+      required this.currentLatitude,
+      required this.currentLongitude,
       required this.createdAt});
 
   @override
@@ -47,16 +51,12 @@ class _VideoRadarState extends State<VideoRadar> {
 
   @override
   Widget build(BuildContext context) {
-    // 출발지
-    const double lat1 = 37.458938402839834;
-    const double lon1 = 126.95236219241595;
-
     const double purpleBallR = 8.0;
     const double whiteBallR = 25.0;
 
     double bearing = Geolocator.bearingBetween(
-      lat1,
-      lon1,
+      widget.currentLatitude,
+      widget.currentLongitude,
       widget.latitude,
       widget.longitude,
     );
@@ -107,7 +107,12 @@ class _VideoRadarState extends State<VideoRadar> {
         ),
         Gaps.v3,
         Text(
-          distance(lon1, lat1, widget.longitude, widget.latitude),
+          distance(
+            widget.currentLongitude,
+            widget.currentLatitude,
+            widget.longitude,
+            widget.latitude,
+          ),
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
