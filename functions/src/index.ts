@@ -12,7 +12,7 @@ export const onVideoCreated = functions.firestore
       "-i",
       video.fileUrl,
       "-ss",
-      "00:00:01.000",
+      "00:00:00.000",
       "-vframes",
       "1",
       "-vf",
@@ -36,7 +36,7 @@ export const onVideoCreated = functions.firestore
       "0",
       `/tmp/${snapshot.id}.gif`,
     ]);
-    const [file1, ] = await storage.bucket().upload(`/tmp/${snapshot.id}.gif`, {
+    const [file1] = await storage.bucket().upload(`/tmp/${snapshot.id}.gif`, {
       destination: `gif/${snapshot.id}.gif`,
     });
     await file.makePublic();

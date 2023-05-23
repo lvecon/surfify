@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
-import "dart:convert";
+import 'package:surfify/keyMap.dart';
 
 class VideoSelectTag extends StatefulWidget {
   final XFile video;
@@ -36,6 +38,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
 
   final ScrollController _scrollController = ScrollController();
   String inputValue = "";
+  List<String> resultsText = [];
 
   void _onClosePressed() {
     Navigator.of(context).pop();
@@ -53,6 +56,14 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   //     _isWriting = true;
   //   });
   // }
+
+  void _setTextToFormField(String text) {
+    _textEditingController.text += text;
+    inputValue = _textEditingController.text;
+    _textEditingController.selection = TextSelection.fromPosition(
+        TextPosition(offset: _textEditingController.text.length));
+    setState(() {});
+  }
 
   Future<void> _saveToGallery() async {
     setState(() {});
@@ -78,6 +89,18 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.resStr != "Empty") {
+      List<dynamic> resJson = jsonDecode(widget.resStr);
+      for (List<dynamic> result in resJson) {
+        String label = result[0];
+        resultsText.add(KeyMap().translations[label]!);
+      }
+    }
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
@@ -85,17 +108,6 @@ class VideoSelectTagState extends State<VideoSelectTag> {
 
   @override
   Widget build(BuildContext context) {
-    String resultsText = "";
-    if (widget.resStr != "Empty") {
-      List<dynamic> resJson = jsonDecode(widget.resStr);
-      for (List<dynamic> result in resJson) {
-        String label = result[0];
-        String confidence = result[1];
-        resultsText += "Label: $label, Confidence: $confidence\n";
-      }
-      print(resultsText);
-    }
-
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * 0.75,
@@ -107,11 +119,11 @@ class VideoSelectTagState extends State<VideoSelectTag> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.grey.shade50,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(Sizes.size96),
+          preferredSize: const Size.fromHeight(80),
           child: GestureDetector(
             onTap: _stopWriting,
             child: AppBar(
-              toolbarHeight: Sizes.size96,
+              toolbarHeight: 100,
               elevation: 0,
               centerTitle: false,
               backgroundColor: Colors.grey.shade50,
@@ -149,70 +161,114 @@ class VideoSelectTagState extends State<VideoSelectTag> {
                         color: Colors.black45,
                       ),
                     ),
-                    Text(
-                      resultsText,
-                      style: const TextStyle(
-                        fontSize: Sizes.size16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black45,
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size24,
-                vertical: Sizes.size12,
-              ),
-              child: TextFormField(
-                textInputAction: TextInputAction.done,
-                maxLines: 18,
-                cursorColor: Theme.of(context).primaryColor,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey.shade200,
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide.none,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(children: [
+                for (var keyword in resultsText)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 4.0, horizontal: 3),
+                    child: GestureDetector(
+                      onTap: () => {
+                        _setTextToFormField("#$keyword"),
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              16,
+                            ),
+                            color: Theme.of(context)
+                                .primaryColor
+                                .withOpacity(0.7)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 8, bottom: 8, left: 8, right: 5),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "#$keyword +",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Gaps.h6,
+                              // const FaIcon(
+                              //   FontAwesomeIcons.plus,
+                              //   size: Sizes.size14,
+                              //   color: Colors.white,
+                              // ),
+                              // Gaps.h2,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+              ]),
+              Gaps.v6,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.size4,
+                    vertical: Sizes.size2,
                   ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide.none,
+                  child: TextFormField(
+                    controller: _textEditingController,
+                    textInputAction: TextInputAction.done,
+                    maxLines: 25,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    onChanged: (value) => setState(() {
+                      inputValue = value;
+                    }),
                   ),
                 ),
-                onChanged: (value) => setState(() {
-                  inputValue = value;
-                }),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size16,
+            vertical: 40,
+          ),
+          child: SizedBox(
+            width: 330,
+            height: Sizes.size64,
+            child: CupertinoButton(
+              onPressed: () => _saveToGallery(),
+              color: Theme.of(context).primaryColor,
+              child: const Text(
+                "입력 완료",
+                style: TextStyle(
+                  fontSize: Sizes.size20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
               ),
             ),
-            Gaps.v10,
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size16,
-                vertical: Sizes.size10,
-              ),
-              child: SizedBox(
-                width: 330,
-                height: Sizes.size64,
-                child: CupertinoButton(
-                  onPressed: () => _saveToGallery(),
-                  color: Theme.of(context).primaryColor,
-                  child: const Text(
-                    "입력 완료",
-                    style: TextStyle(
-                      fontSize: Sizes.size20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
