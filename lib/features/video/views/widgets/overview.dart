@@ -35,11 +35,12 @@ class Overview extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
                 Theme.of(context).primaryColor,
-                const Color.fromARGB(255, 168, 222, 229),
+                const Color.fromARGB(255, 149, 148, 225),
+                // const Color.fromARGB(255, 168, 222, 229),
                 // const Color.fromARGB(255, 180, 224, 216),
               ],
             )),
@@ -51,8 +52,9 @@ class Overview extends StatelessWidget {
                 '이 방향으로는 서핑포인트가 없어요',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.white,
                   fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -104,8 +106,11 @@ class Overview extends StatelessWidget {
                                           true, // 가운데 이미지 크게 보여주기
                                       enableInfiniteScroll:
                                           false, // 무한 스크롤 비활성화
-                                      viewportFraction: 0.42,
+                                      viewportFraction: 0.41,
+                                      enlargeFactor: 0.26,
                                       autoPlay: true,
+                                      autoPlayInterval:
+                                          const Duration(seconds: 3),
                                     ),
                                     items: [
                                       for (var pic in pics)

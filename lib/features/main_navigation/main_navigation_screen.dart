@@ -96,82 +96,90 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
         );
       } else {
         return Scaffold(
-          backgroundColor: Colors.black,
-          body: Stack(
-            children: [
-              Offstage(
-                offstage: _selectedIndex != 0,
-                child: VideoTimelineScreen(
-                  latitude: latitude!,
-                  longitude: longitude!,
-                ), //수정해야함
-              ),
-              Offstage(
-                offstage: _selectedIndex != 1,
-                child: VideoTimelineNowScreen(
-                  latitude: latitude,
-                  longitude: longitude,
+            backgroundColor: Colors.black,
+            body: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Theme.of(context).primaryColor,
+                      const Color.fromARGB(255, 149, 148, 225),
+                      // const Color.fromARGB(255, 168, 222, 229),
+                      // const Color.fromARGB(255, 180, 224, 216),
+                    ],
+                  )),
                 ),
-              ),
-            ],
-          ),
-          bottomNavigationBar: BottomAppBar(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(Sizes.size12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  NavTab(
-                    text: "Here",
-                    isSelected: _selectedIndex == 0,
-                    icon: FontAwesomeIcons.locationDot,
-                    selectedIcon: FontAwesomeIcons.locationDot,
-                    onTap: () => _onTap(0),
-                  ),
-                  NavTab(
-                    text: "Now",
-                    isSelected: _selectedIndex == 1,
-                    icon: FontAwesomeIcons.earthAsia,
-                    selectedIcon: FontAwesomeIcons.earthAsia,
-                    onTap: () => _onTap(1),
-                  ),
-                  Gaps.h24,
-                  GestureDetector(
-                    onTap: _onPostVideoButtonTap,
-                    child: const PostVideoButton(),
-                  ),
-                  Gaps.h24,
-                  NavTab(
-                      text: "Msg.",
-                      isSelected: _selectedIndex == 3,
-                      icon: FontAwesomeIcons.message,
-                      selectedIcon: FontAwesomeIcons.solidMessage,
-                      onTap: () async {
-                        await showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => const MessageScreen());
-                      }),
-                  NavTab(
-                      text: "Profile",
-                      isSelected: _selectedIndex == 4,
-                      icon: FontAwesomeIcons.user,
-                      selectedIcon: FontAwesomeIcons.solidUser,
-                      onTap: () async {
-                        await showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) => UserProfileScreen(
-                                uid: ref.read(authRepo).user!.uid));
-                      }),
-                ],
-              ),
+                Offstage(
+                  offstage: _selectedIndex != 0,
+                  child: VideoTimelineScreen(
+                    latitude: latitude!,
+                    longitude: longitude!,
+                  ), //수정해야함
+                ),
+                Offstage(
+                  offstage: _selectedIndex != 1,
+                  child: VideoTimelineNowScreen(
+                      latitude: latitude!, longitude: longitude!),
+                ),
+              ],
             ),
-          ),
-        );
+            bottomNavigationBar: BottomAppBar(
+                color: Colors.white,
+                child: Padding(
+                    padding: const EdgeInsets.all(Sizes.size12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        NavTab(
+                          text: "Here",
+                          isSelected: _selectedIndex == 0,
+                          icon: FontAwesomeIcons.locationDot,
+                          selectedIcon: FontAwesomeIcons.locationDot,
+                          onTap: () => _onTap(0),
+                        ),
+                        NavTab(
+                          text: "Now",
+                          isSelected: _selectedIndex == 1,
+                          icon: FontAwesomeIcons.earthAsia,
+                          selectedIcon: FontAwesomeIcons.earthAsia,
+                          onTap: () => _onTap(1),
+                        ),
+                        Gaps.h24,
+                        GestureDetector(
+                          onTap: _onPostVideoButtonTap,
+                          child: const PostVideoButton(),
+                        ),
+                        Gaps.h24,
+                        NavTab(
+                            text: "Msg.",
+                            isSelected: _selectedIndex == 3,
+                            icon: FontAwesomeIcons.message,
+                            selectedIcon: FontAwesomeIcons.solidMessage,
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) => const MessageScreen());
+                            }),
+                        NavTab(
+                            text: "Profile",
+                            isSelected: _selectedIndex == 4,
+                            icon: FontAwesomeIcons.user,
+                            selectedIcon: FontAwesomeIcons.solidUser,
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) => UserProfileScreen(
+                                      uid: ref.read(authRepo).user!.uid));
+                            }),
+                      ],
+                    ))));
       }
     });
   }
