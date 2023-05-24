@@ -22,7 +22,6 @@ class VideosRepository {
   }
 
   Future<void> deleteVideo(VideoModel videoModel) async {
-    print(videoModel.id);
     await _db.collection("videos").doc(videoModel.id).delete();
   }
 
