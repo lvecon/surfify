@@ -31,6 +31,11 @@ class MessageViewModel extends AsyncNotifier<List<MessageModel>> {
     await _repository.deleteMessage(message);
   }
 
+  Future<void> deleteAllMessage() async {
+    final userId = ref.read(authRepo).user!.uid;
+    await _repository.deleteAllMessage(userId);
+  }
+
   Future<void> addMessage({
     String? videoId,
     String? comment,
@@ -39,10 +44,10 @@ class MessageViewModel extends AsyncNotifier<List<MessageModel>> {
     final user = ref.read(authRepo).user;
     await _repository.addMessage(MessageModel(
         creatorId: user!.uid,
-        comment: comment,
+        comment: comment!,
         createdAt: DateTime.now().millisecondsSinceEpoch,
-        receiverId: receiverId,
-        videoId: videoId,
+        receiverId: receiverId!,
+        videoId: videoId!,
         messageId: ""));
   }
 

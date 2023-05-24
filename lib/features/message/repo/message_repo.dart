@@ -22,6 +22,21 @@ class MessageRepository {
         .delete();
   }
 
+  Future<void> deleteAllMessage(
+    String? uid,
+  ) async {
+    final query =
+        await _db.collection("users").doc(uid).collection('message').get();
+    final messages = query.docs.map(
+      (message) => MessageModel.fromJson(
+        json: message.data(),
+      ),
+    );
+    for (var message in messages) {
+      deleteMessage(message);
+    }
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchMessage({
     String? uid,
   }) async {

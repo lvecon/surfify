@@ -22,8 +22,8 @@ class VideoUploadedTutorial extends StatefulWidget {
   late String address;
   late String name;
   late String tags;
-  late String lat;
-  late String lon;
+  late double lat;
+  late double lon;
   late String url;
 
   VideoUploadedTutorial({

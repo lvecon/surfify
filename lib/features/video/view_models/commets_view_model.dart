@@ -31,10 +31,10 @@ class CommentsViewModel
     final user = ref.read(authRepo).user;
     await _repository.addComment(CommentModel(
         creatorId: user!.uid,
-        comment: comment,
+        comment: comment!,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         likes: 0,
-        videoId: videoId,
+        videoId: videoId!,
         commentId: ""));
   }
 

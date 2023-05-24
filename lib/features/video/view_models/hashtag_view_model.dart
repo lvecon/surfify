@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
+import 'package:surfify/features/video/view_models/search_condition_view_model.dart';
 
 import '../models/video_model.dart';
 import '../repo/videos_repo.dart';

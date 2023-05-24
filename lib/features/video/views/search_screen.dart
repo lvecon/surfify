@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
+import 'package:surfify/features/video/view_models/search_condition_view_model.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';

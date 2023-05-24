@@ -23,24 +23,14 @@ class FollowingsList extends ConsumerStatefulWidget {
 class _FollowingsListState extends ConsumerState<FollowingsList> {
   final TextEditingController _textController = TextEditingController();
 
-  bool _isWriting = false;
-
   final ScrollController _scrollController = ScrollController();
 
   void _onClosePressed() {
     Navigator.of(context).pop();
   }
 
-  void _stopWriting() {
-    setState(() {
-      _isWriting = false;
-    });
-  }
-
   void _onStartWriting() {
-    setState(() {
-      _isWriting = true;
-    });
+    setState(() {});
   }
 
   @override

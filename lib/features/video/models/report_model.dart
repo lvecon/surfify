@@ -1,9 +1,9 @@
 class ReportModel {
-  final creatorId;
-  final contents;
-  final createdAt;
-  final videoId;
-  final type;
+  final String creatorId;
+  final String contents;
+  final int createdAt;
+  final String videoId;
+  final int type;
 
   ReportModel({
     required this.creatorId,

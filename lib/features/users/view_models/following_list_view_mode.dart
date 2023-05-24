@@ -17,7 +17,6 @@ class FollowingListViewModel extends FamilyAsyncNotifier<List<String>, String> {
   FutureOr<List<String>> build(String arg) async {
     _repository = ref.read(userRepo);
     _list = await _fetchFollowing(arg);
-    print(_list);
     return _list;
   }
 }

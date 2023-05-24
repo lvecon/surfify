@@ -25,11 +25,8 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
     _onRefresh();
   }
 
-  Future<void> _addMessage() async {
-    ref.read(messageProvider.notifier).addMessage(
-        comment: "안녕",
-        videoId: "1",
-        receiverId: "9OwBI6OFzSfPP5fWrIWb3EpWWPD2");
+  Future<void> _deleteAllMessage() async {
+    ref.read(messageProvider.notifier).deleteAllMessage();
     _onRefresh();
   }
 
@@ -41,9 +38,10 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _onRefresh();
     final size = MediaQuery.of(context).size;
 
-    void _onClosePressed() {
+    void onClosePressed() {
       Navigator.of(context).pop();
     }
 
@@ -75,95 +73,99 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: _onClosePressed,
+              onPressed: onClosePressed,
               icon: const FaIcon(FontAwesomeIcons.xmark, color: Colors.black),
             ),
           ],
         ),
         body: ref.watch(messageProvider).when(
-            error: (error, stackTrace) => Center(
-                  child: Text(error.toString()),
-                ),
-            loading: () => const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-            data: (data) => (data.isEmpty || !messageAlarm)
-                ? const Center(
-                    child: Text(
-                      '깨끗한 책상처럼 \n메세지가 없어요!',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: Sizes.size24,
-                      ),
-                    ),
-                  )
-                : ListView.separated(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.only(
-                      top: Sizes.size10,
-                      bottom: Sizes.size96 + Sizes.size20,
-                      left: Sizes.size16,
-                      right: Sizes.size16,
-                    ),
-                    separatorBuilder: (context, index) => Gaps.v20,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) => ListTile(
-                      leading: GestureDetector(
-                        onTap: () async {
-                          await showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) => UserProfileScreen(
-                                  uid: data[index].creatorId));
-                        },
-                        child: CircleAvatar(
-                          radius: Sizes.size18,
-                          child: SizedBox(
-                            child: ClipOval(
-                              child: Image.network(
-                                'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+              error: (error, stackTrace) => Center(
+                child: Text(error.toString()),
+              ),
+              loading: () => const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+              data: (data) => RefreshIndicator(
+                onRefresh: _onRefresh,
+                child: (data.isEmpty || !messageAlarm)
+                    ? const Center(
+                        child: Text(
+                          '깨끗한 책상처럼 \n메세지가 없어요!',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: Sizes.size24,
+                          ),
+                        ),
+                      )
+                    : ListView.separated(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.only(
+                          top: Sizes.size10,
+                          bottom: Sizes.size96 + Sizes.size20,
+                          left: Sizes.size16,
+                          right: Sizes.size16,
+                        ),
+                        separatorBuilder: (context, index) => Gaps.v20,
+                        itemCount: data.length,
+                        itemBuilder: (context, index) => ListTile(
+                          leading: GestureDetector(
+                            onTap: () async {
+                              await showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) => UserProfileScreen(
+                                      uid: data[index].creatorId));
+                            },
+                            child: CircleAvatar(
+                              radius: Sizes.size18,
+                              child: SizedBox(
+                                child: ClipOval(
+                                  child: Image.network(
+                                    'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      title: RichText(
-                        text: TextSpan(
-                          text:
-                              '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                          children: [
-                            TextSpan(
-                                text: nomarlizeTime(data[index].createdAt),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black.withOpacity(0.8),
-                                )),
-                          ],
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("${data[index].comment}"),
-                          GestureDetector(
-                            onTap: () => _deleteMessage(data[index]),
-                            child: Text(
-                              "삭제",
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.bold,
+                          title: RichText(
+                            text: TextSpan(
+                              text:
+                                  '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
+                              children: [
+                                TextSpan(
+                                    text: nomarlizeTime(data[index].createdAt),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black.withOpacity(0.8),
+                                    )),
+                              ],
                             ),
                           ),
-                        ],
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(data[index].comment),
+                              GestureDetector(
+                                onTap: () => _deleteMessage(data[index]),
+                                child: Text(
+                                  "삭제",
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  )),
+              ),
+            ),
         bottomNavigationBar: BottomAppBar(
           elevation: 0,
           color: const Color(0x00fafafa),
@@ -210,6 +212,7 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                                 activeColor: Theme.of(context).primaryColor,
                                 groupValue: messageAlarm,
                                 onChanged: (value) {
+                                  _deleteAllMessage();
                                   setState(() {
                                     messageAlarm = false;
                                   });
@@ -230,7 +233,7 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                 ),
                 GestureDetector(
                     onTap: () {
-                      _onRefresh();
+                      _deleteAllMessage();
                     },
                     child: const FormButton(able: true, text: '메세지 모두 삭제')),
               ],

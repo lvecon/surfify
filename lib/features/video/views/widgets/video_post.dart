@@ -7,6 +7,7 @@ import 'package:shake/shake.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/view_models/compass_view_model.dart';
 import 'package:surfify/features/video/view_models/lucky_view_model.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';
@@ -22,7 +23,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../../authentication/repos/authentication_repo.dart';
 import '../../../users/user_profile_screen.dart';
 import '../../models/video_model.dart';
-import '../../view_models/searchCondition_view_model.dart';
+import '../../view_models/search_condition_view_model.dart';
 import '../../view_models/video_post_view_model.dart';
 import '../opinion_screen.dart';
 import '../search_screen.dart';
@@ -268,14 +269,36 @@ class VideoPostState extends ConsumerState<VideoPost>
                         ),
                       ),
                       Gaps.v12,
-                      Text(
-                        widget.videoData.creator,
-                        style: const TextStyle(
-                          fontSize: Sizes.size20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      FutureBuilder(builder:
+                          (BuildContext context, AsyncSnapshot snapshot) {
+                        if (ref
+                                .read(
+                                    usersProvider(widget.videoData.creatorUid))
+                                .value ==
+                            null) {
+                          return const Text(
+                            '...',
+                            style: TextStyle(
+                              fontSize: Sizes.size20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            ref
+                                .read(
+                                    usersProvider(widget.videoData.creatorUid))
+                                .value!
+                                .name,
+                            style: const TextStyle(
+                              fontSize: Sizes.size20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        }
+                      })
                     ],
                   ),
                 ),
