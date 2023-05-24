@@ -47,7 +47,7 @@ class MessageViewModel extends AsyncNotifier<List<MessageModel>> {
         comment: comment!,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         receiverId: receiverId!,
-        videoId: videoId!,
+        videoId: videoId ?? "",
         messageId: ""));
   }
 

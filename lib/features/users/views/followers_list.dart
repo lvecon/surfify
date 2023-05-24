@@ -33,9 +33,14 @@ class _FollowersListState extends ConsumerState<FollowersList> {
     setState(() {});
   }
 
+  void _onRefresh() {
+    ref.watch(followerListProvider(widget.uid).notifier).refresh(widget.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    _onRefresh();
     return Container(
         height: size.height * 0.95,
         clipBehavior: Clip.hardEdge,

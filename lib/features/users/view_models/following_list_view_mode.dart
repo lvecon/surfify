@@ -13,6 +13,12 @@ class FollowingListViewModel extends FamilyAsyncNotifier<List<String>, String> {
     return followings.toList();
   }
 
+  Future<void> refresh(String arg) async {
+    final result = await _fetchFollowing(arg);
+    _list = result;
+    state = AsyncValue.data(_list);
+  }
+
   @override
   FutureOr<List<String>> build(String arg) async {
     _repository = ref.read(userRepo);
