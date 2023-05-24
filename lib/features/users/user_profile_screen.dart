@@ -321,7 +321,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                                           .read(messageProvider
                                                               .notifier)
                                                           .addMessage(
-                                                            videoId: null,
+                                                            videoId: "",
                                                             comment:
                                                                 "당신을 Follow 합니다!",
                                                             receiverId:

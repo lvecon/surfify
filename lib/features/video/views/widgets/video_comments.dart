@@ -205,7 +205,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("${data[index].comment}"),
+                                      Text(data[index].comment),
                                       if (data[index].creatorId ==
                                           ref.read(authRepo).user!.uid)
                                         GestureDetector(
