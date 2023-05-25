@@ -55,7 +55,6 @@ class _VideoCompassState extends State<VideoCompass> {
 
   @override
   Widget build(BuildContext context) {
-    const double purpleBallR = 8.0;
     const double whiteBallR = 25.0;
 
     double bearing = Geolocator.bearingBetween(

@@ -1,10 +1,10 @@
 class CommentModel {
-  final creatorId;
-  final comment;
-  final createdAt;
-  final likes;
-  final videoId;
-  final commentId;
+  final String creatorId;
+  final String comment;
+  final int createdAt;
+  final int likes;
+  final String videoId;
+  final String commentId;
 
   CommentModel({
     required this.creatorId,

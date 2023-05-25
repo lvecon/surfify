@@ -10,8 +10,8 @@ class VideoTagTutorial extends StatefulWidget {
   final XFile video;
   final String address;
   final String name;
-  final String lat;
-  final String lon;
+  final double lat;
+  final double lon;
   final String url;
   const VideoTagTutorial({
     super.key,

@@ -26,7 +26,6 @@ class Overview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print('$latitude, $longitude');
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor.withOpacity(1),

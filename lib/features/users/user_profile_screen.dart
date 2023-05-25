@@ -60,7 +60,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     var myProfile = (ref.read(authRepo).user!.uid == widget.uid);
-    void _onClosePressed() {
+    void onClosePressed() {
       Navigator.of(context).pop();
     }
 
@@ -85,7 +85,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                 elevation: 0,
                 actions: [
                   IconButton(
-                    onPressed: _onClosePressed,
+                    onPressed: onClosePressed,
                     icon: const FaIcon(
                       FontAwesomeIcons.xmark,
                       size: Sizes.size24,
@@ -321,7 +321,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                                           .read(messageProvider
                                                               .notifier)
                                                           .addMessage(
-                                                            videoId: null,
+                                                            videoId: "",
                                                             comment:
                                                                 "당신을 Follow 합니다!",
                                                             receiverId:
