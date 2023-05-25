@@ -23,29 +23,24 @@ class FollowersList extends ConsumerStatefulWidget {
 class _FollowersListState extends ConsumerState<FollowersList> {
   final TextEditingController _textController = TextEditingController();
 
-  bool _isWriting = false;
-
   final ScrollController _scrollController = ScrollController();
 
   void _onClosePressed() {
     Navigator.of(context).pop();
   }
 
-  void _stopWriting() {
-    setState(() {
-      _isWriting = false;
-    });
+  void _onStartWriting() {
+    setState(() {});
   }
 
-  void _onStartWriting() {
-    setState(() {
-      _isWriting = true;
-    });
+  void _onRefresh() {
+    ref.watch(followerListProvider(widget.uid).notifier).refresh(widget.uid);
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    _onRefresh();
     return Container(
         height: size.height * 0.95,
         clipBehavior: Clip.hardEdge,

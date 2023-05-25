@@ -191,8 +191,8 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
                     child: VideoLocation(
                       address: widget.address,
                       name: widget.name,
-                      latitude: widget.lat,
-                      longitude: widget.lon,
+                      latitude: double.parse(widget.lat),
+                      longitude: double.parse(widget.lon),
                       url: widget.url,
                     ))
                 : Container(),

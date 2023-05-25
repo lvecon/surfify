@@ -7,6 +7,7 @@ import 'package:surfify/features/message/view_model/message_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/video/view_models/commets_view_model.dart';
 
+import '../../../../normalize/time.dart';
 import '../../../authentication/repos/authentication_repo.dart';
 import '../../../users/user_profile_screen.dart';
 
@@ -80,6 +81,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    _onRefresh();
     return Container(
       height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,
@@ -126,131 +128,104 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
           child: Stack(
             children: [
               RefreshIndicator(
-                  onRefresh: _onRefresh,
-                  child: Scrollbar(
-                    controller: _scrollController,
-                    child: ref.watch(commentsProvider(widget.videoId)).when(
-                          error: (error, stackTrace) => Center(
-                            child: Text(error.toString()),
-                          ),
-                          loading: () => const Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          ),
-                          data: (data) => (data.isEmpty)
-                              ? const Center(
-                                  child: Text(
-                                    '1등으로 댓글을\n달 수 있는 기회입니다!\n\n\n\n\n',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: Sizes.size24,
+                onRefresh: _onRefresh,
+                child: Scrollbar(
+                  controller: _scrollController,
+                  child: ref.watch(commentsProvider(widget.videoId)).when(
+                        error: (error, stackTrace) => Center(
+                          child: Text(error.toString()),
+                        ),
+                        loading: () => const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                        data: (data) => (data.isEmpty)
+                            ? const Center(
+                                child: Text(
+                                  '1등으로 댓글을\n달 수 있는 기회입니다!\n\n\n\n\n',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: Sizes.size24,
+                                  ),
+                                ),
+                              )
+                            : ListView.separated(
+                                controller: _scrollController,
+                                padding: const EdgeInsets.only(
+                                  top: Sizes.size10,
+                                  bottom: Sizes.size96 + Sizes.size20,
+                                  left: Sizes.size16,
+                                  right: Sizes.size16,
+                                ),
+                                separatorBuilder: (context, index) => Gaps.v20,
+                                itemCount: data.length,
+                                itemBuilder: (context, index) => ListTile(
+                                  leading: GestureDetector(
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          builder: (context) =>
+                                              UserProfileScreen(
+                                                  uid: data[index].creatorId));
+                                    },
+                                    child: CircleAvatar(
+                                      radius: Sizes.size18,
+                                      child: SizedBox(
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                )
-                              : ListView.separated(
-                                  controller: _scrollController,
-                                  padding: const EdgeInsets.only(
-                                    top: Sizes.size10,
-                                    bottom: Sizes.size96 + Sizes.size20,
-                                    left: Sizes.size16,
-                                    right: Sizes.size16,
+                                  title: RichText(
+                                    text: TextSpan(
+                                      text:
+                                          '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                            text: nomarlizeTime(
+                                                data[index].createdAt),
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color:
+                                                  Colors.black.withOpacity(0.8),
+                                            )),
+                                      ],
+                                    ),
                                   ),
-                                  separatorBuilder: (context, index) =>
-                                      Gaps.v20,
-                                  itemCount: data.length,
-                                  itemBuilder: (context, index) => Row(
+                                  subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      GestureDetector(
-                                        onTap: () async {
-                                          await showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              builder: (context) =>
-                                                  UserProfileScreen(
-                                                      uid: data[index]
-                                                          .creatorId));
-                                        },
-                                        child: CircleAvatar(
-                                          radius: Sizes.size18,
-                                          child: SizedBox(
-                                            child: ClipOval(
-                                              child: Image.network(
-                                                'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Gaps.h10,
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              ref
-                                                      .watch(usersProvider(
-                                                          data[index]
-                                                              .creatorId))
-                                                      .value
-                                                      ?.name ??
-                                                  '로딩중...',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: Sizes.size14,
-                                                  color: Colors.grey.shade500),
-                                            ),
-                                            Gaps.v3,
-                                            Text("${data[index].comment}"),
-                                            Gaps.v3,
-                                            (data[index].creatorId ==
-                                                    ref
-                                                        .read(authRepo)
-                                                        .user!
-                                                        .uid)
-                                                ? GestureDetector(
-                                                    onTap: () => _deleteComment(
-                                                        data[index]),
-                                                    child: Text(
-                                                      "삭제",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .primaryColor),
-                                                    ),
-                                                  )
-                                                : Container(),
-                                          ],
-                                        ),
-                                      ),
-                                      Gaps.h10,
-                                      Column(
-                                        children: [
-                                          FaIcon(
-                                            FontAwesomeIcons.heart,
-                                            size: Sizes.size20,
-                                            color: Colors.grey.shade500,
-                                          ),
-                                          Gaps.v2,
-                                          Text(
-                                            '${data[index].likes}',
+                                      Text(data[index].comment),
+                                      if (data[index].creatorId ==
+                                          ref.read(authRepo).user!.uid)
+                                        GestureDetector(
+                                          onTap: () {},
+                                          child: Text(
+                                            "삭제",
                                             style: TextStyle(
-                                              color: Colors.grey.shade500,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
                                     ],
                                   ),
                                 ),
-                        ),
-                  )),
+                              ),
+                      ),
+                ),
+              ),
               Positioned(
                 bottom: 0,
                 width: size.width,

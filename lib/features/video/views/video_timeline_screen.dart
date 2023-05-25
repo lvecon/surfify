@@ -8,7 +8,7 @@ import 'package:surfify/features/video/view_models/hashtag_view_model.dart';
 import 'package:surfify/features/video/view_models/here_view_model.dart';
 import 'package:surfify/features/video/view_models/lucky_view_model.dart';
 import 'package:surfify/features/video/view_models/random_view_model.dart';
-import 'package:surfify/features/video/view_models/searchCondition_view_model.dart';
+import 'package:surfify/features/video/view_models/search_condition_view_model.dart';
 import 'package:surfify/features/video/views/search_screen.dart';
 import 'package:surfify/features/video/views/widgets/overview.dart';
 import 'package:surfify/features/video/views/widgets/search_bar.dart';

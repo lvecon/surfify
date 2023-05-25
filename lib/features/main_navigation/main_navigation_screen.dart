@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/main_navigation/widgets/nav_tab_with_badge.dart';
 import 'package:surfify/features/main_navigation/widgets/nav_tab.dart';
 import 'package:surfify/features/main_navigation/widgets/post_video_button.dart';
 import 'package:surfify/features/message/view/message_screen.dart';
@@ -61,7 +62,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
     }
     try {
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+          desiredAccuracy: LocationAccuracy.best);
       setState(() {
         latitude = position.latitude;
         longitude = position.longitude;
@@ -96,6 +97,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
         );
       } else {
         return Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.black,
             body: Stack(
               children: [
@@ -153,7 +155,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
                           child: const PostVideoButton(),
                         ),
                         Gaps.h24,
-                        NavTab(
+                        NavTabWithBadge(
                             text: "Msg.",
                             isSelected: _selectedIndex == 3,
                             icon: FontAwesomeIcons.message,

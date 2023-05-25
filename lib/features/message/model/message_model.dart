@@ -1,10 +1,10 @@
 class MessageModel {
-  final receiverId;
-  final creatorId;
-  final comment;
-  final createdAt;
-  final videoId;
-  final messageId;
+  final String receiverId;
+  final String creatorId;
+  final String comment;
+  final int createdAt;
+  final String videoId;
+  final String messageId;
 
   MessageModel({
     required this.creatorId,

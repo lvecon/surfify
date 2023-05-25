@@ -14,11 +14,11 @@ class VideoLocation extends StatelessWidget {
     required this.longitude,
     required this.url,
   });
-  final latitude;
-  final longitude;
-  final name;
-  final address;
-  final url;
+  final double latitude;
+  final double longitude;
+  final String name;
+  final String address;
+  final String url;
 
   @override
   Widget build(BuildContext context) {

@@ -29,7 +29,6 @@ class HereViewModel extends FamilyAsyncNotifier<List<dynamic>, String> {
     var list = videos.toList();
 
     var location = geoHasher.decode(hash!);
-    print(location);
     list.sort((m1, m2) {
       return (Geolocator.distanceBetween(
             m1['latitude'],
