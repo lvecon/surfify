@@ -59,6 +59,10 @@ def extract_keyword(images, labels):
 
     return top5
 
+@app.route("/health")
+def health():
+    return
+
 @app.route('/predict_video', methods=['POST'])
 def predict_video():
     labels = []
