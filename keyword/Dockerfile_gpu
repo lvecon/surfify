@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.0-base-ubuntu20.04
+FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 
 # env setting
 ENV DEBIAN_FRONTEND noninteractive
@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
-RUN apt-get -y install libgl1-mesa-glx vim libglib2.0-0
+RUN apt-get -y install libgl1-mesa-glx vim libglib2.0-0 wget git
 
 # python 3.8 install
 RUN apt -y install python-is-python3
@@ -33,7 +33,9 @@ RUN pip install image pillow
 RUN pip install numpy
 RUN pip install opencv-python
 RUN pip install Flask
-RUN pip install clip-by-openai
+RUN pip install torch==1.7.1+cu110 torchvision==0.8.2+cu110 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install ftfy regex tqdm
+RUN pip install git+https://github.com/openai/CLIP.git
 
 # copy source
 COPY run_flask.py /app
