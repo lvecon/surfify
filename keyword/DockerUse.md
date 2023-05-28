@@ -8,9 +8,9 @@ CPU버전은 Python 버전은 정확히 알지 못하여 bullseye 의 기본 버
 
 CPU 서버 속도가 늦어 GPU로 추가 설정을 진행하였다.
 
-GPU서버는 NVIDIA L4 - g2-standard-4 로 ubuntu 22.04 에 nvidia driver설치 후 nvidia-docker을 셋팅하였다
+GPU서버는 NVIDIA L4 - g2-standard-4 로 ubuntu 20.04 에 nvidia driver설치 후 nvidia-docker을 셋팅하였다
 
-GPU버전은 nvidia/cuda:12.1.0-base-ubuntu20.04 도커 베이스 이미지를 선택하였다.
+GPU버전은 nvidia/cuda:11.0.3-base-ubuntu20.04 도커 베이스 이미지를 선택하였다.
 
 개발 PC 에 파이썬의 가상환경을 따로 구축할 필요없이 바로 사용가능한 형태로 작성되었다.
 
