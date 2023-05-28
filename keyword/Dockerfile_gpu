@@ -1,0 +1,42 @@
+FROM nvidia/cuda:12.1.0-base-ubuntu20.04
+
+# env setting
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV TZ Asia/Seoul
+
+# working dir
+RUN mkdir /app
+WORKDIR /app
+
+# os lib install
+RUN apt-get update
+RUN apt-get install -y tzdata
+RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+RUN apt-get -y install libgl1-mesa-glx vim libglib2.0-0
+
+# python 3.8 install
+RUN apt -y install python-is-python3
+RUN apt -y install python3-pip
+
+# volume
+VOLUME ["/app"]
+
+# port
+EXPOSE 5010
+
+# python lib install
+RUN pip install image pillow
+RUN pip install numpy
+RUN pip install opencv-python
+RUN pip install Flask
+RUN pip install clip-by-openai
+
+# copy source
+COPY run_flask.py /app
+
+# ENTRYPOINT /app/docker-entrypoint.sh
+ENTRYPOINT /usr/local/bin/python /app/run_flask.py
