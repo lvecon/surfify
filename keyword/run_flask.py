@@ -61,7 +61,8 @@ def extract_keyword(images, labels):
 
 @app.route("/health")
 def health():
-    return
+    print('check')
+    return jsonify([])
 
 @app.route('/predict_video', methods=['POST'])
 def predict_video():
