@@ -2,11 +2,19 @@
 
 개발을 하거나 테스트를 할때 서버의 환경과 동일한 구성으로 작업을 할 수 있다.
 
-이번에 서버는 debian bullseye 로 구성되어 있어 해당 버전에 맞는 파이썬 환경을 구성하도록 스크립트를 작성하였다.
+이번에 CPU 서버는 debian bullseye 로 구성되어 있어 해당 버전에 맞는 파이썬 환경을 구성하도록 스크립트를 작성하였다.
 
-Python 버전은 정확히 알지 못하여 bullseye 의 기본 버전인 3.9로 도커 베이스 이미지를 선택하였다.
+CPU버전은 Python 버전은 정확히 알지 못하여 bullseye 의 기본 버전인 3.9로 도커 베이스 이미지를 선택하였다.
+
+CPU 서버 속도가 늦어 GPU로 추가 설정을 진행하였다.
+
+GPU서버는 NVIDIA L4 - g2-standard-4 로 ubuntu 22.04 에 nvidia driver설치 후 nvidia-docker을 셋팅하였다
+
+GPU버전은 nvidia/cuda:12.1.0-base-ubuntu20.04 도커 베이스 이미지를 선택하였다.
 
 개발 PC 에 파이썬의 가상환경을 따로 구축할 필요없이 바로 사용가능한 형태로 작성되었다.
+
+GPU는 nvidia 드라이버에 nvidia-docker 을 구성해야 한다.
 
 
 # Docker Build
@@ -14,6 +22,8 @@ Python 버전은 정확히 알지 못하여 bullseye 의 기본 버전인 3.9로
 docker build -t 이미지명:태그명 도커파일위치
 
 예) docker build -t jams777/surfi-keyword:latest .
+
+예) docker build -t jams777/surfi-keyword:gpu .
 
 ```
 docker build -t jams777/surfi-keyword:latest .
@@ -55,7 +65,9 @@ docker build -t jams777/surfi-keyword:latest .
 
 docker run -it -p 5010:5010 이미지명:태그명 
 
-예) docker run -it -p 5010:5010 jams777/surfi-keyword:latest
+cpu 예) docker run -it -p 5010:5010 jams777/surfi-keyword:latest
+
+gpu 예) docker run -it --runtime=nvidia --gpus all -p 5010:5010 jams777/surfi-keyword:gpu
 
 ```
 docker run -it -p 5010:5010 jams777/surfi-keyword:latest
