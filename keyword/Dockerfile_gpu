@@ -39,4 +39,4 @@ RUN pip install clip-by-openai
 COPY run_flask.py /app
 
 # ENTRYPOINT /app/docker-entrypoint.sh
-ENTRYPOINT /usr/local/bin/python /app/run_flask.py
+ENTRYPOINT /usr/bin/python /app/run_flask.py
