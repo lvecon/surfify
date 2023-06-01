@@ -84,7 +84,7 @@ class VideoPostState extends ConsumerState<VideoPost>
     // await _videoPlayerController
     //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     _videoPlayerController.addListener(_onVideoChange);
-    _videoPlayerController.play();
+    if (!widget.now) _videoPlayerController.play();
     setState(() {});
   }
 
@@ -131,7 +131,7 @@ class VideoPostState extends ConsumerState<VideoPost>
       _videoPlayerController.play();
     }
     if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
-      _onTogglePause();
+      _videoPlayerController.pause();
     }
   }
 
