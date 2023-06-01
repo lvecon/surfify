@@ -526,7 +526,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     )),
           ),
           Positioned(
-            top: !widget.now ? 90 : 65,
+            top: !widget.now ? 90 : 60,
             left: 20,
             child: VideoLocation(
               name: widget.videoData.location,
