@@ -16,8 +16,8 @@ class SearchScreen extends ConsumerStatefulWidget {
 class SearchScreenState extends ConsumerState<SearchScreen> {
   final TextEditingController _textController = TextEditingController();
 
-  final hotSurfer = ["@rabbit2(서울토끼)", "@kingzo(식객조사장)"];
-  final hotSurfingPoint = ["#맛집", "#드립커피", "#만화책방", "#모텔", "#당구장", "#노래방"];
+  final hotSurfer = ["@훈이", "@남현"];
+  final hotSurfingPoint = ["#맛집", "#서울대", "#카페", "#영화관", "#편의점", '#햄버거'];
   List<String> searchCondition = [];
 
   // 유저가 제일 앞으로 오도록 수정하고 return
@@ -143,7 +143,7 @@ class SearchScreenState extends ConsumerState<SearchScreen> {
                           ),
                           color: keyword.toString().contains('@')
                               ? Theme.of(context).primaryColor
-                              : Colors.red,
+                              : Colors.redAccent,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -190,13 +190,52 @@ class SearchScreenState extends ConsumerState<SearchScreen> {
                         ),
                       ),
                       Gaps.v12,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Wrap(
                         children: [
-                          for (var surfer in hotSurfer) Text(surfer),
+                          for (var surfer in hotSurfer)
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ),
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.9),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        surfer,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Gaps.h6,
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            searchCondition.add(surfer);
+                                          });
+                                        },
+                                        child: const FaIcon(
+                                          FontAwesomeIcons.plus,
+                                          size: Sizes.size12,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
-                      Gaps.v24,
+                      Gaps.v8,
                     ]),
               ),
               Gaps.v12,
@@ -212,11 +251,47 @@ class SearchScreenState extends ConsumerState<SearchScreen> {
                         ),
                       ),
                       Gaps.v12,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Wrap(
                         children: [
                           for (var surfingPoint in hotSurfingPoint)
-                            Text(surfingPoint),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    16,
+                                  ),
+                                  color: Colors.redAccent.withOpacity(0.9),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        surfingPoint,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Gaps.h6,
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            searchCondition.add(surfingPoint);
+                                          });
+                                        },
+                                        child: const FaIcon(
+                                          FontAwesomeIcons.plus,
+                                          size: Sizes.size12,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ]),

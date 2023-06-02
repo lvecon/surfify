@@ -93,7 +93,7 @@ class VideoTimelineNowScreenState
                         index: index,
                         videoData: videoData,
                         radar: true,
-                        now: false,
+                        now: true,
                         luckyMode: false,
                         currentLatitude: widget.latitude!,
                         currentLongitude: widget.longitude!,
