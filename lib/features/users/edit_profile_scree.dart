@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,10 +7,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:surfify/features/users/view_models/avatar_view_model.dart';
 import 'package:surfify/features/users/view_models/user_view_model.dart';
 import 'package:surfify/features/users/views/avatar.dart';
-import 'package:surfify/widgets/form_button.dart';
+import 'package:surfify/features/users/views/profile_text.dart';
 
 import '../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import '../../widgets/form_button.dart';
 import '../authentication/repos/authentication_repo.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -23,7 +23,7 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _EditProfileState extends ConsumerState<EditProfileScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ProfileTextState> _formKey = GlobalKey<ProfileTextState>();
   bool able = true;
 
   final TextEditingController _nameTextEditingController =
@@ -34,14 +34,15 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   Map<String, String> formData = {};
 
   void _onSubmitTap() {
+    print(_formKey.currentState);
     if (_formKey.currentState != null) {
-      if (_formKey.currentState!.validate()) {
-        _formKey.currentState!.save();
+      if (_formKey.currentState!.formKey.currentState!.validate()) {
+        _formKey.currentState!.formKey.currentState!.save();
         ref
             .read(usersProvider(ref.read(authRepo).user!.uid).notifier)
             .updateProfile(
-              name: formData["name"],
-              intro: formData['intro'],
+              name: _formKey.currentState!.formData["name"],
+              intro: _formKey.currentState!.formData['intro'],
             );
         Navigator.of(context).pop();
       }
@@ -115,150 +116,32 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                     Sizes.size16,
                   ),
                   child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      child: SizedBox(
-                        height: 670,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Avatar(
-                                  name: data.name,
-                                  hasAvatar: data.hasAvatar,
-                                  uid: data.uid),
-                            ),
-                            Gaps.v16,
-                            Center(
-                              child: GestureDetector(
-                                onTap:
-                                    isLoading ? null : () => _onAvatarTap(ref),
-                                child: Text(
-                                  '사진 변경',
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: Sizes.size16,
-                                  ),
+                    child: SizedBox(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Avatar(
+                                name: data.name,
+                                hasAvatar: data.hasAvatar,
+                                uid: data.uid),
+                          ),
+                          Gaps.v16,
+                          Center(
+                            child: GestureDetector(
+                              onTap: isLoading ? null : () => _onAvatarTap(ref),
+                              child: Text(
+                                '사진 변경',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: Sizes.size16,
                                 ),
                               ),
                             ),
-                            Gaps.v16,
-                            const Text(
-                              '프로필 주소 (변경불가)',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: Sizes.size16,
-                              ),
-                            ),
-                            Gaps.v16,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '@${data.profileAddress}',
-                                  textAlign: TextAlign.left,
-                                  style: const TextStyle(
-                                    fontSize: Sizes.size20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Gaps.v6,
-                            Gaps.v16,
-                            const Text(
-                              '이름 또는 별명',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: Sizes.size16,
-                              ),
-                            ),
-                            Gaps.v6,
-                            TextFormField(
-                              initialValue: data.name,
-                              onChanged: (value) {
-                                setState(() {
-                                  if (_formKey.currentState!.validate()) {
-                                    able = true;
-                                  }
-                                });
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return '이름을 작성해주세요';
-                                } else if (utf8.encode(value).length >= 20) {
-                                  return '20 Byte까지만 저장되어요...😒';
-                                }
-                                return null;
-                              },
-                              onSaved: (newValue) {
-                                if (newValue != null) {
-                                  formData['name'] = newValue;
-                                  // print(formData['name']);
-                                }
-                              },
-                              cursorColor: Theme.of(context).primaryColor,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey.shade200,
-                                  enabledBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  )),
-                            ),
-                            Gaps.v6,
-                            Gaps.v16,
-                            const Text(
-                              '자기소개',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: Sizes.size16,
-                              ),
-                            ),
-                            Gaps.v6,
-                            TextFormField(
-                              initialValue: data.intro,
-                              textInputAction: TextInputAction.done,
-                              onChanged: (value) {
-                                setState(() {
-                                  if (_formKey.currentState!.validate()) {
-                                    able = true;
-                                  } else {
-                                    able = false;
-                                  }
-                                });
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return '자기소개를 작성해주세요';
-                                } else if (utf8.encode(value).length > 120) {
-                                  return '120 Byte까지만 저장되어요...😒';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              onSaved: (newValue) {
-                                if (newValue != null) {
-                                  formData['intro'] = newValue;
-                                }
-                              },
-                              maxLines: 5,
-                              cursorColor: Theme.of(context).primaryColor,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey.shade200,
-                                enabledBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                            Gaps.v6
-                          ],
-                        ),
+                          ),
+                          Gaps.v16,
+                          ProfileText(key: _formKey)
+                        ],
                       ),
                     ),
                   ),
