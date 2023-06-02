@@ -8,15 +8,13 @@ import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
 import '../../authentication/repos/authentication_repo.dart';
 
-class ProfileText extends ConsumerStatefulWidget {
-  const ProfileText({super.key});
-  static const routeName = '/edit_profile_screen';
-
+class RegisterProfileText extends ConsumerStatefulWidget {
+  const RegisterProfileText({super.key});
   @override
-  createState() => ProfileTextState();
+  createState() => RegisterProfileTextState();
 }
 
-class ProfileTextState extends ConsumerState<ProfileText> {
+class RegisterProfileTextState extends ConsumerState<RegisterProfileText> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool able = true;
 
@@ -43,12 +41,11 @@ class ProfileTextState extends ConsumerState<ProfileText> {
             child: Form(
               key: formKey,
               child: SizedBox(
-                height: 670,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      '프로필 주소 (변경불가)',
+                      '프로필 주소',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: Sizes.size16,
@@ -58,11 +55,47 @@ class ProfileTextState extends ConsumerState<ProfileText> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          '@${data.profileAddress}',
+                        const Text(
+                          '@',
                           textAlign: TextAlign.left,
-                          style: const TextStyle(
-                            fontSize: Sizes.size20,
+                          style: TextStyle(
+                            fontSize: Sizes.size32,
+                          ),
+                        ),
+                        Gaps.h6,
+                        Flexible(
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                if (formKey.currentState!.validate()) {
+                                  able = true;
+                                }
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return '프로필 주소를 입력해주세요';
+                              } else if (value == 'madragon') {
+                                return "음 그 이름은 주인이 있네요...😒";
+                              }
+                              return null;
+                            },
+                            onSaved: (newValue) {
+                              if (newValue != null) {
+                                formData['profileAddress'] = newValue;
+                              }
+                            },
+                            cursorColor: Theme.of(context).primaryColor,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade200,
+                              enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -78,7 +111,6 @@ class ProfileTextState extends ConsumerState<ProfileText> {
                     ),
                     Gaps.v6,
                     TextFormField(
-                      initialValue: data.name,
                       onChanged: (value) {
                         setState(() {
                           if (formKey.currentState!.validate()) {
@@ -97,7 +129,6 @@ class ProfileTextState extends ConsumerState<ProfileText> {
                       onSaved: (newValue) {
                         if (newValue != null) {
                           formData['name'] = newValue;
-                          // print(formData['name']);
                         }
                       },
                       cursorColor: Theme.of(context).primaryColor,
@@ -122,7 +153,6 @@ class ProfileTextState extends ConsumerState<ProfileText> {
                     ),
                     Gaps.v6,
                     TextFormField(
-                      initialValue: data.intro,
                       textInputAction: TextInputAction.done,
                       onChanged: (value) {
                         setState(() {

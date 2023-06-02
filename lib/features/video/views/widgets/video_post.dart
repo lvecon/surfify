@@ -476,7 +476,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                                 ),
                               ),
                               Gaps.v8,
-                              Text('500m이내 무작위(50m 이동 시 새로 고침)',
+                              Text('5km 이내 무작위(50m 이동 시 새로 고침)',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: Sizes.size18,
