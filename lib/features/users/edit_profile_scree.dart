@@ -26,8 +26,12 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool able = true;
 
+  final TextEditingController _nameTextEditingController =
+      TextEditingController();
+  final TextEditingController _expTextEditingController =
+      TextEditingController();
+
   Map<String, String> formData = {};
-  final ValueNotifier<String> nameValue = ValueNotifier('');
 
   void _onSubmitTap() {
     if (_formKey.currentState != null) {
@@ -62,7 +66,13 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final name = ref.watch(usersProvider(ref.read(authRepo).user!.uid));
     final size = MediaQuery.of(context).size;
     final isLoading = ref.watch(avatarProvider).isLoading;
 
@@ -183,6 +193,7 @@ class _EditProfileState extends ConsumerState<EditProfileScreen> {
                               onSaved: (newValue) {
                                 if (newValue != null) {
                                   formData['name'] = newValue;
+                                  // print(formData['name']);
                                 }
                               },
                               cursorColor: Theme.of(context).primaryColor,
