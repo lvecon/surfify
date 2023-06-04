@@ -57,7 +57,7 @@ class VideoPost extends ConsumerStatefulWidget {
 
 class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {
-  late final VideoPlayerController _videoPlayerController;
+  late VideoPlayerController _videoPlayerController;
 
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
@@ -70,6 +70,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   var like = 0;
 
   void _onVideoChange() {
+    print('change');
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
           _videoPlayerController.value.position) {
@@ -81,6 +82,21 @@ class VideoPostState extends ConsumerState<VideoPost>
   void _initVideoPlayer() async {
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
+
+    await _videoPlayerController.initialize();
+    if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
+    // await _videoPlayerController
+    //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
+    _videoPlayerController.addListener(_onVideoChange);
+    if (!widget.now) _videoPlayerController.play();
+    setState(() {});
+  }
+
+  void _updateVideoPlayer() async {
+    _videoPlayerController.pause();
+    _videoPlayerController =
+        VideoPlayerController.network(widget.videoData.fileUrl);
+
     await _videoPlayerController.initialize();
     if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
     // await _videoPlayerController
@@ -92,8 +108,7 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   @override
   void initState() {
-    // print("uid${ref.read(authRepo).user!.uid}");
-    // print("creatorUid${widget.videoData.creatorUid}");
+    // print("init");
     super.initState();
     _initVideoPlayer();
     ShakeDetector detector = ShakeDetector.autoStart(
@@ -120,13 +135,26 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   @override
+  void didUpdateWidget(covariant VideoPost oldWidget) {
+    print("update");
+    super.didUpdateWidget(oldWidget);
+
+    // 새로운 속성에 기반한 작업 수행
+    if (widget.videoData != oldWidget.videoData) {
+      _updateVideoPlayer();
+    }
+  }
+
+  @override
   void dispose() {
     _videoPlayerController.dispose();
     print('dispose됨');
+
     super.dispose();
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    print("visibility change");
     if (!mounted) return;
     if (info.visibleFraction == 1 &&
         !_isPaused &&
@@ -512,7 +540,7 @@ class VideoPostState extends ConsumerState<VideoPost>
           ),
           ref.read(authRepo).user!.uid == widget.videoData.creatorUid
               ? Positioned(
-                  bottom: 30,
+                  bottom: 45,
                   right: 20,
                   child: Column(
                     children: [

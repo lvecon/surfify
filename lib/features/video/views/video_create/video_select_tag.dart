@@ -3,22 +3,22 @@ import 'dart:convert';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
+import 'package:surfify/features/video/view_models/hashtagList_view_model.dart';
 import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
 import 'package:surfify/keyMap.dart';
 
-bool hasViolence = false;
-
-class VideoSelectTag extends StatefulWidget {
+class VideoSelectTag extends ConsumerStatefulWidget {
   final XFile video;
   final String address;
   final String name;
   final String lat;
   final String lon;
   final String url;
-  final String resStr;
+
   const VideoSelectTag({
     super.key,
     required this.video,
@@ -27,19 +27,21 @@ class VideoSelectTag extends StatefulWidget {
     required this.lat,
     required this.lon,
     required this.url,
-    required this.resStr,
   });
 
   @override
-  State<VideoSelectTag> createState() => VideoSelectTagState();
+  createState() => VideoSelectTagState();
 }
 
-class VideoSelectTagState extends State<VideoSelectTag> {
+class VideoSelectTagState extends ConsumerState<VideoSelectTag> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
+  bool hasViolence = false;
+
   final ScrollController _scrollController = ScrollController();
   String inputValue = "";
+  late String resStr;
   List<String> resultsText = [];
 
   void _onClosePressed() {
@@ -95,18 +97,19 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   void initState() {
     super.initState();
     hasViolence = false;
-
-    if (widget.resStr != "Empty") {
-      Map<String, dynamic> resJson = jsonDecode(widget.resStr);
-      if (resJson["violence"] == 1) {
-        hasViolence = true;
-      }
-      else{
+    while (true) {
+      resStr = ref.read(hashtagListProvider).hashtag;
+      if (resStr != "Empty" && resStr != "initial") {
+        Map<String, dynamic> resJson = jsonDecode(resStr);
+        if (resJson["violence"] == 1) {
+          hasViolence = true;
+        } else {
           for (String label in resJson["labels"]) {
             resultsText.add(KeyMap().translations[label]!);
           }
+        }
+        break;
       }
-
     }
   }
 
@@ -119,6 +122,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Container(
       height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,

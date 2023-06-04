@@ -93,7 +93,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       if (latitude == null) {
         return const CircularProgressIndicator(
-          color: Colors.red,
+          color: Colors.black,
         );
       } else {
         return Scaffold(
