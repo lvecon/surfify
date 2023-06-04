@@ -173,7 +173,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Wrap(children: [
-                for (var keyword in resultsText)
+                for (var keyword in ["강아지"])
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 4.0, horizontal: 3),
