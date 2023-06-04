@@ -100,13 +100,11 @@ class VideoSelectTagState extends State<VideoSelectTag> {
       Map<String, dynamic> resJson = jsonDecode(widget.resStr);
       if (resJson["violence"] == 1) {
         hasViolence = true;
+      } else {
+        for (String label in resJson["labels"]) {
+          resultsText.add(KeyMap().translations[label]!);
+        }
       }
-      else{
-          for (String label in resJson["labels"]) {
-            resultsText.add(KeyMap().translations[label]!);
-          }
-      }
-
     }
   }
 
@@ -183,7 +181,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Wrap(children: [
-                for (var keyword in ["강아지"])
+                for (var keyword in resultsText)
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 4.0, horizontal: 3),
