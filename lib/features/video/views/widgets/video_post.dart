@@ -57,7 +57,7 @@ class VideoPost extends ConsumerStatefulWidget {
 
 class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {
-  late final VideoPlayerController _videoPlayerController;
+  late VideoPlayerController _videoPlayerController;
 
   final Duration _animationDuration = const Duration(milliseconds: 200);
 
@@ -81,6 +81,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   void _initVideoPlayer() async {
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
+
     await _videoPlayerController.initialize();
     if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
     // await _videoPlayerController
@@ -92,8 +93,7 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   @override
   void initState() {
-    // print("uid${ref.read(authRepo).user!.uid}");
-    // print("creatorUid${widget.videoData.creatorUid}");
+    // print("init");
     super.initState();
     _initVideoPlayer();
     ShakeDetector detector = ShakeDetector.autoStart(
@@ -117,6 +117,14 @@ class VideoPostState extends ConsumerState<VideoPost>
       value: 1.5,
       duration: _animationDuration,
     );
+  }
+
+  @override
+  @protected
+  void didUpdateWidget(oldWidget) {
+    print("update");
+    super.didUpdateWidget(oldWidget);
+    _initVideoPlayer();
   }
 
   @override
