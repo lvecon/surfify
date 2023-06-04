@@ -70,6 +70,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   var like = 0;
 
   void _onVideoChange() {
+    print('change');
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
           _videoPlayerController.value.position) {
@@ -79,6 +80,20 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   void _initVideoPlayer() async {
+    _videoPlayerController =
+        VideoPlayerController.network(widget.videoData.fileUrl);
+
+    await _videoPlayerController.initialize();
+    if (!widget.luckyMode) await _videoPlayerController.setLooping(true);
+    // await _videoPlayerController
+    //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
+    _videoPlayerController.addListener(_onVideoChange);
+    if (!widget.now) _videoPlayerController.play();
+    setState(() {});
+  }
+
+  void _updateVideoPlayer() async {
+    _videoPlayerController.pause();
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
 
@@ -120,21 +135,26 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   @override
-  @protected
-  void didUpdateWidget(oldWidget) {
+  void didUpdateWidget(covariant VideoPost oldWidget) {
     print("update");
     super.didUpdateWidget(oldWidget);
-    _initVideoPlayer();
+
+    // 새로운 속성에 기반한 작업 수행
+    if (widget.videoData != oldWidget.videoData) {
+      _updateVideoPlayer();
+    }
   }
 
   @override
   void dispose() {
     _videoPlayerController.dispose();
     print('dispose됨');
+
     super.dispose();
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    print("visibility change");
     if (!mounted) return;
     if (info.visibleFraction == 1 &&
         !_isPaused &&
