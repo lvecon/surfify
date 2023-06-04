@@ -131,6 +131,30 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
   void initState() {
     super.initState();
     _initVideo();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.hasViolence) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Violence detected'),
+              content: const Text(
+                  'Violence has been detected. When uploaded, this video will be reviewed by our team.'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+
+                    widget.hasViolence = false;
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -164,29 +188,6 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
 
   @override
   Widget build(BuildContext context) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (widget.hasViolence) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Violence detected'),
-              content: Text('Violence has been detected. When uploaded, this video will be reviewed by our team.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Close'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    });
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -444,50 +445,6 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   color: Colors.white,
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(Sizes.size12),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         NavTab(
-      //           text: "Here",
-      //           isSelected: _selectedIndex == 0,
-      //           icon: FontAwesomeIcons.locationDot,
-      //           selectedIcon: FontAwesomeIcons.locationDot,
-      //           onTap: () => {},
-      //         ),
-      //         NavTab(
-      //           text: "Now",
-      //           isSelected: _selectedIndex == 0,
-      //           icon: FontAwesomeIcons.earthAsia,
-      //           selectedIcon: FontAwesomeIcons.earthAsia,
-      //           onTap: () => {},
-      //         ),
-      //         Gaps.h24,
-      //         GestureDetector(
-      //           child: const PostVideoButton(),
-      //         ),
-      //         Gaps.h24,
-      //         NavTab(
-      //           text: "Msg.",
-      //           isSelected: _selectedIndex == 0,
-      //           icon: FontAwesomeIcons.message,
-      //           selectedIcon: FontAwesomeIcons.message,
-      //           onTap: () => {},
-      //         ),
-      //         NavTab(
-      //           text: "Profile",
-      //           isSelected: _selectedIndex == 4,
-      //           icon: FontAwesomeIcons.user,
-      //           selectedIcon: FontAwesomeIcons.message,
-      //           onTap: () => {},
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
