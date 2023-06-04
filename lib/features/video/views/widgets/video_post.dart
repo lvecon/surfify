@@ -540,7 +540,7 @@ class VideoPostState extends ConsumerState<VideoPost>
           ),
           ref.read(authRepo).user!.uid == widget.videoData.creatorUid
               ? Positioned(
-                  bottom: 30,
+                  bottom: 45,
                   right: 20,
                   child: Column(
                     children: [
