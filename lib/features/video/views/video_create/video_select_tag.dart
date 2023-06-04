@@ -9,6 +9,8 @@ import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
 import 'package:surfify/keyMap.dart';
 
+bool hasViolence = false;
+
 class VideoSelectTag extends StatefulWidget {
   final XFile video;
   final String address;
@@ -83,6 +85,7 @@ class VideoSelectTagState extends State<VideoSelectTag> {
           lat: widget.lat,
           lon: widget.lon,
           url: widget.url,
+          hasViolence: hasViolence,
         ),
       ),
     );
@@ -91,12 +94,19 @@ class VideoSelectTagState extends State<VideoSelectTag> {
   @override
   void initState() {
     super.initState();
+    hasViolence = false;
+
     if (widget.resStr != "Empty") {
-      List<dynamic> resJson = jsonDecode(widget.resStr);
-      for (List<dynamic> result in resJson) {
-        String label = result[0];
-        resultsText.add(KeyMap().translations[label]!);
+      Map<String, dynamic> resJson = jsonDecode(widget.resStr);
+      if (resJson["violence"] == 1) {
+        hasViolence = true;
       }
+      else{
+          for (String label in resJson["labels"]) {
+            resultsText.add(KeyMap().translations[label]!);
+          }
+      }
+
     }
   }
 
