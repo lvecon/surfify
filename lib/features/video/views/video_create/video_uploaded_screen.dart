@@ -28,6 +28,7 @@ class VideoUploadedScreen extends ConsumerStatefulWidget {
   late String lat;
   late String lon;
   late String url;
+  late bool hasViolence;
 
   VideoUploadedScreen({
     super.key,
@@ -38,6 +39,7 @@ class VideoUploadedScreen extends ConsumerStatefulWidget {
     required this.lat,
     required this.lon,
     required this.url,
+    required this.hasViolence,
   });
   @override
   createState() => VideoUploadedScreenState();
@@ -162,6 +164,29 @@ class VideoUploadedScreenState extends ConsumerState<VideoUploadedScreen> {
 
   @override
   Widget build(BuildContext context) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.hasViolence) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Violence detected'),
+              content: Text('Violence has been detected. When uploaded, this video will be reviewed by our team.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
