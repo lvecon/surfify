@@ -163,7 +163,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       },
       child: Stack(children: [
         ref.watch(searchConditionProvider).searchCondition.isEmpty
-            ? ref.watch(luckyProvider)
+            ? ref.watch(luckyProvider) // lucky mode
                 ? ref
                     .watch(randomProvider(
                         '${widget.longitude},${widget.latitude}'))
