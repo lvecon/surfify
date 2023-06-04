@@ -63,6 +63,8 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   late final AnimationController _animationController;
 
+  bool showDetail = false;
+
   bool _isPaused = false;
 
   var like = 0;
@@ -120,6 +122,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   @override
   void dispose() {
     _videoPlayerController.dispose();
+    print('dispose됨');
     super.dispose();
   }
 
@@ -258,16 +261,46 @@ class VideoPostState extends ConsumerState<VideoPost>
                   },
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: Sizes.size28,
-                        child: SizedBox(
-                          child: ClipOval(
-                            child: Image.network(
-                              'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media',
+                      FutureBuilder(builder:
+                          (BuildContext context, AsyncSnapshot snapshot) {
+                        if (ref
+                                .read(
+                                    usersProvider(widget.videoData.creatorUid))
+                                .value ==
+                            null) {
+                          return const Text(
+                            '...',
+                            style: TextStyle(
+                              fontSize: Sizes.size20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        ),
-                      ),
+                          );
+                        } else {
+                          if (ref
+                              .read(usersProvider(widget.videoData.creatorUid))
+                              .value!
+                              .hasAvatar) {
+                            return CircleAvatar(
+                              radius: 28,
+                              foregroundImage: NetworkImage(
+                                  "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media"),
+                              child: null,
+                            );
+                          } else {
+                            return CircleAvatar(
+                                radius: 28,
+                                foregroundImage: null,
+                                child: Text(
+                                  ref
+                                      .read(usersProvider(
+                                          widget.videoData.creatorUid))
+                                      .value!
+                                      .name,
+                                ));
+                          }
+                        }
+                      }),
                       Gaps.v12,
                       FutureBuilder(builder:
                           (BuildContext context, AsyncSnapshot snapshot) {
@@ -303,27 +336,93 @@ class VideoPostState extends ConsumerState<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                HashTagText(
-                  text: widget.videoData.description,
-                  basicStyle: const TextStyle(
-                    fontSize: Sizes.size16,
-                    color: Colors.white,
-                  ),
-                  decoratedStyle: TextStyle(
-                    fontSize: Sizes.size16,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  onTap: (string) async {
-                    if (!widget.now) {
-                      ref.watch(luckyProvider.notifier).setUnLucky();
-                      await showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) => const SearchScreen());
-                    }
-                  },
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    showDetail
+                        ? SizedBox(
+                            width: size.width * 0.75,
+                            child: HashTagText(
+                              text: widget.videoData.description,
+                              basicStyle: const TextStyle(
+                                fontSize: Sizes.size16,
+                                color: Colors.white,
+                              ),
+                              decoratedStyle: TextStyle(
+                                fontSize: Sizes.size16,
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              onTap: (string) async {
+                                if (!widget.now) {
+                                  ref
+                                      .watch(luckyProvider.notifier)
+                                      .setUnLucky();
+                                  await showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) =>
+                                          const SearchScreen());
+                                }
+                              },
+                            ),
+                          )
+                        : HashTagText(
+                            text: widget.videoData.description.length >= 40
+                                ? '${widget.videoData.description.substring(0, 25)}...'
+                                : widget.videoData.description,
+                            basicStyle: const TextStyle(
+                              fontSize: Sizes.size16,
+                              color: Colors.white,
+                            ),
+                            decoratedStyle: TextStyle(
+                              fontSize: Sizes.size16,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            onTap: (string) async {
+                              if (!widget.now) {
+                                ref.watch(luckyProvider.notifier).setUnLucky();
+                                await showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => const SearchScreen());
+                              }
+                            },
+                          ),
+                    Gaps.h24,
+                    widget.videoData.description.length >= 40
+                        ? GestureDetector(
+                            onTap: () => {
+                              setState(() {
+                                showDetail = !showDetail;
+                              })
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: showDetail
+                                    ? const Text('줄이기',
+                                        style: TextStyle(
+                                          fontSize: Sizes.size12,
+                                          color: Colors.white,
+                                        ))
+                                    : const Text('더보기',
+                                        style: TextStyle(
+                                          fontSize: Sizes.size12,
+                                          color: Colors.white,
+                                        )),
+                              ),
+                            ),
+                          )
+                        : const Text(''),
+                  ],
                 ),
               ],
             ),
