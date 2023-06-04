@@ -2,24 +2,24 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
-import 'package:surfify/constants/configs.dart';
+import 'package:surfify/features/video/view_models/hashtagList_view_model.dart';
 import 'package:surfify/features/video/views/video_create/video_preview_screen.dart';
-import 'package:http/http.dart' as http;
 
-class VideoCreateScreen extends StatefulWidget {
+class VideoCreateScreen extends ConsumerStatefulWidget {
   const VideoCreateScreen({super.key});
   static const routeName = '/video_create_screen';
 
   @override
-  State<VideoCreateScreen> createState() => _VideoCreateScreenState();
+  createState() => _VideoCreateScreenState();
 }
 
-class _VideoCreateScreenState extends State<VideoCreateScreen>
+class _VideoCreateScreenState extends ConsumerState<VideoCreateScreen>
     with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
 
@@ -163,29 +163,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
     _isRecording = false;
     final video = await _cameraController.stopVideoRecording();
 
-    List<int> videoBytes = await video.readAsBytes();
-    var mFile = http.MultipartFile.fromBytes(
-      'video',
-      videoBytes,
-      filename: 'video.mp4',
-    );
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('${Configs.INFERENCE_SERVER_IP}/predict_video'));
-    request.files.add(mFile);
-
-    String resStr;
-    try {
-      var res = await request.send();
-      if (res.statusCode == 200) {
-        resStr = await res.stream.bytesToString();
-      } else {
-        resStr = "Empty";
-        print("Failed with $res.statusCode");
-      }
-    } catch (e) {
-      resStr = "Empty";
-      print(e);
-    }
+    ref.watch(hashtagListProvider.notifier).setVideo(video);
 
     if (!mounted) return;
 
@@ -194,7 +172,6 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       MaterialPageRoute(
         builder: (context) => VideoPreviewScreen(
           video: video,
-          resStr: resStr,
         ),
       ),
     );
@@ -215,29 +192,7 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       return;
     }
 
-    List<int> videoBytes = await video.readAsBytes();
-    var mFile = http.MultipartFile.fromBytes(
-      'video',
-      videoBytes,
-      filename: 'video.mp4',
-    );
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('${Configs.INFERENCE_SERVER_IP}/predict_video'));
-    request.files.add(mFile);
-
-    String resStr;
-    try {
-      var res = await request.send();
-      if (res.statusCode == 200) {
-        resStr = await res.stream.bytesToString();
-      } else {
-        resStr = "Empty";
-        print("Failed with $res.statusCode");
-      }
-    } catch (e) {
-      resStr = "Empty";
-      print(e);
-    }
+    ref.watch(hashtagListProvider.notifier).setVideo(video);
 
     if (!mounted) return;
 
@@ -246,7 +201,6 @@ class _VideoCreateScreenState extends State<VideoCreateScreen>
       MaterialPageRoute(
         builder: (context) => VideoPreviewScreen(
           video: video,
-          resStr: resStr,
         ),
       ),
     );
