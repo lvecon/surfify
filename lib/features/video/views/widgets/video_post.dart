@@ -93,7 +93,6 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   void _updateVideoPlayer() async {
-    if (widget.now) return;
     _videoPlayerController.pause();
     _videoPlayerController =
         VideoPlayerController.network(widget.videoData.fileUrl);
@@ -104,7 +103,6 @@ class VideoPostState extends ConsumerState<VideoPost>
     //     .seekTo(const Duration(milliseconds: 1)); // minor bug..
     // _videoPlayerController.addListener(_onVideoChange);
     if (!widget.now) _videoPlayerController.play();
-    setState(() {});
   }
 
   @override
@@ -137,11 +135,11 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   @override
   void didUpdateWidget(covariant VideoPost oldWidget) {
-    print("update");
     super.didUpdateWidget(oldWidget);
 
     // 새로운 속성에 기반한 작업 수행
-    if (widget.videoData != oldWidget.videoData) {
+    if (!widget.radar && !oldWidget.radar) {
+      print("update");
       _updateVideoPlayer();
     }
   }
