@@ -117,16 +117,27 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                                   builder: (context) => UserProfileScreen(
                                       uid: data[index].creatorId));
                             },
-                            child: CircleAvatar(
-                              radius: Sizes.size18,
-                              child: SizedBox(
-                                child: ClipOval(
-                                  child: Image.network(
-                                    'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
+                            child: (ref
+                                    .read(usersProvider(data[index].creatorId))
+                                    .value!
+                                    .hasAvatar)
+                                ? CircleAvatar(
+                                    radius: 28,
+                                    foregroundImage: NetworkImage(
+                                        "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media"),
+                                    child: null,
+                                  )
+                                : CircleAvatar(
+                                    radius: 28,
+                                    foregroundImage: null,
+                                    child: Text(
+                                      ref
+                                          .read(usersProvider(
+                                              data[index].creatorId))
+                                          .value!
+                                          .name,
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
                           ),
                           title: RichText(
                             text: TextSpan(
