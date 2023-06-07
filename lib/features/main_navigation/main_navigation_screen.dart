@@ -64,8 +64,8 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
       setState(() {
-        latitude = 37.4488909586232;
-        longitude = 126.951752645537;
+        latitude = position.latitude;
+        longitude = position.longitude;
       });
     } catch (e) {
       print(e);
