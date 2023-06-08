@@ -188,14 +188,14 @@ class _FollowingsListState extends ConsumerState<FollowingsList> {
                                                     .value!
                                                     .hasAvatar) {
                                                   return CircleAvatar(
-                                                    radius: 28,
+                                                    radius: 24,
                                                     foregroundImage: NetworkImage(
                                                         "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media"),
                                                     child: null,
                                                   );
                                                 } else {
                                                   return CircleAvatar(
-                                                      radius: 28,
+                                                      radius: 24,
                                                       foregroundImage: null,
                                                       child: Text(
                                                         ref
