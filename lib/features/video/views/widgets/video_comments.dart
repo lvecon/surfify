@@ -81,7 +81,7 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    _onRefresh();
+    //_onRefresh();
     return Container(
       height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,
@@ -159,70 +159,105 @@ class _VideoCommentsState extends ConsumerState<VideoComments> {
                                 ),
                                 separatorBuilder: (context, index) => Gaps.v20,
                                 itemCount: data.length,
-                                itemBuilder: (context, index) => ListTile(
-                                  leading: GestureDetector(
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                          context: context,
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          builder: (context) =>
-                                              UserProfileScreen(
-                                                  uid: data[index].creatorId));
-                                    },
-                                    child: CircleAvatar(
-                                      radius: Sizes.size18,
-                                      child: SizedBox(
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  title: RichText(
-                                    text: TextSpan(
-                                      text:
-                                          '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                      ),
-                                      children: [
-                                        TextSpan(
-                                            text: nomarlizeTime(
-                                                data[index].createdAt),
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        await showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (context) =>
+                                                UserProfileScreen(
+                                                    uid:
+                                                        data[index].creatorId));
+                                      },
+                                      child: FutureBuilder(builder:
+                                          (BuildContext context,
+                                              AsyncSnapshot snapshot) {
+                                        if (ref
+                                                .read(usersProvider(
+                                                    data[index].creatorId))
+                                                .value ==
+                                            null) {
+                                          return const Text(
+                                            '...',
                                             style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              color:
-                                                  Colors.black.withOpacity(0.8),
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(data[index].comment),
-                                      if (data[index].creatorId ==
-                                          ref.read(authRepo).user!.uid)
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Text(
-                                            "삭제",
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
+                                              fontSize: Sizes.size20,
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                             ),
-                                          ),
+                                          );
+                                        } else {
+                                          if (ref
+                                              .read(usersProvider(
+                                                  data[index].creatorId))
+                                              .value!
+                                              .hasAvatar) {
+                                            return CircleAvatar(
+                                              radius: 28,
+                                              foregroundImage: NetworkImage(
+                                                  "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data[index].creatorId}?alt=media"),
+                                              child: null,
+                                            );
+                                          } else {
+                                            return CircleAvatar(
+                                                radius: 28,
+                                                foregroundImage: null,
+                                                child: Text(
+                                                  ref
+                                                      .read(usersProvider(
+                                                          data[index]
+                                                              .creatorId))
+                                                      .value!
+                                                      .name,
+                                                ));
+                                          }
+                                        }
+                                      }),
+                                    ),
+                                    title: RichText(
+                                      text: TextSpan(
+                                        text:
+                                            '${ref.watch(usersProvider(data[index].creatorId)).value?.name}  ',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
                                         ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                        children: [
+                                          TextSpan(
+                                              text: nomarlizeTime(
+                                                  data[index].createdAt),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                color: Colors.black
+                                                    .withOpacity(0.8),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(data[index].comment),
+                                        if (data[index].creatorId ==
+                                            ref.read(authRepo).user!.uid)
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Text(
+                                              "삭제",
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  );
+                                }),
                       ),
                 ),
               ),
