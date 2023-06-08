@@ -153,6 +153,7 @@ class _VideoCreateScreenState extends ConsumerState<VideoCreateScreen>
   }
 
   Future<void> _stopRecording() async {
+    ref.watch(hashtagListProvider.notifier).setInitial();
     if (!_cameraController.value.isRecordingVideo) return;
 
     _buttonAnimationController.reverse();
@@ -184,6 +185,7 @@ class _VideoCreateScreenState extends ConsumerState<VideoCreateScreen>
   }
 
   Future<void> _onPickVideoPressed() async {
+    ref.watch(hashtagListProvider.notifier).setInitial();
     final video = await ImagePicker().pickVideo(
       source: ImageSource.gallery,
     );

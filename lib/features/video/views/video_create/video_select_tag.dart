@@ -96,18 +96,17 @@ class VideoSelectTagState extends ConsumerState<VideoSelectTag> {
   void initState() {
     super.initState();
     isFlagged = false;
-    while (true) {
-      resStr = ref.read(hashtagListProvider).hashtag;
-      if (resStr != "Empty" && resStr != "initial") {
-        Map<String, dynamic> resJson = jsonDecode(resStr);
-        if (resJson["flag"] == 1) {
-          isFlagged = true;
-        } else {
-          for (String label in resJson["labels"]) {
-            resultsText.add(label);
-          }
+
+    resStr = ref.read(hashtagListProvider).hashtag;
+
+    if (resStr != "initial" && resStr != "Empty") {
+      Map<String, dynamic> resJson = jsonDecode(resStr);
+      if (resJson["flag"] == 1) {
+        isFlagged = true;
+      } else {
+        for (String label in resJson["labels"]) {
+          resultsText.add(label);
         }
-        break;
       }
     }
   }
