@@ -17,21 +17,29 @@ class PlaceViewModel extends FamilyAsyncNotifier<List<VideoModel>, String> {
       lastItemCreatedAt: lastItemCreatedAt,
       hash: hash,
     );
-    final ids = result.docs.map((doc) => doc.id);
+    final ids = result.docs.map((doc) => doc.data()['id']);
     var result2 = [];
     for (var id in ids) {
       final temp = await _repository.fetchSpecificVideos(
         id: id,
       );
-      print(temp);
+
       result2.add(temp);
     }
+
     final videos = result2.map(
       (doc) => VideoModel.fromJson(
         json: doc.data(),
         videoId: doc.id,
       ),
     );
+    //  final videos = result2
+    //     .where((doc) => doc.data() != null)
+    //     .map((doc) => VideoModel.fromJson(
+    //           json: doc.data(),
+    //           videoId: doc.id,
+    //         ))
+    //     .toList();
     return videos.toList();
   }
 
