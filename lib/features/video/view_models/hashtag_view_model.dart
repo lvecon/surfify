@@ -37,7 +37,18 @@ class HashTagViewModel
       );
     }
     if (result == null) return [];
-    final videos = result.docs.map(
+
+    final ids = result.docs.map((doc) => doc.data()['id']);
+    var result2 = [];
+    for (var id in ids) {
+      final temp = await _repository.fetchSpecificVideos(
+        id: id,
+      );
+
+      result2.add(temp);
+    }
+
+    final videos = result2.map(
       (doc) => VideoModel.fromJson(
         json: doc.data(),
         videoId: doc.id,

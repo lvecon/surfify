@@ -25,12 +25,20 @@ class PlaceViewModel extends FamilyAsyncNotifier<List<VideoModel>, String> {
       );
       result2.add(temp);
     }
+
     final videos = result2.map(
       (doc) => VideoModel.fromJson(
         json: doc.data(),
         videoId: doc.id,
       ),
     );
+    //  final videos = result2
+    //     .where((doc) => doc.data() != null)
+    //     .map((doc) => VideoModel.fromJson(
+    //           json: doc.data(),
+    //           videoId: doc.id,
+    //         ))
+    //     .toList();
     return videos.toList();
   }
 
