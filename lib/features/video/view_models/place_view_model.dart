@@ -23,7 +23,6 @@ class PlaceViewModel extends FamilyAsyncNotifier<List<VideoModel>, String> {
       final temp = await _repository.fetchSpecificVideos(
         id: id,
       );
-
       result2.add(temp);
     }
 

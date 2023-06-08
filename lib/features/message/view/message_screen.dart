@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:surfify/features/message/view_model/message_view_model.dart';
+import 'package:surfify/features/video/models/video_model.dart';
+import 'package:surfify/features/video/repo/videos_repo.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
@@ -9,9 +11,16 @@ import '../../../normalize/time.dart';
 import '../../../widgets/form_button.dart';
 import '../../users/user_profile_screen.dart';
 import '../../users/view_models/user_view_model.dart';
+import '../../video/views/widgets/video_post.dart';
 
 class MessageScreen extends ConsumerStatefulWidget {
-  const MessageScreen({super.key});
+  final double latitude;
+  final double longitude;
+  const MessageScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   ConsumerState<MessageScreen> createState() => _MessageScreenState();
@@ -176,21 +185,63 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                               ],
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(data[index].comment),
-                              GestureDetector(
-                                onTap: () => _deleteMessage(data[index]),
-                                child: Text(
-                                  "삭제",
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.bold,
+                          subtitle: GestureDetector(
+                            onTap: () async {
+                              if (data[index].comment == '유저가 당신을 팔로우합니다') {
+                                await showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => UserProfileScreen(
+                                        uid: data[index].creatorId));
+                              } else {
+                                final video = await ref
+                                    .read(videosRepo)
+                                    .fetchSpecificVideos(
+                                        id: data[index].videoId);
+                                final videoModel = VideoModel.fromJson(
+                                    json: video.data()!,
+                                    videoId: data[index].videoId);
+                                await showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) => Container(
+                                        height: size.height * 0.9,
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              Sizes.size14),
+                                        ),
+                                        child: VideoPost(
+                                          videoData: videoModel,
+                                          onVideoFinished: () {},
+                                          index: 0,
+                                          radar: false,
+                                          now: false,
+                                          luckyMode: false,
+                                          currentLatitude: widget.latitude,
+                                          currentLongitude:
+                                              widget.longitude, //수정필요
+                                        )));
+                              }
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data[index].comment),
+                                GestureDetector(
+                                  onTap: () => _deleteMessage(data[index]),
+                                  child: Text(
+                                    "삭제",
+                                    style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
