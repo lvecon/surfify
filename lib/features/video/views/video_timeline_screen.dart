@@ -150,15 +150,15 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       },
       onScaleUpdate: (details) {
         _scaleFactor = _baseScaleFactor * details.scale;
+        print(details.scale);
         if (details.scale < 0.7) {
           setState(() {
             overViewMode = true;
           });
-        } else if (details.scale > 1.3) {
+        } else if (details.scale >= 1.2) {
           setState(() {
             overViewMode = false;
           });
-          print(details.scale);
         }
       },
       child: Stack(children: [
@@ -207,10 +207,11 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
                                   ),
                                 ),
                                 data: (videos) {
+                                  print("luckymode ${videos.length}");
                                   final random = Random();
                                   final videoData =
                                       videos[random.nextInt(videos.length)];
-
+                                  // final videoData = videos[index];
                                   return VideoPost(
                                     onVideoFinished: _onVideoFinished,
                                     index: index,

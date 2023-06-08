@@ -38,13 +38,13 @@ class HashTagViewModel
     }
     if (result == null) return [];
 
-    final ids = result.docs.map((doc) => doc.id);
+    final ids = result.docs.map((doc) => doc.data()['id']);
     var result2 = [];
     for (var id in ids) {
       final temp = await _repository.fetchSpecificVideos(
         id: id,
       );
-      print(temp);
+
       result2.add(temp);
     }
 
