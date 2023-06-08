@@ -39,6 +39,13 @@ class VideosRepository {
     }
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> fetchSpecificVideos({
+    String? id,
+  }) {
+    final query = _db.collection("videos").doc(id);
+    return query.get();
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> fetchVideosHome({
     String? hash,
     int? lastItemCreatedAt,
