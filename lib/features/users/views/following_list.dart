@@ -165,16 +165,48 @@ class _FollowingsListState extends ConsumerState<FollowingsList> {
                                                       UserProfileScreen(
                                                           uid: data.uid));
                                             },
-                                            child: CircleAvatar(
-                                              radius: Sizes.size24,
-                                              child: SizedBox(
-                                                child: ClipOval(
-                                                  child: Image.network(
-                                                    'https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media',
+                                            child: FutureBuilder(builder:
+                                                (BuildContext context,
+                                                    AsyncSnapshot snapshot) {
+                                              if (ref
+                                                      .read(usersProvider(
+                                                          data.uid))
+                                                      .value ==
+                                                  null) {
+                                                return const Text(
+                                                  '...',
+                                                  style: TextStyle(
+                                                    fontSize: Sizes.size20,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                ),
-                                              ),
-                                            ),
+                                                );
+                                              } else {
+                                                if (ref
+                                                    .read(
+                                                        usersProvider(data.uid))
+                                                    .value!
+                                                    .hasAvatar) {
+                                                  return CircleAvatar(
+                                                    radius: 28,
+                                                    foregroundImage: NetworkImage(
+                                                        "https://firebasestorage.googleapis.com/v0/b/surfify.appspot.com/o/avatars%2F${data.uid}?alt=media"),
+                                                    child: null,
+                                                  );
+                                                } else {
+                                                  return CircleAvatar(
+                                                      radius: 28,
+                                                      foregroundImage: null,
+                                                      child: Text(
+                                                        ref
+                                                            .read(usersProvider(
+                                                                data.uid))
+                                                            .value!
+                                                            .name,
+                                                      ));
+                                                }
+                                              }
+                                            }),
                                           ),
                                           title: RichText(
                                             text: TextSpan(
