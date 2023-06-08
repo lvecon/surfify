@@ -165,7 +165,9 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
                                   context: context,
                                   isScrollControlled: true,
                                   backgroundColor: Colors.transparent,
-                                  builder: (context) => const MessageScreen());
+                                  builder: (context) => MessageScreen(
+                                      latitude: latitude!,
+                                      longitude: longitude!));
                             }),
                         NavTab(
                             text: "Profile",

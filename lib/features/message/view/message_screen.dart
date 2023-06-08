@@ -14,7 +14,13 @@ import '../../users/view_models/user_view_model.dart';
 import '../../video/views/widgets/video_post.dart';
 
 class MessageScreen extends ConsumerStatefulWidget {
-  const MessageScreen({super.key});
+  final double latitude;
+  final double longitude;
+  const MessageScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   ConsumerState<MessageScreen> createState() => _MessageScreenState();
@@ -214,9 +220,9 @@ class _MessageScreenState extends ConsumerState<MessageScreen> {
                                           radar: false,
                                           now: false,
                                           luckyMode: false,
-                                          currentLatitude: 37.4488769043997,
+                                          currentLatitude: widget.latitude,
                                           currentLongitude:
-                                              126.952647714416, //수정필요
+                                              widget.longitude, //수정필요
                                         )));
                               }
                             },
