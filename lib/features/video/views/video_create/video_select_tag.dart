@@ -9,7 +9,6 @@ import 'package:surfify/constants/gaps.dart';
 import 'package:surfify/constants/sizes.dart';
 import 'package:surfify/features/video/view_models/hashtagList_view_model.dart';
 import 'package:surfify/features/video/views/video_create/video_uploaded_screen.dart';
-import 'package:surfify/keyMap.dart';
 
 class VideoSelectTag extends ConsumerStatefulWidget {
   final XFile video;
@@ -37,7 +36,7 @@ class VideoSelectTagState extends ConsumerState<VideoSelectTag> {
   bool _isWriting = false;
   final TextEditingController _textEditingController = TextEditingController();
 
-  bool hasViolence = false;
+  bool isFlagged = false;
 
   final ScrollController _scrollController = ScrollController();
   String inputValue = "";
@@ -87,7 +86,7 @@ class VideoSelectTagState extends ConsumerState<VideoSelectTag> {
           lat: widget.lat,
           lon: widget.lon,
           url: widget.url,
-          hasViolence: hasViolence,
+          isFlagged: isFlagged,
         ),
       ),
     );
@@ -96,16 +95,16 @@ class VideoSelectTagState extends ConsumerState<VideoSelectTag> {
   @override
   void initState() {
     super.initState();
-    hasViolence = false;
+    isFlagged = false;
     while (true) {
       resStr = ref.read(hashtagListProvider).hashtag;
       if (resStr != "Empty" && resStr != "initial") {
         Map<String, dynamic> resJson = jsonDecode(resStr);
-        if (resJson["violence"] == 1) {
-          hasViolence = true;
+        if (resJson["flag"] == 1) {
+          isFlagged = true;
         } else {
           for (String label in resJson["labels"]) {
-            resultsText.add(KeyMap().translations[label]!);
+            resultsText.add(label);
           }
         }
         break;
