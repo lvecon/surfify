@@ -1,5 +1,6 @@
 # 🏄️ 장소 서핑 SNS 서피(SURFI)
 ![서피_포스터](https://github.com/lvecon/surfify/assets/86117225/5523a423-2fe9-421f-971f-946cee5b6632)
+최종 보고서 [프로젝트 최종 보고서.pdf](https://github.com/lvecon/surfify/files/14220132/default.pdf)
 
 
 ## 프로젝트 소개
