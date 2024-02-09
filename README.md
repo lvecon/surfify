@@ -29,6 +29,9 @@
 - 백엔드는 Firebase를 사용했고, DB는 NOSQL인 Cloud Firestore으로, 스토리지는 Firebase Storage를 사용했습니다. Firebase Functions는 Firebase 기능과 HTTPS 요청에 의해 트리거되는 이벤트에 응답하여 백엔드 코드를 자동으로 실행할 수 있는 서버리스 프레임워크입니다.
 
 ## 핵심 기능
+![output6](https://github.com/lvecon/surfify/assets/86117225/b3b43cb4-5f48-464a-9cee-14cc2e5cec33)
+![output5](https://github.com/lvecon/surfify/assets/86117225/d3a58efa-eca3-4c2b-bb19-59dd7a559fa5)
+
 - Here Tab
 히어탭에서는 영상을 가로축과 세로축으로, 상하로 스크롤할 경우 멀어지는 영상이 나와야하고, 좌우로 스크롤할 경우 같은 장소의 다른 영상이 나와야합니다. 이를 구현하기 위해서 먼저 현재 db 에 현재 거리부터 가까운 장소들을 탐색합니다. 장소들에 대한
 1 차원 배열을 구한 다음, 그 다음 각 장소에 대해서 영상들을 가져와서 2 차원 배열을 얻습니다. 이를 장소를 세로축으로, 그리고 각각의 영상들을 가로축으로 정렬합니다.
