@@ -1,16 +1,59 @@
-# surfify
+# 🏄️ 장소 서핑 SNS 서피(SURFI)
+![서피_포스터](https://github.com/lvecon/surfify/assets/86117225/5523a423-2fe9-421f-971f-946cee5b6632)
 
-A new Flutter project.
 
-## Getting Started
+## 프로젝트 소개
+- 해당 프로젝트는 2023학년도 1학기 서울대학교 컴퓨터공학부 전공 창의적통합설계 수업으로 진행된 프로젝트로, 단비아이앤씨와 매칭되어서 단비아이앤씨가 제공한 서비스컨셉 및 기획안을 바탕으로, 기획안의 요구사항을 만족하는 어플을 개발한 것입니다.
+- 틱톡과 지도를 결합한 컨셉으로, 사용자들이 새로운 장소를 탐색할 수 있는 새로운 방법을 제공합니다.
 
-This project is a starting point for a Flutter application.
+## 팀원 소개
+- 허남현 @lvecon 프론트엔드 및 백엔드
+- 사공훈 @Octohoon 프론트엔드 및 백엔드
+- 윤민수 @muffinsnip 백엔드 및 AI 피쳐
 
-A few resources to get you started if this is your first Flutter project:
+## DB 다이어그램
+<img width="924" alt="스크린샷 2024-02-09 오후 6 20 13" src="https://github.com/lvecon/surfify/assets/86117225/3c4a4aa6-d04a-47ad-82ac-5b3ed51ff856">
+위의 DB 다이어그램에서는 SQL에서 사용되는 Entity-Relationship을 표현했지만, nosql 환경에서는 이와 다른 설계를 가지기 때문에 위의 다이어그램은 개념적인 모형입니다. 실제 프로젝트에서는 nosql 환경에 최적화하기 위해서 denormalize 작업이 되어 있습니다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img width="996" alt="스크린샷 2024-02-09 오후 6 39 03" src="https://github.com/lvecon/surfify/assets/86117225/3fbba9c3-a207-466c-b8c0-61bcb552ae99">
+실제 Firebase Database
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 아키텍쳐 다이어그램
+<img width="915" alt="스크린샷 2024-02-09 오후 6 20 46" src="https://github.com/lvecon/surfify/assets/86117225/00b2597a-a658-4b2c-ae65-c8eefc1fa860">
+
+- 앱 개발 프론트는 Flutter, 백엔드는 Firebase와 Flask를 사용했습니다.
+
+- 플러터는 MVVM(Model-View-ViewModel) 아키텍쳐를 기반으로 UI(View)를 비즈니스 로직이나 백엔드 로직(Model)로 분리하는 아키텍쳐 패턴으로, ViewModel은 UI의 변화에 따라 데이터의 전환을 담당합니다. 상태 관리는 riverpod을 사용했습니다.
+
+- 백엔드는 Firebase를 사용했고, DB는 NOSQL인 Cloud Firestore으로, 스토리지는 Firebase Storage를 사용했습니다. Firebase Functions는 Firebase 기능과 HTTPS 요청에 의해 트리거되는 이벤트에 응답하여 백엔드 코드를 자동으로 실행할 수 있는 서버리스 프레임워크입니다.
+
+## 핵심 기능
+- Here Tab
+히어탭에서는 영상을 가로축과 세로축으로, 상하로 스크롤할 경우 멀어지는 영상이 나와야하고, 좌우로 스크롤할 경우 같은 장소의 다른 영상이 나와야합니다. 이를 구현하기 위해서 먼저 현재 db 에 현재 거리부터 가까운 장소들을 탐색합니다. 장소들에 대한
+1 차원 배열을 구한 다음, 그 다음 각 장소에 대해서 영상들을 가져와서 2 차원 배열을 얻습니다. 이를 장소를 세로축으로, 그리고 각각의 영상들을 가로축으로 정렬합니다.
+- 나침반 모드
+나침반 모드에서는 휴대폰이 향하는 방향에 있는 영상만을 보여줍니다. Here 탭에서 장소들에 대한 목록을 가지고 있고 이를 기반으로 휴대폰에 내장된 나침반과 휴대폰의 위치, 그리고 각 장소들의 위치를 통해서 방향을 계산합니다. 우선 유저가 향하는 방향을 4 분할 해서 동서남북으로 나누고, 해당 방향에 존재하는 영상들을 보여줍니다. 그리고 유저가 향하는 방향이 달라진다면, 가령 북에서 동으로 바뀌게 된다면 보여주는 영상을 다르게 해줍니다. 유저가 향하는 방향은 90 도를 경계로 하였습니다.
+- 오버뷰 모드
+오버뷰 모드에서는 히어탭의 2 차원 배열을 나침반 모드와 같이 휴대폰이 향하는 방향에 맞게 보여주는 것으로 수정해서 전체적인 배열을 한 번에 볼 수 있게 하였습니다. 이때는 썸네일만 보여주고 썸네일을 누를 경우 동영상이 재생되도록 하였습니다.
+- 럭키 모드
+럭키모드에서는 영상을 랜덤으로 재생되도록 하였고, 검색 기능에서는 원하는 유저나 해시태그로 db 에서 제한에서 보여줍니다.
+
+## 가장 고민을 많이 했던 점
+앱을 구현하면서 어려웠던 점은 두 가지였습니다. 첫 번째는 어떻게 같은 장소를 구분할 것이냐, 두 번째는 어떻게 거리순으로 영상을 정렬할 것이냐였습니다. 
+
+### 장소 구분 기준
+- 첫 번째로 동영상의 장소를 구분하기 위해서 저희는 촬영한 영상의 주소를 단일한 채널을 통해서 정하도록함. 
+- 동영상 촬영시 카카오맵 api 와 연결하여서 카카오맵에 있는 위치로 저장.
+- 장점
+- 이용자의 위치에 관계 없이 똑같은 장소에는 똑같은 위치가 들어가고, 장소의 구획기준 문제도 해결할 수 있었음.
+- 가령, 장소를 얼마나 세분화해야할지 예를 들어 301동 퀴즈노스, 탁구장,1층 복도,104호 강의실 등등 얼마나 세부적으로 장소를 올려야하는지 고민이 되는데 이 기준은 카카오맵에 올라와있는지 여부로 결정하기로 했습니다.
+- 단점
+- 카카오맵에 없는 장소의 경우에는 장소를 올릴 수가 없음.
+- 가령 서울대학교 폐수영장의 경우 카카오맵에 등재되지 않아서 장소로 올릴 수 없었고 인근 장소였던 지진관측소로 올릴 수 밖에 없었음.
+
+### 거리순으로 영상 정렬
+영상을 거리순으로 정렬하기 위해서는 모든 DB를 훑어야 하는 비효율성이 일어납니다. 이 문제를 해결하기 위해서 저희는 지오해시를 사용하여 해결했습니다. 
+- Geohash는 지리적 위치를 문자와 숫자의 짧은 문자열로 인코딩하는 공개 도메인 지오코드 시스템입니다. Geohash 는 지구 표면을 2 차원 그리드로 나누고각 그리드 셀에 고유한 문자열을 할당합니다. Geohash의 길이를 늘리면 그리드 셀의 크기가 작아지고 위치의 정확도가 높아집니다.
+- 이를 이용해서 유저의 현재위치가 속한 지오해시의 앞자리 5 자리가 일치하는 위치의 영상만을 우선적으로 fetch 하기로 했습니다. DB 에도 {geohash 앞자리 5 자리}/{geohash 뒷자리 4 자리}로 영상을 저장해서 geohash 앞자리 5 자리가 일치하는 영상을 우선적으로 확인해서 범위를 좁혀서 영상을 정렬하였습니다. 또한 나침반 기능이나 오버뷰 기능에서도 이와 비슷한 접근법으로 문제를 해결했습니다.
+![image](https://github.com/lvecon/surfify/assets/86117225/401f8d77-d5f2-4a39-bb4f-328ab8f8bcbd)
+
